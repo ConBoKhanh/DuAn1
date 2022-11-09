@@ -22,7 +22,7 @@ public class ap {
         v.setLocationRelativeTo(null);
         v.setVisible(true);
         System.out.println("");
-        System.out.println("");
+        System.out.println("");S
         System.out.println("");
     }
 }
