@@ -21,5 +21,6 @@ public class ap {
         DangNhapView v = new DangNhapView();
         v.setLocationRelativeTo(null);
         v.setVisible(true);
+        System.out.println("");
     }
 }
