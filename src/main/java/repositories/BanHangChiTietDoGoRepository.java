@@ -172,5 +172,6 @@ public class BanHangChiTietDoGoRepository {
 //        } else {
 //            System.out.println("not ok");
 //        }
+          System.out.println("ok");
    }
 }
