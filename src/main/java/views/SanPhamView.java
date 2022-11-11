@@ -182,6 +182,18 @@ public class SanPhamView extends javax.swing.JFrame {
         return true;
     }
 
+    public boolean checkDONVITINH() { //check DON VI TINH
+        String DVT = TXTDVT.getText();
+        List<ViewModelDonViTinh> dvt = dvtrp.getListDVT();
+        for (ViewModelDonViTinh v : dvt) {
+            if (DVT.equals(v.getDonViTinh())) {
+                JOptionPane.showMessageDialog(this, "DVT đã tồn tại!");
+                return false;
+            }
+        }
+        return true;
+    }
+
     public void load1st() { // load doi tuong 1 sp
         List<ViewModelSanPham> sp = spSV.getListSP();
         if (sp.isEmpty()) {
@@ -1659,8 +1671,8 @@ public class SanPhamView extends javax.swing.JFrame {
 
         }
     }
-    
-    public void load1stNhaCungCap(){
+
+    public void load1stNhaCungCap() {
         List<ViewModelNhaCungCap> v = nhaCungCapService.getAll();
         int index = 0;
 
@@ -1669,7 +1681,7 @@ public class SanPhamView extends javax.swing.JFrame {
         txtten.setText(tbNhaSanXuat.getValueAt(index, 2).toString());
         txtdiachi.setText(tbNhaSanXuat.getValueAt(index, 3).toString());
         txtdienthoai.setText(tbNhaSanXuat.getValueAt(index, 4).toString());
-        
+
     }
 
     public void loadTbaleTimKiemTenNCC(String ten) {
@@ -1695,7 +1707,6 @@ public class SanPhamView extends javax.swing.JFrame {
 
     public void load1stNCC() {
         int index = 0;
-        
 
         txtid.setText(tbNhaSanXuat.getValueAt(index, 0).toString());
         txtma.setText(tbNhaSanXuat.getValueAt(index, 1).toString());
@@ -1781,16 +1792,17 @@ public class SanPhamView extends javax.swing.JFrame {
         // TODO add your handling code here:
         DonViTinh sp = new DonViTinh();
         sp.setDonViTinh(TXTDVT.getText());
+        if (checkDONVITINH()) {
+            boolean b = dvtrp.add(sp);
+            if (b == true) {
+                Icon icon = new javax.swing.ImageIcon(getClass().getResource("/img/themmoiicon.png"));
+                JOptionPane.showMessageDialog(this, "Thêm dvt thành công", "DON VI TINH", JOptionPane.INFORMATION_MESSAGE, icon);
+                loadTBDVT();
 
-        boolean b = dvtrp.add(sp);
-        if (b == true) {
-            Icon icon = new javax.swing.ImageIcon(getClass().getResource("/img/themmoiicon.png"));
-            JOptionPane.showMessageDialog(this, "Thêm dvt thành công", "DON VI TINH", JOptionPane.INFORMATION_MESSAGE, icon);
-            loadTBDVT();
-
-        } else {
-            Icon icon = new javax.swing.ImageIcon(getClass().getResource("/img/deleteicon.png"));
-            JOptionPane.showMessageDialog(this, " thêm loi roi", "DON VI TINH", JOptionPane.INFORMATION_MESSAGE, icon);
+            } else {
+                Icon icon = new javax.swing.ImageIcon(getClass().getResource("/img/deleteicon.png"));
+                JOptionPane.showMessageDialog(this, " thêm loi roi", "DON VI TINH", JOptionPane.INFORMATION_MESSAGE, icon);
+            }
         }
 
     }//GEN-LAST:event_btnThem2ActionPerformed
@@ -1800,16 +1812,17 @@ public class SanPhamView extends javax.swing.JFrame {
         DonViTinh sp = new DonViTinh();
         sp.setId(TXTIDDVT.getText());
         sp.setDonViTinh(TXTDVT.getText());
+        if (checkDONVITINH()) {
+            boolean b = dvtrp.update(sp);
+            if (b == true) {
+                Icon icon = new javax.swing.ImageIcon(getClass().getResource("/img/themmoiicon.png"));
+                JOptionPane.showMessageDialog(this, "Update dvt thanh cong", "DON VI TINH", JOptionPane.INFORMATION_MESSAGE, icon);
+                loadTBDVT();
 
-        boolean b = dvtrp.update(sp);
-        if (b == true) {
-            Icon icon = new javax.swing.ImageIcon(getClass().getResource("/img/themmoiicon.png"));
-            JOptionPane.showMessageDialog(this, "Update dvt thanh cong", "DON VI TINH", JOptionPane.INFORMATION_MESSAGE, icon);
-            loadTBDVT();
-
-        } else {
-            Icon icon = new javax.swing.ImageIcon(getClass().getResource("/img/deleteicon.png"));
-            JOptionPane.showMessageDialog(this, "Update dvt that bai", "DON VI TINH", JOptionPane.INFORMATION_MESSAGE, icon);
+            } else {
+                Icon icon = new javax.swing.ImageIcon(getClass().getResource("/img/deleteicon.png"));
+                JOptionPane.showMessageDialog(this, "Update dvt that bai", "DON VI TINH", JOptionPane.INFORMATION_MESSAGE, icon);
+            }
         }
     }//GEN-LAST:event_btnSua2ActionPerformed
 
@@ -1937,7 +1950,7 @@ public class SanPhamView extends javax.swing.JFrame {
     }//GEN-LAST:event_txtMaNguonGocActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        MenuView  v = new MenuView("", "", "");
+        MenuView v = new MenuView("", "", "");
         v.setLocationRelativeTo(null);
         v.setVisible(true);
         this.dispose();
