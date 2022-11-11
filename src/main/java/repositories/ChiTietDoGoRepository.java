@@ -23,7 +23,6 @@ import utilities.mycompany.DBConext.HibernatUtil;
  */
 public class ChiTietDoGoRepository {
 
-    
     public List<ChiTietDoGo> list() {
         try {
             Session session = HibernatUtil.getFACTORY().openSession();
@@ -59,8 +58,7 @@ public class ChiTietDoGoRepository {
             NhaCungCap d = session.get(NhaCungCap.class, dg.getIdNhaCungCap().getId());
             NguonGoc f = session.get(NguonGoc.class, dg.getIdNguocGoc().getId());
             DonViTinh g = session.get(DonViTinh.class, dg.getIdDonViTinh().getId());
-            
-            
+
             v.setIdSanPham(a);
             v.setIdLoaiSP(b);
             v.setIdDongGo(c);
@@ -99,7 +97,14 @@ public class ChiTietDoGoRepository {
             NhaCungCap d = session.get(NhaCungCap.class, dg.getIdNhaCungCap().getId());
             NguonGoc f = session.get(NguonGoc.class, dg.getIdNguocGoc().getId());
             DonViTinh g = session.get(DonViTinh.class, dg.getIdDonViTinh().getId());
-
+            
+            v.setIdSanPham(a);
+            v.setIdLoaiSP(b);
+            v.setIdDongGo(c);
+            v.setIdNhaCungCap(d);
+            v.setIdNguocGoc(f);
+            v.setIdDonViTinh(g);
+            v.setTenSP(dg.getTenSP());
             v.setMoTa(dg.getMoTa());
             v.setSoLuong(0);
             v.setGiaNhap(dg.getGiaNhap());
