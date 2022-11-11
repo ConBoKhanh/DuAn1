@@ -21,19 +21,6 @@ public class ap {
         DangNhapView v = new DangNhapView();
         v.setLocationRelativeTo(null);
         v.setVisible(true);
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("anttt  ");
-        System.out.println("cuong da o day  ");
-        System.out.println("kien da o day  ");
-        System.out.println("phuong da o day");
-        System.out.println("ha da o day");
-        System.out.println("Duy da o day ");
-        System.out.println("phuong da o day lan 2");
-        System.out.println("Duy da o day");
-        System.out.println("an van the");
-        System.out.println("an xóa"); 
-        System.out.println("ha da sua");
+       
     }
 }
