@@ -11,5 +11,6 @@ package application;
 public class test {
     public static void main(String[] args) {
         System.out.println("anttsdjad");
+        System.out.println("a");
     }
 }
