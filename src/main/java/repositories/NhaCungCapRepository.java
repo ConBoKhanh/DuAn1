@@ -121,7 +121,7 @@ public class NhaCungCapRepository {
             n.setTrangThai(0);
 
             se.getTransaction().begin();
-            se.delete(n);
+            se.save(n);
             se.getTransaction().commit();
             se.close();
             return true;
