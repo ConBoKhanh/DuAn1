@@ -47,7 +47,7 @@ public class NhaCungCapRepository {
 
         Session se = HibernatUtil.getFACTORY().openSession();
         String maLonNhat = null;
-        Query q = se.createQuery("select A.Ma From NhaCungCap A");
+        Query q = se.createQuery("select A.Ma From NhaCungCap A Where TrangThai = 1");
         List<String> i = q.getResultList();
         if (i.isEmpty()) {
             return 0;

@@ -44,7 +44,7 @@ public class SanPhamRepository {
     public int getMaxMa() { //Lấy mã lớn nhất + 1 => Tự động tăng
         Session session = HibernatUtil.getFACTORY().openSession();
         String soMaLonNhat = null;
-        Query q = session.createQuery(" select A.Ma From SanPham A ");
+        Query q = session.createQuery(" select A.Ma From SanPham A Where TrangThai = 1 ");
         List<String> i = q.getResultList(); //Lay list String 
         if (i.isEmpty()) {
             return 0;

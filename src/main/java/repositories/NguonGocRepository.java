@@ -37,7 +37,7 @@ public class NguonGocRepository {
 
         Session se = HibernatUtil.getFACTORY().openSession();
         String maLonNhat = null;
-        Query q = se.createQuery("select A.Ma From NguonGoc A");
+        Query q = se.createQuery("select A.Ma From NguonGoc A Where TrangThai = 1");
         List<String> i = q.getResultList();
         if (i.isEmpty()) {
             return 0;

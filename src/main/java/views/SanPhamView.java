@@ -170,6 +170,17 @@ public class SanPhamView extends javax.swing.JFrame {
         }
     }
 
+    public void timKiemSP(String ten) { // Table San Pham
+        model = (DefaultTableModel) tblSanPham.getModel();
+        model.setRowCount(0);
+        List<ViewModelSanPham> sp = spSV.getListSPByName(ten);
+        for (ViewModelSanPham v : sp) {
+            model.addRow(new Object[]{
+                v.getId(), "Sp " + v.getMa(), v.getTen()
+            });
+        }
+    }
+
     public boolean checkTen() { //check ten sp
         String ten = txtTen.getText();
         List<ViewModelSanPham> sp = spSV.getListSP();
@@ -181,8 +192,32 @@ public class SanPhamView extends javax.swing.JFrame {
         }
         return true;
     }
-    
-     public boolean checkDVT() { //check DVT
+
+    public boolean checkTenNguocGoc() { //check ten nguồn quốc
+        String ten = txtQuocGia.getText();
+        List<ViewModelNguonGoc> sp = ngSv.getAll();
+        for (ViewModelNguonGoc v : sp) {
+            if (ten.equals(v.getquocgia())) {
+                JOptionPane.showMessageDialog(this, "Tên quốc gia đã tồn tại!");
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public boolean checkTenDongGo() { //check ten dòng gỗ
+        String ten = txtTenDongGo.getText();
+        List<ViewModelDongGo> dg = dgSV.getListDongGo();
+        for (ViewModelDongGo v : dg) {
+            if (ten.equals(v.getTenLoaiGo())) {
+                JOptionPane.showMessageDialog(this, "Tên loại gỗ đã tồn tại!");
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public boolean checkDVT() { //check DVT
         String ten = TXTDVT.getText();
         List<ViewModelDonViTinh> sp = dvtrp.getListDVT();
         for (ViewModelDonViTinh v : sp) {
@@ -290,6 +325,8 @@ public class SanPhamView extends javax.swing.JFrame {
         txtTen = new javax.swing.JTextField();
         btnSua = new javax.swing.JButton();
         btnXoa = new javax.swing.JButton();
+        txtTimkiemSanPham = new javax.swing.JTextField();
+        btntimkiemSanPham = new javax.swing.JButton();
         jPanel5 = new javax.swing.JPanel();
         jLabel10 = new javax.swing.JLabel();
         txtid = new javax.swing.JTextField();
@@ -421,33 +458,31 @@ public class SanPhamView extends javax.swing.JFrame {
         jPanel6Layout.setHorizontalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel6Layout.createSequentialGroup()
-                .addGap(100, 100, 100)
-                .addComponent(btnThem1, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(48, 48, 48)
-                .addComponent(btnXoa1, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(57, 57, 57)
-                .addComponent(btnSua1, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(jPanel6Layout.createSequentialGroup()
-                .addGap(65, 65, 65)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel6Layout.createSequentialGroup()
+                        .addGap(100, 100, 100)
+                        .addComponent(btnThem1, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(48, 48, 48)
+                        .addComponent(btnXoa1, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(57, 57, 57)
+                        .addComponent(btnSua1, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel6Layout.createSequentialGroup()
+                        .addGap(65, 65, 65)
                         .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 476, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtTenDongGo, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap(104, Short.MAX_VALUE))
-                    .addGroup(jPanel6Layout.createSequentialGroup()
-                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtMaDongGo, javax.swing.GroupLayout.DEFAULT_SIZE, 225, Short.MAX_VALUE)
-                            .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtIDDongGo))
-                        .addGap(33, 33, 33)
-                        .addComponent(txtTimKiemDongGo, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnTimKiemDongGo, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(34, 34, 34))))
+                            .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel6Layout.createSequentialGroup()
+                                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(txtMaDongGo, javax.swing.GroupLayout.DEFAULT_SIZE, 225, Short.MAX_VALUE)
+                                    .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtIDDongGo))
+                                .addGap(33, 33, 33)
+                                .addComponent(txtTimKiemDongGo, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(28, 28, 28)
+                                .addComponent(btnTimKiemDongGo, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addContainerGap(87, Short.MAX_VALUE))
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -467,7 +502,7 @@ public class SanPhamView extends javax.swing.JFrame {
                 .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(txtTenDongGo, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 47, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 55, Short.MAX_VALUE)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnThem1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnXoa1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -592,19 +627,18 @@ public class SanPhamView extends javax.swing.JFrame {
                             .addComponent(jLabel20, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtIDNguonGoc)
                             .addComponent(txtQuocGia))
-                        .addGap(52, 52, 52)
                         .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel7Layout.createSequentialGroup()
+                                .addGap(52, 52, 52)
                                 .addComponent(txtTimKiemNG, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addComponent(btnTimKiemDongGo1, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel7Layout.createSequentialGroup()
-                                .addComponent(btnThemNG, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(28, 28, 28)
-                                .addComponent(btnSuaNG, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel7Layout.createSequentialGroup()
-                                .addGap(48, 48, 48)
-                                .addComponent(btnXoaNG, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addGap(192, 192, 192)
+                                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(btnXoaNG, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(btnThemNG, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(btnSuaNG, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE))))))
                 .addContainerGap(111, Short.MAX_VALUE))
         );
         jPanel7Layout.setVerticalGroup(
@@ -617,24 +651,24 @@ public class SanPhamView extends javax.swing.JFrame {
                     .addComponent(txtIDNguonGoc, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtTimKiemNG, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnTimKiemDongGo1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(20, 20, 20)
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel19, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnThemNG, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel7Layout.createSequentialGroup()
-                        .addGap(24, 24, 24)
-                        .addComponent(jLabel19, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(txtMaNguonGoc, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel7Layout.createSequentialGroup()
-                        .addGap(37, 37, 37)
-                        .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btnThemNG, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnSuaNG, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(14, 14, 14)
+                        .addGap(21, 21, 21)
+                        .addComponent(btnXoaNG, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(23, 23, 23)
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnXoaNG, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                    .addComponent(btnSuaNG, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtQuocGia, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 92, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 89, Short.MAX_VALUE)
                 .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -1045,6 +1079,24 @@ public class SanPhamView extends javax.swing.JFrame {
             }
         });
 
+        txtTimkiemSanPham.setBackground(new java.awt.Color(255, 204, 204));
+        txtTimkiemSanPham.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 3, 0, new java.awt.Color(0, 0, 0)));
+        txtTimkiemSanPham.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtTimkiemSanPhamKeyReleased(evt);
+            }
+        });
+
+        btntimkiemSanPham.setBackground(new java.awt.Color(255, 153, 255));
+        btntimkiemSanPham.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btntimkiemSanPham.setText("Tìm kiếm");
+        btntimkiemSanPham.setBorder(new javax.swing.border.MatteBorder(null));
+        btntimkiemSanPham.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btntimkiemSanPhamActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
@@ -1052,11 +1104,9 @@ public class SanPhamView extends javax.swing.JFrame {
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addContainerGap(110, Short.MAX_VALUE)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 529, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel4Layout.createSequentialGroup()
                         .addGap(87, 87, 87)
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 529, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtTen, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1064,17 +1114,19 @@ public class SanPhamView extends javax.swing.JFrame {
                             .addComponent(txtMa, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel4Layout.createSequentialGroup()
                                 .addGap(6, 6, 6)
-                                .addComponent(txtID, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(txtID, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(txtTimkiemSanPham, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(btntimkiemSanPham, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(148, 148, 148)
                         .addComponent(btnThem, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(btnSua, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(btnXoa, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(154, 154, 154)))
-                .addContainerGap())
+                        .addComponent(btnXoa, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(35, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1082,7 +1134,11 @@ public class SanPhamView extends javax.swing.JFrame {
                 .addGap(6, 6, 6)
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtID, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtID, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(btntimkiemSanPham, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtTimkiemSanPham, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
@@ -1091,7 +1147,7 @@ public class SanPhamView extends javax.swing.JFrame {
                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
                 .addComponent(txtTen, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 96, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 105, Short.MAX_VALUE)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnThem, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnSua, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1197,39 +1253,39 @@ public class SanPhamView extends javax.swing.JFrame {
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
+                .addGap(0, 200, Short.MAX_VALUE)
+                .addComponent(btnadd, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(59, 59, 59)
+                .addComponent(btndelete, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(36, 36, 36)
+                .addComponent(btnupdate, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(101, 101, 101))
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addGap(86, 86, 86)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtid, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtma, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtten, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 171, Short.MAX_VALUE)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel14)
-                    .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtdienthoai)
-                    .addComponent(txtdiachi)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
-                        .addComponent(txttimkiem, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btntimkiem, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
-                .addGap(0, 104, Short.MAX_VALUE)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
+                    .addGroup(jPanel5Layout.createSequentialGroup()
                         .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 524, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(17, 17, 17))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
-                        .addComponent(btnadd, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(59, 59, 59)
-                        .addComponent(btndelete, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(36, 36, 36)
-                        .addComponent(btnupdate, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(101, 101, 101))))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtid, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtma, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtten, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 172, Short.MAX_VALUE)
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel14)
+                            .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtdienthoai)
+                            .addComponent(txtdiachi)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
+                                .addComponent(txttimkiem, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(btntimkiem, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1436,7 +1492,7 @@ public class SanPhamView extends javax.swing.JFrame {
         List<ViewModelLoaiSanPham> sp = lSpSv.getListLoaiSP();
         for (ViewModelLoaiSanPham v : sp) {
             if (ten.equals(v.getTenDongSP())) {
-                JOptionPane.showMessageDialog(this, "Tên đã tồn tại!");
+                JOptionPane.showMessageDialog(this, "Tên loại sp đã tồn tại!");
                 return false;
             }
         }
@@ -1475,7 +1531,7 @@ public class SanPhamView extends javax.swing.JFrame {
         LoaiSP sp = new LoaiSP();
         sp.setTenDongSP(txtTenDongSp.getText());
 
-        if (checkTenLoaiSp()) {
+        if (checkTenLoaiSp() == true) {
             boolean b = lSpSv.add(sp);
             if (b == true) {
                 Icon icon = new javax.swing.ImageIcon(getClass().getResource("/img/themmoiicon.png"));
@@ -1484,7 +1540,7 @@ public class SanPhamView extends javax.swing.JFrame {
 
             } else {
                 Icon icon = new javax.swing.ImageIcon(getClass().getResource("/img/deleteicon.png"));
-                JOptionPane.showMessageDialog(this, "Trùng Tên Loại ", "Sản Phẩm", JOptionPane.INFORMATION_MESSAGE, icon);
+                JOptionPane.showMessageDialog(this, "add ko thành công!", "Sản Phẩm", JOptionPane.INFORMATION_MESSAGE, icon);
             }
         }
 
@@ -1601,15 +1657,17 @@ public class SanPhamView extends javax.swing.JFrame {
         DongGo dongGo = new DongGo();
         dongGo.setTenLoaiGo(txtTenDongGo.getText());
 
-        boolean c = dgSV.add(dongGo);
-        if (c == true) {
-            Icon icon = new javax.swing.ImageIcon(getClass().getResource("/img/themmoiicon.png"));
-            JOptionPane.showMessageDialog(this, "Thêm loại  thành công", "Loại Gỗ", JOptionPane.INFORMATION_MESSAGE, icon);
-            loadTBDongGo();
+        if (checkTenDongGo()) {
+            boolean c = dgSV.add(dongGo);
+            if (c == true) {
+                Icon icon = new javax.swing.ImageIcon(getClass().getResource("/img/themmoiicon.png"));
+                JOptionPane.showMessageDialog(this, "Thêm loại  thành công", "Loại Gỗ", JOptionPane.INFORMATION_MESSAGE, icon);
+                loadTBDongGo();
 
-        } else {
-            Icon icon = new javax.swing.ImageIcon(getClass().getResource("/img/deleteicon.png"));
-            JOptionPane.showMessageDialog(this, "Lỗi!", "Loại Gỗ", JOptionPane.INFORMATION_MESSAGE, icon);
+            } else {
+                Icon icon = new javax.swing.ImageIcon(getClass().getResource("/img/deleteicon.png"));
+                JOptionPane.showMessageDialog(this, "Lỗi!", "Loại Gỗ", JOptionPane.INFORMATION_MESSAGE, icon);
+            }
         }
     }//GEN-LAST:event_btnThem1ActionPerformed
 
@@ -1671,8 +1729,20 @@ public class SanPhamView extends javax.swing.JFrame {
 
         }
     }
-    
-    public void load1stNhaCungCap(){
+
+    public boolean checkTenNCC() { //check ten sp
+        String ten = txtten.getText();
+        List<ViewModelNhaCungCap> ncc = nhaCungCapService.getAll();
+        for (ViewModelNhaCungCap v : ncc) {
+            if (ten.equals(v.getTenNCC())) {
+                JOptionPane.showMessageDialog(this, "Tên NCC đã tồn tại!");
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public void load1stNhaCungCap() {
         List<ViewModelNhaCungCap> v = nhaCungCapService.getAll();
         int index = 0;
 
@@ -1681,7 +1751,7 @@ public class SanPhamView extends javax.swing.JFrame {
         txtten.setText(tbNhaSanXuat.getValueAt(index, 2).toString());
         txtdiachi.setText(tbNhaSanXuat.getValueAt(index, 3).toString());
         txtdienthoai.setText(tbNhaSanXuat.getValueAt(index, 4).toString());
-        
+
     }
 
     public void loadTbaleTimKiemTenNCC(String ten) {
@@ -1707,7 +1777,6 @@ public class SanPhamView extends javax.swing.JFrame {
 
     public void load1stNCC() {
         int index = 0;
-        
 
         txtid.setText(tbNhaSanXuat.getValueAt(index, 0).toString());
         txtma.setText(tbNhaSanXuat.getValueAt(index, 1).toString());
@@ -1743,14 +1812,16 @@ public class SanPhamView extends javax.swing.JFrame {
         nc.setDiaChi(txtdiachi.getText());
         nc.setSdt(txtdienthoai.getText());
 
-        boolean b = nhaCungCapService.add(nc);
-        if (b == true) {
-            Icon icon = new javax.swing.ImageIcon(getClass().getResource("/img/themmoiicon.png"));
-            JOptionPane.showMessageDialog(this, "Thêm sp thành công", "Sản Phẩm", JOptionPane.INFORMATION_MESSAGE, icon);
-            loadTbaleNhaCungCap();
+        if (checkTenNCC()) {
+            boolean b = nhaCungCapService.add(nc);
+            if (b == true) {
+                Icon icon = new javax.swing.ImageIcon(getClass().getResource("/img/themmoiicon.png"));
+                JOptionPane.showMessageDialog(this, "Thêm sp thành công", "Sản Phẩm", JOptionPane.INFORMATION_MESSAGE, icon);
+                loadTbaleNhaCungCap();
 
-        } else {
-            JOptionPane.showMessageDialog(this, "Thêm Không thành công", "Sản Phẩm", JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(this, "Thêm Không thành công", "Sản Phẩm", JOptionPane.INFORMATION_MESSAGE);
+            }
         }
     }//GEN-LAST:event_btnaddActionPerformed
 
@@ -1794,16 +1865,16 @@ public class SanPhamView extends javax.swing.JFrame {
         DonViTinh sp = new DonViTinh();
         sp.setDonViTinh(TXTDVT.getText());
         if (checkDVT()) {
-        boolean b = dvtrp.add(sp);
-        if (b == true) {
-            Icon icon = new javax.swing.ImageIcon(getClass().getResource("/img/themmoiicon.png"));
-            JOptionPane.showMessageDialog(this, "Thêm dvt thành công", "DON VI TINH", JOptionPane.INFORMATION_MESSAGE, icon);
-            loadTBDVT();
+            boolean b = dvtrp.add(sp);
+            if (b == true) {
+                Icon icon = new javax.swing.ImageIcon(getClass().getResource("/img/themmoiicon.png"));
+                JOptionPane.showMessageDialog(this, "Thêm dvt thành công", "DON VI TINH", JOptionPane.INFORMATION_MESSAGE, icon);
+                loadTBDVT();
 
-        } else {
-            Icon icon = new javax.swing.ImageIcon(getClass().getResource("/img/deleteicon.png"));
-            JOptionPane.showMessageDialog(this, " thêm loi roi", "DON VI TINH", JOptionPane.INFORMATION_MESSAGE, icon);
-        }
+            } else {
+                Icon icon = new javax.swing.ImageIcon(getClass().getResource("/img/deleteicon.png"));
+                JOptionPane.showMessageDialog(this, " thêm loi roi", "DON VI TINH", JOptionPane.INFORMATION_MESSAGE, icon);
+            }
         }
 
     }//GEN-LAST:event_btnThem2ActionPerformed
@@ -1814,16 +1885,16 @@ public class SanPhamView extends javax.swing.JFrame {
         sp.setId(TXTIDDVT.getText());
         sp.setDonViTinh(TXTDVT.getText());
         if (checkDVT()) {
-        boolean b = dvtrp.update(sp);
-        if (b == true) {
-            Icon icon = new javax.swing.ImageIcon(getClass().getResource("/img/themmoiicon.png"));
-            JOptionPane.showMessageDialog(this, "Update dvt thanh cong", "DON VI TINH", JOptionPane.INFORMATION_MESSAGE, icon);
-            loadTBDVT();
+            boolean b = dvtrp.update(sp);
+            if (b == true) {
+                Icon icon = new javax.swing.ImageIcon(getClass().getResource("/img/themmoiicon.png"));
+                JOptionPane.showMessageDialog(this, "Update dvt thanh cong", "DON VI TINH", JOptionPane.INFORMATION_MESSAGE, icon);
+                loadTBDVT();
 
-        } else {
-            Icon icon = new javax.swing.ImageIcon(getClass().getResource("/img/deleteicon.png"));
-            JOptionPane.showMessageDialog(this, "Update dvt that bai", "DON VI TINH", JOptionPane.INFORMATION_MESSAGE, icon);
-        }
+            } else {
+                Icon icon = new javax.swing.ImageIcon(getClass().getResource("/img/deleteicon.png"));
+                JOptionPane.showMessageDialog(this, "Update dvt that bai", "DON VI TINH", JOptionPane.INFORMATION_MESSAGE, icon);
+            }
         }
     }//GEN-LAST:event_btnSua2ActionPerformed
 
@@ -1923,15 +1994,17 @@ public class SanPhamView extends javax.swing.JFrame {
         NguonGoc nguonGoc = new NguonGoc();
         nguonGoc.setQuocGia(txtQuocGia.getText());
 
-        boolean c = ngSv.add(nguonGoc);
-        if (c == true) {
-            Icon icon = new javax.swing.ImageIcon(getClass().getResource("/img/themmoiicon.png"));
-            JOptionPane.showMessageDialog(this, "Thêm loại  thành công", "Loại Gỗ", JOptionPane.INFORMATION_MESSAGE, icon);
-            loadTBNguonGoc();
+        if (checkTenNguocGoc()) {
+            boolean c = ngSv.add(nguonGoc);
+            if (c == true) {
+                Icon icon = new javax.swing.ImageIcon(getClass().getResource("/img/themmoiicon.png"));
+                JOptionPane.showMessageDialog(this, "Thêm loại  thành công", "Loại Gỗ", JOptionPane.INFORMATION_MESSAGE, icon);
+                loadTBNguonGoc();
 
-        } else {
-            Icon icon = new javax.swing.ImageIcon(getClass().getResource("/img/deleteicon.png"));
-            JOptionPane.showMessageDialog(this, "Lỗi!", "Loại Gỗ", JOptionPane.INFORMATION_MESSAGE, icon);
+            } else {
+                Icon icon = new javax.swing.ImageIcon(getClass().getResource("/img/deleteicon.png"));
+                JOptionPane.showMessageDialog(this, "Lỗi!", "Loại Gỗ", JOptionPane.INFORMATION_MESSAGE, icon);
+            }
         }
     }//GEN-LAST:event_btnThemNGActionPerformed
 
@@ -1951,11 +2024,24 @@ public class SanPhamView extends javax.swing.JFrame {
     }//GEN-LAST:event_txtMaNguonGocActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        MenuView  v = new MenuView("", "", "");
+        MenuView v = new MenuView("", "", "");
         v.setLocationRelativeTo(null);
         v.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void btntimkiemSanPhamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btntimkiemSanPhamActionPerformed
+        // TODO add your handling code here:
+        timKiemSP(txtTimkiemSanPham.getText());
+
+    }//GEN-LAST:event_btntimkiemSanPhamActionPerformed
+
+    private void txtTimkiemSanPhamKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTimkiemSanPhamKeyReleased
+        // TODO add your handling code here:
+        if (txtTimkiemSanPham.getText().equals("")) {
+            loadTB();
+        }
+    }//GEN-LAST:event_txtTimkiemSanPhamKeyReleased
 
     /**
      * @param args the command line arguments
@@ -2021,6 +2107,7 @@ public class SanPhamView extends javax.swing.JFrame {
     private javax.swing.JButton btnadd;
     private javax.swing.JButton btndelete;
     private javax.swing.JButton btntimkiem;
+    private javax.swing.JButton btntimkiemSanPham;
     private javax.swing.JButton btnupdate;
     private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
@@ -2081,6 +2168,7 @@ public class SanPhamView extends javax.swing.JFrame {
     private javax.swing.JTextField txtTimKiem;
     private javax.swing.JTextField txtTimKiemDongGo;
     private javax.swing.JTextField txtTimKiemNG;
+    private javax.swing.JTextField txtTimkiemSanPham;
     private javax.swing.JTextField txtdiachi;
     private javax.swing.JTextField txtdienthoai;
     private javax.swing.JTextField txtid;
