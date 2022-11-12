@@ -181,6 +181,18 @@ public class SanPhamView extends javax.swing.JFrame {
         }
         return true;
     }
+    
+     public boolean checkDVT() { //check DVT
+        String ten = TXTDVT.getText();
+        List<ViewModelDonViTinh> sp = dvtrp.getListDVT();
+        for (ViewModelDonViTinh v : sp) {
+            if (ten.equals(v.getDonViTinh())) {
+                JOptionPane.showMessageDialog(this, "DVT đã tồn tại!");
+                return false;
+            }
+        }
+        return true;
+    }
 
     public void load1st() { // load doi tuong 1 sp
         List<ViewModelSanPham> sp = spSV.getListSP();
@@ -1781,7 +1793,7 @@ public class SanPhamView extends javax.swing.JFrame {
         // TODO add your handling code here:
         DonViTinh sp = new DonViTinh();
         sp.setDonViTinh(TXTDVT.getText());
-
+        if (checkDVT()) {
         boolean b = dvtrp.add(sp);
         if (b == true) {
             Icon icon = new javax.swing.ImageIcon(getClass().getResource("/img/themmoiicon.png"));
@@ -1792,6 +1804,7 @@ public class SanPhamView extends javax.swing.JFrame {
             Icon icon = new javax.swing.ImageIcon(getClass().getResource("/img/deleteicon.png"));
             JOptionPane.showMessageDialog(this, " thêm loi roi", "DON VI TINH", JOptionPane.INFORMATION_MESSAGE, icon);
         }
+        }
 
     }//GEN-LAST:event_btnThem2ActionPerformed
 
@@ -1800,7 +1813,7 @@ public class SanPhamView extends javax.swing.JFrame {
         DonViTinh sp = new DonViTinh();
         sp.setId(TXTIDDVT.getText());
         sp.setDonViTinh(TXTDVT.getText());
-
+        if (checkDVT()) {
         boolean b = dvtrp.update(sp);
         if (b == true) {
             Icon icon = new javax.swing.ImageIcon(getClass().getResource("/img/themmoiicon.png"));
@@ -1810,6 +1823,7 @@ public class SanPhamView extends javax.swing.JFrame {
         } else {
             Icon icon = new javax.swing.ImageIcon(getClass().getResource("/img/deleteicon.png"));
             JOptionPane.showMessageDialog(this, "Update dvt that bai", "DON VI TINH", JOptionPane.INFORMATION_MESSAGE, icon);
+        }
         }
     }//GEN-LAST:event_btnSua2ActionPerformed
 
