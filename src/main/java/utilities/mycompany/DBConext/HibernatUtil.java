@@ -38,7 +38,7 @@ public class HibernatUtil {
         properties.put(Environment.DRIVER, "com.microsoft.sqlserver.jdbc.SQLServerDriver");
         properties.put(Environment.URL, "jdbc:sqlserver://localhost:1433;databaseName=DuAn1Hibernate");
         properties.put(Environment.USER, "sa");
-        properties.put(Environment.PASS, "123");
+        properties.put(Environment.PASS, "12345678");
         properties.put(Environment.SHOW_SQL, "true");
         //gen DB tự động
 //        properties.put(Environment.HBM2DDL_AUTO, "create");
