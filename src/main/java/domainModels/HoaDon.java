@@ -5,6 +5,7 @@
 package domainModels;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.sql.Date;
 import java.util.Set;
 import javax.persistence.Column;
@@ -49,11 +50,11 @@ public class HoaDon implements Serializable {
 
     private Date NgayNhan;
     private int TrangThai;
-
+    private BigDecimal ThanhTien;
     @OneToMany(mappedBy = "IdHoaDon")
     private Set<HoaDonChiTiet> hoaDonChiTiets;
 
-    public HoaDon(String Id, String Ma, Date NgayTao, Date NgayThanhToan, int TrangThaiHoaDon, KhuyenMai IdKhuyenMai, KhachHang IdKhachHang, NhanVien IdNhanVien, Date NgayNhan, int TrangThai) {
+    public HoaDon(String Id, String Ma, Date NgayTao, Date NgayThanhToan, int TrangThaiHoaDon, KhuyenMai IdKhuyenMai, KhachHang IdKhachHang, NhanVien IdNhanVien, Date NgayNhan, int TrangThai,BigDecimal ThanhTien) {
         this.Id = Id;
         this.Ma = Ma;
         this.NgayTao = NgayTao;
@@ -64,6 +65,7 @@ public class HoaDon implements Serializable {
         this.IdNhanVien = IdNhanVien;
         this.NgayNhan = NgayNhan;
         this.TrangThai = TrangThai;
+        this.ThanhTien = ThanhTien;
     }
 
     public HoaDon() {
@@ -149,9 +151,21 @@ public class HoaDon implements Serializable {
         this.TrangThai = TrangThai;
     }
 
+    public BigDecimal getThanhTien() {
+        return ThanhTien;
+    }
+
+    public void setThanhTien(BigDecimal ThanhTien) {
+        this.ThanhTien = ThanhTien;
+    }
+
     @Override
     public String toString() {
-        return "HoaDon{" + "Id=" + Id + ", Ma=" + Ma + ", NgayTao=" + NgayTao + ", NgayThanhToan=" + NgayThanhToan + ", TrangThaiHoaDon=" + TrangThaiHoaDon + ", IdKhuyenMai=" + IdKhuyenMai + ", IdKhachHang=" + IdKhachHang + ", IdNhanVien=" + IdNhanVien + ", NgayNhan=" + NgayNhan + ", TrangThai=" + TrangThai + ", hoaDonChiTiets=" + hoaDonChiTiets + '}';
+        return "HoaDon{" + "Id=" + Id + ", Ma=" + Ma + ", NgayTao=" + NgayTao + ", NgayThanhToan=" + NgayThanhToan + ", TrangThaiHoaDon=" + TrangThaiHoaDon + ", IdKhuyenMai=" + IdKhuyenMai + ", IdKhachHang=" + IdKhachHang + ", IdNhanVien=" + IdNhanVien + ", NgayNhan=" + NgayNhan + ", TrangThai=" + TrangThai + ", ThanhTien=" + ThanhTien + '}';
     }
+    
+    
+
+    
 
 }

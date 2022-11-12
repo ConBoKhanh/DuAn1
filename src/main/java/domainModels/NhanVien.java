@@ -43,14 +43,14 @@ public class NhanVien implements Serializable {
     private ChucVu IdChucVu;
     private String MatKhau;
     private int TrangThai;
-
+    private String Email;
     @OneToMany(mappedBy = "IdNhanVien")
     private Set<HoaDon> HaoDons;
 
     public NhanVien() {
     }
 
-    public NhanVien(String Id, String Ma, String HoTen, String Sdt, String DiaChi, Date NgaySinh, CuaHang IdCuaHang, ChucVu IdChucVu, String MatKhau, int TrangThai) {
+    public NhanVien(String Id, String Ma, String HoTen, String Sdt, String DiaChi, Date NgaySinh, CuaHang IdCuaHang, ChucVu IdChucVu, String MatKhau, int TrangThai, String Email) {
         this.Id = Id;
         this.Ma = Ma;
         this.HoTen = HoTen;
@@ -61,6 +61,7 @@ public class NhanVien implements Serializable {
         this.IdChucVu = IdChucVu;
         this.MatKhau = MatKhau;
         this.TrangThai = TrangThai;
+        this.Email = Email;
     }
 
     public String getId() {
@@ -143,9 +144,17 @@ public class NhanVien implements Serializable {
         this.TrangThai = TrangThai;
     }
 
+    public String getEmail() {
+        return Email;
+    }
+
+    public void setEmail(String Email) {
+        this.Email = Email;
+    }
+
     @Override
     public String toString() {
-        return "NhanVien{" + "Id=" + Id + ", Ma=" + Ma + ", HoTen=" + HoTen + ", Sdt=" + Sdt + ", DiaChi=" + DiaChi + ", NgaySinh=" + NgaySinh + ", IdCuaHang=" + IdCuaHang + ", IdChucVu=" + IdChucVu + ", MatKhau=" + MatKhau + ", TrangThai=" + TrangThai + '}';
+        return "NhanVien{" + "Id=" + Id + ", Ma=" + Ma + ", HoTen=" + HoTen + ", Sdt=" + Sdt + ", DiaChi=" + DiaChi + ", NgaySinh=" + NgaySinh + ", IdCuaHang=" + IdCuaHang + ", IdChucVu=" + IdChucVu + ", MatKhau=" + MatKhau + ", TrangThai=" + TrangThai + ", Email=" + Email + '}';
     }
 
 }

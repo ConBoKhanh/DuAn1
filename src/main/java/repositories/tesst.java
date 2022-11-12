@@ -21,6 +21,7 @@ import utilities.mycompany.DBConext.HibernatUtil;
  *
  * @author Admin
  */
+
 public class tesst {
 
     private Session session = HibernatUtil.getFACTORY().openSession();
@@ -31,10 +32,25 @@ public class tesst {
         List<HoaDonChiTiet> list = q.getResultList();
         return list;
     }
+    
     public List<HoaDon> getListhd() {
         Session session = HibernatUtil.getFACTORY().openSession();
-        Query q = session.createQuery("from HoaDon");
+        Query q = session.createQuery("from HoaDon Where NgayTao >= '2022-11-01' and NgayTao <= '2022-11-08'");
         List<HoaDon> list = q.getResultList();
+        return list;
+        
+    }
+    public List<Object> getYear() {
+        Session session = HibernatUtil.getFACTORY().openSession();
+        Query  q = session.createQuery("SELECT Id,Day(a.NgayTao) from HoaDon a ");
+        List<Object> list = q.getResultList();
+        return list;
+        
+    }
+    public List<Object> getYearlonhon18() {
+        Session session = HibernatUtil.getFACTORY().openSession();
+        Query  q= session.createQuery("select Id,Ma from HoaDon a where  Year(GETDATE())-YEAR(a.NgayTao)>18");
+        List<Object> list = q.getResultList();
         return list;
         
     }
@@ -159,33 +175,22 @@ public class tesst {
 
     public static void main(String[] args) {
         tesst i = new tesst();
-//        HoaDon hd = new HoaDon();
-//        hd.setMa("21");
-//        KhachHang kh = new KhachHang();
-//        kh.setId("8B8EBFFC-CF93-4361-AAF1-4125D53B6FFE");
-//        hd.setIdKhachHang(kh);
-////        System.out.println(hd.toString());
-//        boolean  b = i.addhoadon(hd);
-//        if(b== true){
-//            System.out.println("ok");
-//        }else{
-//            System.out.println("not ok");
+//        List<HoaDon> list = i.getListhd();
+//        for (HoaDon hoaDon : list) {
+//            System.out.println(hoaDon.toString());
 //        }
-//          add hóa đơn 
-            int ia = i.getMa();
-            System.out.println(ia);
-//          lẫy mã lớn nhất 
-//    }
-//            List<HoaDon> l = i.getListhd();
-//            for (HoaDon hoaDon : l) {
-//                System.out.println(hoaDon.toString());
-//        }
-//        i.delete("60C89AEF-1A48-42E3-92D9-1D7DD2771FC4");
-//         List<HoaDonChiTiet> list = i.getList();
-//         
-//         for (HoaDonChiTiet chiTietDoGo : list) {
-//             System.out.println(chiTietDoGo.toString());
-//    }
+        try {
+            List<Object> l = i.getYear();
+            List<Object[]> ob = new ArrayList<>();
+            for (Object a : l) {
+                ob.add((Object[]) a);
+            }
+            for (Object[] objects : ob) {
+                System.out.println(objects[0]+"  " +objects[1] + "\n");
+            }
+            
+        } catch (Exception e) {
+        }
 }
 
 }
