@@ -1551,17 +1551,18 @@ public class SanPhamView extends javax.swing.JFrame {
         LoaiSP sp = new LoaiSP();
         sp.setId(txtIDLoaiSp.getText());
         sp.setTenDongSP(txtTenDongSp.getText());
+        if (checkTenLoaiSp() == true) {
+            if (checkTenLoaiSp()) {
+                boolean b = lSpSv.update(sp);
+                if (b == true) {
+                    Icon icon = new javax.swing.ImageIcon(getClass().getResource("/img/themmoiicon.png"));
+                    JOptionPane.showMessageDialog(this, "Update tên dòng Sp thành công", "Sản Phẩm", JOptionPane.INFORMATION_MESSAGE, icon);
+                    loadTbLoaiSP();
 
-        if (checkTenLoaiSp()) {
-            boolean b = lSpSv.update(sp);
-            if (b == true) {
-                Icon icon = new javax.swing.ImageIcon(getClass().getResource("/img/themmoiicon.png"));
-                JOptionPane.showMessageDialog(this, "Update tên dòng Sp thành công", "Sản Phẩm", JOptionPane.INFORMATION_MESSAGE, icon);
-                loadTbLoaiSP();
-
-            } else {
-                Icon icon = new javax.swing.ImageIcon(getClass().getResource("/img/deleteicon.png"));
-                JOptionPane.showMessageDialog(this, "Update Tên dòng Sản Phẩm thất bại", "Sản Phẩm", JOptionPane.INFORMATION_MESSAGE, icon);
+                } else {
+                    Icon icon = new javax.swing.ImageIcon(getClass().getResource("/img/deleteicon.png"));
+                    JOptionPane.showMessageDialog(this, "Update Tên dòng Sản Phẩm thất bại", "Sản Phẩm", JOptionPane.INFORMATION_MESSAGE, icon);
+                }
             }
         }
     }//GEN-LAST:event_btnSuaLoaiSpActionPerformed
@@ -1678,16 +1679,17 @@ public class SanPhamView extends javax.swing.JFrame {
         DongGo dongGo = new DongGo();
         dongGo.setId(txtIDDongGo.getText());
         dongGo.setTenLoaiGo(txtTenDongGo.getText());
+        if (checkTenDongGo()) {
+            boolean c = dgSV.update(dongGo);
+            if (c == true) {
+                Icon icon = new javax.swing.ImageIcon(getClass().getResource("/img/themmoiicon.png"));
+                JOptionPane.showMessageDialog(this, "Update loại  thành công", "Loại Gỗ", JOptionPane.INFORMATION_MESSAGE, icon);
+                loadTBDongGo();
 
-        boolean c = dgSV.update(dongGo);
-        if (c == true) {
-            Icon icon = new javax.swing.ImageIcon(getClass().getResource("/img/themmoiicon.png"));
-            JOptionPane.showMessageDialog(this, "Update loại  thành công", "Loại Gỗ", JOptionPane.INFORMATION_MESSAGE, icon);
-            loadTBDongGo();
-
-        } else {
-            Icon icon = new javax.swing.ImageIcon(getClass().getResource("/img/deleteicon.png"));
-            JOptionPane.showMessageDialog(this, "Lỗi!", "Loại Gỗ", JOptionPane.INFORMATION_MESSAGE, icon);
+            } else {
+                Icon icon = new javax.swing.ImageIcon(getClass().getResource("/img/deleteicon.png"));
+                JOptionPane.showMessageDialog(this, "Lỗi!", "Loại Gỗ", JOptionPane.INFORMATION_MESSAGE, icon);
+            }
         }
     }//GEN-LAST:event_btnSua1ActionPerformed
 
@@ -1833,15 +1835,16 @@ public class SanPhamView extends javax.swing.JFrame {
         nc.setTenNCC(txtten.getText());
         nc.setDiaChi(txtdiachi.getText());
         nc.setSdt(txtdienthoai.getText());
+        if (checkTenNCC()) {
+            boolean b = nhaCungCapService.update(nc);
+            if (b == true) {
+                Icon icon = new javax.swing.ImageIcon(getClass().getResource("/img/themmoiicon.png"));
+                JOptionPane.showMessageDialog(this, "Sửa sp thành công", "Sản Phẩm", JOptionPane.INFORMATION_MESSAGE, icon);
+                loadTbaleNhaCungCap();
 
-        boolean b = nhaCungCapService.update(nc);
-        if (b == true) {
-            Icon icon = new javax.swing.ImageIcon(getClass().getResource("/img/themmoiicon.png"));
-            JOptionPane.showMessageDialog(this, "Sửa sp thành công", "Sản Phẩm", JOptionPane.INFORMATION_MESSAGE, icon);
-            loadTbaleNhaCungCap();
-
-        } else {
-            JOptionPane.showMessageDialog(this, "Trùng Tên Sản Phẩm", "Sản Phẩm", JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(this, "Trùng Tên Sản Phẩm", "Sản Phẩm", JOptionPane.INFORMATION_MESSAGE);
+            }
         }
     }//GEN-LAST:event_btnupdateActionPerformed
 
@@ -1850,6 +1853,7 @@ public class SanPhamView extends javax.swing.JFrame {
         NhaCungCap sp = new NhaCungCap();
         sp.setId(txtid.getText());
         boolean b = nhaCungCapService.delete(sp);
+
         if (b == true) {
             Icon icon = new javax.swing.ImageIcon(getClass().getResource("/img/themmoiicon.png"));
             JOptionPane.showMessageDialog(this, "Delete sp thành công", "Sản Phẩm", JOptionPane.INFORMATION_MESSAGE, icon);
@@ -1968,16 +1972,17 @@ public class SanPhamView extends javax.swing.JFrame {
         NguonGoc ng = new NguonGoc();
         ng.setId(txtIDNguonGoc.getText());
         ng.setQuocGia(txtQuocGia.getText());
+        if (checkTenNguocGoc()) {
+            boolean c = ngSv.update(ng);
+            if (c == true) {
+                Icon icon = new javax.swing.ImageIcon(getClass().getResource("/img/themmoiicon.png"));
+                JOptionPane.showMessageDialog(this, "Update   thành công", "Loại Gỗ", JOptionPane.INFORMATION_MESSAGE, icon);
+                loadTBNguonGoc();
 
-        boolean c = ngSv.update(ng);
-        if (c == true) {
-            Icon icon = new javax.swing.ImageIcon(getClass().getResource("/img/themmoiicon.png"));
-            JOptionPane.showMessageDialog(this, "Update   thành công", "Loại Gỗ", JOptionPane.INFORMATION_MESSAGE, icon);
-            loadTBNguonGoc();
-
-        } else {
-            Icon icon = new javax.swing.ImageIcon(getClass().getResource("/img/deleteicon.png"));
-            JOptionPane.showMessageDialog(this, "Lỗi!", "Loại Gỗ", JOptionPane.INFORMATION_MESSAGE, icon);
+            } else {
+                Icon icon = new javax.swing.ImageIcon(getClass().getResource("/img/deleteicon.png"));
+                JOptionPane.showMessageDialog(this, "Lỗi!", "Loại Gỗ", JOptionPane.INFORMATION_MESSAGE, icon);
+            }
         }
     }//GEN-LAST:event_btnSuaNGActionPerformed
 
