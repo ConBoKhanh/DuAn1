@@ -14,7 +14,7 @@ public class KhachHangView extends javax.swing.JFrame {
      * Creates new form KhachHang
      */
     public KhachHangView() {
-        initComponents();
+        initComponents();   //
     }
 
     /**
