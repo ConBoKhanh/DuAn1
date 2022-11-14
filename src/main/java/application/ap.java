@@ -7,6 +7,7 @@ package application;
 import views.BanHangView;
 import views.DangNhapView;
 import views.MenuView;
+import views.SanPhamView;
 import views.TTKHView;
 
 /**
@@ -18,9 +19,13 @@ public class ap {
     public static void main(String[] args) {
 //        BanHangView v = new BanHangView();
 //        MenuView v = new MenuView();
-        DangNhapView v = new DangNhapView();
-        v.setLocationRelativeTo(null);
-        v.setVisible(true);
+//        DangNhapView v = new DangNhapView();
+//        v.setLocationRelativeTo(null);
+//        v.setVisible(true);
+        
+        SanPhamView sp = new SanPhamView();
+        sp.setLocationRelativeTo(null);
+        sp.setVisible(true);
        
     }
 }
