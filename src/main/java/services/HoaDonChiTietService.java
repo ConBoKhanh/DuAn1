@@ -16,7 +16,9 @@ import viewModel.ViewModelHoaDonChiTietBanHang;
  * @author Admin
  */
 public class HoaDonChiTietService implements IManageChiTietHoaDonBanHang {
-    private ChiTietHoaDonRepository i = new  ChiTietHoaDonRepository();
+    
+    private ChiTietHoaDonRepository i = new ChiTietHoaDonRepository();
+    
     @Override
     public List<ViewModelHoaDonChiTietBanHang> list(String id) {
         try {
@@ -37,6 +39,42 @@ public class HoaDonChiTietService implements IManageChiTietHoaDonBanHang {
             return null;
         }
         
+    }
+    
+    @Override
+    public boolean add(HoaDonChiTiet hd) {
+        try {
+            return i.add(hd);
+        } catch (Exception e) {
+            return false;
+        }
+    }
+    
+    @Override
+    public boolean update(HoaDonChiTiet hd) {
+        try {
+            return i.update(hd);
+        } catch (Exception e) {
+            return false;
+        }
+    }
+    
+    @Override
+    public boolean delete(HoaDonChiTiet hd) {
+        try {
+            return i.delete(hd);
+        } catch (Exception e) {
+            return false;
+        }
+    }
+    
+    @Override
+    public boolean updatesol(String id, int soluong) {
+        try {
+            return i.updateSLSP(id, soluong);
+        } catch (Exception e) {
+            return false;
+        }
     }
     
 }

@@ -14,10 +14,13 @@ import com.google.zxing.NotFoundException;
 import com.google.zxing.Result;
 import com.google.zxing.client.j2se.BufferedImageLuminanceSource;
 import com.google.zxing.common.HybridBinarizer;
+import domainModels.ChiTietDoGo;
 import domainModels.HoaDon;
+import domainModels.HoaDonChiTiet;
 import domainModels.NhanVien;
 import java.awt.Dimension;
 import java.awt.image.BufferedImage;
+import java.math.BigDecimal;
 import java.text.MessageFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -57,7 +60,7 @@ public class BanHangView extends javax.swing.JFrame implements Runnable, ThreadF
     private IManageChiTietDoGoBanHangService spService = new ChiTietDoGoBanHangService();
 
     private IManageHoaDonBanHangService hdService = new HoaDonBanHangService();
-    
+
     private IManageChiTietHoaDonBanHang cthdService = new HoaDonChiTietService();
 
     public BanHangView() {
@@ -173,17 +176,17 @@ public class BanHangView extends javax.swing.JFrame implements Runnable, ThreadF
             });
         }
     }
-    
-    public void addtxtNew(){
+
+    public void addtxtNew() {
         String idhd = null;
         String ma = null;
         String nv = null;
         String date = null;
-        
+
         List<ViewModelHoaDonBanHang> lists = hdService.getList();
-        int i = hdService. maxma();
+        int i = hdService.maxma();
         for (ViewModelHoaDonBanHang list : lists) {
-            if(String.valueOf(i).equals(list.getMa())){
+            if (String.valueOf(i).equals(list.getMa())) {
                 idhd = list.getId();
                 ma = list.getMa();
                 nv = list.getTenNV();
@@ -195,20 +198,36 @@ public class BanHangView extends javax.swing.JFrame implements Runnable, ThreadF
         txtTenNV.setText(nv);
         txtNgayTao.setText(date);
     }
-    
-    public void loadCTHH(String id){
+
+    public void loadCTHH(String id) {
         model = (DefaultTableModel) tblCTHH.getModel();
         model.setRowCount(0);
-        List<ViewModelHoaDonChiTietBanHang> lisst =  cthdService.list(id);
-        if(lisst==null){
+        List<ViewModelHoaDonChiTietBanHang> lisst = cthdService.list(id);
+        if (lisst == null) {
             return;
         }
         for (ViewModelHoaDonChiTietBanHang a : lisst) {
             model.addRow(new Object[]{
-            model.getRowCount()+1,a.getIdsp(),a.getTen(),a.getSoluong(),a.getDonGia()
+                model.getRowCount() + 1, a.getIdsp(), a.getTen(), a.getSoluong(), a.getDonGia()
             });
         }
     }
+
+    public int getSoluong(String idsp) {
+        int i = 0;
+        List<ViewModelHoaDonChiTietBanHang> lisst = cthdService.list(txtIdhd.getText());
+        if (lisst == null) {
+            i = 0;
+        } else {
+            for (ViewModelHoaDonChiTietBanHang a : lisst) {
+                if (idsp.equals(a.getIdsp())) {
+                    i = a.getSoluong();
+                }
+            }
+        }
+        return i;
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -651,6 +670,11 @@ public class BanHangView extends javax.swing.JFrame implements Runnable, ThreadF
             }
         ));
         tblCTHH.setSelectionForeground(new java.awt.Color(255, 255, 255));
+        tblCTHH.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblCTHHMouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(tblCTHH);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -807,6 +831,11 @@ public class BanHangView extends javax.swing.JFrame implements Runnable, ThreadF
         tblSanPham.setGridColor(new java.awt.Color(255, 51, 204));
         tblSanPham.setSelectionBackground(new java.awt.Color(204, 204, 204));
         tblSanPham.setSelectionForeground(new java.awt.Color(255, 255, 255));
+        tblSanPham.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblSanPhamMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tblSanPham);
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
@@ -1041,8 +1070,7 @@ public class BanHangView extends javax.swing.JFrame implements Runnable, ThreadF
         txtMahd.setText(tblHoaDon.getValueAt(index, 1).toString());
         txtNgayTao.setText(tblHoaDon.getValueAt(index, 2).toString());
         txtTenNV.setText(tblHoaDon.getValueAt(index, 3).toString());
-        
-        
+
         loadCTHH(tblHoaDon.getValueAt(index, 0).toString());
     }//GEN-LAST:event_tblHoaDonMouseClicked
 
@@ -1083,12 +1111,113 @@ public class BanHangView extends javax.swing.JFrame implements Runnable, ThreadF
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        MenuView  v = new MenuView("", "", "");
+        MenuView v = new MenuView("", "", "");
         v.setLocationRelativeTo(null);
         v.setVisible(true);
         webcam.close();
         this.dispose();
     }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void tblSanPhamMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblSanPhamMouseClicked
+        int index = tblSanPham.getSelectedRow();
+
+        String IdSp = (String) tblSanPham.getValueAt(index, 0);// id sản phẩm
+
+        String Tensp = (String) tblSanPham.getValueAt(index, 1); // tên sp
+        int check = getSoluong(IdSp);// nếu sản phẩm tồn tại thì lấy số lượng nếu nó là 0 thì không tồn tại
+        System.out.println(check);
+        if (check == 0) {
+            String soLuongNhapinpit = JOptionPane.showInputDialog("Nhập Số Lượng Sản Phẩm " + " " + Tensp);
+            // NHẬP SỐ LƯỢNG ĐỂ INSERT 
+            if (soLuongNhapinpit == null) {
+                JOptionPane.showMessageDialog(this, "oke");
+                return;
+            }
+
+            BigDecimal giaBanBig = (BigDecimal) tblSanPham.getValueAt(index, 10); // giá bán 
+            String giaban = String.valueOf(giaBanBig);
+            String idhd = txtIdhd.getText();// id hóa đơn
+
+            int soluongnhap = Integer.parseInt(soLuongNhapinpit);
+            int dongia = soluongnhap * Integer.parseInt(giaban);
+
+            HoaDonChiTiet hd = new HoaDonChiTiet();
+            HoaDon a = new HoaDon();
+            a.setId(idhd);
+
+            ChiTietDoGo b = new ChiTietDoGo();
+            b.setId(IdSp);
+
+            hd.setIdHoaDon(a);
+            hd.setIdChiTietDoGo(b);
+            hd.setSoLuong(soluongnhap);
+            hd.setDonGia(BigDecimal.valueOf(dongia));
+
+            boolean c = cthdService.add(hd);
+
+            if (c == true) {
+                Icon icon = new javax.swing.ImageIcon(getClass().getResource("/img/themmoiicon.png"));
+                JOptionPane.showMessageDialog(this, "Thêm  thành công", "Sản Phẩm", JOptionPane.INFORMATION_MESSAGE, icon);
+                loadCTHH(idhd);
+
+            } else {
+                Icon icon = new javax.swing.ImageIcon(getClass().getResource("/img/deleteicon.png"));
+                JOptionPane.showMessageDialog(this, "lỗi", "Sản Phẩm", JOptionPane.INFORMATION_MESSAGE, icon);
+            }
+        } else {
+            String soLuongNhapinpit = JOptionPane.showInputDialog("Nhập Số Lượng Sản Phẩm " + " " + Tensp);
+            // NHẬP SỐ LƯỢNG ĐỂ INSERT 
+            if (soLuongNhapinpit == null) {
+                JOptionPane.showMessageDialog(this, "oke");
+                return;
+            }
+
+            BigDecimal giaBanBig = (BigDecimal) tblSanPham.getValueAt(index, 10); // giá bán 
+            String giaban = String.valueOf(giaBanBig);
+            String idhd = txtIdhd.getText();// id hóa đơn
+
+            int soluongnhap = Integer.parseInt(soLuongNhapinpit)+check;
+            int dongia = soluongnhap * Integer.parseInt(giaban);
+
+            HoaDonChiTiet hd = new HoaDonChiTiet();
+            HoaDon a = new HoaDon();
+            a.setId(idhd);
+
+            ChiTietDoGo b = new ChiTietDoGo();
+            b.setId(IdSp);
+
+            hd.setIdHoaDon(a);
+            hd.setIdChiTietDoGo(b);
+            hd.setSoLuong(soluongnhap);
+            hd.setDonGia(BigDecimal.valueOf(dongia));
+
+            boolean c = cthdService.update(hd);
+
+            if (c == true) {
+                Icon icon = new javax.swing.ImageIcon(getClass().getResource("/img/themmoiicon.png"));
+                JOptionPane.showMessageDialog(this, "Thêm  thành công", "Sản Phẩm", JOptionPane.INFORMATION_MESSAGE, icon);
+                loadCTHH(idhd);
+
+            } else {
+                Icon icon = new javax.swing.ImageIcon(getClass().getResource("/img/deleteicon.png"));
+                JOptionPane.showMessageDialog(this, "lỗi", "Sản Phẩm", JOptionPane.INFORMATION_MESSAGE, icon);
+            }
+        }
+
+
+    }//GEN-LAST:event_tblSanPhamMouseClicked
+
+    private void tblCTHHMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblCTHHMouseClicked
+        String[] buttons = {"Update", "Delete", "Cancel"};
+        
+        int rc = JOptionPane.showOptionDialog(null, "Question ?", "Confirmation",
+                JOptionPane.WARNING_MESSAGE, 0, null, buttons, buttons[2]);
+        
+        if(rc == 2){
+            Icon icon = new javax.swing.ImageIcon(getClass().getResource("/img/themmoiicon.png"));
+            JOptionPane.showMessageDialog(this, "DẠ Dạ", "Hóa Đơn ChiTiet", JOptionPane.INFORMATION_MESSAGE, icon);
+        }
+    }//GEN-LAST:event_tblCTHHMouseClicked
 
     /**
      * @param args the command line arguments

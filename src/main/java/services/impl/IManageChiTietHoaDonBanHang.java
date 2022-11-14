@@ -4,6 +4,7 @@
  */
 package services.impl;
 
+import domainModels.HoaDonChiTiet;
 import java.util.List;
 import viewModel.ViewModelHoaDonChiTietBanHang;
 
@@ -13,4 +14,12 @@ import viewModel.ViewModelHoaDonChiTietBanHang;
  */
 public interface IManageChiTietHoaDonBanHang {
     List<ViewModelHoaDonChiTietBanHang> list(String id);
+    
+    public boolean add(HoaDonChiTiet hd) ;
+    
+    public boolean update(HoaDonChiTiet hd) ;
+    
+    public boolean delete(HoaDonChiTiet hd) ;
+    
+    public boolean updatesol(String id, int soluong) ;
 }
