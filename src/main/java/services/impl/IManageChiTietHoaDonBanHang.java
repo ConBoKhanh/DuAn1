@@ -19,7 +19,9 @@ public interface IManageChiTietHoaDonBanHang {
     
     public boolean update(HoaDonChiTiet hd) ;
     
-    public boolean delete(HoaDonChiTiet hd) ;
+    public boolean delete(String idsp , String idhd) ;
     
     public boolean updatesol(String id, int soluong) ;
+    
+    int TongTien(String id);
 }

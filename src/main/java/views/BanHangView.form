@@ -269,9 +269,9 @@
                               </Group>
                               <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jTextField17" min="-2" pref="180" max="-2" attributes="0"/>
+                                  <Component id="txtTongTien" min="-2" pref="180" max="-2" attributes="0"/>
                                   <Component id="jTextField16" min="-2" pref="180" max="-2" attributes="0"/>
-                                  <Component id="txtIDKH" min="-2" pref="180" max="-2" attributes="0"/>
+                                  <Component id="txtSdt" min="-2" pref="180" max="-2" attributes="0"/>
                                   <Component id="txtTenKH" min="-2" pref="180" max="-2" attributes="0"/>
                                   <Component id="jButton4" alignment="0" min="-2" pref="182" max="-2" attributes="0"/>
                               </Group>
@@ -293,14 +293,14 @@
                           </Group>
                       </Group>
                       <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jLabel17" min="-2" max="-2" attributes="0"/>
-                          <Component id="txtTenKH" min="-2" pref="30" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="txtTenKH" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                          <Component id="jLabel17" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel18" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="txtIDKH" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                          <Component id="txtSdt" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
@@ -315,7 +315,7 @@
                       <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="1" attributes="0">
                           <Component id="jLabel21" min="-2" max="-2" attributes="0"/>
-                          <Component id="jTextField17" min="-2" pref="30" max="-2" attributes="0"/>
+                          <Component id="txtTongTien" min="-2" pref="30" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="13" max="-2" attributes="0"/>
                       <Component id="jPanel8" min="-2" max="-2" attributes="0"/>
@@ -686,10 +686,10 @@
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="NSimSun" size="14" style="1"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Id Khach Hang"/>
+                <Property name="text" type="java.lang.String" value="Sdt Khach Hang"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="txtIDKH">
+            <Component class="javax.swing.JTextField" name="txtSdt">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="99" green="99" red="ff" type="rgb"/>
@@ -704,7 +704,7 @@
                 </Property>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtIDKHActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtSdtActionPerformed"/>
               </Events>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="10"/>
@@ -771,7 +771,7 @@
                 <Property name="text" type="java.lang.String" value="Tong Tien"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="jTextField17">
+            <Component class="javax.swing.JTextField" name="txtTongTien">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="99" green="99" red="ff" type="rgb"/>
@@ -786,7 +786,7 @@
                 </Property>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextField17ActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtTongTienActionPerformed"/>
               </Events>
             </Component>
           </SubComponents>

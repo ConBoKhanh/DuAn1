@@ -28,6 +28,7 @@ public class HoaDonChiTietService implements IManageChiTietHoaDonBanHang {
                 ViewModelHoaDonChiTietBanHang b = new ViewModelHoaDonChiTietBanHang();
                 b.setIdsp(a.getIdChiTietDoGo().getId());
                 b.setIdhd(a.getIdHoaDon().getId());
+                b.setTen(a.getIdChiTietDoGo().getTenSP());
                 b.setSoluong(a.getSoLuong());
                 b.setDonGia(a.getDonGia());
                 
@@ -60,9 +61,9 @@ public class HoaDonChiTietService implements IManageChiTietHoaDonBanHang {
     }
     
     @Override
-    public boolean delete(HoaDonChiTiet hd) {
+    public boolean delete(String idsp , String idhd) {
         try {
-            return i.delete(hd);
+            return i.delete(idsp, idhd);
         } catch (Exception e) {
             return false;
         }
@@ -75,6 +76,11 @@ public class HoaDonChiTietService implements IManageChiTietHoaDonBanHang {
         } catch (Exception e) {
             return false;
         }
+    }
+    
+    @Override
+    public int TongTien(String id) {
+        return i.TongTien(id);
     }
     
 }

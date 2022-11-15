@@ -191,7 +191,7 @@ public class TTKHView extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        BanHangView.TTKHView("Nguyen Khanh Duy", "10100101010101");
+//        BanHangView.TTKHView("Nguyen Khanh Duy", "0973394351 ", "Hhahahaha");
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
