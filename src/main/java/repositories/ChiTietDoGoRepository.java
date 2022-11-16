@@ -104,9 +104,7 @@ public class ChiTietDoGoRepository {
             v.setIdNhaCungCap(d);
             v.setIdNguocGoc(f);
             v.setIdDonViTinh(g);
-            v.setTenSP(dg.getTenSP());
             v.setMoTa(dg.getMoTa());
-            v.setSoLuong(0);
             v.setGiaNhap(dg.getGiaNhap());
             v.setGiaBan(dg.getGiaBan());
 

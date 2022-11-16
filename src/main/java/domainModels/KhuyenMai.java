@@ -35,21 +35,22 @@ public class KhuyenMai implements Serializable {
     private Date NgayBatDau;
     private Date NgayKetThuc;
     private int TrangThai;
-        
+    private int PhanTramKM;
+
     @OneToMany(mappedBy = "IdKhuyenMai")
     private Set<HoaDon> HaoDons;
-    
-    
-    public KhuyenMai(String Id, String Ma, String TenKhuyenMai, Date NgayBatDau, Date NgayKetThuc, int TrangThai) {
+
+    public KhuyenMai() {
+    }
+
+    public KhuyenMai(String Id, String Ma, String TenKhuyenMai, Date NgayBatDau, Date NgayKetThuc, int TrangThai, int PhanTramKM) {
         this.Id = Id;
         this.Ma = Ma;
         this.TenKhuyenMai = TenKhuyenMai;
         this.NgayBatDau = NgayBatDau;
         this.NgayKetThuc = NgayKetThuc;
         this.TrangThai = TrangThai;
-    }
-
-    public KhuyenMai() {
+        this.PhanTramKM = PhanTramKM;
     }
 
     public String getId() {
@@ -100,9 +101,17 @@ public class KhuyenMai implements Serializable {
         this.TrangThai = TrangThai;
     }
 
+    public int getPhanTramKM() {
+        return PhanTramKM;
+    }
+
+    public void setPhanTramKM(int PhanTramKM) {
+        this.PhanTramKM = PhanTramKM;
+    }
+
     @Override
     public String toString() {
-        return "KhuyenMai{" + "Id=" + Id + ", Ma=" + Ma + ", TenKhuyenMai=" + TenKhuyenMai + ", NgayBatDau=" + NgayBatDau + ", NgayKetThuc=" + NgayKetThuc + ", TrangThai=" + TrangThai + '}';
+        return "KhuyenMai{" + "Id=" + Id + ", Ma=" + Ma + ", TenKhuyenMai=" + TenKhuyenMai + ", NgayBatDau=" + NgayBatDau + ", NgayKetThuc=" + NgayKetThuc + ", TrangThai=" + TrangThai + ", PhanTramKM=" + PhanTramKM + '}';
     }
 
 }
