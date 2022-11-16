@@ -31,13 +31,13 @@ import viewModel.ViewModelNhanVien;
  * @author Admin
  */
 public class NhanVienView extends javax.swing.JFrame {
-    
+
     private IManageNhanVienService nhanVienService = new NhanVienService();
     private IManageCuaHangService cuaHangService = new CuaHangService();
     private IManageChucVuService chucVuService = new ChucVuSerivce();
-    
+
     DefaultTableModel model = new DefaultTableModel();
-    
+
     public void loadTable() {
         model = (DefaultTableModel) TBBANG.getModel();
         model.setColumnCount(0);
@@ -51,7 +51,7 @@ public class NhanVienView extends javax.swing.JFrame {
         model.addColumn("Chức vụ");
         model.addColumn("Mật khẩu");
         model.addColumn("Email");
-        
+
         model.setRowCount(0);
         List<ViewModelNhanVien> nv = nhanVienService.getAll();
         for (ViewModelNhanVien viewModelNhanVien : nv) {
@@ -60,10 +60,10 @@ public class NhanVienView extends javax.swing.JFrame {
                 viewModelNhanVien.getSdt(), viewModelNhanVien.getDiaChi(), viewModelNhanVien.getNgaySinh(),
                 viewModelNhanVien.getIdCH(), viewModelNhanVien.getIdCV(), viewModelNhanVien.getMatKhau(), viewModelNhanVien.getEmail()
             });
-            
+
         }
     }
-    
+
     public void loadTableTimKiem(String ten) {
         model = (DefaultTableModel) TBBANG.getModel();
         model.setColumnCount(0);
@@ -77,7 +77,7 @@ public class NhanVienView extends javax.swing.JFrame {
         model.addColumn("Chức vụ");
         model.addColumn("Mật khẩu");
         model.addColumn("Email");
-        
+
         model.setRowCount(0);
         List<ViewModelNhanVien> nv = nhanVienService.listtk(ten);
         for (ViewModelNhanVien viewModelNhanVien : nv) {
@@ -86,10 +86,10 @@ public class NhanVienView extends javax.swing.JFrame {
                 viewModelNhanVien.getSdt(), viewModelNhanVien.getDiaChi(), viewModelNhanVien.getNgaySinh(),
                 viewModelNhanVien.getIdCH(), viewModelNhanVien.getIdCV(), viewModelNhanVien.getMatKhau(), viewModelNhanVien.getEmail()
             });
-            
+
         }
     }
-    
+
     public String getCHCBB() {
         String id = null;
         List<ViewModelCuaHang> a = cuaHangService.getAll();
@@ -97,11 +97,11 @@ public class NhanVienView extends javax.swing.JFrame {
             if (CBCCUAHANG.getSelectedItem().equals(viewModelCuaHang.getTenCuaHang())) {
                 id = viewModelCuaHang.getId();
             }
-            
+
         }
         return id;
     }
-    
+
     public String getCBBCV() {
         String id = null;
         List<ViewModelChucVu> a = chucVuService.getAll();
@@ -109,22 +109,22 @@ public class NhanVienView extends javax.swing.JFrame {
             if (CBCCHUCVU.getSelectedItem().equals(viewModelChucVu.getTen())) {
                 id = viewModelChucVu.getId();
             }
-            
+
         }
         return id;
     }
-    
+
     public void loadCBB() {
         List<ViewModelCuaHang> a = cuaHangService.getAll();
         for (ViewModelCuaHang viewModelCuaHang : a) {
             CBCCUAHANG.addItem(viewModelCuaHang.getTenCuaHang());
-            
+
         }
-        
+
         List<ViewModelChucVu> b = chucVuService.getAll();
         for (ViewModelChucVu viewModelChucVu : b) {
             CBCCHUCVU.addItem(viewModelChucVu.getTen());
-            
+
         }
     }
 
@@ -174,7 +174,6 @@ public class NhanVienView extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         txtmatKhau = new javax.swing.JTextField();
         ngaySinh = new com.toedter.calendar.JDateChooser();
-        btntimKiem = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -199,6 +198,12 @@ public class NhanVienView extends javax.swing.JFrame {
         jScrollPane1.setViewportView(TBBANG);
 
         jButton1.setText("Back");
+
+        txttimKiem.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txttimKiemKeyReleased(evt);
+            }
+        });
 
         btnThem.setBackground(new java.awt.Color(255, 204, 255));
         btnThem.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -299,13 +304,6 @@ public class NhanVienView extends javax.swing.JFrame {
 
         ngaySinh.setDateFormatString("yyyy-MM-dd");
 
-        btntimKiem.setText("Tìm kiếm");
-        btntimKiem.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btntimKiemActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -355,14 +353,11 @@ public class NhanVienView extends javax.swing.JFrame {
                                 .addGap(88, 88, 88))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(43, 43, 43)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(btntimKiem)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(btnThem, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(29, 29, 29)
-                                        .addComponent(btnSua, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(26, 26, 26)
-                                        .addComponent(btnXoa, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(btnThem, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(29, 29, 29)
+                                .addComponent(btnSua, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(26, 26, 26)
+                                .addComponent(btnXoa, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(0, 0, Short.MAX_VALUE)))))
                 .addContainerGap(15, Short.MAX_VALUE))
         );
@@ -422,9 +417,7 @@ public class NhanVienView extends javax.swing.JFrame {
                             .addComponent(txtEmailNv, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtmatKhau, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(9, 9, 9)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txttimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btntimKiem))
+                        .addComponent(txttimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(ngaySinh, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -450,7 +443,7 @@ public class NhanVienView extends javax.swing.JFrame {
         java.util.Date date = ngaySinh.getDate();
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         String now = format.format(date);
-        
+
         String idCH = getCHCBB();
         String idCV = getCBBCV();
         String hoTen = TXTHOTEN.getText();
@@ -459,15 +452,15 @@ public class NhanVienView extends javax.swing.JFrame {
         // String ngaySinh = getDate.getDateFormatString();
         String matKhau = txtmatKhau.getText();
         String email = txtEmailNv.getText();
-        
+
         NhanVien nv = new NhanVien();
-        
+
         CuaHang ch = new CuaHang();
         ch.setId(idCH);
-        
+
         ChucVu cv = new ChucVu();
         cv.setId(idCV);
-        
+
         nv.setIdCuaHang(ch);
         nv.setIdChucVu(cv);
         nv.setHoTen(hoTen);
@@ -475,12 +468,12 @@ public class NhanVienView extends javax.swing.JFrame {
         nv.setDiaChi(diaChi);
         //nv.setNgaySinh(ngaySinh);
         nv.setNgaySinh(Date.valueOf(now));
-        
+
         nv.setMatKhau(matKhau);
         nv.setEmail(email);
-        
+
         boolean b = nhanVienService.add(nv);
-        
+
         if (b == true) {
             Icon icon = new javax.swing.ImageIcon(getClass().getResource("/img/themmoiicon.png"));
             JOptionPane.showMessageDialog(this, "Thêm sp thành công", "Sản Phẩm", JOptionPane.INFORMATION_MESSAGE, icon);
@@ -489,7 +482,7 @@ public class NhanVienView extends javax.swing.JFrame {
             Icon icon = new javax.swing.ImageIcon(getClass().getResource("/img/deleteicon.png"));
             JOptionPane.showMessageDialog(this, "Trùng Tên Sản Phẩm", "Sản Phẩm", JOptionPane.INFORMATION_MESSAGE, icon);
         }
-        
+
 
     }//GEN-LAST:event_btnThemActionPerformed
 
@@ -501,7 +494,7 @@ public class NhanVienView extends javax.swing.JFrame {
             Icon icon = new javax.swing.ImageIcon(getClass().getResource("/img/themmoiicon.png"));
             JOptionPane.showMessageDialog(this, "Delete sp thành công", "Sản Phẩm", JOptionPane.INFORMATION_MESSAGE, icon);
             loadTable();
-            
+
         } else {
             Icon icon = new javax.swing.ImageIcon(getClass().getResource("/img/deleteicon.png"));
             JOptionPane.showMessageDialog(this, "Delete Tên Sản Phẩm", "Sản Phẩm", JOptionPane.INFORMATION_MESSAGE, icon);
@@ -523,15 +516,15 @@ public class NhanVienView extends javax.swing.JFrame {
         // String ngaySinh = getDate.getDateFormatString();
         String matKhau = txtmatKhau.getText();
         String email = txtEmailNv.getText();
-        
+
         NhanVien nv = new NhanVien();
-        
+
         CuaHang ch = new CuaHang();
         ch.setId(idCH);
-        
+
         ChucVu cv = new ChucVu();
         cv.setId(idCV);
-        
+
         nv.setId(id);
         nv.setIdCuaHang(ch);
         nv.setIdChucVu(cv);
@@ -540,12 +533,12 @@ public class NhanVienView extends javax.swing.JFrame {
         nv.setDiaChi(diaChi);
         //nv.setNgaySinh(ngaySinh);
         nv.setNgaySinh(Date.valueOf(now));
-        
+
         nv.setMatKhau(matKhau);
         nv.setEmail(email);
-        
+
         boolean b = nhanVienService.update(nv);
-        
+
         if (b == true) {
             Icon icon = new javax.swing.ImageIcon(getClass().getResource("/img/themmoiicon.png"));
             JOptionPane.showMessageDialog(this, "Sửa sp thành công", "Sản Phẩm", JOptionPane.INFORMATION_MESSAGE, icon);
@@ -554,7 +547,7 @@ public class NhanVienView extends javax.swing.JFrame {
             Icon icon = new javax.swing.ImageIcon(getClass().getResource("/img/deleteicon.png"));
             JOptionPane.showMessageDialog(this, "Sửa thất Sản Phẩm", "Sản Phẩm", JOptionPane.INFORMATION_MESSAGE, icon);
         }
-        
+
 
     }//GEN-LAST:event_btnSuaActionPerformed
 
@@ -578,7 +571,7 @@ public class NhanVienView extends javax.swing.JFrame {
         // TODO add your handling code here:
 
         int index = TBBANG.getSelectedRow();
-        
+
         String ns = TBBANG.getValueAt(index, 5).toString();
         // Date ngay = Date.valueOf(ngaySinh);
         SimpleDateFormat sdt = new SimpleDateFormat("yyyy-MM-dd");
@@ -591,23 +584,24 @@ public class NhanVienView extends javax.swing.JFrame {
             TXTHOTEN.setText(TBBANG.getValueAt(index, 2).toString());
             TXTSDT.setText(TBBANG.getValueAt(index, 3).toString());
             TXTDIACHI.setText(TBBANG.getValueAt(index, 4).toString());
-            
+
             CBCCUAHANG.setSelectedItem(TBBANG.getValueAt(index, 6).toString());
             CBCCHUCVU.setSelectedItem(TBBANG.getValueAt(index, 7).toString());
             txtmatKhau.setText(TBBANG.getValueAt(index, 8).toString());
             txtEmailNv.setText(TBBANG.getValueAt(index, 9).toString());
-            
+
         } catch (ParseException ex) {
             Logger.getLogger(NhanVienView.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
 
     }//GEN-LAST:event_TBBANGMouseClicked
 
-    private void btntimKiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btntimKiemActionPerformed
+    private void txttimKiemKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txttimKiemKeyReleased
         // TODO add your handling code here:
         loadTableTimKiem(txttimKiem.getText());
-    }//GEN-LAST:event_btntimKiemActionPerformed
+
+    }//GEN-LAST:event_txttimKiemKeyReleased
 
     /**
      * @param args the command line arguments
@@ -656,7 +650,6 @@ public class NhanVienView extends javax.swing.JFrame {
     private javax.swing.JButton btnSua;
     private javax.swing.JButton btnThem;
     private javax.swing.JButton btnXoa;
-    private javax.swing.JButton btntimKiem;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
