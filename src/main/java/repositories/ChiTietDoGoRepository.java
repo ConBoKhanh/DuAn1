@@ -97,7 +97,7 @@ public class ChiTietDoGoRepository {
             NhaCungCap d = session.get(NhaCungCap.class, dg.getIdNhaCungCap().getId());
             NguonGoc f = session.get(NguonGoc.class, dg.getIdNguocGoc().getId());
             DonViTinh g = session.get(DonViTinh.class, dg.getIdDonViTinh().getId());
-            
+
             v.setIdSanPham(a);
             v.setIdLoaiSP(b);
             v.setIdDongGo(c);
@@ -139,4 +139,60 @@ public class ChiTietDoGoRepository {
         }
 
     }
+
+    public boolean truSanPham(String id, int soLuong) {
+        try {
+            Session session = HibernatUtil.getFACTORY().openSession();
+            ChiTietDoGo ct = session.get(ChiTietDoGo.class, id);
+            ct.setSoLuong(ct.getSoLuong() - soLuong);
+
+            session.getTransaction().begin();
+            session.save(ct);
+            session.getTransaction().commit();
+            session.close();
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    public boolean congSanPham(String id, int soLuong) {
+        try {
+            Session session = HibernatUtil.getFACTORY().openSession();
+            ChiTietDoGo ct = session.get(ChiTietDoGo.class, id);
+            ct.setSoLuong(ct.getSoLuong() + soLuong);
+
+            session.getTransaction().begin();
+            session.save(ct);
+            session.getTransaction().commit();
+            session.close();
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+
+    }
+
+    public boolean updateSLSanPham(String id, int soLuong) {
+        try {
+            Session session = HibernatUtil.getFACTORY().openSession();
+            ChiTietDoGo ct = session.get(ChiTietDoGo.class, id);
+            ct.setSoLuong(soLuong);
+
+            session.getTransaction().begin();
+            session.save(ct);
+            session.getTransaction().commit();
+            session.close();
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+
+    }
+
+    public static void main(String[] args) {
+        ChiTietDoGoRepository ctRepo = new ChiTietDoGoRepository();
+        ctRepo.truSanPham("4771CF52-B40D-4A93-B0EB-13DE20BA0F2E", 1);
+    }
+
 }

@@ -4,6 +4,7 @@
  */
 package repositories;
 
+import domainModels.HoaDon;
 import domainModels.HoaDonChiTiet;
 import domainModels.SanPham;
 import java.util.ArrayList;
@@ -123,7 +124,7 @@ public class SanPhamRepository {
             return false;
         }
     }
-
+    
     public static void main(String[] args) {
         SanPhamRepository sp = new SanPhamRepository();
 //        List<SanPham> list = sp.getListSP();

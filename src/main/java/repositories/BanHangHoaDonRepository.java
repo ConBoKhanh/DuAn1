@@ -8,6 +8,7 @@ import domainModels.HoaDon;
 import domainModels.KhachHang;
 import domainModels.KhuyenMai;
 import domainModels.NhanVien;
+import java.math.BigDecimal;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -82,6 +83,7 @@ public class BanHangHoaDonRepository {
             i.setIdNhanVien(nv);
             i.setTrangThaiHoaDon(0); // 0 là chưa thanh toán - 1 là đã hoàn thành 
             i.setTrangThai(1);// trang thai outo la 1 , 0 là đã xóa 
+            i.setThanhTien(new BigDecimal("0"));
 
             transaction.begin();
             session.save(i);
@@ -96,7 +98,7 @@ public class BanHangHoaDonRepository {
         }
 
     }
-
+  
     public static void main(String[] args) {
         BanHangHoaDonRepository o = new BanHangHoaDonRepository();
         HoaDon i = new HoaDon();

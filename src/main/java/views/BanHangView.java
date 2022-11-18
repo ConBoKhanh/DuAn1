@@ -34,10 +34,12 @@ import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import services.ChiTietDoGoBanHangService;
+import services.ChiTietDoGoService;
 import services.HoaDonBanHangService;
 import services.HoaDonChiTietService;
 import viewModel.ViewModelChiTietSanPhamBanHang;
 import services.impl.IManageChiTietDoGoBanHangService;
+import services.impl.IManageChiTietDoGoService;
 import services.impl.IManageChiTietHoaDonBanHang;
 import services.impl.IManageHoaDonBanHangService;
 import viewModel.ViewModelHoaDonBanHang;
@@ -62,6 +64,8 @@ public class BanHangView extends javax.swing.JFrame implements Runnable, ThreadF
     private IManageHoaDonBanHangService hdService = new HoaDonBanHangService();
 
     private IManageChiTietHoaDonBanHang cthdService = new HoaDonChiTietService();
+
+    private IManageChiTietDoGoService ctdgSV = new ChiTietDoGoService();
 
     private static String idkh;
     private static String TenKH;
@@ -1100,7 +1104,7 @@ public class BanHangView extends javax.swing.JFrame implements Runnable, ThreadF
 
         HoaDon hd = new HoaDon();
         NhanVien nv = new NhanVien();
-        nv.setId("8DAA9DA3-B007-4052-9CE3-6724AF09D2D3");
+        nv.setId("97D42683-2927-4807-930A-FC948BA31B8F");
         hd.setIdNhanVien(nv);
 
         boolean b = hdService.add(hd);
@@ -1146,6 +1150,10 @@ public class BanHangView extends javax.swing.JFrame implements Runnable, ThreadF
                 JOptionPane.showMessageDialog(this, "oke");
                 return;
             }
+            if (Integer.parseInt(soLuongNhapinpit) > Integer.parseInt(tblSanPham.getValueAt(index, 7).toString())) {
+                JOptionPane.showMessageDialog(this, "Số lượng không đủ!");
+                return;
+            }
 
             BigDecimal giaBanBig = (BigDecimal) tblSanPham.getValueAt(index, 10); // giá bán 
             String giaban = String.valueOf(giaBanBig);
@@ -1171,6 +1179,8 @@ public class BanHangView extends javax.swing.JFrame implements Runnable, ThreadF
             if (c == true) {
                 Icon icon = new javax.swing.ImageIcon(getClass().getResource("/img/themmoiicon.png"));
                 JOptionPane.showMessageDialog(this, "Thêm  thành công", "Sản Phẩm", JOptionPane.INFORMATION_MESSAGE, icon);
+                ctdgSV.truSanPham(IdSp, soluongnhap);
+                loadSP();
                 loadCTHH(idhd);
                 int tongtien = cthdService.TongTien(txtIdhd.getText());
                 txtTongTien.setText(tongtien + "");
@@ -1179,7 +1189,7 @@ public class BanHangView extends javax.swing.JFrame implements Runnable, ThreadF
                 Icon icon = new javax.swing.ImageIcon(getClass().getResource("/img/deleteicon.png"));
                 JOptionPane.showMessageDialog(this, "lỗi", "Sản Phẩm", JOptionPane.INFORMATION_MESSAGE, icon);
             }
-        } else {
+        } else { //////////////////////////////////////////////////////////////////////////////////////////////////////////
             String soLuongNhapinpit = JOptionPane.showInputDialog("Nhập Số Lượng Sản Phẩm " + " " + Tensp);
             // NHẬP SỐ LƯỢNG ĐỂ INSERT 
             if (soLuongNhapinpit == null) {
@@ -1196,6 +1206,7 @@ public class BanHangView extends javax.swing.JFrame implements Runnable, ThreadF
             String idhd = txtIdhd.getText();// id hóa đơn
 
             int soluongnhap = Integer.parseInt(soLuongNhapinpit) + check;
+            int soluongnhap1 = Integer.parseInt(soLuongNhapinpit);
             int dongia = soluongnhap * Integer.parseInt(giaban);
 
             HoaDonChiTiet hd = new HoaDonChiTiet();
@@ -1215,6 +1226,9 @@ public class BanHangView extends javax.swing.JFrame implements Runnable, ThreadF
             if (c == true) {
                 Icon icon = new javax.swing.ImageIcon(getClass().getResource("/img/themmoiicon.png"));
                 JOptionPane.showMessageDialog(this, "Thêm  thành công", "Sản Phẩm", JOptionPane.INFORMATION_MESSAGE, icon);
+                ctdgSV.truSanPham(IdSp, soluongnhap1);
+                System.out.println(soluongnhap1);
+                loadSP();
                 loadCTHH(idhd);
                 int tongtien = cthdService.TongTien(txtIdhd.getText());
                 txtTongTien.setText(tongtien + "");
@@ -1287,6 +1301,8 @@ public class BanHangView extends javax.swing.JFrame implements Runnable, ThreadF
             if (c == true) {
                 Icon icon = new javax.swing.ImageIcon(getClass().getResource("/img/themmoiicon.png"));
                 JOptionPane.showMessageDialog(this, "delete thành công", "Sản Phẩm", JOptionPane.INFORMATION_MESSAGE, icon);
+                ctdgSV.congSanPham(idsp, Integer.parseInt(tblCTHH.getValueAt(index, 3).toString()));
+                loadSP();
                 loadCTHH(txtIdhd.getText());
                 int tongtien = cthdService.TongTien(txtIdhd.getText());
                 txtTongTien.setText(tongtien + "");

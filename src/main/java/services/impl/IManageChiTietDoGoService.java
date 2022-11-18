@@ -15,6 +15,7 @@ import viewModel.ChiTietDoGoViewModel;
 public interface IManageChiTietDoGoService {
 
     List<ChiTietDoGoViewModel> list();
+
     List<ChiTietDoGoViewModel> listtk(String Ten);
 
     boolean add(ChiTietDoGo go);
@@ -22,4 +23,10 @@ public interface IManageChiTietDoGoService {
     boolean update(ChiTietDoGo go);
 
     boolean delete(String id);
+
+    boolean truSanPham(String id, int soLuong);
+
+    boolean congSanPham(String id, int soLuong);
+
+    boolean updateSLSanPham(String id, int soLuong);
 }

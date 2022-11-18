@@ -17,20 +17,20 @@ import viewModel.ChiTietDoGoViewModel;
  * @author Admin
  */
 public class ChiTietDoGoService implements IManageChiTietDoGoService {
-    
+
     private ChiTietDoGoRepository a = new ChiTietDoGoRepository();
-    
+
     @Override
     public List<ChiTietDoGoViewModel> list() {
         try {
             List<ChiTietDoGoViewModel> list = new ArrayList<>();
             List<ChiTietDoGo> sps = a.list();
             for (ChiTietDoGo sp : sps) {
-                list.add(new ChiTietDoGoViewModel(sp.getId(), sp.getTenSP(),sp.getIdLoaiSP().getTenDongSP(),
+                list.add(new ChiTietDoGoViewModel(sp.getId(), sp.getTenSP(), sp.getIdLoaiSP().getTenDongSP(),
                         sp.getIdSanPham().getTen(),
                         sp.getIdDongGo().getTenLoaiGo(),
                         sp.getIdNhaCungCap().getTenNCC(),
-                        sp.getIdNguocGoc().getQuocGia(),sp.getIdDonViTinh().getDonViTinh(), sp.getMoTa(),
+                        sp.getIdNguocGoc().getQuocGia(), sp.getIdDonViTinh().getDonViTinh(), sp.getMoTa(),
                         sp.getSoLuong(), sp.getGiaNhap(), sp.getGiaBan()));
             }
             return list;
@@ -38,18 +38,18 @@ public class ChiTietDoGoService implements IManageChiTietDoGoService {
             return null;
         }
     }
-    
+
     @Override
     public List<ChiTietDoGoViewModel> listtk(String Ten) {
         try {
             List<ChiTietDoGoViewModel> list = new ArrayList<>();
             List<ChiTietDoGo> sps = a.listtk(Ten);
             for (ChiTietDoGo sp : sps) {
-                  list.add(new ChiTietDoGoViewModel(sp.getId(), sp.getTenSP(),sp.getIdLoaiSP().getTenDongSP(),
+                list.add(new ChiTietDoGoViewModel(sp.getId(), sp.getTenSP(), sp.getIdLoaiSP().getTenDongSP(),
                         sp.getIdSanPham().getTen(),
                         sp.getIdDongGo().getTenLoaiGo(),
                         sp.getIdNhaCungCap().getTenNCC(),
-                        sp.getIdNguocGoc().getQuocGia(),sp.getIdDonViTinh().getDonViTinh(), sp.getMoTa(),
+                        sp.getIdNguocGoc().getQuocGia(), sp.getIdDonViTinh().getDonViTinh(), sp.getMoTa(),
                         sp.getSoLuong(), sp.getGiaNhap(), sp.getGiaBan()));
             }
             return list;
@@ -57,7 +57,7 @@ public class ChiTietDoGoService implements IManageChiTietDoGoService {
             return null;
         }
     }
-    
+
     @Override
     public boolean add(ChiTietDoGo go) {
         try {
@@ -66,7 +66,7 @@ public class ChiTietDoGoService implements IManageChiTietDoGoService {
             return false;
         }
     }
-    
+
     @Override
     public boolean update(ChiTietDoGo go) {
         try {
@@ -75,7 +75,7 @@ public class ChiTietDoGoService implements IManageChiTietDoGoService {
             return false;
         }
     }
-    
+
     @Override
     public boolean delete(String id) {
         try {
@@ -84,5 +84,32 @@ public class ChiTietDoGoService implements IManageChiTietDoGoService {
             return false;
         }
     }
-    
+
+    @Override
+    public boolean truSanPham(String id, int soLuong) {
+        try {
+            return a.truSanPham(id, soLuong);
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    @Override
+    public boolean congSanPham(String id, int soLuong) {
+        try {
+            return a.congSanPham(id, soLuong);
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    @Override
+    public boolean updateSLSanPham(String id, int soLuong) {
+        try {
+            return a.updateSLSanPham(id, soLuong);
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
 }
