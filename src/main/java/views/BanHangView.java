@@ -72,6 +72,9 @@ public class BanHangView extends javax.swing.JFrame implements Runnable, ThreadF
     private static String idkh;
     private static String TenKH;
     private static String SdtKH;
+    
+    private static String idkm;
+    private static String ptkm;
 
     public BanHangView() {
         initComponents();
@@ -95,6 +98,15 @@ public class BanHangView extends javax.swing.JFrame implements Runnable, ThreadF
         txtTenKH.setText(TenKH);
         txtSdt.setText(SdtKH);
     }
+    
+        public static void ChonKhuyenMaiBanHang(String id, String kmpt) {
+        idkm = id;
+        ptkm = kmpt;
+        
+        txtkm.setText(ptkm);
+        
+    }
+    
 
     public int layGiaSanPhamTheoId(String idsp) {
         int dongia = 0;
@@ -292,7 +304,7 @@ public class BanHangView extends javax.swing.JFrame implements Runnable, ThreadF
         jButton4 = new javax.swing.JButton();
         jLabel19 = new javax.swing.JLabel();
         jLabel20 = new javax.swing.JLabel();
-        jTextField16 = new javax.swing.JTextField();
+        txtkm = new javax.swing.JTextField();
         jLabel21 = new javax.swing.JLabel();
         txtTongTien = new javax.swing.JTextField();
         jPanel7 = new javax.swing.JPanel();
@@ -567,12 +579,12 @@ public class BanHangView extends javax.swing.JFrame implements Runnable, ThreadF
         jLabel20.setFont(new java.awt.Font("NSimSun", 1, 14)); // NOI18N
         jLabel20.setText("Sale Money");
 
-        jTextField16.setBackground(new java.awt.Color(255, 153, 153));
-        jTextField16.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jTextField16.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 3, 0, new java.awt.Color(0, 0, 0)));
-        jTextField16.addActionListener(new java.awt.event.ActionListener() {
+        txtkm.setBackground(new java.awt.Color(255, 153, 153));
+        txtkm.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        txtkm.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 3, 0, new java.awt.Color(0, 0, 0)));
+        txtkm.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField16ActionPerformed(evt);
+                txtkmActionPerformed(evt);
             }
         });
 
@@ -611,7 +623,7 @@ public class BanHangView extends javax.swing.JFrame implements Runnable, ThreadF
                         .addGap(35, 35, 35)
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtTongTien, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField16, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtkm, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtSdt, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtTenKH, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)))))
@@ -641,7 +653,7 @@ public class BanHangView extends javax.swing.JFrame implements Runnable, ThreadF
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel20)
-                    .addComponent(jTextField16, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtkm, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(12, 12, 12)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel21)
@@ -1076,9 +1088,9 @@ public class BanHangView extends javax.swing.JFrame implements Runnable, ThreadF
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton4ActionPerformed
 
-    private void jTextField16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField16ActionPerformed
+    private void txtkmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtkmActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField16ActionPerformed
+    }//GEN-LAST:event_txtkmActionPerformed
 
     private void txtTongTienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTongTienActionPerformed
         // TODO add your handling code here:
@@ -1536,7 +1548,6 @@ public class BanHangView extends javax.swing.JFrame implements Runnable, ThreadF
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JTextField jTextField16;
     private javax.swing.JTextField result_field;
     private javax.swing.JTable tblCTHH;
     private javax.swing.JTable tblHoaDon;
@@ -1551,5 +1562,6 @@ public class BanHangView extends javax.swing.JFrame implements Runnable, ThreadF
     private javax.swing.JTextField txtTenNV;
     private javax.swing.JTextField txtTienThua;
     private javax.swing.JTextField txtTongTien;
+    private static javax.swing.JTextField txtkm;
     // End of variables declaration//GEN-END:variables
 }

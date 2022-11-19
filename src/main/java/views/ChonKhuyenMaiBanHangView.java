@@ -7,46 +7,49 @@ package views;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 import services.KhachHangService;
+import services.KhuyenMaiService;
 import services.impl.IManageKhachHangService;
+import services.impl.IManageKhuyenMaiService;
+import viewModel.KhuyenMaiViewModel;
 import viewModel.ViewModelKhachHang;
 
 /**
  *
  * @author Admin
  */
-public class TTKHView extends javax.swing.JFrame {
+public class ChonKhuyenMaiBanHangView extends javax.swing.JFrame {
 
-    private DefaultTableModel model;
-    private IManageKhachHangService khrp = new KhachHangService();
+    private IManageKhuyenMaiService kmSV = new KhuyenMaiService();
+    DefaultTableModel model = new DefaultTableModel();
 
     /**
      * Creates new form GetKHView
      */
-    public TTKHView() {
+    public ChonKhuyenMaiBanHangView() {
         initComponents();
-        loadtb();
+        loadTBAll();
         loadthgdautien();
     }
 
-    public void loadtb() {
+    public void loadTBAll() {
         model = (DefaultTableModel) tbbang.getModel();
         model.setRowCount(0);
-        List<ViewModelKhachHang> kh = khrp.getListKhachHang();
-        for (ViewModelKhachHang x : kh) {
+        List<KhuyenMaiViewModel> km = kmSV.getListKMAll();
+        for (KhuyenMaiViewModel a : km) {
             model.addRow(new Object[]{
-                x.getID(), x.getMa(), x.getTenkh(), x.getSdt(), x.getDiachi()
+                a.getId(), a.getMa(), a.getTenKhuyenMai(), a.getNgayBatDau(), a.getNgayKetThuc(),a.getPhanTramKM()
             });
         }
-
     }
 
     public void loadthgdautien() {
         int index = 0;
         txtid.setText(tbbang.getValueAt(index, 0).toString());
         txtma.setText(tbbang.getValueAt(index, 1).toString());
-        txtten.setText(tbbang.getValueAt(index, 2).toString());
-        txtsdt.setText(tbbang.getValueAt(index, 3).toString());
-        txtdiachi.setText(tbbang.getValueAt(index, 4).toString());
+        txttenKM.setText(tbbang.getValueAt(index, 2).toString());
+        txtNGAYBD.setText(tbbang.getValueAt(index, 3).toString());
+        TXTNGAYKT.setText(tbbang.getValueAt(index,4).toString());
+        TXTPHANTRAM.setText(tbbang.getValueAt(index, 5).toString());
     }
 
     /**
@@ -65,14 +68,16 @@ public class TTKHView extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
         txtid = new javax.swing.JTextField();
         txtma = new javax.swing.JTextField();
-        txtten = new javax.swing.JTextField();
-        txtsdt = new javax.swing.JTextField();
-        txtdiachi = new javax.swing.JTextField();
+        txttenKM = new javax.swing.JTextField();
+        txtNGAYBD = new javax.swing.JTextField();
+        TXTPHANTRAM = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        TXTNGAYKT = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -89,13 +94,13 @@ public class TTKHView extends javax.swing.JFrame {
 
         tbbang.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
             },
             new String [] {
-                "ID", "MA", "TEN", "SDT", "DiaChi"
+                "ID", "MA", "TENKM", "NGAYBATDAU", "NGAYKETTHUC", "PHANTRAMKM"
             }
         ));
         tbbang.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -120,24 +125,29 @@ public class TTKHView extends javax.swing.JFrame {
         txtma.setBackground(new java.awt.Color(255, 153, 153));
         txtma.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 3, 0, new java.awt.Color(255, 102, 153)));
 
-        txtten.setBackground(new java.awt.Color(255, 153, 153));
-        txtten.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 3, 0, new java.awt.Color(255, 102, 153)));
+        txttenKM.setBackground(new java.awt.Color(255, 153, 153));
+        txttenKM.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 3, 0, new java.awt.Color(255, 102, 153)));
 
-        txtsdt.setBackground(new java.awt.Color(255, 153, 153));
-        txtsdt.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 3, 0, new java.awt.Color(255, 102, 153)));
+        txtNGAYBD.setBackground(new java.awt.Color(255, 153, 153));
+        txtNGAYBD.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 3, 0, new java.awt.Color(255, 102, 153)));
 
-        txtdiachi.setBackground(new java.awt.Color(255, 153, 153));
-        txtdiachi.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 3, 0, new java.awt.Color(255, 102, 153)));
+        TXTPHANTRAM.setBackground(new java.awt.Color(255, 153, 153));
+        TXTPHANTRAM.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 3, 0, new java.awt.Color(255, 102, 153)));
 
         jLabel1.setText("Ma");
 
         jLabel2.setText("Id");
 
-        jLabel3.setText("Ten");
+        jLabel3.setText("TenKM");
 
-        jLabel4.setText("sdt");
+        jLabel4.setText("NGAYBATDAU");
 
-        jLabel5.setText("DiaChi");
+        jLabel5.setText("NGAYKETTHUC");
+
+        jLabel6.setText("PHANTRAMKM");
+
+        TXTNGAYKT.setBackground(new java.awt.Color(255, 153, 153));
+        TXTNGAYKT.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 3, 0, new java.awt.Color(255, 102, 153)));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -152,28 +162,31 @@ public class TTKHView extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(76, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtten, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addComponent(txtma, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 217, Short.MAX_VALUE)
-                            .addComponent(txtdiachi, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(txtma, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGroup(jPanel1Layout.createSequentialGroup()
                             .addComponent(txtid, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(txtsdt, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addGap(532, 532, 532)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(6, 6, 6)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(72, 72, 72))
+                            .addComponent(txttenKM, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(6, 6, 6)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(72, 72, 72))))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(63, 63, 63)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 703, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 703, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(TXTPHANTRAM, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(TXTNGAYKT, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtNGAYBD, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel1Layout.createSequentialGroup()
@@ -189,20 +202,27 @@ public class TTKHView extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtid, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtsdt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(5, 5, 5)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel5))
+                    .addComponent(txtNGAYBD, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(5, 5, 5)
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtma, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel3))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(9, 9, 9)
+                        .addComponent(jLabel5)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(TXTNGAYKT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtma, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtdiachi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txttenKM, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel6))
+                .addGap(7, 7, 7)
+                .addComponent(TXTPHANTRAM, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtten, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(32, 32, 32)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 269, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(28, 28, 28)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -231,11 +251,11 @@ public class TTKHView extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-//        BanHangView.TTKHView("an", "01111231", "hanoi");
-            int index = tbbang.getSelectedRow();
-      
-            BanHangView.TTKHView(tbbang.getValueAt(index,0).toString(), tbbang.getValueAt(index, 2).toString(),tbbang.getValueAt(index, 3).toString());
-        this.dispose();
+       
+        int index = tbbang.getSelectedRow();
+        
+        BanHangView.ChonKhuyenMaiBanHang(tbbang.getValueAt(index,0).toString(), tbbang.getValueAt(index,5).toString());
+       this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -243,13 +263,14 @@ public class TTKHView extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void tbbangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbbangMouseClicked
-
-        int index = tbbang.getSelectedRow();
+        
+           int index =tbbang.getSelectedRow();
         txtid.setText(tbbang.getValueAt(index, 0).toString());
         txtma.setText(tbbang.getValueAt(index, 1).toString());
-        txtten.setText(tbbang.getValueAt(index, 2).toString());
-        txtsdt.setText(tbbang.getValueAt(index, 3).toString());
-        txtdiachi.setText(tbbang.getValueAt(index, 4).toString());
+        txttenKM.setText(tbbang.getValueAt(index, 2).toString());
+        txtNGAYBD.setText(tbbang.getValueAt(index, 3).toString());
+        TXTNGAYKT.setText(tbbang.getValueAt(index,4).toString());
+        TXTPHANTRAM.setText(tbbang.getValueAt(index, 5).toString());
     }//GEN-LAST:event_tbbangMouseClicked
 
     /**
@@ -269,14 +290,18 @@ public class TTKHView extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(TTKHView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ChonKhuyenMaiBanHangView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(TTKHView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ChonKhuyenMaiBanHangView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(TTKHView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ChonKhuyenMaiBanHangView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(TTKHView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ChonKhuyenMaiBanHangView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -285,12 +310,14 @@ public class TTKHView extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new TTKHView().setVisible(true);
+                new ChonKhuyenMaiBanHangView().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField TXTNGAYKT;
+    private javax.swing.JTextField TXTPHANTRAM;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
@@ -298,13 +325,13 @@ public class TTKHView extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tbbang;
-    private javax.swing.JTextField txtdiachi;
+    private javax.swing.JTextField txtNGAYBD;
     private javax.swing.JTextField txtid;
     private javax.swing.JTextField txtma;
-    private javax.swing.JTextField txtsdt;
-    private javax.swing.JTextField txtten;
+    private javax.swing.JTextField txttenKM;
     // End of variables declaration//GEN-END:variables
 }

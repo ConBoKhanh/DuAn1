@@ -270,7 +270,7 @@
                               <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="txtTongTien" min="-2" pref="180" max="-2" attributes="0"/>
-                                  <Component id="jTextField16" min="-2" pref="180" max="-2" attributes="0"/>
+                                  <Component id="txtkm" min="-2" pref="180" max="-2" attributes="0"/>
                                   <Component id="txtSdt" min="-2" pref="180" max="-2" attributes="0"/>
                                   <Component id="txtTenKH" min="-2" pref="180" max="-2" attributes="0"/>
                                   <Component id="jButton4" alignment="0" min="-2" pref="182" max="-2" attributes="0"/>
@@ -310,7 +310,7 @@
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel20" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jTextField16" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                          <Component id="txtkm" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="1" attributes="0">
@@ -746,7 +746,7 @@
                 <Property name="text" type="java.lang.String" value="Sale Money"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="jTextField16">
+            <Component class="javax.swing.JTextField" name="txtkm">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="99" green="99" red="ff" type="rgb"/>
@@ -761,8 +761,11 @@
                 </Property>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextField16ActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtkmActionPerformed"/>
               </Events>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="10"/>
+              </AuxValues>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel21">
               <Properties>
