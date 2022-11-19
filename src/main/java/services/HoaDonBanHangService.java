@@ -6,6 +6,7 @@ package services;
 
 import domainModels.HoaDon;
 import domainModels.NhanVien;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import repositories.BanHangHoaDonRepository;
@@ -56,5 +57,14 @@ public class HoaDonBanHangService implements IManageHoaDonBanHangService {
     @Override
     public int maxma() {
         return i.getMaxMa();
+    }
+
+    @Override
+    public boolean update(String id, BigDecimal thanhTien) {
+        try {
+            return i.update(id, thanhTien);
+        } catch (Exception e) {
+            return false;
+        }
     }
 }

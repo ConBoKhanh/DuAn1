@@ -98,6 +98,34 @@ public class BanHangHoaDonRepository {
         }
 
     }
+    public boolean update(String id, BigDecimal thanhTien) {
+        // lấy thời gian tạo hóa đơn 
+        try {
+            Session session = HibernatUtil.getFACTORY().openSession();
+            Transaction transaction = session.getTransaction();
+            
+            java.util.Date date = java.util.Calendar.getInstance().getTime();
+            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+
+            String now = format.format(date);
+            HoaDon hd = session.get(HoaDon.class, id);
+            hd.setNgayThanhToan(Date.valueOf(now));
+            hd.setThanhTien(thanhTien);
+            hd.setTrangThai(2);
+
+            transaction.begin();
+            session.save(hd);
+            session.getTransaction().commit();
+            session.close();
+            return true;
+
+        } catch (Exception e) {
+            System.out.println(e.toString());
+            transaction.rollback();
+            return false;
+        }
+
+    }
   
     public static void main(String[] args) {
         BanHangHoaDonRepository o = new BanHangHoaDonRepository();

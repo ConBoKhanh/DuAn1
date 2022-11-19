@@ -19,8 +19,10 @@ import domainModels.HoaDon;
 import domainModels.HoaDonChiTiet;
 import domainModels.NhanVien;
 import java.awt.Dimension;
+import java.awt.HeadlessException;
 import java.awt.image.BufferedImage;
 import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.text.MessageFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -269,9 +271,9 @@ public class BanHangView extends javax.swing.JFrame implements Runnable, ThreadF
         jButton3 = new javax.swing.JButton();
         jCheckBox1 = new javax.swing.JCheckBox();
         jLabel22 = new javax.swing.JLabel();
-        jTextField18 = new javax.swing.JTextField();
+        txtKhachTra = new javax.swing.JTextField();
         jLabel23 = new javax.swing.JLabel();
-        jTextField19 = new javax.swing.JTextField();
+        txtTienThua = new javax.swing.JTextField();
         jPanel9 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         txtIdhd = new javax.swing.JTextField();
@@ -371,24 +373,29 @@ public class BanHangView extends javax.swing.JFrame implements Runnable, ThreadF
         jLabel22.setFont(new java.awt.Font("NSimSun", 1, 14)); // NOI18N
         jLabel22.setText("Khach Tra");
 
-        jTextField18.setBackground(new java.awt.Color(255, 153, 153));
-        jTextField18.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jTextField18.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 3, 0, new java.awt.Color(0, 0, 0)));
-        jTextField18.addActionListener(new java.awt.event.ActionListener() {
+        txtKhachTra.setBackground(new java.awt.Color(255, 153, 153));
+        txtKhachTra.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        txtKhachTra.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 3, 0, new java.awt.Color(0, 0, 0)));
+        txtKhachTra.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField18ActionPerformed(evt);
+                txtKhachTraActionPerformed(evt);
+            }
+        });
+        txtKhachTra.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtKhachTraKeyReleased(evt);
             }
         });
 
         jLabel23.setFont(new java.awt.Font("NSimSun", 1, 14)); // NOI18N
         jLabel23.setText("Tien Thua ");
 
-        jTextField19.setBackground(new java.awt.Color(255, 153, 153));
-        jTextField19.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jTextField19.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 3, 0, new java.awt.Color(0, 0, 0)));
-        jTextField19.addActionListener(new java.awt.event.ActionListener() {
+        txtTienThua.setBackground(new java.awt.Color(255, 153, 153));
+        txtTienThua.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        txtTienThua.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 3, 0, new java.awt.Color(0, 0, 0)));
+        txtTienThua.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField19ActionPerformed(evt);
+                txtTienThuaActionPerformed(evt);
             }
         });
 
@@ -406,9 +413,9 @@ public class BanHangView extends javax.swing.JFrame implements Runnable, ThreadF
                     .addGroup(jPanel8Layout.createSequentialGroup()
                         .addGap(174, 174, 174)
                         .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jTextField18, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtKhachTra, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jCheckBox1)
-                            .addComponent(jTextField19, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(txtTienThua, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel8Layout.createSequentialGroup()
                         .addGap(48, 48, 48)
                         .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 345, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -420,11 +427,11 @@ public class BanHangView extends javax.swing.JFrame implements Runnable, ThreadF
                 .addContainerGap()
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel22)
-                    .addComponent(jTextField18, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtKhachTra, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel23)
-                    .addComponent(jTextField19, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtTienThua, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jCheckBox1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -693,7 +700,6 @@ public class BanHangView extends javax.swing.JFrame implements Runnable, ThreadF
                 "STT", "Idsp", "Ten", "soluong", "dongia"
             }
         ));
-        tblCTHH.setSelectionForeground(new java.awt.Color(255, 255, 255));
         tblCTHH.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tblCTHHMouseClicked(evt);
@@ -854,7 +860,6 @@ public class BanHangView extends javax.swing.JFrame implements Runnable, ThreadF
         tblSanPham.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         tblSanPham.setGridColor(new java.awt.Color(255, 51, 204));
         tblSanPham.setSelectionBackground(new java.awt.Color(204, 204, 204));
-        tblSanPham.setSelectionForeground(new java.awt.Color(255, 255, 255));
         tblSanPham.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tblSanPhamMouseClicked(evt);
@@ -1079,13 +1084,13 @@ public class BanHangView extends javax.swing.JFrame implements Runnable, ThreadF
         // TODO add your handling code here:
     }//GEN-LAST:event_txtTongTienActionPerformed
 
-    private void jTextField18ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField18ActionPerformed
+    private void txtKhachTraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtKhachTraActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField18ActionPerformed
+    }//GEN-LAST:event_txtKhachTraActionPerformed
 
-    private void jTextField19ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField19ActionPerformed
+    private void txtTienThuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTienThuaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField19ActionPerformed
+    }//GEN-LAST:event_txtTienThuaActionPerformed
 
     private void tblHoaDonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblHoaDonMouseClicked
         int index = tblHoaDon.getSelectedRow();
@@ -1124,6 +1129,49 @@ public class BanHangView extends javax.swing.JFrame implements Runnable, ThreadF
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        try {
+            int tongTien = Integer.parseInt(txtTongTien.getText());
+
+            int tienTra = Integer.parseInt(txtKhachTra.getText());
+
+            int tienThua = tienTra - tongTien;
+
+            String TT = String.valueOf(tienThua);
+
+            if (tienTra < tongTien) {
+                Icon icon = new javax.swing.ImageIcon(getClass().getResource("/img/deleteicon.png"));
+                JOptionPane.showMessageDialog(this, "Khách trả chưa đủ tiền!", "Hóa Đơn !", JOptionPane.INFORMATION_MESSAGE, icon);
+                return;
+            }
+
+            
+            boolean b = hdService.update(txtIdhd.getText(), new BigDecimal(tongTien));;
+            if (b == true) {
+                Icon icon = new javax.swing.ImageIcon(getClass().getResource("/img/themmoiicon.png"));
+                JOptionPane.showMessageDialog(this, " Thành Công", "Hóa Đơn", JOptionPane.INFORMATION_MESSAGE, icon);
+                loadHD();
+                addtxtNew();
+                txtIdhd.setText("");
+                txtMahd.setText("");
+                txtTenNV.setText("");
+                txtNgayTao.setText("");
+                txtSdt.setText("");
+                txtTienThua.setText("");
+                txtTongTien.setText("");
+                txtKhachTra.setText("");
+                
+                model = (DefaultTableModel) tblCTHH.getModel();
+                model.setRowCount(0);
+
+            } else {
+                Icon icon = new javax.swing.ImageIcon(getClass().getResource("/img/deleteicon.png"));
+                JOptionPane.showMessageDialog(this, "Thất bại", "Hóa Đơn !", JOptionPane.INFORMATION_MESSAGE, icon);
+
+            }
+        } catch (NumberFormatException numberFormatException) {
+        } catch (HeadlessException headlessException) {
+        }
+
 
     }//GEN-LAST:event_jButton3ActionPerformed
 
@@ -1268,6 +1316,8 @@ public class BanHangView extends javax.swing.JFrame implements Runnable, ThreadF
 
             int dongia = SoLuongNhap * giaBan;
 
+            int soLuong = Integer.parseInt(tblCTHH.getValueAt(index, 3).toString());
+
             HoaDonChiTiet hd = new HoaDonChiTiet();
             HoaDon a = new HoaDon();
             a.setId(txtIdhd.getText());
@@ -1283,12 +1333,25 @@ public class BanHangView extends javax.swing.JFrame implements Runnable, ThreadF
             boolean c = cthdService.update(hd);
 
             if (c == true) {//update
-                Icon icon = new javax.swing.ImageIcon(getClass().getResource("/img/themmoiicon.png"));
-                JOptionPane.showMessageDialog(this, "Update thành công", "Sản Phẩm", JOptionPane.INFORMATION_MESSAGE, icon);
-                loadCTHH(txtIdhd.getText());
-                int tongtien = cthdService.TongTien(txtIdhd.getText());
-                txtTongTien.setText(tongtien + "");
-
+                if (SoLuongNhap > soLuong) {
+                    int tru = SoLuongNhap - soLuong;
+                    ctdgSV.truSanPham(idsp, tru);
+                    Icon icon = new javax.swing.ImageIcon(getClass().getResource("/img/themmoiicon.png"));
+                    JOptionPane.showMessageDialog(this, "Update thành công", "Sản Phẩm", JOptionPane.INFORMATION_MESSAGE, icon);
+                    loadCTHH(txtIdhd.getText());
+                    int tongtien = cthdService.TongTien(txtIdhd.getText());
+                    txtTongTien.setText(tongtien + "");
+                    loadSP();
+                } else if (SoLuongNhap < soLuong) {
+                    int cong = soLuong - SoLuongNhap;
+                    ctdgSV.congSanPham(idsp, cong);
+                    Icon icon = new javax.swing.ImageIcon(getClass().getResource("/img/themmoiicon.png"));
+                    JOptionPane.showMessageDialog(this, "Update thành công", "Sản Phẩm", JOptionPane.INFORMATION_MESSAGE, icon);
+                    loadCTHH(txtIdhd.getText());
+                    int tongtien = cthdService.TongTien(txtIdhd.getText());
+                    txtTongTien.setText(tongtien + "");
+                    loadSP();
+                }
             } else {
                 Icon icon = new javax.swing.ImageIcon(getClass().getResource("/img/deleteicon.png"));
                 JOptionPane.showMessageDialog(this, "lỗi", "Sản Phẩm", JOptionPane.INFORMATION_MESSAGE, icon);
@@ -1317,6 +1380,21 @@ public class BanHangView extends javax.swing.JFrame implements Runnable, ThreadF
             JOptionPane.showMessageDialog(this, "DẠ Dạ", "Hóa Đơn ChiTiet", JOptionPane.INFORMATION_MESSAGE, icon);
         }
     }//GEN-LAST:event_tblCTHHMouseClicked
+
+    private void txtKhachTraKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtKhachTraKeyReleased
+        // TODO add your handling code here:
+        int tongTien = Integer.parseInt(txtTongTien.getText());
+
+        int tienTra = Integer.parseInt(txtKhachTra.getText());
+
+        int tienThua = tienTra - tongTien;
+
+        String TT = String.valueOf(tienThua);
+
+        txtTienThua.setText(TT.replaceAll("-", ""));
+
+
+    }//GEN-LAST:event_txtKhachTraKeyReleased
 
     /**
      * @param args the command line arguments
@@ -1459,19 +1537,19 @@ public class BanHangView extends javax.swing.JFrame implements Runnable, ThreadF
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTextField jTextField16;
-    private javax.swing.JTextField jTextField18;
-    private javax.swing.JTextField jTextField19;
     private javax.swing.JTextField result_field;
     private javax.swing.JTable tblCTHH;
     private javax.swing.JTable tblHoaDon;
     private javax.swing.JTable tblSanPham;
     private javax.swing.JTextField txtIdhd;
+    private javax.swing.JTextField txtKhachTra;
     private javax.swing.JTextField txtMahd;
     private javax.swing.JTextField txtNgayTao;
     private javax.swing.JTextField txtPhiShop;
     private static javax.swing.JTextField txtSdt;
     private static javax.swing.JTextField txtTenKH;
     private javax.swing.JTextField txtTenNV;
+    private javax.swing.JTextField txtTienThua;
     private javax.swing.JTextField txtTongTien;
     // End of variables declaration//GEN-END:variables
 }

@@ -5,6 +5,7 @@
 package services.impl;
 
 import domainModels.HoaDon;
+import java.math.BigDecimal;
 import java.util.List;
 import viewModel.ViewModelHoaDonBanHang;
 
@@ -17,5 +18,8 @@ public interface IManageHoaDonBanHangService {
     
     boolean add(HoaDon hd);
     
+    boolean update(String id, BigDecimal thanhTien);
+    
     int maxma();
+    
 }
