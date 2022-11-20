@@ -255,6 +255,7 @@ public class ChonKhuyenMaiBanHangView extends javax.swing.JFrame {
         int index = tbbang.getSelectedRow();
         
         BanHangView.ChonKhuyenMaiBanHang(tbbang.getValueAt(index,0).toString(), tbbang.getValueAt(index,5).toString());
+        BanHangView.sale();
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
