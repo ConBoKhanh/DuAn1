@@ -69,12 +69,12 @@ public class BanHangView extends javax.swing.JFrame implements Runnable, ThreadF
 
     private IManageChiTietDoGoService ctdgSV = new ChiTietDoGoService();
 
-    private static String idkh;
-    private static String TenKH;
-    private static String SdtKH;
-    
-    private static String idkm;
-    private static String ptkm;
+    private static String idkh = null;
+    private static String TenKH = null;
+    private static String SdtKH = null;
+
+    private static String idkm = null;
+    private static String ptkm = null;
 
     public BanHangView() {
         initComponents();
@@ -92,21 +92,20 @@ public class BanHangView extends javax.swing.JFrame implements Runnable, ThreadF
     }
 
     public static void TTKHView(String id, String kh, String sdt) {
-        idkh = id;
-        TenKH = kh;
-        SdtKH = sdt;
+        BanHangView.idkh = id;
+        BanHangView.TenKH = kh;
+        BanHangView.SdtKH = sdt;
         txtTenKH.setText(TenKH);
         txtSdt.setText(SdtKH);
+//        System.out.println(idkh);
     }
-    
-        public static void ChonKhuyenMaiBanHang(String id, String kmpt) {
-        idkm = id;
-        ptkm = kmpt;
-        
+
+    public static void ChonKhuyenMaiBanHang(String id, String kmpt) {
+        BanHangView.idkm = id;
+        BanHangView.ptkm = kmpt;
         txtkm.setText(ptkm);
-        
+//        System.out.println(idkm);
     }
-    
 
     public int layGiaSanPhamTheoId(String idsp) {
         int dongia = 0;
@@ -307,6 +306,7 @@ public class BanHangView extends javax.swing.JFrame implements Runnable, ThreadF
         txtkm = new javax.swing.JTextField();
         jLabel21 = new javax.swing.JLabel();
         txtTongTien = new javax.swing.JTextField();
+        jButton6 = new javax.swing.JButton();
         jPanel7 = new javax.swing.JPanel();
         result_field = new javax.swing.JTextField();
         jPanel14 = new javax.swing.JPanel();
@@ -600,6 +600,14 @@ public class BanHangView extends javax.swing.JFrame implements Runnable, ThreadF
             }
         });
 
+        jButton6.setBackground(new java.awt.Color(255, 153, 153));
+        jButton6.setText("V");
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
@@ -623,7 +631,10 @@ public class BanHangView extends javax.swing.JFrame implements Runnable, ThreadF
                         .addGap(35, 35, 35)
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtTongTien, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtkm, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addComponent(txtkm, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(32, 32, 32)
+                                .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(txtSdt, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtTenKH, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)))))
@@ -653,7 +664,8 @@ public class BanHangView extends javax.swing.JFrame implements Runnable, ThreadF
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel20)
-                    .addComponent(txtkm, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtkm, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton6))
                 .addGap(12, 12, 12)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel21)
@@ -1085,7 +1097,11 @@ public class BanHangView extends javax.swing.JFrame implements Runnable, ThreadF
     }//GEN-LAST:event_txtSdtActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        // TODO add your handling code here:
+        ChonKhuyenMaiBanHangView i = new ChonKhuyenMaiBanHangView();
+        i.setVisible(true);
+        i.pack();
+        i.setLocationRelativeTo(null);
+        i.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void txtkmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtkmActionPerformed
@@ -1155,9 +1171,13 @@ public class BanHangView extends javax.swing.JFrame implements Runnable, ThreadF
                 JOptionPane.showMessageDialog(this, "Khách trả chưa đủ tiền!", "Hóa Đơn !", JOptionPane.INFORMATION_MESSAGE, icon);
                 return;
             }
-
             
-            boolean b = hdService.update(txtIdhd.getText(), new BigDecimal(tongTien));;
+            String idkh1 = BanHangView.idkh ;
+           
+            String idkm1 = BanHangView.idkm;
+            
+            
+            boolean b = hdService.update(txtIdhd.getText(), new BigDecimal(tongTien), idkh1, idkm1);
             if (b == true) {
                 Icon icon = new javax.swing.ImageIcon(getClass().getResource("/img/themmoiicon.png"));
                 JOptionPane.showMessageDialog(this, " Thành Công", "Hóa Đơn", JOptionPane.INFORMATION_MESSAGE, icon);
@@ -1171,7 +1191,11 @@ public class BanHangView extends javax.swing.JFrame implements Runnable, ThreadF
                 txtTienThua.setText("");
                 txtTongTien.setText("");
                 txtKhachTra.setText("");
-                
+                txtTenKH.setText("");
+                txtkm.setText("");
+                BanHangView.idkh = null;
+                BanHangView.idkm = null;
+
                 model = (DefaultTableModel) tblCTHH.getModel();
                 model.setRowCount(0);
 
@@ -1395,18 +1419,34 @@ public class BanHangView extends javax.swing.JFrame implements Runnable, ThreadF
 
     private void txtKhachTraKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtKhachTraKeyReleased
         // TODO add your handling code here:
-        int tongTien = Integer.parseInt(txtTongTien.getText());
+        if (txtKhachTra.getText().isEmpty()) {
+            return;
+        } else {
+            int tongTien = Integer.parseInt(txtTongTien.getText());
 
-        int tienTra = Integer.parseInt(txtKhachTra.getText());
+            int tienTra = Integer.parseInt(txtKhachTra.getText());
 
-        int tienThua = tienTra - tongTien;
+            int tienThua = tienTra - tongTien;
 
-        String TT = String.valueOf(tienThua);
+            String TT = String.valueOf(tienThua);
 
-        txtTienThua.setText(TT.replaceAll("-", ""));
+            txtTienThua.setText(TT.replaceAll("-", ""));
+        }
 
 
     }//GEN-LAST:event_txtKhachTraKeyReleased
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        int tongtien = cthdService.TongTien(txtIdhd.getText());
+        
+        int pt = Integer.parseInt(txtkm.getText());
+        
+        float a = 100-pt;
+        float b = a/100;
+        float c = tongtien*b;
+        int d = (int) c;
+        txtTongTien.setText(d+"");
+    }//GEN-LAST:event_jButton6ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1513,6 +1553,7 @@ public class BanHangView extends javax.swing.JFrame implements Runnable, ThreadF
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
+    private javax.swing.JButton jButton6;
     private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel12;

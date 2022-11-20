@@ -60,9 +60,9 @@ public class HoaDonBanHangService implements IManageHoaDonBanHangService {
     }
 
     @Override
-    public boolean update(String id, BigDecimal thanhTien) {
+    public boolean update(String id, BigDecimal thanhTien ,String idkh , String idKM) {
         try {
-            return i.update(id, thanhTien);
+            return i.update(id, thanhTien, idkh, idKM);
         } catch (Exception e) {
             return false;
         }

@@ -70,7 +70,7 @@ public class BanHangHoaDonRepository {
         try {
             Session session = HibernatUtil.getFACTORY().openSession();
             Transaction transaction = session.getTransaction();
-            
+
             java.util.Date date = java.util.Calendar.getInstance().getTime();
             SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 
@@ -98,17 +98,29 @@ public class BanHangHoaDonRepository {
         }
 
     }
-    public boolean update(String id, BigDecimal thanhTien) {
+
+    public boolean update(String id, BigDecimal thanhTien, String idkh, String idKM) {
         // lấy thời gian tạo hóa đơn 
         try {
             Session session = HibernatUtil.getFACTORY().openSession();
             Transaction transaction = session.getTransaction();
-            
+
             java.util.Date date = java.util.Calendar.getInstance().getTime();
             SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 
             String now = format.format(date);
             HoaDon hd = session.get(HoaDon.class, id);
+
+            if (idKM!=null) {
+                KhuyenMai km = session.get(KhuyenMai.class, idKM);
+                hd.setIdKhuyenMai(km);
+
+            }
+            if (idkh!=null) {
+                KhachHang kh = session.get(KhachHang.class, idkh);
+                hd.setIdKhachHang(kh);
+            }
+            
             hd.setNgayThanhToan(Date.valueOf(now));
             hd.setThanhTien(thanhTien);
             hd.setTrangThai(2);
@@ -126,7 +138,7 @@ public class BanHangHoaDonRepository {
         }
 
     }
-  
+
     public static void main(String[] args) {
         BanHangHoaDonRepository o = new BanHangHoaDonRepository();
         HoaDon i = new HoaDon();

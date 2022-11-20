@@ -18,7 +18,7 @@ public interface IManageHoaDonBanHangService {
     
     boolean add(HoaDon hd);
     
-    boolean update(String id, BigDecimal thanhTien);
+    boolean update(String id, BigDecimal thanhTien ,String idkh , String idKM);
     
     int maxma();
     
