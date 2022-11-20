@@ -40,7 +40,7 @@ public class test extends javax.swing.JFrame {
         l.add(new ViewModelHoaDonChiTietBanHang("5", "4", "b", 511, new BigDecimal(10000)));
         for (ViewModelHoaDonChiTietBanHang i : l) {
             model.addRow(new Object[]{
-               i.getIdsp(), i.getTen(), i.getSoluong(), i.getDonGia()
+                i.getIdsp(), i.getTen(), i.getSoluong(), i.getDonGia()
             });
         }
     }
@@ -147,26 +147,27 @@ public class test extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         int tongtien = 0;
-        txt1.setText(txt1.getText()+"-----------------------------------------*-------------------------------------\n");
-        txt1.setText(txt1.getText()+"\t      - Hóa Đơn Bán Hàng -\n");
-        txt1.setText(txt1.getText()+"\t      - Đồ Gỗ Hoàng Kim -\n\n");
-        txt1.setText(txt1.getText()+"\t                   - hotline : 0973394351\n\n");
-        txt1.setText(txt1.getText()+"\t                   - Thời gian : 7-10-2003\n\n");
-        txt1.setText(txt1.getText()+"                    Khách Hàng : Nguyễn Khánh Duy  \n\n");
-        txt1.setText(txt1.getText()+"-------------------------------------------------------------------------------\n\n");
+        txt1.setText(txt1.getText() + "-----------------------------------------*-------------------------------------\n");
+        txt1.setText(txt1.getText() + "\t      - Hóa Đơn Bán Hàng -\n");
+        txt1.setText(txt1.getText() + "\t      - Đồ Gỗ Hoàng Kim -\n\n");
+        txt1.setText(txt1.getText() + "\t                   - hotline : 0973394351\n\n");
+        txt1.setText(txt1.getText() + "\t                   - Thời gian : 7-10-2003\n\n");
+        txt1.setText(txt1.getText() + "                    Khách Hàng : Nguyễn Khánh Duy  \n\n");
+        txt1.setText(txt1.getText() + "-------------------------------------------------------------------------------\n\n");
+        txt1.setText(txt1.getText() + "   TênSP  " + "\t\tSố Lượng " + "\t Đơn Giá " + "\n\n");
         for (ViewModelHoaDonChiTietBanHang i : l) {
-            txt1.setText(txt1.getText()+"   TênSP  "+"\t\tSố Lượng "+"\t Đơn Giá "+"\n\n");
-            txt1.setText(txt1.getText()+"   "+i.getTen() +"\t\t"+i.getSoluong()+"\t"+i.getDonGia()+"\n\n");
-            txt1.setText(txt1.getText()+"---------------------------------------------------------------------------\n");
-            tongtien = Integer.valueOf(String.valueOf(i.getDonGia()))+tongtien;
+
+            txt1.setText(txt1.getText() + "   " + i.getTen() + "\t\t" + i.getSoluong() + "\t" + i.getDonGia() + "\n\n");
+            txt1.setText(txt1.getText() + "---------------------------------------------------------------------------\n");
+            tongtien = Integer.valueOf(String.valueOf(i.getDonGia())) + tongtien;
         }
-         txt1.setText(txt1.getText()+"------------------------------------------------------------------------------\n");
-         txt1.setText(txt1.getText()+"\tTổng Tiền : \t "+tongtien+"\n");
-         txt1.setText(txt1.getText()+"------------------------------------------------------------------------------\n");
-         txt1.setText(txt1.getText()+"                    Cảm Ơn Quý Khách Đã Mua Hàng\n");
-         txt1.setText(txt1.getText()+"------------------------------------------------------------------------------\n");
-         txt1.setText(txt1.getText()+"------------------------------------------------------------------------------\n");
-         
+        txt1.setText(txt1.getText() + "------------------------------------------------------------------------------\n");
+        txt1.setText(txt1.getText() + "\tTổng Tiền : \t " + tongtien + "\n");
+        txt1.setText(txt1.getText() + "------------------------------------------------------------------------------\n");
+        txt1.setText(txt1.getText() + "                    Cảm Ơn Quý Khách Đã Mua Hàng\n");
+        txt1.setText(txt1.getText() + "------------------------------------------------------------------------------\n");
+        txt1.setText(txt1.getText() + "------------------------------------------------------------------------------\n");
+
 
     }//GEN-LAST:event_jButton1ActionPerformed
 
