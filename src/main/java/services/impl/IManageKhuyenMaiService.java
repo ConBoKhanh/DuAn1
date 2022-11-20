@@ -21,6 +21,8 @@ public interface IManageKhuyenMaiService {
     
     List<KhuyenMaiViewModel> getListKMByDate(String ten);
     
+    List<KhuyenMaiViewModel> getListKMByDateContg(String ten);
+    
     boolean add(KhuyenMai km);
     
     boolean update(KhuyenMai km);

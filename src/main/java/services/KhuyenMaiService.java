@@ -139,4 +139,25 @@ public class KhuyenMaiService implements IManageKhuyenMaiService {
 //
 //    }
 
+    @Override
+    public List<KhuyenMaiViewModel> getListKMByDateContg(String ten) {
+       List<KhuyenMai> km = kmRepo.getListKMByDateContg(ten);
+        try {
+            List<KhuyenMaiViewModel> khuyenMaiViewModels = new ArrayList<>();
+            for (KhuyenMai x : km) {
+                KhuyenMaiViewModel i = new KhuyenMaiViewModel();
+                i.setId(x.getId());
+                i.setMa(x.getMa());
+                i.setTenKhuyenMai(x.getTenKhuyenMai());
+                i.setNgayBatDau(String.valueOf(x.getNgayBatDau()));
+                i.setNgayKetThuc(String.valueOf(x.getNgayKetThuc()));
+                i.setPhanTramKM(x.getPhanTramKM());
+                khuyenMaiViewModels.add(i);
+            }
+            return khuyenMaiViewModels;
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
 }

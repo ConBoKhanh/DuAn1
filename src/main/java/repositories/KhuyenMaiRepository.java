@@ -42,7 +42,7 @@ public class KhuyenMaiRepository {
 
             Session session = HibernatUtil.getFACTORY().openSession();
             Query q = session.createQuery("FROM KhuyenMai WHERE "
-                    + "TrangThai = 1 AND GetDate() between NgayBatDau and NgayKetThuc");
+                    + "TrangThai = 1 AND  NgayBatDau <= GetDate() or GETDATE() = NgayBatDau and getdate() <= NgayKetThuc or GETDATE() = NgayKetThuc");
             List<KhuyenMai> list = q.getResultList();
             return list;
         } catch (Exception e) {
@@ -54,7 +54,7 @@ public class KhuyenMaiRepository {
         try {
             Session session = HibernatUtil.getFACTORY().openSession();
             Query q = session.createQuery("FROM KhuyenMai WHERE "
-                    + "TrangThai = 1 AND GetDate() between NgayBatDau and NgayKetThuc");
+                    + "TrangThai = 1 AND GetDate() not between NgayBatDau and NgayKetThuc");
             List<KhuyenMai> list = q.getResultList();
             return list;
         } catch (Exception e) {
@@ -69,6 +69,21 @@ public class KhuyenMaiRepository {
             q.setParameter("ten", "%" + ten + "%");
             List<KhuyenMai> list = q.getResultList();
             return list;
+        } catch (Exception e){
+            return null;
+        }
+    }
+        public List<KhuyenMai> getListKMByDateContg(String ten) {
+        try {
+            Session session = HibernatUtil.getFACTORY().openSession();
+            Query q = session.createQuery("FROM KhuyenMai WHERE TrangThai = 1 AND TenKhuyenMai like :ten ");
+            q.setParameter("ten", "%" + ten + "%");
+             KhuyenMaiRepository kmRepo = new KhuyenMaiRepository();
+             List<KhuyenMai> khuyenMais = kmRepo.getListKMCon();
+             khuyenMais = q.getResultList();
+            
+             
+            return khuyenMais;
         } catch (Exception e) {
             return null;
         }
@@ -166,7 +181,7 @@ public class KhuyenMaiRepository {
 
     public static void main(String[] args) {
         KhuyenMaiRepository kmRepo = new KhuyenMaiRepository();
-        List<KhuyenMai> khuyenMais = kmRepo.getListKMAll();
+        List<KhuyenMai> khuyenMais = kmRepo.getListKMByDate("21");
         for (KhuyenMai khuyenMai : khuyenMais) {
             System.out.println(khuyenMai.toString());
         }
