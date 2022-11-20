@@ -98,6 +98,27 @@ public class KhachHangRepository {
             return false;
         }
     }
+    
+    public boolean addnhanh(KhachHang kh) {
+        String getMa = String.valueOf(getMaxMa() + 1);
+        try {
+            Session ss = HibernatUtil.getFACTORY().openSession();
+            KhachHang lsp = new KhachHang();
+            lsp.setMa(getMa);
+            lsp.setTenKhachHang(kh.getTenKhachHang());
+            lsp.setSdt(kh.getSdt());
+            lsp.setDiaChi(kh.getDiaChi());
+            lsp.setTrangThai(1);
+
+            ss.getTransaction().begin();
+            ss.save(lsp);
+            ss.getTransaction().commit();
+            ss.close();
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
 
     public boolean update(KhachHang kh) {
         try {

@@ -165,7 +165,6 @@ public class KhachHangView extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tbtable = new javax.swing.JTable();
-        jDateChooser1 = new com.toedter.calendar.JDateChooser();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -202,6 +201,11 @@ public class KhachHangView extends javax.swing.JFrame {
 
         txttimKiem.setBackground(new java.awt.Color(255, 153, 204));
         txttimKiem.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createMatteBorder(2, 2, 2, 2, new java.awt.Color(0, 0, 0)), "TIM KIEM"));
+        txttimKiem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txttimKiemActionPerformed(evt);
+            }
+        });
         txttimKiem.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txttimKiemKeyReleased(evt);
@@ -246,6 +250,11 @@ public class KhachHangView extends javax.swing.JFrame {
         btnback.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnback.setText("BACK");
         btnback.setBorder(javax.swing.BorderFactory.createMatteBorder(2, 2, 2, 2, new java.awt.Color(0, 0, 0)));
+        btnback.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnbackActionPerformed(evt);
+            }
+        });
         jPanel1.add(btnback, new org.netbeans.lib.awtextra.AbsoluteConstraints(33, 17, 81, 40));
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -290,9 +299,6 @@ public class KhachHangView extends javax.swing.JFrame {
         );
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 350, -1, -1));
-
-        jDateChooser1.setDateFormatString("yyyy-MM-dd");
-        jPanel1.add(jDateChooser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 70, 150, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -387,6 +393,16 @@ public class KhachHangView extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_txttimKiemKeyReleased
 
+    private void txttimKiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txttimKiemActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txttimKiemActionPerformed
+
+    private void btnbackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnbackActionPerformed
+        MenuView v = new MenuView("","","");       
+        v.setVisible(true);        
+        this.dispose();
+    }//GEN-LAST:event_btnbackActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -430,7 +446,6 @@ public class KhachHangView extends javax.swing.JFrame {
     private javax.swing.JButton btnsua;
     private javax.swing.JButton btnthem;
     private javax.swing.JButton btnxoa;
-    private com.toedter.calendar.JDateChooser jDateChooser1;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
