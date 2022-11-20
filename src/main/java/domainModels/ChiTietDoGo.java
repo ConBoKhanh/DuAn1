@@ -55,8 +55,7 @@ public class ChiTietDoGo implements Serializable {
     @ManyToOne
     @JoinColumn(name = "IdDonViTinh")
     private DonViTinh IdDonViTinh;
-    
-    
+
     private String TenSP;
     private int SoLuong;
     private BigDecimal GiaNhap;
@@ -64,14 +63,16 @@ public class ChiTietDoGo implements Serializable {
     private String MoTa;
     private int TrangThai;
     
+    @OneToMany(mappedBy = "IdSpNhap")
+    private Set<LichSuNhap> lichSuNhaps;
+    
     @OneToMany(mappedBy = "IdSPBaoHanh")
     private Set<BaoHanh> BaoHanhs;
-    
+
     @OneToMany(mappedBy = "IdChiTietDoGo")
     private Set<HoaDonChiTiet> hoaDonChiTiets;
+
     
-    public ChiTietDoGo() {
-    }
 
     public ChiTietDoGo(String Id, SanPham IdSanPham, LoaiSP IdLoaiSP, DongGo IdDongGo, NhaCungCap IdNhaCungCap, NguonGoc IdNguocGoc, DonViTinh IdDonViTinh, String TenSP, int SoLuong, BigDecimal GiaNhap, BigDecimal GiaBan, String MoTa, int TrangThai) {
         this.Id = Id;
@@ -87,6 +88,9 @@ public class ChiTietDoGo implements Serializable {
         this.GiaBan = GiaBan;
         this.MoTa = MoTa;
         this.TrangThai = TrangThai;
+    }
+
+    public ChiTietDoGo() {
     }
 
     public String getId() {

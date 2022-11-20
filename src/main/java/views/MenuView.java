@@ -1724,7 +1724,7 @@ public class MenuView extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        BanHangView v = new BanHangView();
+        BanHangView v = new BanHangView(lbId.getText(),lbTen.getText(),lbCv.getText());
         v.setLocationRelativeTo(null);
         v.setVisible(true);
         this.dispose();

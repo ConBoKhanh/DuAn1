@@ -75,9 +75,17 @@ public class BanHangView extends javax.swing.JFrame implements Runnable, ThreadF
 
     private static String idkm = null;
     private static String ptkm = null;
+    
+    
+    String IdNV;
+    String TenNV;
+    String CV;
 
-    public BanHangView() {
+    public BanHangView(String Id, String Ten, String cv) {
         initComponents();
+        IdNV = Id;
+        TenNV = Ten;
+        CV = cv;
         initWebcam();
         loadSP();
         loadHD();
@@ -1138,7 +1146,7 @@ public class BanHangView extends javax.swing.JFrame implements Runnable, ThreadF
 
         HoaDon hd = new HoaDon();
         NhanVien nv = new NhanVien();
-        nv.setId("97D42683-2927-4807-930A-FC948BA31B8F");
+        nv.setId(IdNV);
         hd.setIdNhanVien(nv);
 
         boolean b = hdService.add(hd);
@@ -1213,7 +1221,7 @@ public class BanHangView extends javax.swing.JFrame implements Runnable, ThreadF
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        MenuView v = new MenuView("", "", "");
+        MenuView v = new MenuView(IdNV,TenNV,CV);
         v.setLocationRelativeTo(null);
         v.setVisible(true);
         webcam.close();
@@ -1441,7 +1449,7 @@ public class BanHangView extends javax.swing.JFrame implements Runnable, ThreadF
         int tongtien = cthdService.TongTien(txtIdhd.getText());
         
         int pt = Integer.parseInt(txtkm.getText());
-        
+     
         float a = 100-pt;
         float b = a/100;
         float c = tongtien*b;
@@ -1480,7 +1488,7 @@ public class BanHangView extends javax.swing.JFrame implements Runnable, ThreadF
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new BanHangView().setVisible(true);
+//                new BanHangView().setVisible(true);
             }
         });
     }

@@ -4,6 +4,16 @@
  */
 package views;
 
+import domainModels.ChiTietDoGo;
+import domainModels.LichSuNhap;
+import java.math.BigDecimal;
+import javax.swing.Icon;
+import javax.swing.JOptionPane;
+import services.ChiTietDoGoService;
+import services.NhapXuatService;
+import services.impl.IManageChiTietDoGoService;
+import services.impl.IManagerNhapXuat;
+
 /**
  *
  * @author Admin
@@ -13,6 +23,9 @@ public class NhapXuatView extends javax.swing.JFrame {
     /**
      * Creates new form NhapXuatView
      */
+    private IManageChiTietDoGoService a = new ChiTietDoGoService();
+    private IManagerNhapXuat i = new NhapXuatService();
+
     public NhapXuatView(String Idsp, String TenSP, String GiaNhap, String SoLuongHT) {
         initComponents();
         lbId.setText(Idsp);
@@ -91,6 +104,11 @@ public class NhapXuatView extends javax.swing.JFrame {
         jButton1.setBackground(new java.awt.Color(255, 204, 255));
         jButton1.setText("Nhập");
         jButton1.setBorder(javax.swing.BorderFactory.createMatteBorder(3, 3, 3, 3, new java.awt.Color(0, 0, 0)));
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setBackground(new java.awt.Color(255, 204, 255));
         jButton2.setText("Back");
@@ -182,6 +200,34 @@ public class NhapXuatView extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         this.dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        String id = lbId.getText();
+        int soLuongNhap = Integer.parseInt(txtAddSL.getText());
+        int GiaNhap = Integer.parseInt(lbNhap.getText());
+        float tongtien = Float.valueOf(soLuongNhap + "") * Float.valueOf(GiaNhap + "");
+        int soluonght = Integer.parseInt(lbSl.getText());
+
+        LichSuNhap ls = new LichSuNhap();
+
+        ChiTietDoGo sp = new ChiTietDoGo();
+        sp.setId(id);
+        ls.setIdSpNhap(sp);
+        ls.setSoLongNhap(soLuongNhap);
+        ls.setTongTienNhap(new BigDecimal(tongtien + ""));
+        boolean b = i.add(ls);
+        if (b == true) {
+            Icon icon = new javax.swing.ImageIcon(getClass().getResource("/img/themmoiicon.png"));
+            JOptionPane.showMessageDialog(this, "Nhập sp thành công", "Sản Phẩm", JOptionPane.INFORMATION_MESSAGE, icon);
+            a.congSanPham(id, soLuongNhap);
+            ChiTietSanPhamView.load(a.list());
+            this.dispose();
+
+        } else {
+            Icon icon = new javax.swing.ImageIcon(getClass().getResource("/img/deleteicon.png"));
+            JOptionPane.showMessageDialog(this, "Trùng Tên Sản Phẩm", "Sản Phẩm", JOptionPane.INFORMATION_MESSAGE, icon);
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments

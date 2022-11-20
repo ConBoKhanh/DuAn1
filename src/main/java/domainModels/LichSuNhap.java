@@ -11,6 +11,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import org.hibernate.annotations.GenericGenerator;
 
@@ -27,16 +29,20 @@ public class LichSuNhap implements Serializable {
     @GeneratedValue(generator = "generator")
     @Column(name = "IdNhap", columnDefinition = "uniqueidentifier")
     private String IdNhap;
-    private SanPham IdSpNhap;
-    private int SoLuongNhap;
+
+    @ManyToOne
+    @JoinColumn(name = "IdSpNhap")
+    private ChiTietDoGo IdSpNhap;
+
+    private int SoLongNhap;
     private Date NgayNhap;
     private int Trangthai;
     private BigDecimal TongTienNhap;
 
-    public LichSuNhap(String IdNhap, SanPham IdSpNhap, int SoLuongNhap, Date NgayNhap, int Trangthai, BigDecimal TongTienNhap) {
+    public LichSuNhap(String IdNhap, ChiTietDoGo IdSpNhap, int SoLongNhap, Date NgayNhap, int Trangthai, BigDecimal TongTienNhap) {
         this.IdNhap = IdNhap;
         this.IdSpNhap = IdSpNhap;
-        this.SoLuongNhap = SoLuongNhap;
+        this.SoLongNhap = SoLongNhap;
         this.NgayNhap = NgayNhap;
         this.Trangthai = Trangthai;
         this.TongTienNhap = TongTienNhap;
@@ -53,20 +59,20 @@ public class LichSuNhap implements Serializable {
         this.IdNhap = IdNhap;
     }
 
-    public SanPham getIdSpNhap() {
+    public ChiTietDoGo getIdSpNhap() {
         return IdSpNhap;
     }
 
-    public void setIdSpNhap(SanPham IdSpNhap) {
+    public void setIdSpNhap(ChiTietDoGo IdSpNhap) {
         this.IdSpNhap = IdSpNhap;
     }
 
-    public int getSoLuongNhap() {
-        return SoLuongNhap;
+    public int getSoLongNhap() {
+        return SoLongNhap;
     }
 
-    public void setSoLuongNhap(int SoLuongNhap) {
-        this.SoLuongNhap = SoLuongNhap;
+    public void setSoLongNhap(int SoLongNhap) {
+        this.SoLongNhap = SoLongNhap;
     }
 
     public Date getNgayNhap() {
@@ -95,7 +101,7 @@ public class LichSuNhap implements Serializable {
 
     @Override
     public String toString() {
-        return "LichSuNhap{" + "IdNhap=" + IdNhap + ", IdSpNhap=" + IdSpNhap + ", SoLuongNhap=" + SoLuongNhap + ", NgayNhap=" + NgayNhap + ", Trangthai=" + Trangthai + ", TongTienNhap=" + TongTienNhap + '}';
+        return "LichSuNhap{" + "IdNhap=" + IdNhap + ", IdSpNhap=" + IdSpNhap + ", SoLongNhap=" + SoLongNhap + ", NgayNhap=" + NgayNhap + ", Trangthai=" + Trangthai + ", TongTienNhap=" + TongTienNhap + '}';
     }
 
 }
