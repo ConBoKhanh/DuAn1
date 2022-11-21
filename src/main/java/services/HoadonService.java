@@ -28,12 +28,33 @@ public class HoadonService implements IManageHoaDonService {
                 ViewModelHoadon l = new ViewModelHoadon();
                 l.setId(x.getId());
                 l.setMa(x.getMa());
-                l.setNgayTao(x.getNgayTao());
-                l.setNgayThanhToan(x.getNgayThanhToan());
-                l.setPhamtramKM(x.getIdKhuyenMai().getPhanTramKM());
-                l.setTenKH(x.getIdKhachHang().getTenKhachHang());
+                l.setNgayTao(x.getNgayTao() + "");
+                if (x.getNgayThanhToan() == null) {
+                    l.setNgayThanhToan("Chưa Thanh Toán");
+                } else {
+                    l.setNgayThanhToan(x.getNgayThanhToan() + "");
+                }
+
+                if (x.getIdKhuyenMai() == null) {
+                    l.setPhamtramKM("Không chọn");
+                } else {
+                    l.setPhamtramKM(x.getIdKhuyenMai().getPhanTramKM() + "");
+                }
+                if (x.getIdKhachHang() == null) {
+                    l.setTenKH("Không chọn");
+                } else {
+                    l.setTenKH(x.getIdKhachHang().getTenKhachHang());
+                }
+
                 l.setTenNV(x.getIdNhanVien().getHoTen());
-                l.setTrangThaiHoaDon(x.getTrangThaiHoaDon());
+                if (x.getTrangThai() == 1) {
+                    l.setTrangThaiHoaDon("Chưa Thanh Toán");
+                } else if (x.getTrangThai() == 2) {
+                    l.setTrangThaiHoaDon("Đã Thanh Toán");
+                } else {
+                    l.setTrangThaiHoaDon("Hóa Đơn Bảo Hành");
+                }
+
                 hoadon.add(l);
             }
             return hoadon;
@@ -69,12 +90,33 @@ public class HoadonService implements IManageHoaDonService {
                 ViewModelHoadon l = new ViewModelHoadon();
                 l.setId(x.getId());
                 l.setMa(x.getMa());
-                l.setNgayTao(x.getNgayTao());
-                l.setNgayThanhToan(x.getNgayThanhToan());
-                l.setPhamtramKM(x.getIdKhuyenMai().getPhanTramKM());
-                l.setTenKH(x.getIdKhachHang().getTenKhachHang());
+                l.setNgayTao(x.getNgayTao() + "");
+                if (x.getNgayThanhToan() == null) {
+                    l.setNgayThanhToan("Chưa Thanh Toán");
+                } else {
+                    l.setNgayThanhToan(x.getNgayThanhToan() + "");
+                }
+
+                if (x.getIdKhuyenMai() == null) {
+                    l.setPhamtramKM("Không chọn");
+                } else {
+                    l.setPhamtramKM(x.getIdKhuyenMai().getPhanTramKM() + "");
+                }
+                if (x.getIdKhachHang() == null) {
+                    l.setTenKH("Không chọn");
+                } else {
+                    l.setTenKH(x.getIdKhachHang().getTenKhachHang());
+                }
+
                 l.setTenNV(x.getIdNhanVien().getHoTen());
-                l.setTrangThaiHoaDon(x.getTrangThaiHoaDon());
+                if (x.getTrangThai() == 1) {
+                    l.setTrangThaiHoaDon("Chưa Thanh Toán");
+                } else if (x.getTrangThai() == 2) {
+                    l.setTrangThaiHoaDon("Đã Thanh Toán");
+                } else {
+                    l.setTrangThaiHoaDon("Hóa Đơn Bảo Hành");
+                }
+
                 hoadon.add(l);
             }
             return hoadon;

@@ -98,7 +98,7 @@ public class HoadonRepository {
             HoaDon hds = session.get(HoaDon.class, id);
             hds.setTrangThai(0);
             session.getTransaction().begin();
-            session.save(id);
+            session.save(hds);
             session.getTransaction().commit();
             session.close();
             return true;

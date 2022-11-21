@@ -13,17 +13,14 @@ import java.sql.Date;
 public class ViewModelHoadon {
     private String Id;
     private String ma;
-    private Date NgayTao;
-    private Date NgayThanhToan;
-    private int TrangThaiHoaDon;
-    private int phamtramKM;
+    private String NgayTao;
+    private String NgayThanhToan;
+    private String TrangThaiHoaDon;
+    private String phamtramKM;
     private String tenKH;
     private String tenNV;
 
-    public ViewModelHoadon() {
-    }
-
-    public ViewModelHoadon(String Id, String ma, Date NgayTao, Date NgayThanhToan, int TrangThaiHoaDon, int phamtramKM, String tenKH, String tenNV) {
+    public ViewModelHoadon(String Id, String ma, String NgayTao, String NgayThanhToan, String TrangThaiHoaDon, String phamtramKM, String tenKH, String tenNV) {
         this.Id = Id;
         this.ma = ma;
         this.NgayTao = NgayTao;
@@ -32,6 +29,9 @@ public class ViewModelHoadon {
         this.phamtramKM = phamtramKM;
         this.tenKH = tenKH;
         this.tenNV = tenNV;
+    }
+
+    public ViewModelHoadon() {
     }
 
     public String getId() {
@@ -50,35 +50,35 @@ public class ViewModelHoadon {
         this.ma = ma;
     }
 
-    public Date getNgayTao() {
+    public String getNgayTao() {
         return NgayTao;
     }
 
-    public void setNgayTao(Date NgayTao) {
+    public void setNgayTao(String NgayTao) {
         this.NgayTao = NgayTao;
     }
 
-    public Date getNgayThanhToan() {
+    public String getNgayThanhToan() {
         return NgayThanhToan;
     }
 
-    public void setNgayThanhToan(Date NgayThanhToan) {
+    public void setNgayThanhToan(String NgayThanhToan) {
         this.NgayThanhToan = NgayThanhToan;
     }
 
-    public int getTrangThaiHoaDon() {
+    public String getTrangThaiHoaDon() {
         return TrangThaiHoaDon;
     }
 
-    public void setTrangThaiHoaDon(int TrangThaiHoaDon) {
+    public void setTrangThaiHoaDon(String TrangThaiHoaDon) {
         this.TrangThaiHoaDon = TrangThaiHoaDon;
     }
 
-    public int getPhamtramKM() {
+    public String getPhamtramKM() {
         return phamtramKM;
     }
 
-    public void setPhamtramKM(int phamtramKM) {
+    public void setPhamtramKM(String phamtramKM) {
         this.phamtramKM = phamtramKM;
     }
 
@@ -102,6 +102,9 @@ public class ViewModelHoadon {
     public String toString() {
         return "ViewModelHoadon{" + "Id=" + Id + ", ma=" + ma + ", NgayTao=" + NgayTao + ", NgayThanhToan=" + NgayThanhToan + ", TrangThaiHoaDon=" + TrangThaiHoaDon + ", phamtramKM=" + phamtramKM + ", tenKH=" + tenKH + ", tenNV=" + tenNV + '}';
     }
-    
+
+  
+  
+   
     
 }
