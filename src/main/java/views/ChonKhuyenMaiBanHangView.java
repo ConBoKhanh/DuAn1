@@ -29,36 +29,43 @@ public class ChonKhuyenMaiBanHangView extends javax.swing.JFrame {
         initComponents();
         setLocationRelativeTo(null);
         loadTBAll();
-        loadthgdautien();
+
     }
 
     public void loadTBAll() {
+        List<KhuyenMaiViewModel> km = kmSV.getListKMCon();
+        if (km == null) {
+            return;
+        }
         model = (DefaultTableModel) tbbang.getModel();
         model.setRowCount(0);
-        List<KhuyenMaiViewModel> km = kmSV.getListKMCon();
+
         for (KhuyenMaiViewModel a : km) {
             model.addRow(new Object[]{
-                a.getId(), a.getMa(), a.getTenKhuyenMai(), a.getNgayBatDau(), a.getNgayKetThuc(),a.getPhanTramKM()
+                a.getId(), a.getMa(), a.getTenKhuyenMai(), a.getNgayBatDau(), a.getNgayKetThuc(), a.getPhanTramKM()
             });
         }
+        loadthgdautien();
     }
 
     public void loadthgdautien() {
+
         int index = 0;
         txtid.setText(tbbang.getValueAt(index, 0).toString());
         txtma.setText(tbbang.getValueAt(index, 1).toString());
         txttenKM.setText(tbbang.getValueAt(index, 2).toString());
         txtNGAYBD.setText(tbbang.getValueAt(index, 3).toString());
-        TXTNGAYKT.setText(tbbang.getValueAt(index,4).toString());
+        TXTNGAYKT.setText(tbbang.getValueAt(index, 4).toString());
         TXTPHANTRAM.setText(tbbang.getValueAt(index, 5).toString());
     }
-     public void searchName(String ten) {
+
+    public void searchName(String ten) {
         model = (DefaultTableModel) tbbang.getModel();
         model.setRowCount(0);
         List<KhuyenMaiViewModel> km = kmSV.getListKMByDate(ten);
         for (KhuyenMaiViewModel a : km) {
             model.addRow(new Object[]{
-                a.getId(), a.getMa(), a.getTenKhuyenMai(), a.getNgayBatDau(), a.getNgayKetThuc(),a.getPhanTramKM()
+                a.getId(), a.getMa(), a.getTenKhuyenMai(), a.getNgayBatDau(), a.getNgayKetThuc(), a.getPhanTramKM()
             });
         }
     }
@@ -176,7 +183,7 @@ public class ChonKhuyenMaiBanHangView extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(131, 131, 131)
                         .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(75, 75, 75)
+                        .addGap(105, 105, 105)
                         .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(523, 523, 523)
@@ -275,29 +282,32 @@ public class ChonKhuyenMaiBanHangView extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-
+        List<KhuyenMaiViewModel> km = kmSV.getListKMCon();
+        if (km == null) {
+            return;
+        }
         int index = tbbang.getSelectedRow();
-        
-        BanHangView.ChonKhuyenMaiBanHang(tbbang.getValueAt(index,0).toString(), tbbang.getValueAt(index,5).toString());
+
+        BanHangView.ChonKhuyenMaiBanHang(tbbang.getValueAt(index, 0).toString(), tbbang.getValueAt(index, 5).toString());
         BanHangView.sale();
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        BanHangView v = new BanHangView("", "", "");
-        v.setVisible(true);
+        BanHangView.ChonKhuyenMaiBanHang(null, null);
+        BanHangView.sale();
         this.dispose();
-        
+
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void tbbangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbbangMouseClicked
-        
-           int index =tbbang.getSelectedRow();
+
+        int index = tbbang.getSelectedRow();
         txtid.setText(tbbang.getValueAt(index, 0).toString());
         txtma.setText(tbbang.getValueAt(index, 1).toString());
         txttenKM.setText(tbbang.getValueAt(index, 2).toString());
         txtNGAYBD.setText(tbbang.getValueAt(index, 3).toString());
-        TXTNGAYKT.setText(tbbang.getValueAt(index,4).toString());
+        TXTNGAYKT.setText(tbbang.getValueAt(index, 4).toString());
         TXTPHANTRAM.setText(tbbang.getValueAt(index, 5).toString());
     }//GEN-LAST:event_tbbangMouseClicked
 
@@ -312,7 +322,7 @@ public class ChonKhuyenMaiBanHangView extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {  
+    public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new ChonKhuyenMaiBanHangView().setVisible(true);

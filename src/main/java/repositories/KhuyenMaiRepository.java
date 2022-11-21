@@ -41,8 +41,11 @@ public class KhuyenMaiRepository {
         try {
 
             Session session = HibernatUtil.getFACTORY().openSession();
-            Query q = session.createQuery("FROM KhuyenMai WHERE "
-                    + "TrangThai = 1 AND  NgayBatDau <= GetDate() or GETDATE() = NgayBatDau and getdate() <= NgayKetThuc or GETDATE() = NgayKetThuc");
+            Query q = session.createQuery("from khuyenmai\n"
+                    + "where Day(GETDATE()) between DAY(NgayBatDau) and Day(NgayKetThuc) \n"
+                    + " and MONTH(getdate()) = MONTH(NgayKetThuc) \n"
+                    + " and year(getdate()) = year(NgayKetThuc)  or\n"
+                    + "GETDATE() between NgayBatDau and NgayKetThuc ");
             List<KhuyenMai> list = q.getResultList();
             return list;
         } catch (Exception e) {
@@ -69,20 +72,20 @@ public class KhuyenMaiRepository {
             q.setParameter("ten", "%" + ten + "%");
             List<KhuyenMai> list = q.getResultList();
             return list;
-        } catch (Exception e){
+        } catch (Exception e) {
             return null;
         }
     }
-        public List<KhuyenMai> getListKMByDateContg(String ten) {
+
+    public List<KhuyenMai> getListKMByDateContg(String ten) {
         try {
             Session session = HibernatUtil.getFACTORY().openSession();
             Query q = session.createQuery("FROM KhuyenMai WHERE TrangThai = 1 AND TenKhuyenMai like :ten ");
             q.setParameter("ten", "%" + ten + "%");
-             KhuyenMaiRepository kmRepo = new KhuyenMaiRepository();
-             List<KhuyenMai> khuyenMais = kmRepo.getListKMCon();
-             khuyenMais = q.getResultList();
-            
-             
+            KhuyenMaiRepository kmRepo = new KhuyenMaiRepository();
+            List<KhuyenMai> khuyenMais = kmRepo.getListKMCon();
+            khuyenMais = q.getResultList();
+
             return khuyenMais;
         } catch (Exception e) {
             return null;
