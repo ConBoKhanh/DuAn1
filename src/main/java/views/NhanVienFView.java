@@ -905,7 +905,7 @@ public void loadTBCuaHang() {
             txtEmailNv.setText(TBBANG.getValueAt(index, 9).toString().trim());
 
         } catch (ParseException ex) {
-            Logger.getLogger(NhanVienView.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(NhanVienViewTest.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_TBBANGMouseClicked
 

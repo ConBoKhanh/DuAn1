@@ -30,7 +30,7 @@ import viewModel.ViewModelNhanVien;
  *
  * @author Admin
  */
-public class NhanVienView extends javax.swing.JFrame {
+public class NhanVienViewTest extends javax.swing.JFrame {
 
     private IManageNhanVienService nhanVienService = new NhanVienService();
     private IManageCuaHangService cuaHangService = new CuaHangService();
@@ -131,7 +131,7 @@ public class NhanVienView extends javax.swing.JFrame {
     /**
      * Creates new form NhanVienView
      */
-    public NhanVienView() {
+    public NhanVienViewTest() {
         initComponents();
         setLocationRelativeTo(null);
         loadTable();
@@ -518,7 +518,7 @@ public class NhanVienView extends javax.swing.JFrame {
             txtEmailNv.setText(TBBANG.getValueAt(index, 9).toString());
 
         } catch (ParseException ex) {
-            Logger.getLogger(NhanVienView.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(NhanVienViewTest.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_TBBANGMouseClicked
 
@@ -548,20 +548,21 @@ public class NhanVienView extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(NhanVienView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(NhanVienViewTest.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(NhanVienView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(NhanVienViewTest.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(NhanVienView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(NhanVienViewTest.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(NhanVienView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(NhanVienViewTest.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new NhanVienView().setVisible(true);
+                new NhanVienViewTest().setVisible(true);
             }
         });
     }

@@ -1732,7 +1732,7 @@ public class MenuView extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        NhanVienView v = new NhanVienView();
+        NhanVienViewTest v = new NhanVienViewTest();
         v.setLocationRelativeTo(null);
         v.setVisible(true);
         this.dispose();
