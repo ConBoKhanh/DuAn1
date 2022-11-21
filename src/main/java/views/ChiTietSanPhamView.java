@@ -60,6 +60,7 @@ public class ChiTietSanPhamView extends javax.swing.JFrame {
 
     public ChiTietSanPhamView() {
         initComponents();
+        setLocationRelativeTo(null);
         load(a.list());
         loadcbc();
     }

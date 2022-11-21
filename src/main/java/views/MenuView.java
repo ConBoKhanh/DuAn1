@@ -15,6 +15,7 @@ public class MenuView extends javax.swing.JFrame {
      */
     public MenuView(String Id, String Ten, String cv) {
         initComponents();
+        setLocationRelativeTo(null);
         lbId.setText(Id);
         lbTen.setText(Ten);
         lbCv.setText(cv);

@@ -27,6 +27,7 @@ public class ChonKhuyenMaiBanHangView extends javax.swing.JFrame {
      */
     public ChonKhuyenMaiBanHangView() {
         initComponents();
+        setLocationRelativeTo(null);
         loadTBAll();
         loadthgdautien();
     }

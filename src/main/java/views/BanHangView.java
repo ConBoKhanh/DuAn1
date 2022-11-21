@@ -83,6 +83,7 @@ public class BanHangView extends javax.swing.JFrame implements Runnable, ThreadF
 
     public BanHangView(String Id, String Ten, String cv) {
         initComponents();
+        setLocationRelativeTo(null);
         IdNV = Id;
         TenNV = Ten;
         CV = cv;

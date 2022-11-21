@@ -44,6 +44,7 @@ public class NhanVienFView extends javax.swing.JFrame {
      */
     public NhanVienFView() {
         initComponents();
+        setLocationRelativeTo(null);
          loadTable();
          loadCBB();
          

@@ -28,6 +28,7 @@ public class KhachHangView extends javax.swing.JFrame {
      */
     public KhachHangView() {
         initComponents();
+        setLocationRelativeTo(null);
         loadtb();
         loadthangst1();
     }
@@ -398,7 +399,8 @@ public class KhachHangView extends javax.swing.JFrame {
     }//GEN-LAST:event_txttimKiemActionPerformed
 
     private void btnbackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnbackActionPerformed
-        MenuView v = new MenuView("","","");       
+        MenuView v = new MenuView("","","");   
+        setLocationRelativeTo(null);
         v.setVisible(true);        
         this.dispose();
     }//GEN-LAST:event_btnbackActionPerformed

@@ -18,6 +18,7 @@ public class HoaDonView extends javax.swing.JFrame {
      */
     public HoaDonView() {
         initComponents();
+        setLocationRelativeTo(null);
     }
 
     /**

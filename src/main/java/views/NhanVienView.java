@@ -133,6 +133,7 @@ public class NhanVienView extends javax.swing.JFrame {
      */
     public NhanVienView() {
         initComponents();
+        setLocationRelativeTo(null);
         loadTable();
         loadCBB();
     }

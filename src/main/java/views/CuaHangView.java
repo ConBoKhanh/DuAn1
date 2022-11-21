@@ -85,6 +85,7 @@ public class CuaHangView extends javax.swing.JFrame {
      */
     public CuaHangView() {
         initComponents();
+        setLocationRelativeTo(null);
         loadTBCuaHang();
         loadPhanTu1();
     }

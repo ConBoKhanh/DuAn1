@@ -28,6 +28,7 @@ public class NhapXuatView extends javax.swing.JFrame {
 
     public NhapXuatView(String Idsp, String TenSP, String GiaNhap, String SoLuongHT) {
         initComponents();
+        setLocationRelativeTo(null);
         lbId.setText(Idsp);
         lbTen.setText(TenSP);
         lbNhap.setText(GiaNhap);

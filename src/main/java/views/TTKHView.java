@@ -28,6 +28,7 @@ public class TTKHView extends javax.swing.JFrame {
      */
     public TTKHView() {
         initComponents();
+        setLocationRelativeTo(null);
         loadtb();
         loadthgdautien();
     }

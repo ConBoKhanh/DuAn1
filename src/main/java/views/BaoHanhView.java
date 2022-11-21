@@ -15,6 +15,7 @@ public class BaoHanhView extends javax.swing.JFrame {
      */
     public BaoHanhView() {
         initComponents();
+        setLocationRelativeTo(null);
     }
 
     /**

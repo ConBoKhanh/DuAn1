@@ -279,7 +279,7 @@ public class KhuyenMaiView extends javax.swing.JFrame {
 
     private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
         // TODO add your handling code here:
-                java.util.Date dateBD = DateNgayBatDau.getDate();
+        java.util.Date dateBD = DateNgayBatDau.getDate();
         java.util.Date dateKT = DateNgayKetThuc.getDate();
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         String batDau = format.format(dateBD);

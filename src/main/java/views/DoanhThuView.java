@@ -15,6 +15,7 @@ public class DoanhThuView extends javax.swing.JFrame {
      */
     public DoanhThuView() {
         initComponents();
+        setLocationRelativeTo(null);
     }
 
     /**

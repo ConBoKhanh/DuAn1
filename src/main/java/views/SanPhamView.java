@@ -52,6 +52,7 @@ public class SanPhamView extends javax.swing.JFrame {
 
     public SanPhamView() {
         initComponents();
+        setLocationRelativeTo(null);
         //San Pham
         txtID.setEnabled(false);
         txtMa.setEnabled(false);
