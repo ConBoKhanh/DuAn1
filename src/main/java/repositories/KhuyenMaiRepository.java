@@ -38,26 +38,23 @@ public class KhuyenMaiRepository {
     }
 
     public List<KhuyenMai> getListKMCon() {
-        try {
+//        try {
 
-            Session session = HibernatUtil.getFACTORY().openSession();
-            Query q = session.createQuery("from khuyenmai\n"
-                    + "where Day(GETDATE()) between DAY(NgayBatDau) and Day(NgayKetThuc) \n"
-                    + " and MONTH(getdate()) = MONTH(NgayKetThuc) \n"
-                    + " and year(getdate()) = year(NgayKetThuc)  or\n"
-                    + "GETDATE() between NgayBatDau and NgayKetThuc ");
-            List<KhuyenMai> list = q.getResultList();
-            return list;
-        } catch (Exception e) {
-            return null;
-        }
+        Session session = HibernatUtil.getFACTORY().openSession();
+        Query q = session.createQuery("From KhuyenMai where CONVERT(varchar(20),GETDATE(),23) >= NgayBatDau AND\n"
+                + "CONVERT(varchar(20),GETDATE(),23) <= NgayKetThuc	");
+        List<KhuyenMai> list = q.getResultList();
+        return list;
+//        } catch (Exception e) {
+//            return null;
+//        }
     }
 
     public List<KhuyenMai> getListKMHet() {
         try {
             Session session = HibernatUtil.getFACTORY().openSession();
-            Query q = session.createQuery("FROM KhuyenMai WHERE "
-                    + "TrangThai = 1 AND GetDate() not between NgayBatDau and NgayKetThuc");
+            Query q = session.createQuery("FROM KhuyenMai WHERE \n"
+                    + "TrangThai = 1 AND CONVERT(varchar(20),GETDATE(),23) > NgayKetThuc	");
             List<KhuyenMai> list = q.getResultList();
             return list;
         } catch (Exception e) {
@@ -184,7 +181,7 @@ public class KhuyenMaiRepository {
 
     public static void main(String[] args) {
         KhuyenMaiRepository kmRepo = new KhuyenMaiRepository();
-        List<KhuyenMai> khuyenMais = kmRepo.getListKMByDate("21");
+        List<KhuyenMai> khuyenMais = kmRepo.getListKMHet();
         for (KhuyenMai khuyenMai : khuyenMais) {
             System.out.println(khuyenMai.toString());
         }
