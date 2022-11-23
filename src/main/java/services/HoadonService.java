@@ -20,47 +20,42 @@ public class HoadonService implements IManageHoaDonService {
     private HoadonRepository hdrp = new HoadonRepository();
 
     @Override
-    public List<ViewModelHoadon> getListHoaDon() {
-        List<HoaDon> lhd = hdrp.getList();
-        try {
-            List<ViewModelHoadon> hoadon = new ArrayList<>();
-            for (HoaDon x : lhd) {
-                ViewModelHoadon l = new ViewModelHoadon();
-                l.setId(x.getId());
-                l.setMa(x.getMa());
-                l.setNgayTao(x.getNgayTao() + "");
-                if (x.getNgayThanhToan() == null) {
-                    l.setNgayThanhToan("Chưa Thanh Toán");
-                } else {
-                    l.setNgayThanhToan(x.getNgayThanhToan() + "");
-                }
+    public List<ViewModelHoadon> getListHoaDon(int i, int b) {
+        List<Object[]> lhd = hdrp.getList(i, b);
 
-                if (x.getIdKhuyenMai() == null) {
-                    l.setPhamtramKM("Không chọn");
-                } else {
-                    l.setPhamtramKM(x.getIdKhuyenMai().getPhanTramKM() + "");
-                }
-                if (x.getIdKhachHang() == null) {
-                    l.setTenKH("Không chọn");
-                } else {
-                    l.setTenKH(x.getIdKhachHang().getTenKhachHang());
-                }
-
-                l.setTenNV(x.getIdNhanVien().getHoTen());
-                if (x.getTrangThai() == 1) {
-                    l.setTrangThaiHoaDon("Chưa Thanh Toán");
-                } else if (x.getTrangThai() == 2) {
-                    l.setTrangThaiHoaDon("Đã Thanh Toán");
-                } else {
-                    l.setTrangThaiHoaDon("Hóa Đơn Bảo Hành");
-                }
-
-                hoadon.add(l);
+        List<ViewModelHoadon> hoadon = new ArrayList<>();
+        for (Object[] a : lhd) {
+            ViewModelHoadon c = new ViewModelHoadon();
+            c.setId(a[0].toString());
+            c.setMa(a[1].toString());
+            c.setTenNV(a[2].toString());
+            if (a[3] == null) {
+                c.setTenKH("Không Chọn");
+            } else {
+                c.setTenKH(a[3].toString());
             }
-            return hoadon;
-        } catch (Exception e) {
-            return null;
+            c.setNgayTao(a[4].toString());
+            if (a[5] == null) {
+                c.setNgayThanhToan("Chưa Thanh Toán");
+            } else {
+                c.setNgayThanhToan(a[5].toString());
+            }
+            if (a[6] == null) {
+                c.setPhamtramKM("Không chọn");
+            } else {
+                c.setPhamtramKM(a[6].toString());
+            }
+            if (a[7].toString().equals("1")) {
+                c.setTrangThaiHoaDon("Chưa Thanh Toán");
+            } else if (a[7].toString().equals("2")) {
+                c.setTrangThaiHoaDon("Đã Thanh Toán");
+            } else {
+                c.setTrangThaiHoaDon("Hóa Đơn Bảo Hành");
+            }
+            hoadon.add(c);
         }
+        return hoadon;
+
     }
 
     @Override
@@ -122,6 +117,15 @@ public class HoadonService implements IManageHoaDonService {
             return hoadon;
         } catch (Exception e) {
             return null;
+        }
+    }
+
+    @Override
+    public int row(int i, int b) {
+        try {
+            return hdrp.getListSL(i, b);
+        } catch (Exception e) {
+            return 0;
         }
     }
 

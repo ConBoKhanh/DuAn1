@@ -25,16 +25,46 @@ public class HoadonRepository {
     Session session = HibernatUtil.getFACTORY().openSession();
     Transaction transaction = session.getTransaction();
 
-    public List<HoaDon> getList() {
-        Transaction transaction = session.getTransaction();
+    public List<Object[]> getList(int i, int b) {
         try {
+            Transaction transaction = session.getTransaction();
+
             Session session = HibernatUtil.getFACTORY().openSession();
-            Query q = session.createQuery("from HoaDon where TrangThai = 2 or TrangThai = 1 or TrangThai = 3  order by TrangThai asc");
-            List<HoaDon> list = q.getResultList();
+            Query q = session.createNativeQuery("Select A.Id,A.Ma,B.HoTen,C.TenKhachHang"
+                    + " ,A.NgayTao , A.NgayThanhToan , D.PhanTramKM ,A.TrangThai from"
+                    + " HoaDon A left join NhanVien B on A.IdNhanVien = B.Id left join KhachHang C "
+                    + " on A.IdKhachHang = C.Id left join KhuyenMai D on A.IdkhuyenMai = D.Id where A.TrangThai >= 1"
+                    + "order by Convert(int,A.Ma) desc "
+                    + "OFFSET " + i + " ROWS "
+                    + "FETCH NEXT " + b + " ROWS ONLY");
+
+            List<Object[]> list = q.getResultList();
             return list;
         } catch (Exception e) {
             return null;
         }
+
+    }
+    public int getListSL(int i, int b) {
+          int index = -1;
+        try {
+            Transaction transaction = session.getTransaction();
+
+            Session session = HibernatUtil.getFACTORY().openSession();
+            Query q = session.createNativeQuery("Select A.Id,A.Ma,B.HoTen,C.TenKhachHang"
+                    + " ,A.NgayTao , A.NgayThanhToan , D.PhanTramKM ,A.TrangThai from"
+                    + " HoaDon A left join NhanVien B on A.IdNhanVien = B.Id left join KhachHang C "
+                    + " on A.IdKhachHang = C.Id left join KhuyenMai D on A.IdkhuyenMai = D.Id where A.TrangThai >= 1"
+                    + "order by Convert(int,A.Ma) desc ");
+
+
+            List<Object[]> list = q.getResultList();
+            index = list.size();
+            return index ;
+        } catch (Exception e) {
+            return -1;
+        }
+
     }
 
     public int getMaxMa() {
@@ -121,9 +151,13 @@ public class HoadonRepository {
 
     public static void main(String[] args) {
         HoadonRepository hd = new HoadonRepository();
-        List<HoaDon> list = hd.getList();
-        for (HoaDon hoaDon : list) {
-            System.out.println(hoaDon.toString());
-        }
+        int i = hd.getListSL(0, 5);
+        System.out.println(i);
+        
+
+//        List<HoaDon> list = hd.getList();
+//        for (HoaDon hoaDon : list) {
+//            System.out.println(hoaDon.toString());
+//        }
     }
 }

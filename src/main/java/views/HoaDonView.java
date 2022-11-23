@@ -6,6 +6,8 @@ import java.util.List;
 import javax.swing.Icon;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import pagination.EventPagination;
+import pagination.style.PaginationItemRenderStyle1;
 import services.HoaDonBanHangService;
 import services.HoaDonChiTietService;
 import services.HoadonService;
@@ -36,13 +38,29 @@ public class HoaDonView extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         txtIdHoaDon.setEditable(false);
         txtMaHD.setEditable(false);
-        loadTbHD();
+        loadTbHD(1);
+        pagination1.setPaginationItemRender(new PaginationItemRenderStyle1());
+        pagination1.addEventPagination(new EventPagination() {
+            @Override
+            public void pageChanged(int page) {
+                loadTbHD(page);
+            }
+        });
+
     }
 
-    public void loadTbHD() {
+    public void loadTbHD(int page) {
+        int limit = 5;
+        int count = 0;
+        List<ViewModelHoadon> hd = hdService.getListHoaDon((page - 1) * limit, limit);
+        if (hd == null) {
+            return;
+        }
+        count = hdService.row((page - 1) * limit, limit);
+
         model = (DefaultTableModel) tbHD.getModel();
         model.setRowCount(0);
-        List<ViewModelHoadon> hd = hdService.getListHoaDon();
+
         for (ViewModelHoadon v : hd) {
             model.addRow(new Object[]{
                 v.getId(), v.getMa(), v.getTenNV(),
@@ -53,6 +71,12 @@ public class HoaDonView extends javax.swing.JFrame {
 
             });
 
+        }
+        int totalPage = (int) Math.ceil(count / limit);
+        if (count / limit != 0) {
+            pagination1.setPagegination(page, totalPage + 1);
+        } else if (count / limit == 0) {
+            pagination1.setPagegination(page, totalPage);
         }
 
     }
@@ -128,6 +152,7 @@ public class HoaDonView extends javax.swing.JFrame {
         txtNgayThanhToanHD = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
         txtPhanTramKM = new javax.swing.JTextField();
+        pagination1 = new pagination.Pagination();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -223,6 +248,8 @@ public class HoaDonView extends javax.swing.JFrame {
 
         jLabel10.setText("Phần Trăm KM");
 
+        pagination1.setOpaque(false);
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -288,6 +315,10 @@ public class HoaDonView extends javax.swing.JFrame {
                                 .addComponent(txtKH, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(0, 0, Short.MAX_VALUE)))))
                 .addContainerGap())
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(pagination1, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -316,8 +347,7 @@ public class HoaDonView extends javax.swing.JFrame {
                                 .addGap(18, 18, 18))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(18, 18, 18)
-                                .addComponent(rdHDBH)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
+                                .addComponent(rdHDBH)))))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(40, 40, 40)
@@ -354,7 +384,9 @@ public class HoaDonView extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(31, 31, 31))
+                .addGap(3, 3, 3)
+                .addComponent(pagination1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -390,7 +422,7 @@ public class HoaDonView extends javax.swing.JFrame {
         if (b == true) {
             Icon icon = new javax.swing.ImageIcon(getClass().getResource("/img/themmoiicon.png"));
             JOptionPane.showMessageDialog(this, "Tạo Hóa Đơn Thành Công", "Hóa Đơn", JOptionPane.INFORMATION_MESSAGE, icon);
-            loadTbHD();
+            loadTbHD(1);
 
         } else {
             Icon icon = new javax.swing.ImageIcon(getClass().getResource("/img/deleteicon.png"));
@@ -433,7 +465,7 @@ public class HoaDonView extends javax.swing.JFrame {
         // TODO add your handling code here:
         int index = cbbHD.getSelectedIndex();
         if (index == 0) {
-            loadTbHD();
+            loadTbHD(1);
         } else if (index == 1) {
             loadTrangThai(1);
         } else if (index == 2) {
@@ -449,7 +481,7 @@ public class HoaDonView extends javax.swing.JFrame {
         if (b == true) {
             Icon icon = new javax.swing.ImageIcon(getClass().getResource("/img/themmoiicon.png"));
             JOptionPane.showMessageDialog(this, "Xoa Hóa Đơn Thành Công", "Hóa Đơn", JOptionPane.INFORMATION_MESSAGE, icon);
-            loadTbHD();
+            loadTbHD(1);
 
         } else {
             Icon icon = new javax.swing.ImageIcon(getClass().getResource("/img/deleteicon.png"));
@@ -513,6 +545,7 @@ public class HoaDonView extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private pagination.Pagination pagination1;
     private javax.swing.JRadioButton rdChuaThanhToan;
     private javax.swing.JRadioButton rdDaThanhToan;
     private javax.swing.JRadioButton rdHDBH;
