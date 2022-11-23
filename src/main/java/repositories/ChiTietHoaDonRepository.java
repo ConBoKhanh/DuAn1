@@ -140,7 +140,7 @@ public class ChiTietHoaDonRepository {
     
     public static void main(String[] args) {
         ChiTietHoaDonRepository i = new ChiTietHoaDonRepository();
-        List<HoaDonChiTiet> list = i.getList("98086841-A6AE-4EC8-ABC4-7740FBBCFD46");
+        List<HoaDonChiTiet> list = i.getList("C22E1F90-9D49-45BA-A073-559EC2A04C37");
         for (HoaDonChiTiet hoaDonChiTiet : list) {
             System.out.println(hoaDonChiTiet.toString());
         }

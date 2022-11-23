@@ -100,9 +100,14 @@ public class HoaDonView extends javax.swing.JFrame {
     }
 
     public void loadChiTiet(String idHD) {
+        List<ViewModelHoaDonChiTietBanHang> hdCt = hdCTService.list(idHD);
+        if(hdCt==null){
+            return;
+        }
         model = (DefaultTableModel) tbChiTiet.getModel();
         model.setRowCount(0);
-        List<ViewModelHoaDonChiTietBanHang> hdCt = hdCTService.list(idHD);
+        
+       
         for (ViewModelHoaDonChiTietBanHang v : hdCt) {
             model.addRow(new Object[]{
                 v.getTen(),
