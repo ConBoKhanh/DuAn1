@@ -22,7 +22,7 @@ import utilities.mycompany.DBConext.HibernatUtil;
  * @author Admin
  */
 public class ChiTietDoGoRepository {
-
+    
     public List<ChiTietDoGo> list() {
         try {
             Session session = HibernatUtil.getFACTORY().openSession();
@@ -33,7 +33,7 @@ public class ChiTietDoGoRepository {
             return null;
         }
     }
-
+    
     public List<ChiTietDoGo> listtk(String ten) {
         try {
             Session session = HibernatUtil.getFACTORY().openSession();
@@ -45,20 +45,20 @@ public class ChiTietDoGoRepository {
             return null;
         }
     }
-
+    
     public boolean add(ChiTietDoGo dg) {
         try {
             Session session = HibernatUtil.getFACTORY().openSession();
-
+            
             ChiTietDoGo v = new ChiTietDoGo();
-
+            
             SanPham a = session.get(SanPham.class, dg.getIdSanPham().getId());
             LoaiSP b = session.get(LoaiSP.class, dg.getIdLoaiSP().getId());
             DongGo c = session.get(DongGo.class, dg.getIdDongGo().getId());
             NhaCungCap d = session.get(NhaCungCap.class, dg.getIdNhaCungCap().getId());
             NguonGoc f = session.get(NguonGoc.class, dg.getIdNguocGoc().getId());
             DonViTinh g = session.get(DonViTinh.class, dg.getIdDonViTinh().getId());
-
+            
             v.setIdSanPham(a);
             v.setIdLoaiSP(b);
             v.setIdDongGo(c);
@@ -72,32 +72,33 @@ public class ChiTietDoGoRepository {
             v.setGiaNhap(dg.getGiaNhap());
             v.setGiaBan(dg.getGiaBan());
             v.setTrangThai(1);
-
+            
             session.getTransaction().begin();
             session.save(v);
             session.getTransaction().commit();
             session.close();
-
+            
             return true;
         } catch (Exception e) {
             return false;
         }
-
+        
     }
-
+    
     public boolean update(ChiTietDoGo dg) {
         try {
             Session session = HibernatUtil.getFACTORY().openSession();
-
+            
             ChiTietDoGo v = session.get(ChiTietDoGo.class, dg.getId());
-
+            
             SanPham a = session.get(SanPham.class, dg.getIdSanPham().getId());
             LoaiSP b = session.get(LoaiSP.class, dg.getIdLoaiSP().getId());
             DongGo c = session.get(DongGo.class, dg.getIdDongGo().getId());
             NhaCungCap d = session.get(NhaCungCap.class, dg.getIdNhaCungCap().getId());
             NguonGoc f = session.get(NguonGoc.class, dg.getIdNguocGoc().getId());
             DonViTinh g = session.get(DonViTinh.class, dg.getIdDonViTinh().getId());
-
+            
+            v.setTenSP(dg.getTenSP());
             v.setIdSanPham(a);
             v.setIdLoaiSP(b);
             v.setIdDongGo(c);
@@ -107,45 +108,45 @@ public class ChiTietDoGoRepository {
             v.setMoTa(dg.getMoTa());
             v.setGiaNhap(dg.getGiaNhap());
             v.setGiaBan(dg.getGiaBan());
-
+            
             session.getTransaction().begin();
             session.save(v);
             session.getTransaction().commit();
             session.close();
-
+            
             return true;
         } catch (Exception e) {
             return false;
         }
-
+        
     }
-
+    
     public boolean delete(String id) {
         try {
             Session session = HibernatUtil.getFACTORY().openSession();
-
+            
             ChiTietDoGo v = session.get(ChiTietDoGo.class, id);
-
+            
             v.setTrangThai(0);
-
+            
             session.getTransaction().begin();
             session.save(v);
             session.getTransaction().commit();
             session.close();
-
+            
             return true;
         } catch (Exception e) {
             return false;
         }
-
+        
     }
-
+    
     public boolean truSanPham(String id, int soLuong) {
         try {
             Session session = HibernatUtil.getFACTORY().openSession();
             ChiTietDoGo ct = session.get(ChiTietDoGo.class, id);
             ct.setSoLuong(ct.getSoLuong() - soLuong);
-
+            
             session.getTransaction().begin();
             session.save(ct);
             session.getTransaction().commit();
@@ -155,13 +156,13 @@ public class ChiTietDoGoRepository {
             return false;
         }
     }
-
+    
     public boolean congSanPham(String id, int soLuong) {
         try {
             Session session = HibernatUtil.getFACTORY().openSession();
             ChiTietDoGo ct = session.get(ChiTietDoGo.class, id);
             ct.setSoLuong(ct.getSoLuong() + soLuong);
-
+            
             session.getTransaction().begin();
             session.save(ct);
             session.getTransaction().commit();
@@ -170,15 +171,15 @@ public class ChiTietDoGoRepository {
         } catch (Exception e) {
             return false;
         }
-
+        
     }
-
+    
     public boolean updateSLSanPham(String id, int soLuong) {
         try {
             Session session = HibernatUtil.getFACTORY().openSession();
             ChiTietDoGo ct = session.get(ChiTietDoGo.class, id);
             ct.setSoLuong(soLuong);
-
+            
             session.getTransaction().begin();
             session.save(ct);
             session.getTransaction().commit();
@@ -187,12 +188,12 @@ public class ChiTietDoGoRepository {
         } catch (Exception e) {
             return false;
         }
-
+        
     }
-
+    
     public static void main(String[] args) {
         ChiTietDoGoRepository ctRepo = new ChiTietDoGoRepository();
         ctRepo.truSanPham("4771CF52-B40D-4A93-B0EB-13DE20BA0F2E", 1);
     }
-
+    
 }
