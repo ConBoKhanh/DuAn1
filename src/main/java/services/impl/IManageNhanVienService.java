@@ -13,8 +13,11 @@ import viewModel.ViewModelNhanVien;
  * @author Phuong Bi
  */
 public interface IManageNhanVienService {
-    
-     List<ViewModelNhanVien> getAll();
+
+    List<ViewModelNhanVien> getAll(int a, int b);
+
+    int getRow(int b, int c);
+
     List<ViewModelNhanVien> listtk(String Ten);
 
     boolean add(NhanVien nv);

@@ -19,18 +19,25 @@ public class NhanVienService implements IManageNhanVienService{
 
     private NhanVienRepository nhan = new NhanVienRepository();
     @Override
-    public List<ViewModelNhanVien> getAll() {
+    public List<ViewModelNhanVien> getAll(int a, int b) {
          try {
             List<ViewModelNhanVien> list = new ArrayList<>();
-            List<NhanVien> sps = nhan.getAll();
-            for (NhanVien sp : sps) {
-                list.add(new ViewModelNhanVien(sp.getId(), sp.getMa(),sp.getHoTen(),
-                        sp.getSdt(),
-                        sp.getDiaChi(),
-                        sp.getNgaySinh(),
-                        sp.getIdCuaHang().getTenCuaHang(),sp.getIdChucVu().getTenChucVu(), sp.getMatKhau(),
-                        sp.getEmail()));
-            }
+            List<Object[]> sps = nhan.getAll(a, b);
+             for (Object[] sp : sps) {
+                 ViewModelNhanVien v = new ViewModelNhanVien();
+                 v.setId(sp[0].toString());
+                 v.setMa(sp[1].toString());
+                 v.setHoTen(sp[2].toString());
+                 v.setSdt(sp[3].toString());
+                 v.setDiaChi(sp[4].toString());
+                 v.setNgaySinh(sp[5].toString());
+                 v.setEmail(sp[6].toString());
+                 v.setMatKhau(sp[7].toString());
+                 v.setIdCV(sp[8].toString());
+                 v.setIdCH(sp[9].toString());
+                 
+                 list.add(v);
+             }
             return list;
         } catch (Exception e) {
             return null;
@@ -46,7 +53,7 @@ public class NhanVienService implements IManageNhanVienService{
                 list.add(new ViewModelNhanVien(sp.getId(), sp.getMa(),sp.getHoTen(),
                         sp.getSdt(),
                         sp.getDiaChi(),
-                        sp.getNgaySinh(),
+                        sp.getNgaySinh()+ "",
                         sp.getIdCuaHang().getTenCuaHang(),sp.getIdChucVu().getTenChucVu(), sp.getMatKhau(),
                         sp.getEmail()));
             }
@@ -82,5 +89,12 @@ public class NhanVienService implements IManageNhanVienService{
             return false;
         }
     }
+
+    @Override
+    public int getRow(int b, int c) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    
     
 }

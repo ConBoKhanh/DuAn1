@@ -45,8 +45,9 @@ public class HoadonRepository {
         }
 
     }
+
     public int getListSL(int i, int b) {
-          int index = -1;
+        int index = -1;
         try {
             Transaction transaction = session.getTransaction();
 
@@ -57,10 +58,9 @@ public class HoadonRepository {
                     + " on A.IdKhachHang = C.Id left join KhuyenMai D on A.IdkhuyenMai = D.Id where A.TrangThai >= 1"
                     + "order by Convert(int,A.Ma) desc ");
 
-
             List<Object[]> list = q.getResultList();
             index = list.size();
-            return index ;
+            return index;
         } catch (Exception e) {
             return -1;
         }
@@ -153,11 +153,18 @@ public class HoadonRepository {
         HoadonRepository hd = new HoadonRepository();
         int i = hd.getListSL(0, 5);
         System.out.println(i);
-        
 
-//        List<HoaDon> list = hd.getList();
+//        List<HoaDon> list = hd.getList(2,5);
 //        for (HoaDon hoaDon : list) {
 //            System.out.println(hoaDon.toString());
 //        }
+     //   List<Object[]> list = hd.getList(2, 5);
+        
+         for (Object[] arg : hd.getList(0, 5)) {
+            System.out.println(arg.toString());
+            
+        }
+        
+
     }
 }

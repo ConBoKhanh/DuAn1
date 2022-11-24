@@ -52,16 +52,16 @@ public class NhanVienViewTest extends javax.swing.JFrame {
         model.addColumn("Mật khẩu");
         model.addColumn("Email");
 
-        model.setRowCount(0);
-        List<ViewModelNhanVien> nv = nhanVienService.getAll();
-        for (ViewModelNhanVien viewModelNhanVien : nv) {
-            model.addRow(new Object[]{
-                viewModelNhanVien.getId(), viewModelNhanVien.getMa(), viewModelNhanVien.getHoTen(),
-                viewModelNhanVien.getSdt(), viewModelNhanVien.getDiaChi(), viewModelNhanVien.getNgaySinh(),
-                viewModelNhanVien.getIdCH(), viewModelNhanVien.getIdCV(), viewModelNhanVien.getMatKhau(), viewModelNhanVien.getEmail()
-            });
-
-        }
+//        model.setRowCount(0);
+//        List<ViewModelNhanVien> nv = nhanVienService.getAll();
+//        for (ViewModelNhanVien viewModelNhanVien : nv) {
+//            model.addRow(new Object[]{
+//                viewModelNhanVien.getId(), viewModelNhanVien.getMa(), viewModelNhanVien.getHoTen(),
+//                viewModelNhanVien.getSdt(), viewModelNhanVien.getDiaChi(), viewModelNhanVien.getNgaySinh(),
+//                viewModelNhanVien.getIdCH(), viewModelNhanVien.getIdCV(), viewModelNhanVien.getMatKhau(), viewModelNhanVien.getEmail()
+//            });
+//
+//        }
     }
 
     public void loadTableTimKiem(String ten) {

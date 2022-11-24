@@ -39,7 +39,7 @@
     <Container class="javax.swing.JPanel" name="jPanel1">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="cc" green="cc" red="ff" type="rgb"/>
+          <Color blue="99" green="99" red="ff" type="rgb"/>
         </Property>
       </Properties>
 
@@ -72,6 +72,11 @@
           <Layout class="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout"/>
           <SubComponents>
             <Container class="javax.swing.JPanel" name="jPanel3">
+              <Properties>
+                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="cc" green="cc" red="ff" type="rgb"/>
+                </Property>
+              </Properties>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
                   <JTabbedPaneConstraints tabName="Nh&#xe2;n Vi&#xea;n">
@@ -87,8 +92,8 @@
                           <EmptySpace min="0" pref="44" max="32767" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" attributes="0">
-                                  <Component id="txttimKiemnhanvien" min="-2" pref="360" max="-2" attributes="0"/>
-                                  <EmptySpace min="100" pref="100" max="-2" attributes="0"/>
+                                  <Component id="txttimKiemnhanvien" min="-2" pref="322" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="138" max="-2" attributes="0"/>
                                   <Component id="btnXoa" min="-2" pref="92" max="-2" attributes="0"/>
                               </Group>
                               <Component id="jScrollPane1" min="-2" pref="640" max="-2" attributes="0"/>
@@ -151,7 +156,7 @@
                                           <Component id="btnSua" min="-2" pref="92" max="-2" attributes="0"/>
                                       </Group>
                                       <Group type="102" attributes="0">
-                                          <Component id="txtEmailNv" min="-2" pref="140" max="-2" attributes="0"/>
+                                          <Component id="txtemailNhanVien" min="-2" pref="140" max="-2" attributes="0"/>
                                           <EmptySpace min="-2" pref="70" max="-2" attributes="0"/>
                                           <Component id="txtmatKhau" min="-2" pref="140" max="-2" attributes="0"/>
                                       </Group>
@@ -239,7 +244,7 @@
                               </Group>
                               <Group type="102" alignment="0" attributes="0">
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="txtEmailNv" min="-2" pref="29" max="-2" attributes="0"/>
+                                  <Component id="txtemailNhanVien" min="-2" pref="29" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
@@ -310,7 +315,15 @@
                   </AuxValues>
                 </Component>
                 <Component class="javax.swing.JTextField" name="txttimKiemnhanvien">
+                  <Properties>
+                    <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="99" green="99" red="99" type="rgb"/>
+                    </Property>
+                    <Property name="text" type="java.lang.String" value="Nh&#x1ead;p t&#xea;n c&#x1ea7;n t&#xec;m ki&#x1ebf;m"/>
+                  </Properties>
                   <Events>
+                    <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="txttimKiemnhanvienMouseClicked"/>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txttimKiemnhanvienActionPerformed"/>
                     <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txttimKiemnhanvienKeyReleased"/>
                   </Events>
                 </Component>
@@ -512,7 +525,7 @@
                     <Property name="dateFormatString" type="java.lang.String" value="yyyy-MM-dd"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JTextField" name="txtEmailNv">
+                <Component class="javax.swing.JTextField" name="txtemailNhanVien">
                   <Properties>
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="cc" green="cc" red="ff" type="rgb"/>
@@ -525,12 +538,17 @@
                     </Property>
                   </Properties>
                   <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtEmailNvActionPerformed"/>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtemailNhanVienActionPerformed"/>
                   </Events>
                 </Component>
               </SubComponents>
             </Container>
             <Container class="javax.swing.JPanel" name="jPanel4">
+              <Properties>
+                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="cc" green="cc" red="ff" type="rgb"/>
+                </Property>
+              </Properties>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
                   <JTabbedPaneConstraints tabName="Ch&#x1ee9;c V&#x1ee5;">
@@ -553,7 +571,7 @@
                                               <Group type="102" alignment="0" attributes="0">
                                                   <Component id="jLabel3" min="-2" pref="37" max="-2" attributes="0"/>
                                                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                                  <Component id="txtten" max="32767" attributes="0"/>
+                                                  <Component id="txttenChucVu" max="32767" attributes="0"/>
                                               </Group>
                                               <Group type="102" alignment="0" attributes="0">
                                                   <Component id="jLabel4" min="-2" pref="37" max="-2" attributes="0"/>
@@ -601,7 +619,7 @@
                           <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="txtten" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="txttenChucVu" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Component id="jScrollPane2" min="-2" pref="193" max="-2" attributes="0"/>
@@ -671,12 +689,19 @@
                   </SubComponents>
                 </Container>
                 <Component class="javax.swing.JTextField" name="txttimKiemchucvu">
+                  <Properties>
+                    <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="99" green="99" red="99" type="rgb"/>
+                    </Property>
+                    <Property name="text" type="java.lang.String" value="Nh&#x1ead;p t&#xea;n c&#x1ea7;n t&#xec;m ki&#x1ebf;m"/>
+                  </Properties>
                   <Events>
+                    <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="txttimKiemchucvuMouseClicked"/>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txttimKiemchucvuActionPerformed"/>
                     <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txttimKiemchucvuKeyReleased"/>
                   </Events>
                 </Component>
-                <Component class="javax.swing.JTextField" name="txtten">
+                <Component class="javax.swing.JTextField" name="txttenChucVu">
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabel3">
                   <Properties>
@@ -695,6 +720,11 @@
               </SubComponents>
             </Container>
             <Container class="javax.swing.JPanel" name="jPanel2">
+              <Properties>
+                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="cc" green="cc" red="ff" type="rgb"/>
+                </Property>
+              </Properties>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
                   <JTabbedPaneConstraints tabName="C&#x1eed;a H&#xe0;ng">
@@ -744,7 +774,7 @@
                                               </Group>
                                           </Group>
                                           <EmptySpace min="-2" pref="43" max="-2" attributes="0"/>
-                                          <Component id="txttimKiem" min="-2" pref="172" max="-2" attributes="0"/>
+                                          <Component id="txttimKiemCuaHang" min="-2" pref="172" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
                               </Group>
@@ -760,7 +790,7 @@
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="jLabel17" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="txtIDCH" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="txttimKiem" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="txttimKiemCuaHang" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
@@ -868,9 +898,16 @@
                     </Component>
                   </SubComponents>
                 </Container>
-                <Component class="javax.swing.JTextField" name="txttimKiem">
+                <Component class="javax.swing.JTextField" name="txttimKiemCuaHang">
+                  <Properties>
+                    <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="99" green="99" red="99" type="rgb"/>
+                    </Property>
+                    <Property name="text" type="java.lang.String" value="Nh&#x1ead;p t&#xea;n c&#x1ea7;n t&#xec;m ki&#x1ebf;m"/>
+                  </Properties>
                   <Events>
-                    <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txttimKiemKeyReleased"/>
+                    <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="txttimKiemCuaHangMouseClicked"/>
+                    <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txttimKiemCuaHangKeyReleased"/>
                   </Events>
                 </Component>
                 <Component class="javax.swing.JTextField" name="txttenCH">

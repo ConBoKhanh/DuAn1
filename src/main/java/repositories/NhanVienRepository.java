@@ -19,14 +19,46 @@ import utilities.mycompany.DBConext.HibernatUtil;
  */
 public class NhanVienRepository {
 
-    public List<NhanVien> getAll() {
+    public List<Object[]> getAll(int b, int c) {
+        // try {
+        Session se = HibernatUtil.getFACTORY().openSession();
+        Query q = se.createNativeQuery("select*"
+                + " from NhanVien A left join CuaHang B  on A.IdCuaHang = "
+                + " B.Id left join ChucVu C on A.IdChucVu = C.Id\n where A.TrangThai >= 1");
+//                + " order by Convert(int,A.Ma) desc \n"
+//                + " OFFSET " + b + " ROWS"
+//                + " FETCH NEXT " + c + " ROWS ONLY");
+        List<Object[]> list = q.getResultList();
+        return list;
+//        } catch (Exception e) {
+//            return null;
+//        }
+    }
+
+    public static void main(String[] args) {
+        NhanVienRepository nv = new NhanVienRepository();
+
+        for (Object[] arg : nv.getAll(0, 5)) {
+            System.out.println(arg.toString());
+
+        }
+    }
+
+    public int getRow(int b, int c) {
+        int index = -1;
         try {
             Session se = HibernatUtil.getFACTORY().openSession();
-            Query q = se.createQuery("from NhanVien where TrangThai = 1");
-            List<NhanVien> list = q.getResultList();
-            return list;
+            Query q = se.createNativeQuery("select A.Id,A.Ma,A.HoTen,A.Sdt,"
+                    + "A.DiaChi,A.NgaySinh,A.Email,A.MatKhau,C.TenChucVu,B.TenCuaHang\n"
+                    + "from NhanVien A left join CuaHang B  on A.IdCuaHang = "
+                    + "B.Id left join ChucVu C on A.IdChucVu = C.Id\n"
+                    + "order by Convert(int,A.Ma) desc \n"
+            );
+            List<Object[]> list = q.getResultList();
+            index = list.size();
+            return index;
         } catch (Exception e) {
-            return null;
+            return -1;
         }
     }
 
@@ -69,7 +101,7 @@ public class NhanVienRepository {
 
     public boolean add(NhanVien nv) {
         String ma = String.valueOf(getMaMax() + 1);
-        
+
         try {
             Session session = HibernatUtil.getFACTORY().openSession();
 
@@ -149,21 +181,21 @@ public class NhanVienRepository {
         }
     }
 
-    public static void main(String[] args) {
-        NhanVienRepository nhanVienRepository = new NhanVienRepository();
-        NhanVien nv = new NhanVien();
-        nv.setId("6D59880C-0882-41F0-9ACD-383748192E26");
-
-//        nv.setHoTen("Nguyen Phuong");
-//        nv.setSdt("0987676454");
-//        nv.setDiaChi("Hoang Mai");
-//       // nv.setNgaySinh("10-10-2002");
-//       //nv.setIdCuaHang("");
-//       nv.setMatKhau("mmmm");
-//       nv.setEmail("ppp@gmail.com");
-//       nhanVienRepository.add(nv);
-        System.out.println(nhanVienRepository.delete("6D59880C-0882-41F0-9ACD-383748192E26"));
-
-        // System.out.println(nhanVienRepository.getMaMax());
-    }
+//    public static void main(String[] args) {
+//        NhanVienRepository nhanVienRepository = new NhanVienRepository();
+//        NhanVien nv = new NhanVien();
+//        nv.setId("6D59880C-0882-41F0-9ACD-383748192E26");
+//
+////        nv.setHoTen("Nguyen Phuong");
+////        nv.setSdt("0987676454");
+////        nv.setDiaChi("Hoang Mai");
+////       // nv.setNgaySinh("10-10-2002");
+////       //nv.setIdCuaHang("");
+////       nv.setMatKhau("mmmm");
+////       nv.setEmail("ppp@gmail.com");
+////       nhanVienRepository.add(nv);
+//        System.out.println(nhanVienRepository.delete("6D59880C-0882-41F0-9ACD-383748192E26"));
+//
+//        // System.out.println(nhanVienRepository.getMaMax());
+//    }
 }

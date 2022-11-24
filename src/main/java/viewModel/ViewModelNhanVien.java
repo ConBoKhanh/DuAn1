@@ -16,7 +16,7 @@ public class ViewModelNhanVien {
     private String hoTen;
     private String sdt;
     private String diaChi;
-    private Date ngaySinh;
+    private String ngaySinh;
     private String idCH;
     private String idCV;
     private String matKhau;
@@ -26,7 +26,7 @@ public class ViewModelNhanVien {
     public ViewModelNhanVien() {
     }
 
-    public ViewModelNhanVien(String id, String ma, String hoTen, String sdt, String diaChi, Date ngaySinh, String idCH, String idCV, String matKhau, String email) {
+    public ViewModelNhanVien(String id, String ma, String hoTen, String sdt, String diaChi, String ngaySinh, String idCH, String idCV, String matKhau, String email) {
         this.id = id;
         this.ma = ma;
         this.hoTen = hoTen;
@@ -79,11 +79,11 @@ public class ViewModelNhanVien {
         this.diaChi = diaChi;
     }
 
-    public Date getNgaySinh() {
+    public String getNgaySinh() {
         return ngaySinh;
     }
 
-    public void setNgaySinh(Date ngaySinh) {
+    public void setNgaySinh(String ngaySinh) {
         this.ngaySinh = ngaySinh;
     }
 
@@ -119,12 +119,6 @@ public class ViewModelNhanVien {
         this.email = email;
     }
 
-    @Override
-    public String toString() {
-        return "ViewModelNhanVien{" + "id=" + id + ", ma=" + ma + ", hoTen=" + hoTen + ", sdt=" + sdt + ", diaChi=" + diaChi + ", ngaySinh=" + ngaySinh + ", idCH=" + idCH + ", idCV=" + idCV + ", matKhau=" + matKhau + ", email=" + email + '}';
-    }
-
-  
-    
+   
     
 }

@@ -10,6 +10,7 @@ import domainModels.NhanVien;
 import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -25,7 +26,6 @@ import services.impl.IManageNhanVienService;
 import viewModel.ViewModelChucVu;
 import viewModel.ViewModelCuaHang;
 import viewModel.ViewModelNhanVien;
-
 
 /**
  *
@@ -45,15 +45,16 @@ public class NhanVienFView extends javax.swing.JFrame {
     public NhanVienFView() {
         initComponents();
         setLocationRelativeTo(null);
-         loadTable();
-         loadCBB();
-         
-         loadTBChucVu();
-         loadPhanTu1();
-         
-         loadTBCuaHang();
-         loadPhanTuDAUTIEN();  
+        loadTable();
+        loadCBB();
+
+        loadTBChucVu();
+        loadPhanTu1();
+
+        loadTBCuaHang();
+        loadPhanTuDAUTIEN();
     }
+
     public void loadTable() {
         model = (DefaultTableModel) TBBANG.getModel();
         model.setColumnCount(0);
@@ -69,7 +70,7 @@ public class NhanVienFView extends javax.swing.JFrame {
         model.addColumn("Email");
 
         model.setRowCount(0);
-        List<ViewModelNhanVien> nv = nhanVienService.getAll();
+        List<ViewModelNhanVien> nv = nhanVienService.getAll(2,5);
         for (ViewModelNhanVien viewModelNhanVien : nv) {
             model.addRow(new Object[]{
                 viewModelNhanVien.getId(), viewModelNhanVien.getMa(), viewModelNhanVien.getHoTen(),
@@ -143,7 +144,6 @@ public class NhanVienFView extends javax.swing.JFrame {
 
         }
     }
-      
 
     public void loadTBChucVu() {
         model = (DefaultTableModel) tbbangcv.getModel();
@@ -184,11 +184,11 @@ public class NhanVienFView extends javax.swing.JFrame {
 
         txtID.setText(tbbangcv.getValueAt(index, 0).toString());
         txtma.setText(tbbangcv.getValueAt(index, 1).toString());
-        txtten.setText(tbbangcv.getValueAt(index, 2).toString());
+        txttenChucVu.setText(tbbangcv.getValueAt(index, 2).toString());
     }
 
     public boolean checkTenCHUCVU() { //check ten sp
-        String ten = txtten.getText();
+        String ten = txttenChucVu.getText();
         List<ViewModelChucVu> sp = chucVuService.getAll();
         for (ViewModelChucVu v : sp) {
             if (ten.equals(v.getTen())) {
@@ -198,7 +198,8 @@ public class NhanVienFView extends javax.swing.JFrame {
         }
         return true;
     }
-public void loadTBCuaHang() {
+
+    public void loadTBCuaHang() {
         model = (DefaultTableModel) tbbang.getModel();
         model.setColumnCount(0);
         model.addColumn("ID");
@@ -209,13 +210,12 @@ public void loadTBCuaHang() {
         List<ViewModelCuaHang> sp = cuaHangService.getAll();
         for (ViewModelCuaHang v : sp) {
             model.addRow(new Object[]{
-                v.getId(), v.getMa(), v.getTenCuaHang(),v.getDiaChi()
+                v.getId(), v.getMa(), v.getTenCuaHang(), v.getDiaChi()
             });
         }
     }
-     
-     
-      public void loadTBCuaHang(String ten) {
+
+    public void loadTBCuaHang(String ten) {
         model = (DefaultTableModel) tbbang.getModel();
         model.setColumnCount(0);
         model.addColumn("ID");
@@ -226,12 +226,12 @@ public void loadTBCuaHang() {
         List<ViewModelCuaHang> sp = cuaHangService.getListSPByName(ten);
         for (ViewModelCuaHang v : sp) {
             model.addRow(new Object[]{
-                v.getId(), v.getMa(), v.getTenCuaHang(),v.getDiaChi()
+                v.getId(), v.getMa(), v.getTenCuaHang(), v.getDiaChi()
             });
         }
     }
-     
-      public void loadPhanTuDAUTIEN() {
+
+    public void loadPhanTuDAUTIEN() {
         List<ViewModelCuaHang> sp = cuaHangService.getAll();
         if (sp.isEmpty()) {
             return;
@@ -243,10 +243,9 @@ public void loadTBCuaHang() {
         txttenCH.setText(tbbang.getValueAt(index, 2).toString());
         txtdiaChi.setText(tbbang.getValueAt(index, 3).toString());
     }
-      
-      
-       public boolean checkTen() { //check ten sp
-        String ten = txtten.getText();
+
+    public boolean checkTen() { //check ten sp
+        String ten = txttenChucVu.getText();
         List<ViewModelCuaHang> sp = cuaHangService.getAll();
         for (ViewModelCuaHang v : sp) {
             if (ten.equals(v.getTenCuaHang())) {
@@ -294,7 +293,7 @@ public void loadTBCuaHang() {
         jLabel1 = new javax.swing.JLabel();
         txtmatKhau = new javax.swing.JTextField();
         ngaySinh = new com.toedter.calendar.JDateChooser();
-        txtEmailNv = new javax.swing.JTextField();
+        txtemailNhanVien = new javax.swing.JTextField();
         jPanel4 = new javax.swing.JPanel();
         btnxoa = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
@@ -303,7 +302,7 @@ public void loadTBCuaHang() {
         jScrollPane2 = new javax.swing.JScrollPane();
         tbbangcv = new javax.swing.JTable();
         txttimKiemchucvu = new javax.swing.JTextField();
-        txtten = new javax.swing.JTextField();
+        txttenChucVu = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         txtma = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
@@ -321,13 +320,15 @@ public void loadTBCuaHang() {
         btnthem1 = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
         tbbang = new javax.swing.JTable();
-        txttimKiem = new javax.swing.JTextField();
+        txttimKiemCuaHang = new javax.swing.JTextField();
         txttenCH = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel1.setBackground(new java.awt.Color(255, 204, 204));
+        jPanel1.setBackground(new java.awt.Color(255, 153, 153));
+
+        jPanel3.setBackground(new java.awt.Color(255, 204, 204));
 
         TBBANG.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -347,6 +348,18 @@ public void loadTBCuaHang() {
         });
         jScrollPane1.setViewportView(TBBANG);
 
+        txttimKiemnhanvien.setForeground(new java.awt.Color(153, 153, 153));
+        txttimKiemnhanvien.setText("Nhập tên cần tìm kiếm");
+        txttimKiemnhanvien.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txttimKiemnhanvienMouseClicked(evt);
+            }
+        });
+        txttimKiemnhanvien.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txttimKiemnhanvienActionPerformed(evt);
+            }
+        });
         txttimKiemnhanvien.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txttimKiemnhanvienKeyReleased(evt);
@@ -443,12 +456,12 @@ public void loadTBCuaHang() {
 
         ngaySinh.setDateFormatString("yyyy-MM-dd");
 
-        txtEmailNv.setBackground(new java.awt.Color(255, 204, 204));
-        txtEmailNv.setActionCommand("<Not Set>");
-        txtEmailNv.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 3, 0, new java.awt.Color(0, 0, 0)));
-        txtEmailNv.addActionListener(new java.awt.event.ActionListener() {
+        txtemailNhanVien.setBackground(new java.awt.Color(255, 204, 204));
+        txtemailNhanVien.setActionCommand("<Not Set>");
+        txtemailNhanVien.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 3, 0, new java.awt.Color(0, 0, 0)));
+        txtemailNhanVien.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtEmailNvActionPerformed(evt);
+                txtemailNhanVienActionPerformed(evt);
             }
         });
 
@@ -460,8 +473,8 @@ public void loadTBCuaHang() {
                 .addGap(0, 44, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(txttimKiemnhanvien, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(100, 100, 100)
+                        .addComponent(txttimKiemnhanvien, javax.swing.GroupLayout.PREFERRED_SIZE, 322, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(138, 138, 138)
                         .addComponent(btnXoa, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 640, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel3Layout.createSequentialGroup()
@@ -510,7 +523,7 @@ public void loadTBCuaHang() {
                                 .addGap(191, 191, 191)
                                 .addComponent(btnSua, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addComponent(txtEmailNv, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txtemailNhanVien, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(70, 70, 70)
                                 .addComponent(txtmatKhau, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addGap(0, 45, Short.MAX_VALUE))
@@ -575,7 +588,7 @@ public void loadTBCuaHang() {
                         .addComponent(txtmatKhau, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtEmailNv, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(txtemailNhanVien, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
@@ -588,6 +601,8 @@ public void loadTBCuaHang() {
         );
 
         jTabbedPane2.addTab("Nhân Viên", jPanel3);
+
+        jPanel4.setBackground(new java.awt.Color(255, 204, 204));
 
         btnxoa.setText("Xóa");
         btnxoa.addActionListener(new java.awt.event.ActionListener() {
@@ -630,6 +645,13 @@ public void loadTBCuaHang() {
         });
         jScrollPane2.setViewportView(tbbangcv);
 
+        txttimKiemchucvu.setForeground(new java.awt.Color(153, 153, 153));
+        txttimKiemchucvu.setText("Nhập tên cần tìm kiếm");
+        txttimKiemchucvu.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txttimKiemchucvuMouseClicked(evt);
+            }
+        });
         txttimKiemchucvu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txttimKiemchucvuActionPerformed(evt);
@@ -660,7 +682,7 @@ public void loadTBCuaHang() {
                                     .addGroup(jPanel4Layout.createSequentialGroup()
                                         .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(txtten))
+                                        .addComponent(txttenChucVu))
                                     .addGroup(jPanel4Layout.createSequentialGroup()
                                         .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -695,7 +717,7 @@ public void loadTBCuaHang() {
                 .addGap(25, 25, 25)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(txtten, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txttenChucVu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(60, 60, 60)
@@ -707,6 +729,8 @@ public void loadTBCuaHang() {
         );
 
         jTabbedPane2.addTab("Chức Vụ", jPanel4);
+
+        jPanel2.setBackground(new java.awt.Color(255, 204, 204));
 
         txtdiaChi.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -761,9 +785,16 @@ public void loadTBCuaHang() {
         });
         jScrollPane3.setViewportView(tbbang);
 
-        txttimKiem.addKeyListener(new java.awt.event.KeyAdapter() {
+        txttimKiemCuaHang.setForeground(new java.awt.Color(153, 153, 153));
+        txttimKiemCuaHang.setText("Nhập tên cần tìm kiếm");
+        txttimKiemCuaHang.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txttimKiemCuaHangMouseClicked(evt);
+            }
+        });
+        txttimKiemCuaHang.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
-                txttimKiemKeyReleased(evt);
+                txttimKiemCuaHangKeyReleased(evt);
             }
         });
 
@@ -803,7 +834,7 @@ public void loadTBCuaHang() {
                                         .addGap(18, 18, 18)
                                         .addComponent(txtIDCH, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                 .addGap(43, 43, 43)
-                                .addComponent(txttimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addComponent(txttimKiemCuaHang, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap(93, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -813,7 +844,7 @@ public void loadTBCuaHang() {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel17)
                     .addComponent(txtIDCH, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txttimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txttimKiemCuaHang, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(24, 24, 24)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel16)
@@ -902,7 +933,7 @@ public void loadTBCuaHang() {
             CBCCUAHANG.setSelectedItem(TBBANG.getValueAt(index, 6).toString());
             CBCCHUCVU.setSelectedItem(TBBANG.getValueAt(index, 7).toString());
             txtmatKhau.setText(TBBANG.getValueAt(index, 8).toString());
-            txtEmailNv.setText(TBBANG.getValueAt(index, 9).toString().trim());
+            txtemailNhanVien.setText(TBBANG.getValueAt(index, 9).toString().trim());
 
         } catch (ParseException ex) {
             Logger.getLogger(NhanVienViewTest.class.getName()).log(Level.SEVERE, null, ex);
@@ -911,11 +942,83 @@ public void loadTBCuaHang() {
 
     private void txttimKiemnhanvienKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txttimKiemnhanvienKeyReleased
         // TODO add your handling code here:
+//           String hoTen = txttimKiemnhanvien.getText();
+//        List<ViewModelNhanVien> dg = nhanVienService.getAll();
+//        for (ViewModelNhanVien v : dg) {
+//            if (hoTen.equals(v.getSdt())) {
+//                JOptionPane.showMessageDialog(this, "Không tìm thấy tên cần tìm");
+//                return;
+//            }
+//        }
         loadTableTimKiem(txttimKiemnhanvien.getText());
     }//GEN-LAST:event_txttimKiemnhanvienKeyReleased
 
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
         // TODO add your handling code here:
+        if (TXTHOTEN.getText().length() > 50) {
+            JOptionPane.showMessageDialog(this, "Họ và tên không được quá 50 ký tự");
+            return;
+        }
+
+        if (txtemailNhanVien.getText().length() > 254) {
+            JOptionPane.showMessageDialog(this, "Email không được quá 254 ký tự");
+            return;
+        }
+
+        if (txtdiaChi.getText().length() > 200) {
+            JOptionPane.showMessageDialog(this, "Địa chỉ không được quá 50 ký tự");
+            return;
+        }
+
+        if (txtmatKhau.getText().length() < 8 || txtmatKhau.getText().length() > 15) {
+            JOptionPane.showMessageDialog(this, "Mật khẩu phải ít nhất 8 ký tự và nhiều nhất 15 ký tự");
+            return;
+        }
+
+        if (!TXTHOTEN.getText().matches("[a-zA-Z\\s]+$")) {
+            JOptionPane.showMessageDialog(this, "Họ tên phải là chữ, không được chứa số và ký tự đặc biệt");
+            return;
+
+        }
+
+        if (!txtmatKhau.getText().matches("^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%]).{8,15}$")) {
+            JOptionPane.showMessageDialog(this, "Mật khẩu phải chứa 1 ký tự số, 1 ký tự hoa và 1 ký tự đặc biệt");
+            return;
+        }
+        
+        if(!txtemailNhanVien.getText().matches("^[\\w-_\\.+]*[\\w-_\\.]\\@([\\w]+\\.)+[\\w]+[\\w]$")) {
+            JOptionPane.showMessageDialog(this, "Vui lòng nhập đúng định dang email");
+            return;
+        }
+
+//        String dienThoai1 = "^03\\d{8}$";
+//        String dienThoai2 = "^05\\d{8}$";
+//        String dienThoai3 = "^07\\d{8}$";
+//        String dienThoai4 = "^08\\d{8}$";
+//        String dienThoai5 = "^09\\d{8}$";
+//        
+//         if(!TXTSDT.getText().matches(dienThoai1)) {
+//             JOptionPane.showMessageDialog(this, "Vui lòng nhập số điện thoại đúng định dạng ");
+//             return;
+//         }
+        //    Validate email không được trùng
+//         String ten = txtemailNhanVien.getText();
+//        List<ViewModelNhanVien> dg = nhanVienService.getAll();
+//        for (ViewModelNhanVien v : dg) {
+//            if (ten.equals(v.getEmail())) {
+//                JOptionPane.showMessageDialog(this, "Tên email  đã tồn tại!");
+//                return;
+//            }
+//        }
+        String dienThoai = TXTSDT.getText();
+        List<ViewModelNhanVien> dg = nhanVienService.getAll(2,5);
+        for (ViewModelNhanVien v : dg) {
+            if (dienThoai.equals(v.getSdt())) {
+                JOptionPane.showMessageDialog(this, "Số điện thoại  đã tồn tại!");
+                return;
+            }
+        }
+
         java.util.Date date = ngaySinh.getDate();
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         String now = format.format(date);
@@ -927,7 +1030,7 @@ public void loadTBCuaHang() {
         String diaChi = TXTDIACHI.getText();
         // String ngaySinh = getDate.getDateFormatString();
         String matKhau = txtmatKhau.getText();
-        String email = txtEmailNv.getText();
+        String email = txtemailNhanVien.getText();
 
         NhanVien nv = new NhanVien();
 
@@ -989,7 +1092,7 @@ public void loadTBCuaHang() {
         String diaChi = TXTDIACHI.getText();
         // String ngaySinh = getDate.getDateFormatString();
         String matKhau = txtmatKhau.getText();
-        String email = txtEmailNv.getText();
+        String email = txtemailNhanVien.getText();
 
         NhanVien nv = new NhanVien();
 
@@ -1035,9 +1138,9 @@ public void loadTBCuaHang() {
         // TODO add your handling code here:
     }//GEN-LAST:event_TXTHOTENActionPerformed
 
-    private void txtEmailNvActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEmailNvActionPerformed
+    private void txtemailNhanVienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtemailNhanVienActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtEmailNvActionPerformed
+    }//GEN-LAST:event_txtemailNhanVienActionPerformed
 
     private void btnxoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnxoaActionPerformed
         // TODO add your handling code here:
@@ -1059,8 +1162,19 @@ public void loadTBCuaHang() {
     private void btnthemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnthemActionPerformed
         // TODO add your handling code here:
 
+        if (txttenChucVu.getText().length() > 100) {
+            JOptionPane.showMessageDialog(this, "Tên chức vụ không được quá 100 ký tự");
+            return;
+        }
+
+        if (!txttenChucVu.getText().matches("[a-zA-Z\\s]+$")) {
+            JOptionPane.showMessageDialog(this, "Tên chức vụ phải là chữ, không được chứa số và ký tự đặc biệt");
+            return;
+
+        }
+
         ChucVu cv = new ChucVu();
-        cv.setTenChucVu(txtten.getText());
+        cv.setTenChucVu(txttenChucVu.getText());
 
         if (checkTenCHUCVU()) {
             boolean b = chucVuService.add(cv);
@@ -1082,7 +1196,7 @@ public void loadTBCuaHang() {
 
         txtID.setText(tbbangcv.getValueAt(index, 0).toString());
         txtma.setText(tbbangcv.getValueAt(index, 1).toString());
-        txtten.setText(tbbangcv.getValueAt(index, 2).toString());
+        txttenChucVu.setText(tbbangcv.getValueAt(index, 2).toString());
     }//GEN-LAST:event_tbbangcvMouseClicked
 
     private void txttimKiemchucvuKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txttimKiemchucvuKeyReleased
@@ -1094,7 +1208,7 @@ public void loadTBCuaHang() {
         // TODO add your handling code here:
         ChucVu cv = new ChucVu();
         cv.setId(txtID.getText());
-        cv.setTenChucVu(txtten.getText());
+        cv.setTenChucVu(txttenChucVu.getText());
 
         if (checkTenCHUCVU()) {
             boolean b = chucVuService.update(cv);
@@ -1137,7 +1251,7 @@ public void loadTBCuaHang() {
     private void btnsua1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnsua1ActionPerformed
         // TODO add your handling code here:
 
-        CuaHang ch =  new CuaHang();
+        CuaHang ch = new CuaHang();
         ch.setId(txtIDCH.getText());
         ch.setTenCuaHang(txttenCH.getText());
         ch.setDiaChi(txtdiaChi.getText());
@@ -1158,23 +1272,44 @@ public void loadTBCuaHang() {
 
     private void btnthem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnthem1ActionPerformed
         // TODO add your handling code here:
-        CuaHang ch =  new CuaHang();
+
+        if (txttenCH.getText().length() > 150) {
+            JOptionPane.showMessageDialog(this, "Tên cửa hàng không được quá 150 ký tự");
+            return;
+        }
+        if (txtdiaChi.getText().length() > 250) {
+            JOptionPane.showMessageDialog(this, "Tên cửa hàng không được quá 250 ký tự");
+            return;
+        }
+
+        String tenCH = txttenCH.getText();
+        String diaChi = txtdiaChi.getText();
+        List<ViewModelCuaHang> dg = cuaHangService.getAll();
+
+        for (ViewModelCuaHang v : dg) {
+            if (tenCH.equals(v.getTenCuaHang()) && diaChi.equals(v.getDiaChi())) {
+                JOptionPane.showMessageDialog(this, "Tên cửa hàng và địa chỉ này đã tồn tại");
+                return;
+
+            }
+        }
+
+        CuaHang ch = new CuaHang();
 
         ch.setTenCuaHang(txttenCH.getText());
         ch.setDiaChi(txtdiaChi.getText());
 
-        if (checkTen()) {
-            boolean b = cuaHangService.add(ch);
-            if (b == true) {
-                Icon icon = new javax.swing.ImageIcon(getClass().getResource("/img/themmoiicon.png"));
-                JOptionPane.showMessageDialog(this, "Thêm sp thành công", "Sản Phẩm", JOptionPane.INFORMATION_MESSAGE, icon);
-                loadTBCuaHang();
+        boolean b = cuaHangService.add(ch);
+        if (b == true) {
+            Icon icon = new javax.swing.ImageIcon(getClass().getResource("/img/themmoiicon.png"));
+            JOptionPane.showMessageDialog(this, "Thêm sp thành công", "Sản Phẩm", JOptionPane.INFORMATION_MESSAGE, icon);
+            loadTBCuaHang();
 
-            } else {
-                Icon icon = new javax.swing.ImageIcon(getClass().getResource("/img/deleteicon.png"));
-                JOptionPane.showMessageDialog(this, "Trùng Tên Sản Phẩm", "Sản Phẩm", JOptionPane.INFORMATION_MESSAGE, icon);
-            }
+        } else {
+            Icon icon = new javax.swing.ImageIcon(getClass().getResource("/img/deleteicon.png"));
+            JOptionPane.showMessageDialog(this, "Trùng Tên Sản Phẩm", "Sản Phẩm", JOptionPane.INFORMATION_MESSAGE, icon);
         }
+
     }//GEN-LAST:event_btnthem1ActionPerformed
 
     private void tbbangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbbangMouseClicked
@@ -1182,22 +1317,43 @@ public void loadTBCuaHang() {
 
         int index = tbbang.getSelectedRow();
 
-         txtIDCH.setText(tbbang.getValueAt(index, 0).toString());
+        txtIDCH.setText(tbbang.getValueAt(index, 0).toString());
         txtmaCH.setText(tbbang.getValueAt(index, 1).toString());
         txttenCH.setText(tbbang.getValueAt(index, 2).toString());
         txtdiaChi.setText(tbbang.getValueAt(index, 3).toString());
     }//GEN-LAST:event_tbbangMouseClicked
 
-    private void txttimKiemKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txttimKiemKeyReleased
+    private void txttimKiemCuaHangKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txttimKiemCuaHangKeyReleased
         // TODO add your handling code here:
-        loadTBCuaHang(txttimKiem.getText());
-    }//GEN-LAST:event_txttimKiemKeyReleased
+
+        loadTBCuaHang(txttimKiemCuaHang.getText());
+    }//GEN-LAST:event_txttimKiemCuaHangKeyReleased
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        MenuView v = new MenuView("","","");       
-        v.setVisible(true);        
+        MenuView v = new MenuView("", "", "");
+        v.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void txttimKiemnhanvienMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txttimKiemnhanvienMouseClicked
+        // TODO add your handling code here:
+        txttimKiemnhanvien.setText("");
+    }//GEN-LAST:event_txttimKiemnhanvienMouseClicked
+
+    private void txttimKiemchucvuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txttimKiemchucvuMouseClicked
+        // TODO add your handling code here:
+        txttimKiemchucvu.setText("");
+    }//GEN-LAST:event_txttimKiemchucvuMouseClicked
+
+    private void txttimKiemCuaHangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txttimKiemCuaHangMouseClicked
+        // TODO add your handling code here:
+        txttimKiemCuaHang.setText("");
+    }//GEN-LAST:event_txttimKiemCuaHangMouseClicked
+
+    private void txttimKiemnhanvienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txttimKiemnhanvienActionPerformed
+        // TODO add your handling code here:
+
+    }//GEN-LAST:event_txttimKiemnhanvienActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1281,16 +1437,16 @@ public void loadTBCuaHang() {
     private com.toedter.calendar.JDateChooser ngaySinh;
     private javax.swing.JTable tbbang;
     private javax.swing.JTable tbbangcv;
-    private javax.swing.JTextField txtEmailNv;
     private javax.swing.JTextField txtID;
     private javax.swing.JTextField txtIDCH;
     private javax.swing.JTextField txtdiaChi;
+    private javax.swing.JTextField txtemailNhanVien;
     private javax.swing.JTextField txtma;
     private javax.swing.JTextField txtmaCH;
     private javax.swing.JTextField txtmatKhau;
-    private javax.swing.JTextField txtten;
     private javax.swing.JTextField txttenCH;
-    private javax.swing.JTextField txttimKiem;
+    private javax.swing.JTextField txttenChucVu;
+    private javax.swing.JTextField txttimKiemCuaHang;
     private javax.swing.JTextField txttimKiemchucvu;
     private javax.swing.JTextField txttimKiemnhanvien;
     // End of variables declaration//GEN-END:variables
