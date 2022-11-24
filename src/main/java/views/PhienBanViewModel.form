@@ -95,7 +95,7 @@
                                           <Component id="jLabel5" min="-2" pref="448" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
-                                  <EmptySpace min="0" pref="45" max="32767" attributes="0"/>
+                                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                               </Group>
                               <Group type="102" attributes="0">
                                   <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
@@ -309,7 +309,7 @@
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Segoe UI" size="14" style="1"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Ph&#x1ea7;n M&#x1ec1;m C&#x1a1; B&#x1ea3;n Qu&#x1ea3;n L&#xfd; B&#xe1;n &#x110;&#x1ed3; G&#x1ed7; Gia D&#x1ee5;ng"/>
+            <Property name="text" type="java.lang.String" value="Ph&#x1ea7;n M&#x1ec1;m C&#x1a1; B&#x1ea3;n Qu&#x1ea3;n L&#xfd; B&#xe1;n &#x110;&#x1ed3; L&#x1ebb; G&#x1ed7; Gia D&#x1ee5;ng"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel5">

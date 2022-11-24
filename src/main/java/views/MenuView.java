@@ -29,7 +29,7 @@ public class MenuView extends javax.swing.JFrame {
             KhachHang.setEnabled(false);
             NhanVien.setEnabled(false);
         } else {
-
+            
         }
     }
 
