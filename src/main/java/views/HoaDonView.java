@@ -101,13 +101,12 @@ public class HoaDonView extends javax.swing.JFrame {
 
     public void loadChiTiet(String idHD) {
         List<ViewModelHoaDonChiTietBanHang> hdCt = hdCTService.list(idHD);
-        if(hdCt==null){
+        if (hdCt == null) {
             return;
         }
         model = (DefaultTableModel) tbChiTiet.getModel();
         model.setRowCount(0);
-        
-       
+
         for (ViewModelHoaDonChiTietBanHang v : hdCt) {
             model.addRow(new Object[]{
                 v.getTen(),
@@ -318,12 +317,12 @@ public class HoaDonView extends javax.swing.JFrame {
                                         .addGap(44, 44, 44))))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(txtKH, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE)))))
+                                .addGap(0, 0, Short.MAX_VALUE))))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(pagination1, javax.swing.GroupLayout.PREFERRED_SIZE, 291, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(pagination1, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

@@ -17,6 +17,8 @@ import java.util.logging.Logger;
 import javax.swing.Icon;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import pagination.EventPagination;
+import pagination.style.PaginationItemRenderStyle1;
 import services.ChucVuSerivce;
 import services.CuaHangService;
 import services.NhanVienService;
@@ -45,39 +47,53 @@ public class NhanVienFView extends javax.swing.JFrame {
     public NhanVienFView() {
         initComponents();
         setLocationRelativeTo(null);
-        loadTable();
+        loadTable(1);
+        pagination1.setPaginationItemRender(new PaginationItemRenderStyle1());
+        pagination1.addEventPagination(new EventPagination() {
+            @Override
+            public void pageChanged(int page) {
+                loadTable(page);
+            }
+        });
         loadCBB();
-
         loadTBChucVu();
         loadPhanTu1();
-
         loadTBCuaHang();
         loadPhanTuDAUTIEN();
     }
 
-    public void loadTable() {
-        model = (DefaultTableModel) TBBANG.getModel();
-        model.setColumnCount(0);
-        model.addColumn("Id");
-        model.addColumn("Mã");
-        model.addColumn("Họ tên");
-        model.addColumn("SĐT");
-        model.addColumn("Địa chỉ");
-        model.addColumn("Ngày sinh");
-        model.addColumn("Cửa hàng");
-        model.addColumn("Chức vụ");
-        model.addColumn("Mật khẩu");
-        model.addColumn("Email");
+    public void loadTable(int page) {
+        try {
+            int limit = 5;
+            int count = 0;
+            List<ViewModelNhanVien> nv = nhanVienService.getAll((page - 1) * limit, limit);
+            if (nv == null) {
+                System.out.println("1");
+                return;
+            }
+            count = nhanVienService.getRow((page - 1) * limit, limit);
 
-        model.setRowCount(0);
-        List<ViewModelNhanVien> nv = nhanVienService.getAll(2,5);
-        for (ViewModelNhanVien viewModelNhanVien : nv) {
-            model.addRow(new Object[]{
-                viewModelNhanVien.getId(), viewModelNhanVien.getMa(), viewModelNhanVien.getHoTen(),
-                viewModelNhanVien.getSdt(), viewModelNhanVien.getDiaChi(), viewModelNhanVien.getNgaySinh(),
-                viewModelNhanVien.getIdCH(), viewModelNhanVien.getIdCV(), viewModelNhanVien.getMatKhau(), viewModelNhanVien.getEmail()
-            });
+            model = (DefaultTableModel) TBBANG.getModel();
 
+            model.setRowCount(0);
+
+            for (ViewModelNhanVien viewModelNhanVien : nv) {
+                model.addRow(new Object[]{
+                    viewModelNhanVien.getId(), viewModelNhanVien.getMa(), viewModelNhanVien.getHoTen(),
+                    viewModelNhanVien.getSdt(), viewModelNhanVien.getDiaChi(), viewModelNhanVien.getNgaySinh(),
+                    viewModelNhanVien.getIdCH(), viewModelNhanVien.getIdCV(), viewModelNhanVien.getMatKhau(), viewModelNhanVien.getEmail()
+                });
+
+            }
+            int totalPage = (int) Math.ceil(count / limit);
+            if (count / limit == 0) {
+                pagination1.setPagegination(page, totalPage);
+            } else {
+
+                pagination1.setPagegination(page, totalPage + 1);
+
+            }
+        } catch (Exception e) {
         }
     }
 
@@ -294,6 +310,7 @@ public class NhanVienFView extends javax.swing.JFrame {
         txtmatKhau = new javax.swing.JTextField();
         ngaySinh = new com.toedter.calendar.JDateChooser();
         txtemailNhanVien = new javax.swing.JTextField();
+        pagination1 = new pagination.Pagination();
         jPanel4 = new javax.swing.JPanel();
         btnxoa = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
@@ -332,13 +349,13 @@ public class NhanVienFView extends javax.swing.JFrame {
 
         TBBANG.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Id", "Ma", "HoTen", "sdt", "DiaChi", "NgaySinh", "TenCV", "TenCuaHang"
+                "Id", "Ma", "HoTen", "sdt", "DiaChi", "NgaySinh", "TenCV", "TenCuaHang", "Email"
             }
         ));
         TBBANG.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -465,6 +482,8 @@ public class NhanVienFView extends javax.swing.JFrame {
             }
         });
 
+        pagination1.setOpaque(false);
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -527,6 +546,10 @@ public class NhanVienFView extends javax.swing.JFrame {
                                 .addGap(70, 70, 70)
                                 .addComponent(txtmatKhau, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addGap(0, 45, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(pagination1, javax.swing.GroupLayout.PREFERRED_SIZE, 293, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -596,8 +619,10 @@ public class NhanVienFView extends javax.swing.JFrame {
                         .addComponent(txttimKiemnhanvien, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(btnXoa, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(8, 8, 8)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(pagination1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 10, Short.MAX_VALUE))
         );
 
         jTabbedPane2.addTab("Nhân Viên", jPanel3);
@@ -985,8 +1010,8 @@ public class NhanVienFView extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Mật khẩu phải chứa 1 ký tự số, 1 ký tự hoa và 1 ký tự đặc biệt");
             return;
         }
-        
-        if(!txtemailNhanVien.getText().matches("^[\\w-_\\.+]*[\\w-_\\.]\\@([\\w]+\\.)+[\\w]+[\\w]$")) {
+
+        if (!txtemailNhanVien.getText().matches("^[\\w-_\\.+]*[\\w-_\\.]\\@([\\w]+\\.)+[\\w]+[\\w]$")) {
             JOptionPane.showMessageDialog(this, "Vui lòng nhập đúng định dang email");
             return;
         }
@@ -1011,7 +1036,7 @@ public class NhanVienFView extends javax.swing.JFrame {
 //            }
 //        }
         String dienThoai = TXTSDT.getText();
-        List<ViewModelNhanVien> dg = nhanVienService.getAll(2,5);
+        List<ViewModelNhanVien> dg = nhanVienService.getAll(2, 5);
         for (ViewModelNhanVien v : dg) {
             if (dienThoai.equals(v.getSdt())) {
                 JOptionPane.showMessageDialog(this, "Số điện thoại  đã tồn tại!");
@@ -1056,7 +1081,7 @@ public class NhanVienFView extends javax.swing.JFrame {
         if (b == true) {
             Icon icon = new javax.swing.ImageIcon(getClass().getResource("/img/themmoiicon.png"));
             JOptionPane.showMessageDialog(this, "Thêm sp thành công", "Sản Phẩm", JOptionPane.INFORMATION_MESSAGE, icon);
-            loadTable();
+            loadTable(1);
         } else {
             Icon icon = new javax.swing.ImageIcon(getClass().getResource("/img/deleteicon.png"));
             JOptionPane.showMessageDialog(this, "Trùng Tên Sản Phẩm", "Sản Phẩm", JOptionPane.INFORMATION_MESSAGE, icon);
@@ -1070,7 +1095,7 @@ public class NhanVienFView extends javax.swing.JFrame {
         if (b == true) {
             Icon icon = new javax.swing.ImageIcon(getClass().getResource("/img/themmoiicon.png"));
             JOptionPane.showMessageDialog(this, "Delete sp thành công", "Sản Phẩm", JOptionPane.INFORMATION_MESSAGE, icon);
-            loadTable();
+            loadTable(1);
 
         } else {
             Icon icon = new javax.swing.ImageIcon(getClass().getResource("/img/deleteicon.png"));
@@ -1119,7 +1144,7 @@ public class NhanVienFView extends javax.swing.JFrame {
         if (b == true) {
             Icon icon = new javax.swing.ImageIcon(getClass().getResource("/img/themmoiicon.png"));
             JOptionPane.showMessageDialog(this, "Sửa sp thành công", "Sản Phẩm", JOptionPane.INFORMATION_MESSAGE, icon);
-            loadTable();
+            loadTable(1);
         } else {
             Icon icon = new javax.swing.ImageIcon(getClass().getResource("/img/deleteicon.png"));
             JOptionPane.showMessageDialog(this, "Sửa thất Sản Phẩm", "Sản Phẩm", JOptionPane.INFORMATION_MESSAGE, icon);
@@ -1435,6 +1460,7 @@ public class NhanVienFView extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTabbedPane jTabbedPane2;
     private com.toedter.calendar.JDateChooser ngaySinh;
+    private pagination.Pagination pagination1;
     private javax.swing.JTable tbbang;
     private javax.swing.JTable tbbangcv;
     private javax.swing.JTextField txtID;

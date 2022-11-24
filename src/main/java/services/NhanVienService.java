@@ -20,7 +20,7 @@ public class NhanVienService implements IManageNhanVienService{
     private NhanVienRepository nhan = new NhanVienRepository();
     @Override
     public List<ViewModelNhanVien> getAll(int a, int b) {
-         try {
+        
             List<ViewModelNhanVien> list = new ArrayList<>();
             List<Object[]> sps = nhan.getAll(a, b);
              for (Object[] sp : sps) {
@@ -39,9 +39,7 @@ public class NhanVienService implements IManageNhanVienService{
                  list.add(v);
              }
             return list;
-        } catch (Exception e) {
-            return null;
-        }
+      
     }
 
     @Override
@@ -92,7 +90,17 @@ public class NhanVienService implements IManageNhanVienService{
 
     @Override
     public int getRow(int b, int c) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        try {
+            return nhan.getRow(b, c);
+        } catch (Exception e) {
+            return 0;
+        }
+    }
+    public static void main(String[] args) {
+        NhanVienService i = new NhanVienService();
+        for (ViewModelNhanVien arg : i.getAll(0, 5)) {
+            System.out.println(arg.toString());
+        }
     }
 
     
