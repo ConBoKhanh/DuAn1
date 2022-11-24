@@ -46,7 +46,7 @@ public class HoadonRepository {
 
     }
 
-    public int getListSL(int i, int b) {
+    public int getListSL() {
         int index = -1;
         try {
             Transaction transaction = session.getTransaction();
@@ -151,8 +151,8 @@ public class HoadonRepository {
 
     public static void main(String[] args) {
         HoadonRepository hd = new HoadonRepository();
-        int i = hd.getListSL(0, 5);
-        System.out.println(i);
+//        int i = hd.getListSL(0, 5);
+//        System.out.println(i);
 
 //        List<HoaDon> list = hd.getList(2,5);
 //        for (HoaDon hoaDon : list) {

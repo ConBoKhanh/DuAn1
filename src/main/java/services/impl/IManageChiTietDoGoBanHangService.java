@@ -14,15 +14,17 @@ import viewModel.ViewModelChiTietSanPhamBanHang;
  */
 public interface IManageChiTietDoGoBanHangService {
 
-    List<ViewModelChiTietSanPhamBanHang> getList();
+    List<ViewModelChiTietSanPhamBanHang> getList(int i, int b);
+
+    int getRow();
 
     List<ViewModelChiTietSanPhamBanHang> TimKiemTheoId(String Id);
 
     List<ViewModelChiTietSanPhamBanHang> TimKiemTen(String Ten);
-    
+
     boolean add(ChiTietDoGo go);
-    
+
     boolean update(ChiTietDoGo go);
-    
+
     boolean delete(String Id);
 }

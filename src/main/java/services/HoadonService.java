@@ -121,9 +121,9 @@ public class HoadonService implements IManageHoaDonService {
     }
 
     @Override
-    public int row(int i, int b) {
+    public int row() {
         try {
-            return hdrp.getListSL(i, b);
+            return hdrp.getListSL();
         } catch (Exception e) {
             return 0;
         }

@@ -26,11 +26,16 @@ public class KhuyenMaiView extends javax.swing.JFrame {
      */
     private IManageKhuyenMaiService kmSV = new KhuyenMaiService();
     DefaultTableModel model = new DefaultTableModel();
+    String IdNV;
+    String TenNV;
+    String CV;
 
-    public KhuyenMaiView() {
+    public KhuyenMaiView(String Id, String Ten, String cv) {
         initComponents();
         setLocationRelativeTo(null);
-
+        IdNV = Id;
+        TenNV = Ten;
+        CV = cv;
         DateNgayBatDau.getDateEditor().setEnabled(false);
         DateNgayKetThuc.getDateEditor().setEnabled(false);
         loadTBAll();
@@ -43,17 +48,18 @@ public class KhuyenMaiView extends javax.swing.JFrame {
         List<KhuyenMaiViewModel> km = kmSV.getListKMAll();
         for (KhuyenMaiViewModel a : km) {
             model.addRow(new Object[]{
-                a.getId(), a.getMa(), a.getTenKhuyenMai(), a.getNgayBatDau(), a.getNgayKetThuc(),a.getPhanTramKM()
+                a.getId(), a.getMa(), a.getTenKhuyenMai(), a.getNgayBatDau(), a.getNgayKetThuc(), a.getPhanTramKM()
             });
         }
     }
+
     public void searchName(String ten) {
         model = (DefaultTableModel) tblKhuyenMai.getModel();
         model.setRowCount(0);
         List<KhuyenMaiViewModel> km = kmSV.getListKMByDate(ten);
         for (KhuyenMaiViewModel a : km) {
             model.addRow(new Object[]{
-                a.getId(), a.getMa(), a.getTenKhuyenMai(), a.getNgayBatDau(), a.getNgayKetThuc(),a.getPhanTramKM()
+                a.getId(), a.getMa(), a.getTenKhuyenMai(), a.getNgayBatDau(), a.getNgayKetThuc(), a.getPhanTramKM()
             });
         }
     }
@@ -112,6 +118,11 @@ public class KhuyenMaiView extends javax.swing.JFrame {
         jScrollPane1.setViewportView(tblKhuyenMai);
 
         jButton1.setText("Back");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jLabel1.setText("Id");
 
@@ -196,7 +207,7 @@ public class KhuyenMaiView extends javax.swing.JFrame {
                         .addGap(6, 6, 6)))
                 .addGap(142, 142, 142))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(0, 96, Short.MAX_VALUE)
+                .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 616, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(78, 78, 78))
             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -371,6 +382,14 @@ public class KhuyenMaiView extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_txtTimKiemKeyReleased
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        MenuView v = new MenuView(IdNV, TenNV, CV);
+        v.setLocationRelativeTo(null);
+        v.setVisible(true);
+
+        this.dispose();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -401,7 +420,7 @@ public class KhuyenMaiView extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new KhuyenMaiView().setVisible(true);
+//                new KhuyenMaiView().setVisible(true);
             }
         });
     }

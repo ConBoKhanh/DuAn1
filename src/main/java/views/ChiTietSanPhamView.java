@@ -58,8 +58,15 @@ public class ChiTietSanPhamView extends javax.swing.JFrame {
 
     static DefaultTableModel model = new DefaultTableModel();
 
-    public ChiTietSanPhamView() {
+    String IdNV;
+    String TenNV;
+    String CV;
+
+    public ChiTietSanPhamView(String Id, String Ten, String cv) {
         initComponents();
+        IdNV = Id;
+        TenNV = Ten;
+        CV = cv;
         setLocationRelativeTo(null);
         load(a.list());
         loadcbc();
@@ -70,6 +77,7 @@ public class ChiTietSanPhamView extends javax.swing.JFrame {
         model.setRowCount(0);
         for (ChiTietDoGoViewModel n : list) {
             model.addRow(new Object[]{
+                model.getRowCount() + 1,
                 n.getId(),
                 n.getTensp(),
                 n.getSp(),
@@ -247,6 +255,7 @@ public class ChiTietSanPhamView extends javax.swing.JFrame {
         jButton5 = new javax.swing.JButton();
         jLabel13 = new javax.swing.JLabel();
         txtSoLuong = new javax.swing.JLabel();
+        jButton6 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -256,18 +265,23 @@ public class ChiTietSanPhamView extends javax.swing.JFrame {
 
         tbl.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "id", "Ten SP", "SPham", "LoaiSP", "DongGo", "NhaCungCap", "NguonGoc", "Dv Tinh", "MoTa", "SoLuong", "GiaNhap", "GiaBan"
+                "STT", "id", "Ten SP", "SPham", "LoaiSP", "DongGo", "NhaCungCap", "NguonGoc", "Dv Tinh", "MoTa", "SoLuong", "GiaNhap", "GiaBan"
             }
         ));
         tbl.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tblMouseClicked(evt);
+            }
+        });
+        tbl.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                tblKeyTyped(evt);
             }
         });
         jScrollPane1.setViewportView(tbl);
@@ -455,6 +469,16 @@ public class ChiTietSanPhamView extends javax.swing.JFrame {
         txtSoLuong.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         txtSoLuong.setText("Soluong");
 
+        jButton6.setBackground(new java.awt.Color(255, 204, 255));
+        jButton6.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jButton6.setText("BACK");
+        jButton6.setBorder(javax.swing.BorderFactory.createMatteBorder(3, 3, 3, 3, new java.awt.Color(0, 0, 0)));
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -476,11 +500,14 @@ public class ChiTietSanPhamView extends javax.swing.JFrame {
                                     .addComponent(txtid, javax.swing.GroupLayout.PREFERRED_SIZE, 316, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(txtGiaNhap, javax.swing.GroupLayout.PREFERRED_SIZE, 254, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(txtTen, javax.swing.GroupLayout.PREFERRED_SIZE, 288, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 80, Short.MAX_VALUE)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel10, javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.TRAILING))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                        .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(57, 57, 57)
+                                        .addComponent(jLabel7)))
                                 .addGap(23, 23, 23)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(cbcDongGo, javax.swing.GroupLayout.Alignment.TRAILING, 0, 174, Short.MAX_VALUE)
@@ -535,7 +562,8 @@ public class ChiTietSanPhamView extends javax.swing.JFrame {
                         .addContainerGap()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(cbcSP, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton6, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE))))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -619,19 +647,19 @@ public class ChiTietSanPhamView extends javax.swing.JFrame {
 
     private void tblMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblMouseClicked
         int index = tbl.getSelectedRow();
-        txtid.setText(tbl.getValueAt(index, 0).toString());
-        txtTen.setText(tbl.getValueAt(index, 1).toString());
-        txtGiaNhap.setText(tbl.getValueAt(index, 10).toString());
+        txtid.setText(tbl.getValueAt(index, 1).toString());
+        txtTen.setText(tbl.getValueAt(index, 2).toString());
+        txtGiaNhap.setText(tbl.getValueAt(index, 11).toString());
         System.out.println(tbl.getValueAt(index, 10).toString());
-        txtGiaBan.setText(tbl.getValueAt(index, 11).toString());
-        taMoTa.setText(tbl.getValueAt(index, 8).toString());
-        txtSoLuong.setText(tbl.getValueAt(index, 9).toString());
-        cbcSP.setSelectedItem(tbl.getValueAt(index, 2).toString());
-        cbcLoaiSP.setSelectedItem(tbl.getValueAt(index, 3).toString());
-        cbcDongGo.setSelectedItem(tbl.getValueAt(index, 4).toString());
-        cbNhaCC.setSelectedItem(tbl.getValueAt(index, 5).toString());
-        cbcDVT.setSelectedItem(tbl.getValueAt(index, 6).toString());
-        cbcNguonGoc.setSelectedItem(tbl.getValueAt(index, 7).toString());
+        txtGiaBan.setText(tbl.getValueAt(index, 12).toString());
+        taMoTa.setText(tbl.getValueAt(index, 9).toString());
+        txtSoLuong.setText(tbl.getValueAt(index, 10).toString());
+        cbcSP.setSelectedItem(tbl.getValueAt(index, 3).toString());
+        cbcLoaiSP.setSelectedItem(tbl.getValueAt(index, 4).toString());
+        cbcDongGo.setSelectedItem(tbl.getValueAt(index, 5).toString());
+        cbNhaCC.setSelectedItem(tbl.getValueAt(index, 6).toString());
+        cbcDVT.setSelectedItem(tbl.getValueAt(index, 7).toString());
+        cbcNguonGoc.setSelectedItem(tbl.getValueAt(index, 8).toString());
     }//GEN-LAST:event_tblMouseClicked
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -685,7 +713,7 @@ public class ChiTietSanPhamView extends javax.swing.JFrame {
 
         } else {
             Icon icon = new javax.swing.ImageIcon(getClass().getResource("/img/deleteicon.png"));
-            JOptionPane.showMessageDialog(this, "Trùng Tên Sản Phẩm", "Sản Phẩm", JOptionPane.INFORMATION_MESSAGE, icon);
+            JOptionPane.showMessageDialog(this, "Lỗi Sản Phẩm", "Sản Phẩm", JOptionPane.INFORMATION_MESSAGE, icon);
         }
     }//GEN-LAST:event_jButton2ActionPerformed
 
@@ -767,6 +795,17 @@ public class ChiTietSanPhamView extends javax.swing.JFrame {
         i.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     }//GEN-LAST:event_jButton5ActionPerformed
 
+    private void tblKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tblKeyTyped
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tblKeyTyped
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        MenuView v = new MenuView(IdNV, TenNV, CV);
+        v.setLocationRelativeTo(null);
+        v.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jButton6ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -797,7 +836,7 @@ public class ChiTietSanPhamView extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ChiTietSanPhamView().setVisible(true);
+//                new ChiTietSanPhamView().setVisible(true);
             }
         });
     }
@@ -813,6 +852,7 @@ public class ChiTietSanPhamView extends javax.swing.JFrame {
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
+    private javax.swing.JButton jButton6;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;

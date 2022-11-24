@@ -16,7 +16,7 @@ public interface IManageHoaDonService {
 
     List<ViewModelHoadon> getListHoaDon(int i, int b);
 
-    int row(int i, int b);
+    int row();
 
     List<ViewModelHoadon> loc(int Tranngthai);
 

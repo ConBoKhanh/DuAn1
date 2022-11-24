@@ -14,6 +14,7 @@ import domainModels.NhaCungCap;
 import domainModels.SanPham;
 import java.util.List;
 import javax.persistence.Query;
+import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import utilities.mycompany.DBConext.HibernatUtil;
 
@@ -25,11 +26,42 @@ public class BanHangChiTietDoGoRepository {
 
     private Session session = HibernatUtil.getFACTORY().openSession();
 
-    public List<ChiTietDoGo> getList() {
-        Session session = HibernatUtil.getFACTORY().openSession();
-        Query q = session.createQuery("FROM ChiTietDoGo Where TrangThai = 1");
-        List<ChiTietDoGo> list = q.getResultList();
-        return list;
+    public List<Object[]> getList(int i, int b) {
+        try {
+            Session session = HibernatUtil.getFACTORY().openSession();
+            Query q = session.createNativeQuery("select A.Id,A.TenSP,B.Ten,C.TenDongSP,D.TenLoaiGo"
+                    + ",E.TenNCC,F.QuocGia,G.DonViTinh \n"
+                    + ", A.SoLuong,A.GiaNhap,A.GiaBan,A.MoTa,A.TrangThai\n"
+                    + "from ChiTietDoGo A Left Join SanPham B\n"
+                    + "ON A.IdSanPham = B.Id left join LoaiSP C On A.IdLoaiSP = C.Id \n"
+                    + "left Join DongGo D ON A.IdDongGo = D.Id left Join NhaCungCap E ON \n"
+                    + "A.IdNhaCungCap = E.Id LEFT JOIN NguonGoc F ON A.IdNguonGoc = F.Id \n"
+                    + "LEFT JOIN DonViTinh G ON A.IdDonViTinh = G.Id\n"
+                    + "where A.TrangThai = 1\n"
+                    + "ORDER BY A.TrangThai desc \n"
+                    + "OFFSET " + i + " ROWS \n"
+                    + "FETCH NEXT " + b + " ROWS ONLY");
+            List<Object[]> list = q.getResultList();
+            return list;
+        } catch (HibernateException hibernateException) {
+            return null;
+        }
+    }
+
+    public int getRow() {
+        int index = -1;
+        try {
+            Session session = HibernatUtil.getFACTORY().openSession();
+            Query q = session.createQuery("select count(A.Id),count(A.Id) From ChiTietDoGo A where A.TrangThai = 1");
+
+            List<Object[]> list = q.getResultList();
+            for (Object[] objects : list) {
+                index  = Integer.parseInt(objects[0].toString());
+            }
+            return index;
+        } catch (HibernateException hibernateException) {
+            return -1;
+        }
     }
 
     public List<ChiTietDoGo> TimKiemTheoId(String Id) {
@@ -138,40 +170,9 @@ public class BanHangChiTietDoGoRepository {
 
     public static void main(String[] args) {
         BanHangChiTietDoGoRepository i = new BanHangChiTietDoGoRepository();
-        List<ChiTietDoGo> list = i.TimKiemTen("Hura");
-        for (ChiTietDoGo chiTietDoGo : list) {
-            System.out.println(chiTietDoGo.toString());
-        }
-//        ChiTietDoGo a = new ChiTietDoGo();
-//        
-//        DongGo b = new DongGo();
-//        b.setId("5E123722-EFC5-4CBD-BBCB-B8EF019DF8BD");
-//        SanPham c = new SanPham();
-//        c.setId("B2709151-A03A-4470-9776-CCF15AB22E6C");
-//        LoaiSP d = new LoaiSP();
-//        d.setId("8EAA5DE2-23E1-4381-BD91-4EDCAC96CAE0");
-//        NhaCungCap e = new NhaCungCap();
-//        e.setId("CB4049CA-59FF-4A31-8B29-1DD03F06CD88");
-//        NguonGoc f = new NguonGoc();
-//        f.setId("B57F0A96-6BAC-4B8B-BB11-B54557B48666");
-//        DonViTinh g = new DonViTinh();
-//        g.setId("D9CC9DCF-AE16-4A67-8639-8136B78CDFD9");
-//        
-//        a.setId("55777D17-1A48-4210-95BC-3315C1BE5416");
-//        a.setIdDongGo(b);
-//        a.setIdSanPham(c);
-//        a.setIdLoaiSP(d);
-//        a.setIdNhaCungCap(e);
-//        a.setIdNguocGoc(f);
-//        a.setIdDonViTinh(g);
-//        a.setSoLuong(12);
-
-//        boolean h = i.delete("55777D17-1A48-4210-95BC-3315C1BE5416");
-//        if (h == true) {
-//            System.out.println("ok");
-//        } else {
-//            System.out.println("not ok");
+//        for (Object[] arg : i.getList(0, 10)) {
+//            System.out.println(arg[0] + "    " + arg[1]);
 //        }
-        System.out.println("ok");
+        System.out.println(i.getRow());
     }
 }

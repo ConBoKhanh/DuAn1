@@ -50,9 +50,16 @@ public class SanPhamView extends javax.swing.JFrame {
     private IManageDongGoService dgSV = new DongGoService();
     DefaultTableModel model = new DefaultTableModel();
 
-    public SanPhamView() {
+    String IdNV;
+    String TenNV;
+    String CV;
+
+    public SanPhamView(String Id, String Ten, String cv) {
         initComponents();
         setLocationRelativeTo(null);
+        IdNV = Id;
+        TenNV = Ten;
+        CV = cv;
         //San Pham
         txtID.setEnabled(false);
         txtMa.setEnabled(false);
@@ -2017,9 +2024,10 @@ public class SanPhamView extends javax.swing.JFrame {
     }//GEN-LAST:event_txtMaNguonGocActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        MenuView v = new MenuView("", "", "");
+        MenuView v = new MenuView(IdNV, TenNV, CV);
         v.setLocationRelativeTo(null);
         v.setVisible(true);
+
         this.dispose();
     }//GEN-LAST:event_jButton5ActionPerformed
 
@@ -2067,7 +2075,7 @@ public class SanPhamView extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new SanPhamView().setVisible(true);
+//                new SanPhamView().setVisible(true);
             }
         });
     }

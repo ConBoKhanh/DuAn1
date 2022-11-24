@@ -41,11 +41,18 @@ public class NhanVienFView extends javax.swing.JFrame {
 
     DefaultTableModel model = new DefaultTableModel();
 
+    String IdNV;
+    String TenNV;
+    String CV;
+
     /**
      * Creates new form NhanVienFView
      */
-    public NhanVienFView() {
+    public NhanVienFView(String Id, String Ten, String cv) {
         initComponents();
+        IdNV = Id;
+        TenNV = Ten;
+        CV = cv;
         setLocationRelativeTo(null);
         loadTable(1);
         pagination1.setPaginationItemRender(new PaginationItemRenderStyle1());
@@ -339,7 +346,7 @@ public class NhanVienFView extends javax.swing.JFrame {
         tbbang = new javax.swing.JTable();
         txttimKiemCuaHang = new javax.swing.JTextField();
         txttenCH = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        jButton6 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -894,10 +901,13 @@ public class NhanVienFView extends javax.swing.JFrame {
 
         jTabbedPane2.addTab("Cửa Hàng", jPanel2);
 
-        jButton1.setText("BACK");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        jButton6.setBackground(new java.awt.Color(255, 204, 255));
+        jButton6.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jButton6.setText("BACK");
+        jButton6.setBorder(javax.swing.BorderFactory.createMatteBorder(3, 3, 3, 3, new java.awt.Color(0, 0, 0)));
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                jButton6ActionPerformed(evt);
             }
         });
 
@@ -906,19 +916,19 @@ public class NhanVienFView extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jButton1)
-                .addGap(27, 27, 27)
+                .addGap(8, 8, 8)
+                .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jTabbedPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 729, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jTabbedPane2, javax.swing.GroupLayout.Alignment.TRAILING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(18, 18, 18)
-                .addComponent(jButton1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(575, 575, 575))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -1354,12 +1364,6 @@ public class NhanVienFView extends javax.swing.JFrame {
         loadTBCuaHang(txttimKiemCuaHang.getText());
     }//GEN-LAST:event_txttimKiemCuaHangKeyReleased
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        MenuView v = new MenuView("", "", "");
-        v.setVisible(true);
-        this.dispose();
-    }//GEN-LAST:event_jButton1ActionPerformed
-
     private void txttimKiemnhanvienMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txttimKiemnhanvienMouseClicked
         // TODO add your handling code here:
         txttimKiemnhanvien.setText("");
@@ -1379,6 +1383,13 @@ public class NhanVienFView extends javax.swing.JFrame {
         // TODO add your handling code here:
 
     }//GEN-LAST:event_txttimKiemnhanvienActionPerformed
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        MenuView v = new MenuView(IdNV, TenNV, CV);
+        v.setLocationRelativeTo(null);
+        v.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jButton6ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1410,7 +1421,7 @@ public class NhanVienFView extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new NhanVienFView().setVisible(true);
+//                new NhanVienFView().setVisible(true);
             }
         });
     }
@@ -1433,7 +1444,7 @@ public class NhanVienFView extends javax.swing.JFrame {
     private javax.swing.JButton btnthem1;
     private javax.swing.JButton btnxoa;
     private javax.swing.JButton btnxoa1;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton6;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;

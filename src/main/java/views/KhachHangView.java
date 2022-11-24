@@ -26,8 +26,15 @@ public class KhachHangView extends javax.swing.JFrame {
     /**
      * Creates new form KhachHang
      */
-    public KhachHangView() {
+    String IdNV;
+    String TenNV;
+    String CV;
+
+    public KhachHangView(String Id, String Ten, String cv) {
         initComponents();
+        IdNV = Id;
+        TenNV = Ten;
+        CV = cv;
         setLocationRelativeTo(null);
         loadtb();
         loadthangst1();
@@ -399,9 +406,9 @@ public class KhachHangView extends javax.swing.JFrame {
     }//GEN-LAST:event_txttimKiemActionPerformed
 
     private void btnbackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnbackActionPerformed
-        MenuView v = new MenuView("","","");   
+        MenuView v = new MenuView(IdNV, TenNV, CV);
         setLocationRelativeTo(null);
-        v.setVisible(true);        
+        v.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnbackActionPerformed
 
@@ -438,7 +445,7 @@ public class KhachHangView extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new KhachHangView().setVisible(true);
+//                new KhachHangView().setVisible(true);
             }
         });
     }

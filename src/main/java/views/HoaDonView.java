@@ -30,11 +30,18 @@ public class HoaDonView extends javax.swing.JFrame {
     private IManageHoaDonService hdService = new HoadonService();
     private IManageChiTietHoaDonBanHang hdCTService = new HoaDonChiTietService();
 
+    String IdNV;
+    String TenNV;
+    String CV;
+
     /**
      * Creates new form HoaDonView
      */
-    public HoaDonView() {
+    public HoaDonView(String Id, String Ten, String cv) {
         initComponents();
+        IdNV = Id;
+        TenNV = Ten;
+        CV = cv;
         setLocationRelativeTo(null);
         txtIdHoaDon.setEditable(false);
         txtMaHD.setEditable(false);
@@ -56,7 +63,7 @@ public class HoaDonView extends javax.swing.JFrame {
         if (hd == null) {
             return;
         }
-        count = hdService.row((page - 1) * limit, limit);
+        count = hdService.row();
 
         model = (DefaultTableModel) tbHD.getModel();
         model.setRowCount(0);
@@ -221,6 +228,11 @@ public class HoaDonView extends javax.swing.JFrame {
 
         jButton2.setText("Back");
         jButton2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jButton3.setText("Delete");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
@@ -494,6 +506,15 @@ public class HoaDonView extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButton3ActionPerformed
 
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        MenuView v = new MenuView(IdNV, TenNV, CV);
+        v.setLocationRelativeTo(null);
+        v.setVisible(true);
+
+        this.dispose();
+    }//GEN-LAST:event_jButton2ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -524,7 +545,7 @@ public class HoaDonView extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new HoaDonView().setVisible(true);
+//                new HoaDonView().setVisible(true);
             }
         });
     }
