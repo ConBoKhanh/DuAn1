@@ -4,18 +4,50 @@
  */
 package views;
 
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
+import services.BaoHanhService;
+import services.impl.IManageBaoHanhService;
+import viewModel.ViewModelKhachHang;
+
 /**
  *
  * @author Admin
  */
 public class BaoHanhView extends javax.swing.JFrame {
+ private IManageBaoHanhService bh = new BaoHanhService();
+    
+    DefaultTableModel model = new DefaultTableModel();
+    
+       public void loadtb() {
+        model = (DefaultTableModel) tbkhachhang.getModel();
+        model.setRowCount(0);
+        List<ViewModelKhachHang> kh = bh.getListKhachHang();
+        for (ViewModelKhachHang x : kh) {
+            model.addRow(new Object[]{
+                x.getID(), x.getMa(), x.getTenkh(), x.getSdt()
+            });
+        }
 
+    }
+          public void loadtbTKSDT(String sdt) {
+        model = (DefaultTableModel) tbkhachhang.getModel();
+        model.setRowCount(0);
+        List<ViewModelKhachHang> kh = bh.getTKSDT(sdt);
+        for (ViewModelKhachHang x : kh) {
+            model.addRow(new Object[]{
+                x.getID(), x.getMa(), x.getTenkh(), x.getSdt()
+            });
+        }
+
+    }
     /**
      * Creates new form BaoHanhView
      */
     public BaoHanhView() {
         initComponents();
         setLocationRelativeTo(null);
+        loadtb();
     }
 
     /**
@@ -31,9 +63,9 @@ public class BaoHanhView extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        txttimkiem = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tbkhachhang = new javax.swing.JTable();
         jPanel4 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable2 = new javax.swing.JTable();
@@ -57,7 +89,13 @@ public class BaoHanhView extends javax.swing.JFrame {
 
         jLabel1.setText("NHAP SÐT");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        txttimkiem.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txttimkiemKeyReleased(evt);
+            }
+        });
+
+        tbkhachhang.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -68,7 +106,7 @@ public class BaoHanhView extends javax.swing.JFrame {
                 "ID", "MA", "TEN", "SÐT"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tbkhachhang);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -78,7 +116,7 @@ public class BaoHanhView extends javax.swing.JFrame {
                 .addGap(23, 23, 23)
                 .addComponent(jLabel1)
                 .addGap(42, 42, 42)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txttimkiem, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(59, Short.MAX_VALUE))
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
@@ -90,7 +128,7 @@ public class BaoHanhView extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txttimkiem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 117, Short.MAX_VALUE))
         );
@@ -291,6 +329,11 @@ public class BaoHanhView extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void txttimkiemKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txttimkiemKeyReleased
+        // TODO add your handling code here:
+        loadtbTKSDT(txttimkiem.getText());
+    }//GEN-LAST:event_txttimkiemKeyReleased
+
     /**
      * @param args the command line arguments
      */
@@ -342,11 +385,11 @@ public class BaoHanhView extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable2;
     private javax.swing.JTable jTable3;
     private javax.swing.JTable jTable4;
     private javax.swing.JTable jTable5;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTable tbkhachhang;
+    private javax.swing.JTextField txttimkiem;
     // End of variables declaration//GEN-END:variables
 }
