@@ -63,6 +63,13 @@ public class BaoHanhService implements IManageBaoHanhService {
             return null;
         }
     }
+    
+    public static void main(String[] args) {
+        BaoHanhService i = new BaoHanhService();
+        for (String arg : args) {
+            
+        }
+    }
 
   
 

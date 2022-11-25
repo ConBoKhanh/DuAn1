@@ -34,7 +34,7 @@ public class HoaDonDeBaoHanhSerivice implements IManageHoaDonDeBaoHanhService {
                 x.setMa(a.getMa());
                 x.setNgayThanhToan(String.valueOf(a.getNgayThanhToan()));
                 x.setTenNV(a.getIdNhanVien().getHoTen());
-                x.setIdKH(String.valueOf(a.getIdKhachHang()));
+                x.setIdKH(a.getIdKhachHang().getTenKhachHang());
                 x.setTongTien(a.getThanhTien());
                 list.add(x);
             }
@@ -66,7 +66,7 @@ public class HoaDonDeBaoHanhSerivice implements IManageHoaDonDeBaoHanhService {
 
     public static void main(String[] args) {
         HoaDonDeBaoHanhSerivice a = new HoaDonDeBaoHanhSerivice();
-        List<ViewModelHoaDonDeBaoHanh> b = a.getListHD("8E9E7363-3342-46B5-8C87-565B18BA92E4");
+        List<ViewModelHoaDonDeBaoHanh> b = a.getListHD("3A0EC275-3876-4C1C-9808-0EB84385F009");
         for (ViewModelHoaDonDeBaoHanh viewModelHoaDonDeBaoHanh : b) {
             System.out.println(viewModelHoaDonDeBaoHanh.toString());
         }

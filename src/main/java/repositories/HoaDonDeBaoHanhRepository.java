@@ -25,14 +25,15 @@ import utilities.mycompany.DBConext.HibernatUtil;
 public class HoaDonDeBaoHanhRepository {
 
     public List<HoaDon> getListHD(String id) {
-//        try {
-        Session session = HibernatUtil.getFACTORY().openSession(); //Ket noi DB thuc hien hien truy van
-        Query q = session.createQuery("FROM HoaDon A WHERE A.TrangThai = 2 and A.NgayThanhToan >= GETDATE() - 7 and A.IdKhachHang = '" + id + "'"); //Tao cau truy van lay du lieu tu bang dong go
-        List<HoaDon> list = q.getResultList();
-        return list;
-//        } catch (Exception e) {
-//            return null;
-//        }
+        try {
+            Session session = HibernatUtil.getFACTORY().openSession(); //Ket noi DB thuc hien hien truy van
+            Query q = session.createQuery("FROM HoaDon A WHERE A.TrangThai = 2 and A.NgayThanhToan "
+                    + ">= CONVERT(date,Getdate()-7,23)  and A.IdKhachHang = '" + id + "'"); //Tao cau truy van lay du lieu tu bang dong go
+            List<HoaDon> list = q.list();
+            return list;
+        } catch (Exception e) {
+            return null;
+        }
     }
 
     public List<HoaDon> getListHDBH() {
@@ -118,7 +119,7 @@ public class HoaDonDeBaoHanhRepository {
 
     public static void main(String[] args) {
         HoaDonDeBaoHanhRepository a = new HoaDonDeBaoHanhRepository();
-        List<HoaDon> list = a.getListHD("789C3304-CE21-4A62-A97A-71B216B6BBCC");
+        List<HoaDon> list = a.getListHD("3A0EC275-3876-4C1C-9808-0EB84385F009");
         if (list == null) {
             System.out.println("OKE");
         }

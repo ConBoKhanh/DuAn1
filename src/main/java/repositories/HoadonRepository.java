@@ -161,8 +161,7 @@ public class HoadonRepository {
      //   List<Object[]> list = hd.getList(2, 5);
         
          for (Object[] arg : hd.getList(0, 5)) {
-            System.out.println(arg.toString());
-            
+             System.out.println(arg.toString());
         }
         
 

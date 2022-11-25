@@ -37,6 +37,9 @@ public class TTKHView extends javax.swing.JFrame {
         model = (DefaultTableModel) tbbang.getModel();
         model.setRowCount(0);
         List<ViewModelKhachHang> kh = khrp.getListKhachHang();
+        if (kh == null) {
+            return;
+        }
         for (ViewModelKhachHang x : kh) {
             model.addRow(new Object[]{
                 x.getID(), x.getMa(), x.getTenkh(), x.getSdt(), x.getDiachi()
@@ -53,6 +56,7 @@ public class TTKHView extends javax.swing.JFrame {
         txtsdt.setText(tbbang.getValueAt(index, 3).toString());
         txtdiachi.setText(tbbang.getValueAt(index, 4).toString());
     }
+
     public boolean checksdt() { //check sdt khachhang
         String sdt = txtsdt.getText();
         List<ViewModelKhachHang> kh = khrp.getListKhachHang();
@@ -64,6 +68,7 @@ public class TTKHView extends javax.swing.JFrame {
         }
         return true;
     }
+
     public boolean valydatefrom() {
         try {
             if (txtten.getText().equals("")) {
@@ -118,7 +123,8 @@ public class TTKHView extends javax.swing.JFrame {
         }
         return true;
     }
-     public void getNameKhachHang(String ten) {
+
+    public void getNameKhachHang(String ten) {
         model = (DefaultTableModel) tbbang.getModel();
         model.setRowCount(0);
         List<ViewModelKhachHang> kh = khrp.getListKhachHangByName(ten);
@@ -127,7 +133,8 @@ public class TTKHView extends javax.swing.JFrame {
                 x.getID(), x.getMa(), x.getTenkh(), x.getSdt(), x.getDiachi()
             });
         }
-     }
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -345,14 +352,14 @@ public class TTKHView extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 //        BanHangView.TTKHView("an", "01111231", "hanoi");
-            int index = tbbang.getSelectedRow();
-      
-            BanHangView.TTKHView(tbbang.getValueAt(index,0).toString(), tbbang.getValueAt(index, 2).toString(),tbbang.getValueAt(index, 3).toString());
+        int index = tbbang.getSelectedRow();
+
+        BanHangView.TTKHView(tbbang.getValueAt(index, 0).toString(), tbbang.getValueAt(index, 2).toString(), tbbang.getValueAt(index, 3).toString());
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-         KhachHang kh = new KhachHang();
+        KhachHang kh = new KhachHang();
         kh.setTenKhachHang(txtten.getText());
         kh.setSdt(txtsdt.getText());
         kh.setDiaChi(txtdiachi.getText());

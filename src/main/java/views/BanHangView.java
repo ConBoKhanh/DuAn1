@@ -1197,8 +1197,8 @@ public class BanHangView extends javax.swing.JFrame implements Runnable, ThreadF
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         try {
 
-            List<ViewModelHoaDonChiTietBanHang> lisst = cthdService.list(txtIdhd.getText());
-            if (lisst == null) {
+            
+            if (tblCTHH.getRowCount()==0) {
                 Icon icon = new javax.swing.ImageIcon(getClass().getResource("/img/deleteicon.png"));
                 JOptionPane.showMessageDialog(this, "Ủa Anh Chưa Mua Đã Tính Tiền À!", "Hóa Đơn !", JOptionPane.INFORMATION_MESSAGE, icon);
                 return;
