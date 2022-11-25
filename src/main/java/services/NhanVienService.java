@@ -18,6 +18,7 @@ import viewModel.ViewModelNhanVien;
 public class NhanVienService implements IManageNhanVienService{
 
     private NhanVienRepository nhan = new NhanVienRepository();
+    
     @Override
     public List<ViewModelNhanVien> getAll(int a, int b) {
         
@@ -98,8 +99,40 @@ public class NhanVienService implements IManageNhanVienService{
     }
     public static void main(String[] args) {
         NhanVienService i = new NhanVienService();
-        for (ViewModelNhanVien arg : i.getAll(0, 5)) {
-            System.out.println(arg.toString());
+//        for (ViewModelNhanVien arg : i.getAll(0, 5)) {
+//            System.out.println(arg.toString());
+//        }
+            List<ViewModelNhanVien> list = i.getListNV();
+            for (ViewModelNhanVien a : list) {
+                System.out.println(a.toString());
+        }
+        
+    }
+
+    @Override
+    public List<ViewModelNhanVien> getListNV() {
+        try {
+            List<ViewModelNhanVien> list = new ArrayList<>();
+            List<NhanVien> sps = nhan.getListNV();
+            
+            for (NhanVien sp : sps) {
+                ViewModelNhanVien x = new ViewModelNhanVien();
+                x.setId(sp.getId());
+                x.setMa(sp.getMa());
+                x.setHoTen(sp.getHoTen());
+                x.setSdt(sp.getSdt());
+                x.setDiaChi(sp.getDiaChi());
+                x.setNgaySinh(String.valueOf(sp.getNgaySinh()));
+                x.setIdCH(String.valueOf(sp.getIdCuaHang()));
+                x.setIdCV(String.valueOf(sp.getIdChucVu()));
+                x.setMatKhau(sp.getMatKhau());
+                x.setEmail(sp.getEmail());
+                
+                list.add(x);
+            }
+            return list;
+        } catch (Exception e) {
+            return null;
         }
     }
 

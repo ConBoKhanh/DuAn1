@@ -4,22 +4,41 @@
  */
 package views;
 
+import domainModels.HoaDon;
+import domainModels.KhachHang;
+import domainModels.NhanVien;
+import java.sql.Date;
 import java.util.List;
+import javax.swing.Icon;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import services.BaoHanhService;
+import services.HoaDonDeBaoHanhSerivice;
+import services.NhanVienService;
 import services.impl.IManageBaoHanhService;
+import services.impl.IManageHoaDonDeBaoHanhService;
+import services.impl.IManageNhanVienService;
+import viewModel.ViewModelHDCTBH;
+import viewModel.ViewModelHoaDonBaoHanh;
+import viewModel.ViewModelHoaDonDeBaoHanh;
 import viewModel.ViewModelKhachHang;
+import viewModel.ViewModelNhanVien;
 
 /**
  *
  * @author Admin
  */
 public class BaoHanhView extends javax.swing.JFrame {
- private IManageBaoHanhService bh = new BaoHanhService();
-    
+
+    private IManageBaoHanhService bh = new BaoHanhService();
+
+    private IManageHoaDonDeBaoHanhService hdbh = new HoaDonDeBaoHanhSerivice();
+
+    private IManageNhanVienService nvSV = new NhanVienService();
+
     DefaultTableModel model = new DefaultTableModel();
-    
-       public void loadtb() {
+
+    public void loadtb() {
         model = (DefaultTableModel) tbkhachhang.getModel();
         model.setRowCount(0);
         List<ViewModelKhachHang> kh = bh.getListKhachHang();
@@ -30,7 +49,8 @@ public class BaoHanhView extends javax.swing.JFrame {
         }
 
     }
-          public void loadtbTKSDT(String sdt) {
+
+    public void loadtbTKSDT(String sdt) {
         model = (DefaultTableModel) tbkhachhang.getModel();
         model.setRowCount(0);
         List<ViewModelKhachHang> kh = bh.getTKSDT(sdt);
@@ -41,6 +61,53 @@ public class BaoHanhView extends javax.swing.JFrame {
         }
 
     }
+
+    public void loadTBHD(String id) {
+        model = (DefaultTableModel) tblHoaDon.getModel();
+        model.setRowCount(0);
+        List<ViewModelHoaDonDeBaoHanh> hd = hdbh.getListHD(id);
+        for (ViewModelHoaDonDeBaoHanh x : hd) {
+            model.addRow(new Object[]{
+                x.getId(), x.getMa(), x.getNgayThanhToan(), x.getTenNV(), x.getIdKH(), x.getTongTien()
+            });
+        }
+    }
+
+    public void loadTBHDCT(String id) {
+        model = (DefaultTableModel) tblHoaDonChiTiet.getModel();
+        model.setRowCount(0);
+        List<ViewModelHDCTBH> hd = hdbh.getListCTHD(id);
+        for (ViewModelHDCTBH x : hd) {
+            model.addRow(new Object[]{
+                x.getId(), x.getIdHD(), x.getSoLuong(), x.getThanhTien()
+            });
+        }
+    }
+
+    public void loadTBHDBH() {
+        model = (DefaultTableModel) tblHDBaoHanh.getModel();
+        model.setRowCount(0);
+        List<ViewModelHoaDonBaoHanh> hd = hdbh.getListHDBH();
+        for (ViewModelHoaDonBaoHanh x : hd) {
+            model.addRow(new Object[]{
+                x.getId(), x.getNgayTao(), x.getTenNV(), x.getTenKH(), x.getTrangThai() == 3 ? "Hoa Don bao hanh" : ""
+            });
+        }
+    }
+
+    public void getIdNhanVien() {
+        int index = tblHDBaoHanh.getSelectedRow();
+        String ten = tblHDBaoHanh.getValueAt(index, 2).toString();
+        List<ViewModelNhanVien> list = nvSV.getListNV();
+        for (ViewModelNhanVien x : list) {
+            if (ten.equals(x.getHoTen())) {
+                x.getId();
+                System.out.println(x.toString());
+            }
+        }
+
+    }
+
     /**
      * Creates new form BaoHanhView
      */
@@ -48,6 +115,9 @@ public class BaoHanhView extends javax.swing.JFrame {
         initComponents();
         setLocationRelativeTo(null);
         loadtb();
+        loadTBHDBH();
+//        loadTBHD("A0A56FC7-A093-41FB-B0DF-D0FC62F46267");
+//        loadTBHDCT("0FF804AB-10D0-4694-A332-21A688669FB8");
     }
 
     /**
@@ -68,16 +138,16 @@ public class BaoHanhView extends javax.swing.JFrame {
         tbkhachhang = new javax.swing.JTable();
         jPanel4 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        tblHoaDon = new javax.swing.JTable();
         jPanel5 = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jTable3 = new javax.swing.JTable();
+        tblHoaDonChiTiet = new javax.swing.JTable();
         jPanel6 = new javax.swing.JPanel();
         jScrollPane5 = new javax.swing.JScrollPane();
-        jTable5 = new javax.swing.JTable();
+        tblHDBaoHanh = new javax.swing.JTable();
         jPanel7 = new javax.swing.JPanel();
         jScrollPane4 = new javax.swing.JScrollPane();
-        jTable4 = new javax.swing.JTable();
+        tblHDBHChiTiet = new javax.swing.JTable();
         jButton2 = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
 
@@ -106,6 +176,11 @@ public class BaoHanhView extends javax.swing.JFrame {
                 "ID", "MA", "TEN", "SÐT"
             }
         ));
+        tbkhachhang.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbkhachhangMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tbkhachhang);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -135,7 +210,7 @@ public class BaoHanhView extends javax.swing.JFrame {
 
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder("HÐ "));
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        tblHoaDon.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null},
                 {null, null, null, null, null, null},
@@ -146,7 +221,12 @@ public class BaoHanhView extends javax.swing.JFrame {
                 "ID", "MA", "NGAY THANH TOAN", "TEN NV", "ID KH", "TONG TIEN"
             }
         ));
-        jScrollPane2.setViewportView(jTable2);
+        tblHoaDon.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblHoaDonMouseClicked(evt);
+            }
+        });
+        jScrollPane2.setViewportView(tblHoaDon);
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -167,7 +247,7 @@ public class BaoHanhView extends javax.swing.JFrame {
 
         jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder("HÐ CHI TIET"));
 
-        jTable3.setModel(new javax.swing.table.DefaultTableModel(
+        tblHoaDonChiTiet.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -178,7 +258,7 @@ public class BaoHanhView extends javax.swing.JFrame {
                 "ID", "ID HÐ", "SO LUONG", "THANH TIEN"
             }
         ));
-        jScrollPane3.setViewportView(jTable3);
+        jScrollPane3.setViewportView(tblHoaDonChiTiet);
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -196,7 +276,7 @@ public class BaoHanhView extends javax.swing.JFrame {
 
         jPanel6.setBorder(javax.swing.BorderFactory.createTitledBorder("HÐ BAO HANH"));
 
-        jTable5.setModel(new javax.swing.table.DefaultTableModel(
+        tblHDBaoHanh.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null},
                 {null, null, null, null, null},
@@ -207,7 +287,7 @@ public class BaoHanhView extends javax.swing.JFrame {
                 "ID", "NGAY TAO", "TÊN NV", "TÊN KH", "TRANG THAI"
             }
         ));
-        jScrollPane5.setViewportView(jTable5);
+        jScrollPane5.setViewportView(tblHDBaoHanh);
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
@@ -228,7 +308,7 @@ public class BaoHanhView extends javax.swing.JFrame {
 
         jPanel7.setBorder(javax.swing.BorderFactory.createTitledBorder("HÐ BAO HANH CHI TIET"));
 
-        jTable4.setModel(new javax.swing.table.DefaultTableModel(
+        tblHDBHChiTiet.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null},
                 {null, null, null},
@@ -239,7 +319,7 @@ public class BaoHanhView extends javax.swing.JFrame {
                 "ID", "TENSP", "SO LUONG"
             }
         ));
-        jScrollPane4.setViewportView(jTable4);
+        jScrollPane4.setViewportView(tblHDBHChiTiet);
 
         jButton2.setText("BAO HANH");
 
@@ -267,6 +347,11 @@ public class BaoHanhView extends javax.swing.JFrame {
         );
 
         jButton1.setText("TAO HÐ BAO HANH");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -334,6 +419,61 @@ public class BaoHanhView extends javax.swing.JFrame {
         loadtbTKSDT(txttimkiem.getText());
     }//GEN-LAST:event_txttimkiemKeyReleased
 
+    private void tbkhachhangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbkhachhangMouseClicked
+        // TODO add your handling code here:
+        int index = tbkhachhang.getSelectedRow();
+
+        loadTBHD(tbkhachhang.getValueAt(index, 0).toString());
+    }//GEN-LAST:event_tbkhachhangMouseClicked
+
+    private void tblHoaDonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblHoaDonMouseClicked
+        // TODO add your handling code here:
+        int index = tblHoaDon.getSelectedRow();
+
+        loadTBHDCT(tblHoaDon.getValueAt(index, 0).toString());
+    }//GEN-LAST:event_tblHoaDonMouseClicked
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        int index = tbkhachhang.getSelectedRow();
+        if (index < 0) {
+            JOptionPane.showMessageDialog(this, "Chon khach hang`");
+            return;
+        }
+        String idKH = tbkhachhang.getValueAt(index, 0).toString();
+
+        List<ViewModelHoaDonDeBaoHanh> hd1 = hdbh.getListHD(idKH);
+        if (hd1 == null) {
+            JOptionPane.showMessageDialog(this, "Khong co hoa don de bao hanh");
+            return;
+        }
+
+        NhanVien nv = new NhanVien();
+        nv.setId("121D16CE-B94A-4AFF-8E6C-887C2657A694");
+        KhachHang kh = new KhachHang();
+        kh.setId(idKH);
+
+        HoaDon hd = new HoaDon();
+        hd.setIdNhanVien(nv);
+        hd.setIdKhachHang(kh);
+        hd.setTrangThai(3);
+
+        System.out.println(hd.toString());
+
+        boolean b = hdbh.addHoadon(hd);
+        if (b == true) {
+            Icon icon = new javax.swing.ImageIcon(getClass().getResource("/img/themmoiicon.png"));
+            JOptionPane.showMessageDialog(this, "Tạo Hóa Đơn Bảo Hành Thành Công", "Hóa Đơn", JOptionPane.INFORMATION_MESSAGE, icon);
+            loadTBHDBH();
+
+        } else {
+            Icon icon = new javax.swing.ImageIcon(getClass().getResource("/img/deleteicon.png"));
+            JOptionPane.showMessageDialog(this, "Lỗi!", "Hóa Đơn !", JOptionPane.INFORMATION_MESSAGE, icon);
+
+        }
+
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -385,11 +525,11 @@ public class BaoHanhView extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
-    private javax.swing.JTable jTable2;
-    private javax.swing.JTable jTable3;
-    private javax.swing.JTable jTable4;
-    private javax.swing.JTable jTable5;
     private javax.swing.JTable tbkhachhang;
+    private javax.swing.JTable tblHDBHChiTiet;
+    private javax.swing.JTable tblHDBaoHanh;
+    private javax.swing.JTable tblHoaDon;
+    private javax.swing.JTable tblHoaDonChiTiet;
     private javax.swing.JTextField txttimkiem;
     // End of variables declaration//GEN-END:variables
 }

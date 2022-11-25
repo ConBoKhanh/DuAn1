@@ -32,7 +32,7 @@ public class NhanVienRepository {
                     + "order by Convert(int,A.Ma) desc "
                     + "OFFSET " + b + " ROWS "
                     + "FETCH NEXT " + c + " ROWS ONLY");
-            
+
             List<Object[]> list = q.getResultList();
             return list;
         } catch (HibernateException hibernateException) {
@@ -41,14 +41,28 @@ public class NhanVienRepository {
 
     }
 
+    public List<NhanVien> getListNV() {
+        try {
+            Session session = HibernatUtil.getFACTORY().openSession();
+            Query q = session.createQuery("FROM NhanVien where TrangThai = 1");
+            List<NhanVien> list = q.getResultList();
+            return list;
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
     public static void main(String[] args) {
         NhanVienRepository nv = new NhanVienRepository();
-
-        for (Object[] arg : nv.getAll(0, 5)) {
-            System.out.println(arg[0].toString());
-
+        List<NhanVien> list = nv.getListNV();
+        for (NhanVien nhanVien : list) {
+            System.out.println(nhanVien.toString());
         }
-        System.out.println(nv.getRow(0, 5));
+//        for (Object[] arg : nv.getAll(0, 5)) {
+//            System.out.println(arg[0].toString());
+//
+//        }
+//        System.out.println(nv.getRow(0, 5));
     }
 
     public int getRow(int b, int c) {
@@ -58,9 +72,9 @@ public class NhanVienRepository {
             Query q = se.createNativeQuery("Select A.Id, A.Ma, A.HoTen, A.Sdt, A.DiaChi, A.NgaySinh , "
                     + " C.TenChucVu, B.TenCuaHang  from NhanVien A  left JOIN CuaHang B  "
                     + " on A.IdCuaHang = B.Id  "
-                    + " left join ChucVu C On A.IdChucVu = C.Id " 
+                    + " left join ChucVu C On A.IdChucVu = C.Id "
                     + " order by Convert(int,A.Ma) desc  ");
-            
+
             List<Object[]> list = q.getResultList();
             index = list.size();
             return index;

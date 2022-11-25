@@ -19,6 +19,8 @@ public interface IManageNhanVienService {
     int getRow(int b, int c);
 
     List<ViewModelNhanVien> listtk(String Ten);
+    
+    List<ViewModelNhanVien> getListNV();
 
     boolean add(NhanVien nv);
 
