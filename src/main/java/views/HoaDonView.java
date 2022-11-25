@@ -39,6 +39,7 @@ public class HoaDonView extends javax.swing.JFrame {
      */
     public HoaDonView(String Id, String Ten, String cv) {
         initComponents();
+        this.setDefaultCloseOperation(HoaDonView.DO_NOTHING_ON_CLOSE);
         IdNV = Id;
         TenNV = Ten;
         CV = cv;

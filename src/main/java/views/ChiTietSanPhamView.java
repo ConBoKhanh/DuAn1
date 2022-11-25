@@ -63,6 +63,7 @@ public class ChiTietSanPhamView extends javax.swing.JFrame {
     String CV;
 
     public ChiTietSanPhamView(String Id, String Ten, String cv) {
+         this.setDefaultCloseOperation(ChiTietSanPhamView.DO_NOTHING_ON_CLOSE);
         initComponents();
         IdNV = Id;
         TenNV = Ten;

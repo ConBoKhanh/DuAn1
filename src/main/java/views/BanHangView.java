@@ -90,6 +90,7 @@ public class BanHangView extends javax.swing.JFrame implements Runnable, ThreadF
 
     public BanHangView(String Id, String Ten, String cv) {
         initComponents();
+         this.setDefaultCloseOperation(BanHangView.DO_NOTHING_ON_CLOSE);
         loadSP(1);
         pagination1.setPaginationItemRender(new PaginationItemRenderStyle1());
         pagination1.addEventPagination(new EventPagination() {

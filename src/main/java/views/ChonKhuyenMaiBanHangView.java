@@ -27,6 +27,7 @@ public class ChonKhuyenMaiBanHangView extends javax.swing.JFrame {
      */
     public ChonKhuyenMaiBanHangView() {
         initComponents();
+        this.setDefaultCloseOperation(ChonKhuyenMaiBanHangView.DO_NOTHING_ON_CLOSE);
         setLocationRelativeTo(null);
         loadTBAll();
 

@@ -56,6 +56,7 @@ public class SanPhamView extends javax.swing.JFrame {
 
     public SanPhamView(String Id, String Ten, String cv) {
         initComponents();
+        this.setDefaultCloseOperation(SanPhamView.DO_NOTHING_ON_CLOSE);
         setLocationRelativeTo(null);
         IdNV = Id;
         TenNV = Ten;

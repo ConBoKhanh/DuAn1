@@ -32,6 +32,7 @@ public class KhachHangView extends javax.swing.JFrame {
 
     public KhachHangView(String Id, String Ten, String cv) {
         initComponents();
+        this.setDefaultCloseOperation(KhachHangView.DO_NOTHING_ON_CLOSE);
         IdNV = Id;
         TenNV = Ten;
         CV = cv;

@@ -82,6 +82,7 @@ public class ChucVuView extends javax.swing.JFrame {
      */
     public ChucVuView() {
         initComponents();
+        this.setDefaultCloseOperation(ChucVuView.DO_NOTHING_ON_CLOSE);
         setLocationRelativeTo(null);
         loadTBChucVu();
         loadPhanTu1();

@@ -50,6 +50,7 @@ public class NhanVienFView extends javax.swing.JFrame {
      */
     public NhanVienFView(String Id, String Ten, String cv) {
         initComponents();
+        this.setDefaultCloseOperation(NhanVienFView.DO_NOTHING_ON_CLOSE);
         IdNV = Id;
         TenNV = Ten;
         CV = cv;

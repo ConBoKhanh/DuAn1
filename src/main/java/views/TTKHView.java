@@ -28,6 +28,7 @@ public class TTKHView extends javax.swing.JFrame {
      */
     public TTKHView() {
         initComponents();
+        this.setDefaultCloseOperation(TTKHView.DO_NOTHING_ON_CLOSE);
         setLocationRelativeTo(null);
         loadtb();
         loadthgdautien();

@@ -15,6 +15,7 @@ public class PhienBanViewModel extends javax.swing.JFrame {
      */
     public PhienBanViewModel() {
         initComponents();
+        this.setDefaultCloseOperation(PhienBanViewModel.DO_NOTHING_ON_CLOSE);
         setLocationRelativeTo(null);
     }
 

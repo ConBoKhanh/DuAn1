@@ -24,6 +24,7 @@ public class DangNhapView extends javax.swing.JFrame {
 
     public DangNhapView() {
         initComponents();
+        this.setDefaultCloseOperation(DangNhapView.DO_NOTHING_ON_CLOSE);
         setLocationRelativeTo(null);
     }
 

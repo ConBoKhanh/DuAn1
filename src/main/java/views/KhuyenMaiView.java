@@ -32,6 +32,7 @@ public class KhuyenMaiView extends javax.swing.JFrame {
 
     public KhuyenMaiView(String Id, String Ten, String cv) {
         initComponents();
+        this.setDefaultCloseOperation(KhuyenMaiView.DO_NOTHING_ON_CLOSE);
         setLocationRelativeTo(null);
         IdNV = Id;
         TenNV = Ten;

@@ -7,6 +7,7 @@ package views;
 import domainModels.HoaDon;
 import domainModels.KhachHang;
 import domainModels.NhanVien;
+import java.beans.BeanProperty;
 import java.sql.Date;
 import java.util.List;
 import javax.swing.Icon;
@@ -42,7 +43,13 @@ public class BaoHanhView extends javax.swing.JFrame {
      * Creates new form BaoHanhView
      */
     public BaoHanhView() {
+
+//        setUndecorated(true);
+
         initComponents();
+        
+        this.setDefaultCloseOperation(BaoHanhView.DO_NOTHING_ON_CLOSE);
+        
         setLocationRelativeTo(null);
         loadtb();
         loadTBHDBH();
@@ -150,10 +157,12 @@ public class BaoHanhView extends javax.swing.JFrame {
         tblHDBHChiTiet = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel2.setBackground(new java.awt.Color(255, 153, 153));
+        jPanel2.setBorder(javax.swing.BorderFactory.createMatteBorder(3, 3, 3, 3, new java.awt.Color(0, 0, 0)));
 
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("KHACH HANG"));
 
@@ -347,6 +356,13 @@ public class BaoHanhView extends javax.swing.JFrame {
 
         jButton2.setText("BAO HANH");
 
+        jButton3.setText("jButton3");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -359,6 +375,9 @@ public class BaoHanhView extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addGap(48, 48, 48)
+                        .addComponent(jButton3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButton1)
                         .addGap(18, 18, 18)
                         .addComponent(jButton2)
@@ -379,7 +398,8 @@ public class BaoHanhView extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
-                    .addComponent(jButton2))
+                    .addComponent(jButton2)
+                    .addComponent(jButton3))
                 .addGap(18, 18, 18)
                 .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -394,7 +414,7 @@ public class BaoHanhView extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 10, Short.MAX_VALUE))
+                .addGap(0, 4, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -428,40 +448,67 @@ public class BaoHanhView extends javax.swing.JFrame {
 
     private void tblHoaDonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblHoaDonMouseClicked
         // TODO add your handling code here:
-        int index = tblHoaDon.getSelectedRow();
+        try {
+            int index = tblHoaDon.getSelectedRow();
 
-        loadTBHDCT(tblHoaDon.getValueAt(index, 0).toString());
+            loadTBHDCT(tblHoaDon.getValueAt(index, 0).toString());
+        } catch (Exception e) {
+        }
     }//GEN-LAST:event_tblHoaDonMouseClicked
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        int indexhd = tblHoaDon.getSelectedRow();
+        if (indexhd < 0) {
+            JOptionPane.showMessageDialog(this, "Vui Long Chon Hoa Don Muon Bao Hanh");
+            return;
+        } else {
+            String[] buttons = {"Update", "Delete", "Cancel"};
+
+            int rc = JOptionPane.showOptionDialog(null, "Bạn Có Muốn Tạo Bảo Hành Cho Hóa Đơn Này Không", "Confirmation",
+                    JOptionPane.WARNING_MESSAGE, 0, null, buttons, buttons[2]);
+            if (rc == 0) {
+            }
+        }
+
         int index = tbkhachhang.getSelectedRow();
-        if (index < 0) {
+        if (index
+                < 0) {
             JOptionPane.showMessageDialog(this, "Chon khach hang`");
             return;
         }
         String idKH = tbkhachhang.getValueAt(index, 0).toString();
 
-        if (tblHoaDon.getRowCount() == 0) {
+        if (tblHoaDon.getRowCount()
+                == 0) {
             JOptionPane.showMessageDialog(this, "Khong co hoa don de bao hanh");
             return;
         }
+
         System.out.println(tblHoaDon.getRowCount());
 
         NhanVien nv = new NhanVien();
-        nv.setId("612B3352-EE22-4CBB-8BE7-6AE5F761A099");
+
+        nv.setId(
+                "612B3352-EE22-4CBB-8BE7-6AE5F761A099");
         KhachHang kh = new KhachHang();
+
         kh.setId(idKH);
 
         HoaDon hd = new HoaDon();
+
         hd.setIdNhanVien(nv);
+
         hd.setIdKhachHang(kh);
-        hd.setTrangThai(3);
+
+        hd.setTrangThai(
+                3);
 
         System.out.println(hd.toString());
 
         boolean b = hdbh.addHoadon(hd);
-        if (b == true) {
+        if (b
+                == true) {
             Icon icon = new javax.swing.ImageIcon(getClass().getResource("/img/themmoiicon.png"));
             JOptionPane.showMessageDialog(this, "Tạo Hóa Đơn Bảo Hành Thành Công", "Hóa Đơn", JOptionPane.INFORMATION_MESSAGE, icon);
             loadTBHDBH();
@@ -473,6 +520,10 @@ public class BaoHanhView extends javax.swing.JFrame {
         }
 
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        System.exit(0);
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -488,16 +539,24 @@ public class BaoHanhView extends javax.swing.JFrame {
                 if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
+
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(BaoHanhView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(BaoHanhView.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(BaoHanhView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(BaoHanhView.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(BaoHanhView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(BaoHanhView.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(BaoHanhView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(BaoHanhView.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
@@ -512,6 +571,7 @@ public class BaoHanhView extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
