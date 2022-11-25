@@ -238,6 +238,8 @@ public class BanHangView extends javax.swing.JFrame implements Runnable, ThreadF
     }
 
     public void loadHD() {
+        List<ViewModelHoaDonBanHang> lists = hdService.getList();
+
         model = (DefaultTableModel) tblHoaDon.getModel();
         model.setColumnCount(0);
         model.addColumn("Id");
@@ -247,7 +249,11 @@ public class BanHangView extends javax.swing.JFrame implements Runnable, ThreadF
         model.addColumn("Trang Thai");
 
         model.setRowCount(0);
-        List<ViewModelHoaDonBanHang> lists = hdService.getList();
+
+        if (lists == null) {
+            return;
+        }
+
         for (ViewModelHoaDonBanHang a : lists) {
             model.addRow(new Object[]{
                 a.getId(), "Hóa Đơn " + a.getMa(), a.getNgayTao(), a.getTenNV(), a.getTrangThaiHoaDon()
