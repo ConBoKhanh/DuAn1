@@ -87,19 +87,23 @@ public class BanHangView extends javax.swing.JFrame implements Runnable, ThreadF
     String IdNV;
     String TenNV;
     String CV;
+    int page1 = 1;
 
     public BanHangView(String Id, String Ten, String cv) {
         initComponents();
-         this.setDefaultCloseOperation(BanHangView.DO_NOTHING_ON_CLOSE);
-        loadSP(1);
+        setLocationRelativeTo(null);
+        this.setDefaultCloseOperation(BanHangView.DO_NOTHING_ON_CLOSE);
+        loadSP(page1);
         pagination1.setPaginationItemRender(new PaginationItemRenderStyle1());
         pagination1.addEventPagination(new EventPagination() {
             @Override
             public void pageChanged(int page) {
+                page1 = page;
                 loadSP(page);
+                
             }
         });
-        setLocationRelativeTo(null);
+
         IdNV = Id;
         TenNV = Ten;
         CV = cv;
@@ -990,6 +994,11 @@ public class BanHangView extends javax.swing.JFrame implements Runnable, ThreadF
         });
 
         pagination1.setOpaque(false);
+        pagination1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                pagination1MouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -1353,7 +1362,7 @@ public class BanHangView extends javax.swing.JFrame implements Runnable, ThreadF
                 Icon icon = new javax.swing.ImageIcon(getClass().getResource("/img/themmoiicon.png"));
                 JOptionPane.showMessageDialog(this, "Thêm  thành công", "Sản Phẩm", JOptionPane.INFORMATION_MESSAGE, icon);
                 ctdgSV.truSanPham(IdSp, soluongnhap);
-                loadSP(1);
+                loadSP(page1);
                 loadCTHH(idhd);
                 int tongtien = cthdService.TongTien(txtIdhd.getText());
                 txtTongTien.setText(tongtien + "");
@@ -1401,7 +1410,7 @@ public class BanHangView extends javax.swing.JFrame implements Runnable, ThreadF
                 JOptionPane.showMessageDialog(this, "Thêm  thành công", "Sản Phẩm", JOptionPane.INFORMATION_MESSAGE, icon);
                 ctdgSV.truSanPham(IdSp, soluongnhap1);
                 System.out.println(soluongnhap1);
-                loadSP(1);
+                loadSP(page1);
                 loadCTHH(idhd);
                 int tongtien = cthdService.TongTien(txtIdhd.getText());
                 txtTongTien.setText(tongtien + "");
@@ -1466,7 +1475,7 @@ public class BanHangView extends javax.swing.JFrame implements Runnable, ThreadF
                     loadCTHH(txtIdhd.getText());
                     int tongtien = cthdService.TongTien(txtIdhd.getText());
                     txtTongTien.setText(tongtien + "");
-                    loadSP(1);
+                    loadSP(page1);
                 } else if (SoLuongNhap < soLuong) {
                     int cong = soLuong - SoLuongNhap;
                     ctdgSV.congSanPham(idsp, cong);
@@ -1475,7 +1484,7 @@ public class BanHangView extends javax.swing.JFrame implements Runnable, ThreadF
                     loadCTHH(txtIdhd.getText());
                     int tongtien = cthdService.TongTien(txtIdhd.getText());
                     txtTongTien.setText(tongtien + "");
-                    loadSP(1);
+                    loadSP(page1);
                 }
             } else {
                 Icon icon = new javax.swing.ImageIcon(getClass().getResource("/img/deleteicon.png"));
@@ -1490,7 +1499,7 @@ public class BanHangView extends javax.swing.JFrame implements Runnable, ThreadF
                 Icon icon = new javax.swing.ImageIcon(getClass().getResource("/img/themmoiicon.png"));
                 JOptionPane.showMessageDialog(this, "delete thành công", "Sản Phẩm", JOptionPane.INFORMATION_MESSAGE, icon);
                 ctdgSV.congSanPham(idsp, Integer.parseInt(tblCTHH.getValueAt(index, 3).toString()));
-                loadSP(1);
+                loadSP(page1);
                 loadCTHH(txtIdhd.getText());
                 int tongtien = cthdService.TongTien(txtIdhd.getText());
                 txtTongTien.setText(tongtien + "");
@@ -1544,8 +1553,12 @@ public class BanHangView extends javax.swing.JFrame implements Runnable, ThreadF
     }//GEN-LAST:event_txtIdhdActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        loadSP(1);
+        loadSP(page1);
     }//GEN-LAST:event_formWindowOpened
+
+    private void pagination1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pagination1MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_pagination1MouseClicked
 
     /**
      * @param args the command line arguments
