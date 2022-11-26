@@ -132,7 +132,7 @@ public class test extends javax.swing.JFrame {
             List<ChiTietDoGo> list = q.getResultList();
             session.close();
             for (ChiTietDoGo a : list) {
-                dataset.setValue(a.getTenSP(), a.getSoLuong());
+                dataset.setValue(a.getTenSP()+" SL"+a.getSoLuong(), a.getSoLuong());
                 System.out.println(a.toString());
             }
             for (ChiTietDoGo a : list) {
@@ -145,19 +145,23 @@ public class test extends javax.swing.JFrame {
                 dataset, true, true,
                 false);
         ///////////////
-//        JFreeChart barChart = ChartFactory.createBarChart3D("Bang2",
-//                "TenSP", "soluong", dataset2,
-//                PlotOrientation.VERTICAL, true,
-//                true, false);
+        JFreeChart barChart = ChartFactory.createBarChart3D("Bang2",
+                "TenSP", "soluong", dataset2,
+                PlotOrientation.VERTICAL, true,
+                true, false);
         //////////////////
         PiePlot3D p1 = (PiePlot3D) chart.getPlot();
 //        CategoryPlot p1 = (CategoryPlot) barChart.getCategoryPlot();
 
 //        p1.setRangeGridlinePaint(Color.ORANGE);
         ChartFrame frame = new ChartFrame("Bang", chart, true);
+        ChartFrame frame1 = new ChartFrame("Bang", barChart, true);
         frame.setVisible(true);
         frame.setSize(500, 400);
         frame.setVisible(true);
+        frame1.setVisible(true);
+        frame1.setSize(500, 400);
+        frame1.setVisible(true);
         ChartPanel chartPanel = new ChartPanel(chart);
 
         iii.removeAll();
