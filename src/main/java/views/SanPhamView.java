@@ -191,25 +191,31 @@ public class SanPhamView extends javax.swing.JFrame {
     }
 
     public boolean checkTen() { //check ten sp
-        String ten = txtTen.getText();
+       
+        
+        String ten= txtTen.getText();
         List<ViewModelSanPham> sp = spSV.getListSP();
         for (ViewModelSanPham v : sp) {
-            if (ten.equals(v.getTen())) {
-                JOptionPane.showMessageDialog(this, "Tên đã tồn tại!");
+           
+            if (ten.isBlank()) {
+                JOptionPane.showMessageDialog(this, "Tên trong !");
                 return false;
             }
         }
         return true;
+        
     }
 
     public boolean checkTenNguocGoc() { //check ten nguồn quốc
+      
         String ten = txtQuocGia.getText();
         List<ViewModelNguonGoc> sp = ngSv.getAll();
         for (ViewModelNguonGoc v : sp) {
-            if (ten.equals(v.getquocgia())) {
-                JOptionPane.showMessageDialog(this, "Tên quốc gia đã tồn tại!");
+            if (ten.isBlank()) {
+                JOptionPane.showMessageDialog(this, "Tên trong !");
                 return false;
             }
+            
         }
         return true;
     }
@@ -218,8 +224,8 @@ public class SanPhamView extends javax.swing.JFrame {
         String ten = txtTenDongGo.getText();
         List<ViewModelDongGo> dg = dgSV.getListDongGo();
         for (ViewModelDongGo v : dg) {
-            if (ten.equals(v.getTenLoaiGo())) {
-                JOptionPane.showMessageDialog(this, "Tên loại gỗ đã tồn tại!");
+            if (ten.isBlank()) {
+                JOptionPane.showMessageDialog(this, "Tên trong !");
                 return false;
             }
         }
@@ -230,8 +236,8 @@ public class SanPhamView extends javax.swing.JFrame {
         String ten = TXTDVT.getText();
         List<ViewModelDonViTinh> sp = dvtrp.getListDVT();
         for (ViewModelDonViTinh v : sp) {
-            if (ten.equals(v.getDonViTinh())) {
-                JOptionPane.showMessageDialog(this, "DVT đã tồn tại!");
+            if (ten.isBlank()) {
+                JOptionPane.showMessageDialog(this, "DVT trong!");
                 return false;
             }
         }
