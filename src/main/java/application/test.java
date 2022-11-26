@@ -17,5 +17,53 @@ public class test {
         System.out.println("an đã sửa mà cứ thích cãi ");
         System.out.println("duy da lay lai duoc may");
         System.out.println("duy da lay lai duoc may");
+        System.out.println("a");
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
     }
 }
