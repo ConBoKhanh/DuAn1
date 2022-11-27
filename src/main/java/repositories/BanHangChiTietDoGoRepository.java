@@ -42,6 +42,7 @@ public class BanHangChiTietDoGoRepository {
                     + "OFFSET " + i + " ROWS \n"
                     + "FETCH NEXT " + b + " ROWS ONLY");
             List<Object[]> list = q.getResultList();
+            session.close();
             return list;
         } catch (HibernateException hibernateException) {
             return null;
@@ -56,7 +57,7 @@ public class BanHangChiTietDoGoRepository {
 
             List<Object[]> list = q.getResultList();
             for (Object[] objects : list) {
-                index  = Integer.parseInt(objects[0].toString());
+                index = Integer.parseInt(objects[0].toString());
             }
             return index;
         } catch (HibernateException hibernateException) {
@@ -73,13 +74,45 @@ public class BanHangChiTietDoGoRepository {
         return list;
     }
 
-    public List<ChiTietDoGo> TimKiemTen(String Ten) {
-        Session session = HibernatUtil.getFACTORY().openSession();
-        Query q = session.createQuery("FROM ChiTietDoGo Where TrangThai = 1 and TenSP like :ten ");
-        q.setParameter("ten", "%" + Ten + "%");
+    public List<Object[]> TimKiemTen(String Ten, int i, int b) {
+        try {
+            Session session = HibernatUtil.getFACTORY().openSession();
+            Query q = session.createNativeQuery("select A.Id,A.TenSP,B.Ten,C.TenDongSP,D.TenLoaiGo"
+                    + ",E.TenNCC,F.QuocGia,G.DonViTinh \n"
+                    + ", A.SoLuong,A.GiaNhap,A.GiaBan,A.MoTa,A.TrangThai\n"
+                    + "from ChiTietDoGo A Left Join SanPham B\n"
+                    + "ON A.IdSanPham = B.Id left join LoaiSP C On A.IdLoaiSP = C.Id \n"
+                    + "left Join DongGo D ON A.IdDongGo = D.Id left Join NhaCungCap E ON \n"
+                    + "A.IdNhaCungCap = E.Id LEFT JOIN NguonGoc F ON A.IdNguonGoc = F.Id \n"
+                    + "LEFT JOIN DonViTinh G ON A.IdDonViTinh = G.Id\n"
+                    + "where A.TrangThai = 1 and A.TenSP LIKE :Ten\n"
+                    + "ORDER BY A.TrangThai desc \n"
+                    + "OFFSET " + i + " ROWS \n"
+                    + "FETCH NEXT " + b + " ROWS ONLY");
+            q.setParameter("Ten", "%" + Ten + "%");
+            List<Object[]> list = q.getResultList();
+            session.close();
+            return list;
+        } catch (HibernateException hibernateException) {
+            return null;
+        }
+    }
 
-        List<ChiTietDoGo> list = q.getResultList();
-        return list;
+    public int getRowTimKiem(String Ten) {
+        int i = -1;
+        try {
+            Session session = HibernatUtil.getFACTORY().openSession();
+            Query q = session.createQuery("From ChiTietDoGo A Where  A.TrangThai = 1 and A.TenSP LIKE :Ten ");
+
+            q.setParameter("Ten", "%" + Ten + "%");
+            List<ChiTietDoGo> list = q.getResultList();
+           
+                i = list.size();
+            
+            return i;
+        } catch (HibernateException hibernateException) {
+            return -1;
+        }
     }
 
     public boolean add(ChiTietDoGo go) {
@@ -170,9 +203,10 @@ public class BanHangChiTietDoGoRepository {
 
     public static void main(String[] args) {
         BanHangChiTietDoGoRepository i = new BanHangChiTietDoGoRepository();
-//        for (Object[] arg : i.getList(0, 10)) {
-//            System.out.println(arg[0] + "    " + arg[1]);
-//        }
-        System.out.println(i.getRow());
+        for (Object[] arg : i.TimKiemTen("Ghe", 0, 10)) {
+            System.out.println(arg[0] + "    " + arg[1]);
+        }
+        int row = i.getRowTimKiem("Ghe");
+        System.out.println(row);
     }
 }

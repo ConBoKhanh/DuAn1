@@ -17,10 +17,12 @@ public interface IManageChiTietDoGoBanHangService {
     List<ViewModelChiTietSanPhamBanHang> getList(int i, int b);
 
     int getRow();
+    
+    int getRowTimKiem(String Ten);
 
     List<ViewModelChiTietSanPhamBanHang> TimKiemTheoId(String Id);
 
-    List<ViewModelChiTietSanPhamBanHang> TimKiemTen(String Ten);
+    List<ViewModelChiTietSanPhamBanHang> TimKiemTen(String Ten, int i, int b);
 
     boolean add(ChiTietDoGo go);
 

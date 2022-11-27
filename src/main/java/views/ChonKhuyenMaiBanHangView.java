@@ -5,6 +5,8 @@
 package views;
 
 import java.util.List;
+import javax.swing.Icon;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import services.KhachHangService;
 import services.KhuyenMaiService;
@@ -46,11 +48,18 @@ public class ChonKhuyenMaiBanHangView extends javax.swing.JFrame {
                 a.getId(), a.getMa(), a.getTenKhuyenMai(), a.getNgayBatDau(), a.getNgayKetThuc(), a.getPhanTramKM()
             });
         }
+        int a = tbbang.getSelectedRow();
+        if (a < 0) {
+           
+        }
         loadthgdautien();
     }
 
     public void loadthgdautien() {
-
+        int a = tbbang.getSelectedRow();
+        if (a < 0) {
+            return;
+        }
         int index = 0;
         txtid.setText(tbbang.getValueAt(index, 0).toString());
         txtma.setText(tbbang.getValueAt(index, 1).toString());
@@ -284,7 +293,9 @@ public class ChonKhuyenMaiBanHangView extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         List<KhuyenMaiViewModel> km = kmSV.getListKMCon();
-        if (km == null) {
+        if (tbbang.getSelectedRow() < 0) {
+            Icon icon = new javax.swing.ImageIcon(getClass().getResource("/img/themmoiicon.png"));
+            JOptionPane.showMessageDialog(this, "Hôm Nay Chả Có Khuyến Mãi ", "Hóa Đơn", JOptionPane.INFORMATION_MESSAGE, icon);
             return;
         }
         int index = tbbang.getSelectedRow();

@@ -58,37 +58,38 @@ import viewModel.ViewModelHoaDonChiTietBanHang;
  * @author Admin
  */
 public class BanHangView extends javax.swing.JFrame implements Runnable, ThreadFactory {
-    
+
     private WebcamPanel panel = null;
     private Webcam webcam = null;
     private static final long serialVersionUID = 6441489157408381878L;
     private Executor executor = Executors.newSingleThreadExecutor(this);
     String ten = null;
-    
+
     DefaultTableModel model = new DefaultTableModel();
-    
+
     private IManageChiTietDoGoBanHangService spService = new ChiTietDoGoBanHangService();
-    
+
     private IManageHoaDonBanHangService hdService = new HoaDonBanHangService();
-    
+
     private static IManageChiTietHoaDonBanHang cthdService = new HoaDonChiTietService();
-    
+
     private IManageChiTietDoGoService ctdgSV = new ChiTietDoGoService();
-    
+
     private IManageKhuyenMaiService kmSV = new KhuyenMaiService();
-    
+
     private static String idkh = null;
     private static String TenKH = null;
     private static String SdtKH = null;
-    
+
     private static String idkm = null;
     private static String ptkm = null;
-    
+
     String IdNV;
     String TenNV;
     String CV;
     int page1 = 1;
-    
+    int page2 = 1;
+
     public BanHangView(String Id, String Ten, String cv) {
         initComponents();
         setLocationRelativeTo(null);
@@ -100,25 +101,33 @@ public class BanHangView extends javax.swing.JFrame implements Runnable, ThreadF
         pagination1.addEventPagination(new EventPagination() {
             @Override
             public void pageChanged(int page) {
-                page1 = page;
-                loadSP(page);
-                
+                if (result_field.getText().equals("")) {
+                    page1 = page;
+                    loadSP(page);
+                } else {
+                    page2 = page;
+                    loadSPByTen(result_field.getText(), page);
+                }
+
             }
         });
-        
+
         IdNV = Id;
         TenNV = Ten;
         CV = cv;
         initWebcam();
         loadHD();
+        loadCTHH(txtIdhd.getText());
+        int tongtien = cthdService.TongTien(txtIdhd.getText());
+        txtTongTien.setText(tongtien + "");
         txtIdhd.setEditable(false);
         txtMahd.setEditable(false);
         txtNgayTao.setEditable(false);
         txtTenNV.setEditable(false);
         txtTongTien.setEditable(false);
-        
+
     }
-    
+
     public static void TTKHView(String id, String kh, String sdt) {
         BanHangView.idkh = id;
         BanHangView.TenKH = kh;
@@ -127,14 +136,14 @@ public class BanHangView extends javax.swing.JFrame implements Runnable, ThreadF
         txtSdt.setText(SdtKH);
 //        System.out.println(idkh);
     }
-    
+
     public static void ChonKhuyenMaiBanHang(String id, String kmpt) {
         BanHangView.idkm = id;
         BanHangView.ptkm = kmpt;
         txtkm.setText(ptkm);
 //        System.out.println(idkm);
     }
-    
+
     public int layGiaSanPhamTheoId(String idsp) {
         int dongia = 0;
         List<ViewModelChiTietSanPhamBanHang> listsp = spService.TimKiemTheoId(idsp);
@@ -145,50 +154,53 @@ public class BanHangView extends javax.swing.JFrame implements Runnable, ThreadF
         }
         return dongia;
     }
-    
+
     public void loadSP(int page) {
-        int limit = 5;
-        int count = 0;
-        
-        List<ViewModelChiTietSanPhamBanHang> listsp = spService.getList((page - 1) * limit, limit);
-        if (listsp == null) {
-            return;
-        }
-        
-        count = spService.getRow();
-        
-        int totalPage = (int) Math.ceil(count / limit);
-        
-        model = (DefaultTableModel) tblSanPham.getModel();
-        model.setColumnCount(0);
-        model.addColumn("Id");
-        model.addColumn("TenSP");
-        model.addColumn("sp");
-        model.addColumn("LoaiSP");
-        model.addColumn("DongGo");
-        model.addColumn("NhaCungCap");
-        model.addColumn("NguonGoc");
-        model.addColumn("SoLuong");
-        model.addColumn("MoTa");
-        model.addColumn("GiaNhap");
-        model.addColumn("GiaBan");
-        model.setRowCount(0);
-        
-        for (ViewModelChiTietSanPhamBanHang a : listsp) {
-            model.addRow(new Object[]{
-                a.getId(), a.getTenSp(), a.getSanPham(), a.getLoaiSP(), a.getDongGo(), a.getNhaCungCap(), a.getNguonGoc(),
-                a.getSoLuong(), a.getMoTa(), a.getGiaBan(), a.getGiaBan()
-            
-            });
-        }
-        
-        if (count / limit != 0) {
-            pagination1.setPagegination(page, totalPage + 1);
-        } else if (count / limit == 0) {
-            pagination1.setPagegination(page, totalPage);
+        try {
+            int limit = 5;
+            int count = 0;
+
+            List<ViewModelChiTietSanPhamBanHang> listsp = spService.getList((page - 1) * limit, limit);
+            if (listsp == null) {
+                return;
+            }
+
+            count = spService.getRow();
+
+            int totalPage = (int) Math.ceil(count / limit);
+
+            model = (DefaultTableModel) tblSanPham.getModel();
+            model.setColumnCount(0);
+            model.addColumn("Id");
+            model.addColumn("TenSP");
+            model.addColumn("sp");
+            model.addColumn("LoaiSP");
+            model.addColumn("DongGo");
+            model.addColumn("NhaCungCap");
+            model.addColumn("NguonGoc");
+            model.addColumn("SoLuong");
+            model.addColumn("MoTa");
+            model.addColumn("GiaNhap");
+            model.addColumn("GiaBan");
+            model.setRowCount(0);
+
+            for (ViewModelChiTietSanPhamBanHang a : listsp) {
+                model.addRow(new Object[]{
+                    a.getId(), a.getTenSp(), a.getSanPham(), a.getLoaiSP(), a.getDongGo(), a.getNhaCungCap(), a.getNguonGoc(),
+                    a.getSoLuong(), a.getMoTa(), a.getGiaBan(), a.getGiaBan()
+
+                });
+            }
+
+            if (count / limit != 0) {
+                pagination1.setPagegination(page, totalPage + 1);
+            } else if (count / limit == 0) {
+                pagination1.setPagegination(page, totalPage);
+            }
+        } catch (Exception e) {
         }
     }
-    
+
     public void loadTheoId(String id) {
         try {
             model = (DefaultTableModel) tblSanPham.getModel();
@@ -210,43 +222,64 @@ public class BanHangView extends javax.swing.JFrame implements Runnable, ThreadF
                 model.addRow(new Object[]{
                     a.getId(), a.getTenSp(), a.getSanPham(), a.getLoaiSP(), a.getDongGo(), a.getNhaCungCap(), a.getNguonGoc(),
                     a.getSoLuong(), a.getMoTa(), a.getGiaBan(), a.getGiaBan()
-                
+
                 });
             }
         } catch (Exception e) {
         }
-        
+
     }
-    
-    public void loadSPByTen(String ten) {
-        model = (DefaultTableModel) tblSanPham.getModel();
-        model.setColumnCount(0);
-        model.addColumn("Id");
-        model.addColumn("TenSP");
-        model.addColumn("sp");
-        model.addColumn("LoaiSP");
-        model.addColumn("DongGo");
-        model.addColumn("NhaCungCap");
-        model.addColumn("NguonGoc");
-        model.addColumn("SoLuong");
-        model.addColumn("MoTa");
-        model.addColumn("GiaNhap");
-        model.addColumn("GiaBan");
-        model.setRowCount(0);
-        List<ViewModelChiTietSanPhamBanHang> listsp = spService.TimKiemTen(ten);
-        for (ViewModelChiTietSanPhamBanHang a : listsp) {
-            model.addRow(new Object[]{
-                a.getId(), a.getTenSp(), a.getSanPham(), a.getLoaiSP(), a.getDongGo(), a.getNhaCungCap(), a.getNguonGoc(),
-                a.getSoLuong(), a.getMoTa(), a.getGiaBan(), a.getGiaBan()
-            
-            });
+
+    public void loadSPByTen(String ten, int page1) {
+        try {
+            int limit = 5;
+            int count = 0;
+
+            List<ViewModelChiTietSanPhamBanHang> listsp = spService.TimKiemTen(ten, (page1 - 1) * limit, limit);
+
+            if (listsp == null) {
+                return;
+            }
+
+            count = spService.getRowTimKiem(ten);
+
+            int totalPage = (int) Math.ceil(count / limit);
+
+            model = (DefaultTableModel) tblSanPham.getModel();
+            model.setColumnCount(0);
+            model.addColumn("Id");
+            model.addColumn("TenSP");
+            model.addColumn("sp");
+            model.addColumn("LoaiSP");
+            model.addColumn("DongGo");
+            model.addColumn("NhaCungCap");
+            model.addColumn("NguonGoc");
+            model.addColumn("SoLuong");
+            model.addColumn("MoTa");
+            model.addColumn("GiaNhap");
+            model.addColumn("GiaBan");
+            model.setRowCount(0);
+
+            for (ViewModelChiTietSanPhamBanHang a : listsp) {
+                model.addRow(new Object[]{
+                    a.getId(), a.getTenSp(), a.getSanPham(), a.getLoaiSP(), a.getDongGo(), a.getNhaCungCap(), a.getNguonGoc(),
+                    a.getSoLuong(), a.getMoTa(), a.getGiaBan(), a.getGiaBan()
+
+                });
+            }
+
+            if (count / limit != 0) {
+                pagination1.setPagegination(page1, totalPage + 1);
+            } else if (count / limit == 0) {
+                pagination1.setPagegination(page1, totalPage);
+            }
+        } catch (Exception e) {
         }
-        
     }
-    
+
     public void loadHD() {
         List<ViewModelHoaDonBanHang> lists = hdService.getList();
-        
+
         model = (DefaultTableModel) tblHoaDon.getModel();
         model.setColumnCount(0);
         model.addColumn("Id");
@@ -254,20 +287,20 @@ public class BanHangView extends javax.swing.JFrame implements Runnable, ThreadF
         model.addColumn("NgayTao");
         model.addColumn("TenNV");
         model.addColumn("Trang Thai");
-        
+
         model.setRowCount(0);
-        
+
         if (lists == null) {
             return;
         }
-        
+
         for (ViewModelHoaDonBanHang a : lists) {
             model.addRow(new Object[]{
                 a.getId(), "Hóa Đơn " + a.getMa(), a.getNgayTao(), a.getTenNV(), a.getTrangThaiHoaDon()
             });
         }
     }
-    
+
     public static void sale() {
         try {
             int tongtien = cthdService.TongTien(txtIdhd.getText());
@@ -276,7 +309,7 @@ public class BanHangView extends javax.swing.JFrame implements Runnable, ThreadF
                 return;
             }
             int pt = Integer.parseInt(txtkm.getText());
-            
+
             float a = 100 - pt;
             float b = a / 100;
             float c = tongtien * b;
@@ -285,13 +318,13 @@ public class BanHangView extends javax.swing.JFrame implements Runnable, ThreadF
         } catch (Exception e) {
         }
     }
-    
+
     public void addtxtNew() {
         String idhd = null;
         String ma = null;
         String nv = null;
         String date = null;
-        
+
         List<ViewModelHoaDonBanHang> lists = hdService.getList();
         int i = hdService.maxma();
         for (ViewModelHoaDonBanHang list : lists) {
@@ -307,7 +340,7 @@ public class BanHangView extends javax.swing.JFrame implements Runnable, ThreadF
         txtTenNV.setText(nv);
         txtNgayTao.setText(date);
     }
-    
+
     public void loadCTHH(String id) {
         model = (DefaultTableModel) tblCTHH.getModel();
         model.setRowCount(0);
@@ -321,7 +354,7 @@ public class BanHangView extends javax.swing.JFrame implements Runnable, ThreadF
             });
         }
     }
-    
+
     public int getSoluong(String idsp) {
         int i = 0;
         List<ViewModelHoaDonChiTietBanHang> lisst = cthdService.list(txtIdhd.getText());
@@ -1122,7 +1155,7 @@ public class BanHangView extends javax.swing.JFrame implements Runnable, ThreadF
     }//GEN-LAST:event_txtNgayTaoActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        
+
         TTKHView i = new TTKHView();
         i.setVisible(true);
         i.pack();
@@ -1134,7 +1167,8 @@ public class BanHangView extends javax.swing.JFrame implements Runnable, ThreadF
         if (result_field.getText().equals("")) {
             loadSP(1);
         } else {
-            loadSPByTen(result_field.getText());
+            loadSPByTen(result_field.getText(), page2);
+
         }
     }//GEN-LAST:event_result_fieldKeyReleased
 
@@ -1172,67 +1206,49 @@ public class BanHangView extends javax.swing.JFrame implements Runnable, ThreadF
 
     private void tblHoaDonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblHoaDonMouseClicked
         int index = tblHoaDon.getSelectedRow();
-        
+
         txtIdhd.setText(tblHoaDon.getValueAt(index, 0).toString());
         txtMahd.setText(tblHoaDon.getValueAt(index, 1).toString());
         txtNgayTao.setText(tblHoaDon.getValueAt(index, 2).toString());
         txtTenNV.setText(tblHoaDon.getValueAt(index, 3).toString());
-        
+
         loadCTHH(tblHoaDon.getValueAt(index, 0).toString());
         int tongtien = cthdService.TongTien(txtIdhd.getText());
         txtTongTien.setText(tongtien + "");
     }//GEN-LAST:event_tblHoaDonMouseClicked
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        
+
         HoaDon hd = new HoaDon();
         NhanVien nv = new NhanVien();
         nv.setId(IdNV);
         hd.setIdNhanVien(nv);
-        
+
         boolean b = hdService.add(hd);
         if (b == true) {
             Icon icon = new javax.swing.ImageIcon(getClass().getResource("/img/themmoiicon.png"));
             JOptionPane.showMessageDialog(this, "Tạo Hóa Đơn Thành Công", "Hóa Đơn", JOptionPane.INFORMATION_MESSAGE, icon);
             loadHD();
             addtxtNew();
-            
+
         } else {
             Icon icon = new javax.swing.ImageIcon(getClass().getResource("/img/deleteicon.png"));
             JOptionPane.showMessageDialog(this, "Trùng Mã Hóa Đơn", "Hóa Đơn !", JOptionPane.INFORMATION_MESSAGE, icon);
-            
+
         }
-        
+
 
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         try {
-            
+
             if (tblCTHH.getRowCount() == 0) {
                 Icon icon = new javax.swing.ImageIcon(getClass().getResource("/img/deleteicon.png"));
                 JOptionPane.showMessageDialog(this, "Ủa Anh Chưa Mua Đã Tính Tiền À!", "Hóa Đơn !", JOptionPane.INFORMATION_MESSAGE, icon);
                 return;
             }
-            
-            List<KhuyenMaiViewModel> km = kmSV.getListKMCon();
-            if (km == null) {
-                
-            } else if (txtkm.getText().equals("")) {
-                String[] buttons = {"Chosse", "Cancel"};
-                int rc = JOptionPane.showOptionDialog(null, "Shop Vẫn Còn Hóa Đơn Vui Lòng Chọn !", "KhuyenMai",
-                        JOptionPane.WARNING_MESSAGE, 0, null, buttons, buttons[1]);
-                if (rc == 0) {
-                    ChonKhuyenMaiBanHangView i = new ChonKhuyenMaiBanHangView();
-                    i.setVisible(true);
-                    i.pack();
-                    i.setLocationRelativeTo(null);
-                    i.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-                    return;
-                }
-                
-            }
-            
+
             if (txtTenKH.getText().equals("")) {
                 String[] buttons = {"Chosse", "Cancel"};
                 int rc = JOptionPane.showOptionDialog(null, "Vui Lòng Chọn Khách Hàng!", "Khach Hang",
@@ -1244,17 +1260,19 @@ public class BanHangView extends javax.swing.JFrame implements Runnable, ThreadF
                     i.setLocationRelativeTo(null);
                     i.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
                     return;
+                } else if (rc == 1) {
+                    txtkm.setText("Không Chọn Khuyến Mãi");
                 }
             }
-            
+
             int tongTien = Integer.parseInt(txtTongTien.getText());
-            
+
             int tienTra = Integer.parseInt(txtKhachTra.getText());
-            
+
             int tienThua = tienTra - tongTien;
-            
+
             String TT = String.valueOf(tienThua);
-            
+
             if (LB.getText().equals("Chua Du")) {
                 Icon icon = new javax.swing.ImageIcon(getClass().getResource("/img/deleteicon.png"));
                 JOptionPane.showMessageDialog(this, "Khách trả chưa đủ tiền!", "Hóa Đơn !", JOptionPane.INFORMATION_MESSAGE, icon);
@@ -1265,11 +1283,11 @@ public class BanHangView extends javax.swing.JFrame implements Runnable, ThreadF
                 JOptionPane.showMessageDialog(this, "Khách trả chưa đủ tiền!", "Hóa Đơn !", JOptionPane.INFORMATION_MESSAGE, icon);
                 return;
             }
-            
+
             String idkh1 = BanHangView.idkh;
-            
+
             String idkm1 = BanHangView.idkm;
-            
+
             boolean b = hdService.update(txtIdhd.getText(), new BigDecimal(tongTien), idkh1, idkm1);
             if (b == true) {
                 Icon icon = new javax.swing.ImageIcon(getClass().getResource("/img/themmoiicon.png"));
@@ -1295,11 +1313,11 @@ public class BanHangView extends javax.swing.JFrame implements Runnable, ThreadF
                 BanHangView.idkm = null;
                 model = (DefaultTableModel) tblCTHH.getModel();
                 model.setRowCount(0);
-                
+
             } else {
                 Icon icon = new javax.swing.ImageIcon(getClass().getResource("/img/deleteicon.png"));
                 JOptionPane.showMessageDialog(this, "Thất bại", "Hóa Đơn !", JOptionPane.INFORMATION_MESSAGE, icon);
-                
+
             }
         } catch (NumberFormatException numberFormatException) {
             Icon icon = new javax.swing.ImageIcon(getClass().getResource("/img/themmoiicon.png"));
@@ -1310,7 +1328,7 @@ public class BanHangView extends javax.swing.JFrame implements Runnable, ThreadF
             JOptionPane.showMessageDialog(this, "Từ Từ Trong Ngày Vẫn Còn", "Khuyến Mãi", JOptionPane.INFORMATION_MESSAGE, icon);
             return;
         }
-        
+
 
     }//GEN-LAST:event_jButton3ActionPerformed
 
@@ -1324,7 +1342,7 @@ public class BanHangView extends javax.swing.JFrame implements Runnable, ThreadF
 
     private void tblSanPhamMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblSanPhamMouseClicked
         int index = tblSanPham.getSelectedRow();
-        
+
         String IdSp = (String) tblSanPham.getValueAt(index, 0);// id sản phẩm
 
         String Tensp = (String) tblSanPham.getValueAt(index, 1); // tên sp
@@ -1341,37 +1359,41 @@ public class BanHangView extends javax.swing.JFrame implements Runnable, ThreadF
                 JOptionPane.showMessageDialog(this, "Số lượng không đủ!");
                 return;
             }
-            
+
             BigDecimal giaBanBig = (BigDecimal) tblSanPham.getValueAt(index, 10); // giá bán 
             String giaban = String.valueOf(giaBanBig);
             String idhd = txtIdhd.getText();// id hóa đơn
 
             int soluongnhap = Integer.parseInt(soLuongNhapinpit);
             int dongia = soluongnhap * Integer.parseInt(giaban);
-            
+
             HoaDonChiTiet hd = new HoaDonChiTiet();
             HoaDon a = new HoaDon();
             a.setId(idhd);
-            
+
             ChiTietDoGo b = new ChiTietDoGo();
             b.setId(IdSp);
-            
+
             hd.setIdHoaDon(a);
             hd.setIdChiTietDoGo(b);
             hd.setSoLuong(soluongnhap);
             hd.setDonGia(BigDecimal.valueOf(dongia));
-            
+
             boolean c = cthdService.add(hd);
-            
+
             if (c == true) {
                 Icon icon = new javax.swing.ImageIcon(getClass().getResource("/img/themmoiicon.png"));
                 JOptionPane.showMessageDialog(this, "Thêm  thành công", "Sản Phẩm", JOptionPane.INFORMATION_MESSAGE, icon);
                 ctdgSV.truSanPham(IdSp, soluongnhap);
-                loadSP(page1);
+                if (result_field.getText().equals("")) {
+                    loadSP(page1);
+                } else {
+                    loadSPByTen(result_field.getText(), page2);
+                }
                 loadCTHH(idhd);
                 int tongtien = cthdService.TongTien(txtIdhd.getText());
                 txtTongTien.setText(tongtien + "");
-                
+
             } else {
                 Icon icon = new javax.swing.ImageIcon(getClass().getResource("/img/deleteicon.png"));
                 JOptionPane.showMessageDialog(this, "lỗi", "Sản Phẩm", JOptionPane.INFORMATION_MESSAGE, icon);
@@ -1400,55 +1422,59 @@ public class BanHangView extends javax.swing.JFrame implements Runnable, ThreadF
             int soluongnhap = Integer.parseInt(soLuongNhapinpit) + check;
             int soluongnhap1 = Integer.parseInt(soLuongNhapinpit);
             int dongia = soluongnhap * Integer.parseInt(giaban);
-            
+
             HoaDonChiTiet hd = new HoaDonChiTiet();
             HoaDon a = new HoaDon();
             a.setId(idhd);
-            
+
             ChiTietDoGo b = new ChiTietDoGo();
             b.setId(IdSp);
-            
+
             hd.setIdHoaDon(a);
             hd.setIdChiTietDoGo(b);
             hd.setSoLuong(soluongnhap);
             hd.setDonGia(BigDecimal.valueOf(dongia));
-            
+
             boolean c = cthdService.update(hd);
-            
+
             if (c == true) {
                 Icon icon = new javax.swing.ImageIcon(getClass().getResource("/img/themmoiicon.png"));
                 JOptionPane.showMessageDialog(this, "Thêm  thành công", "Sản Phẩm", JOptionPane.INFORMATION_MESSAGE, icon);
                 ctdgSV.truSanPham(IdSp, soluongnhap1);
                 System.out.println(soluongnhap1);
-                loadSP(page1);
+                if (result_field.getText().equals("")) {
+                    loadSP(page1);
+                } else {
+                    loadSPByTen(result_field.getText(), page2);
+                }
                 loadCTHH(idhd);
                 int tongtien = cthdService.TongTien(txtIdhd.getText());
                 txtTongTien.setText(tongtien + "");
-                
+
             } else {
                 Icon icon = new javax.swing.ImageIcon(getClass().getResource("/img/deleteicon.png"));
                 JOptionPane.showMessageDialog(this, "Lỗi Trống Hóa Đơn", "Sản Phẩm", JOptionPane.INFORMATION_MESSAGE, icon);
             }
         }
-        
+
 
     }//GEN-LAST:event_tblSanPhamMouseClicked
 
     private void tblCTHHMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblCTHHMouseClicked
         String[] buttons = {"Update", "Delete", "Cancel"};
-        
+
         int index = tblCTHH.getSelectedRow();
-        
+
         String idsp = (String) tblCTHH.getValueAt(index, 1);
-        
+
         List<ViewModelChiTietSanPhamBanHang> listsp = spService.TimKiemTheoId(idsp);
-        
+
         int soluonghientai = 0;
-        
+
         for (ViewModelChiTietSanPhamBanHang a : listsp) {
             soluonghientai = a.getSoLuong();
         }
-        
+
         int rc = JOptionPane.showOptionDialog(null, "Question ?", "Confirmation",
                 JOptionPane.WARNING_MESSAGE, 0, null, buttons, buttons[2]);
         if (rc == 0) {
@@ -1463,27 +1489,27 @@ public class BanHangView extends javax.swing.JFrame implements Runnable, ThreadF
                 return;
             }
             int SoLuongNhap = Integer.parseInt(soLuongNhapinpit);
-            
+
             int giaBan = layGiaSanPhamTheoId(idsp);
-            
+
             int dongia = SoLuongNhap * giaBan;
-            
+
             int soLuong = Integer.parseInt(tblCTHH.getValueAt(index, 3).toString());
-            
+
             HoaDonChiTiet hd = new HoaDonChiTiet();
             HoaDon a = new HoaDon();
             a.setId(txtIdhd.getText());
-            
+
             ChiTietDoGo b = new ChiTietDoGo();
             b.setId(idsp);
-            
+
             hd.setIdHoaDon(a);
             hd.setIdChiTietDoGo(b);
             hd.setSoLuong(SoLuongNhap);
             hd.setDonGia(BigDecimal.valueOf(dongia));
-            
+
             boolean c = cthdService.update(hd);
-            
+
             if (c == true) {//update
                 if (SoLuongNhap > soLuong) {
                     int tru = SoLuongNhap - soLuong;
@@ -1498,7 +1524,11 @@ public class BanHangView extends javax.swing.JFrame implements Runnable, ThreadF
                     loadCTHH(txtIdhd.getText());
                     int tongtien = cthdService.TongTien(txtIdhd.getText());
                     txtTongTien.setText(tongtien + "");
-                    loadSP(page1);
+                    if (result_field.getText().equals("")) {
+                        loadSP(page1);
+                    } else {
+                        loadSPByTen(result_field.getText(), page2);
+                    }
                 } else if (SoLuongNhap < soLuong) {
                     int cong = soLuong - SoLuongNhap;
                     ctdgSV.congSanPham(idsp, cong);
@@ -1507,7 +1537,11 @@ public class BanHangView extends javax.swing.JFrame implements Runnable, ThreadF
                     loadCTHH(txtIdhd.getText());
                     int tongtien = cthdService.TongTien(txtIdhd.getText());
                     txtTongTien.setText(tongtien + "");
-                    loadSP(page1);
+                    if (result_field.getText().equals("")) {
+                        loadSP(page1);
+                    } else {
+                        loadSPByTen(result_field.getText(), page2);
+                    }
                 }
             } else {
                 Icon icon = new javax.swing.ImageIcon(getClass().getResource("/img/deleteicon.png"));
@@ -1517,16 +1551,20 @@ public class BanHangView extends javax.swing.JFrame implements Runnable, ThreadF
         if (rc == 1) {// delete
 
             boolean c = cthdService.delete(idsp, txtIdhd.getText());
-            
+
             if (c == true) {
                 Icon icon = new javax.swing.ImageIcon(getClass().getResource("/img/themmoiicon.png"));
                 JOptionPane.showMessageDialog(this, "delete thành công", "Sản Phẩm", JOptionPane.INFORMATION_MESSAGE, icon);
                 ctdgSV.congSanPham(idsp, Integer.parseInt(tblCTHH.getValueAt(index, 3).toString()));
-                loadSP(page1);
+                if (result_field.getText().equals("")) {
+                    loadSP(page1);
+                } else {
+                    loadSPByTen(result_field.getText(), page2);
+                }
                 loadCTHH(txtIdhd.getText());
                 int tongtien = cthdService.TongTien(txtIdhd.getText());
                 txtTongTien.setText(tongtien + "");
-                
+
             } else {
                 Icon icon = new javax.swing.ImageIcon(getClass().getResource("/img/deleteicon.png"));
                 JOptionPane.showMessageDialog(this, "lỗi", "Sản Phẩm", JOptionPane.INFORMATION_MESSAGE, icon);
@@ -1544,22 +1582,22 @@ public class BanHangView extends javax.swing.JFrame implements Runnable, ThreadF
             return;
         } else {
             int tongTien = Integer.parseInt(txtTongTien.getText());
-            
+
             int tienTra = Integer.parseInt(txtKhachTra.getText());
-            
+
             int tienThua = tienTra - tongTien;
-            
+
             String TT = String.valueOf(tienThua);
-            
+
             txtTienThua.setText(TT.replaceAll("-", ""));
-            
+
             if (tongTien > tienTra) {
                 LB.setText("Chua Du");
             } else {
                 LB.setText("Tien Thua");
             }
         }
-        
+
 
     }//GEN-LAST:event_txtKhachTraKeyReleased
 
@@ -1618,26 +1656,26 @@ public class BanHangView extends javax.swing.JFrame implements Runnable, ThreadF
             }
         });
     }
-    
+
     private void initWebcam() {
-        
+
         try {
             Dimension size = WebcamResolution.QVGA.getSize();
             webcam = Webcam.getWebcams().get(0); //0 is default webcam
             webcam.setViewSize(size);
-            
+
             panel = new WebcamPanel(webcam);
             panel.setPreferredSize(size);
             panel.setFPSDisplayed(true);
-            
+
             jPanel2.add(panel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 470, 300));
-            
+
             executor.execute(this);
         } catch (WebcamException webcamException) {
         }
-        
+
     }
-    
+
     @Override
     public void run() {
         try {
@@ -1647,26 +1685,26 @@ public class BanHangView extends javax.swing.JFrame implements Runnable, ThreadF
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-                
+
                 Result result = null;
                 BufferedImage image = null;
-                
+
                 if (webcam.isOpen()) {
                     if ((image = webcam.getImage()) == null) {
                         continue;
                     }
                 }
-                
+
                 LuminanceSource source = new BufferedImageLuminanceSource(image);
                 BinaryBitmap bitmap = new BinaryBitmap(new HybridBinarizer(source));
-                
+
                 try {
-                    
+
                     result = new MultiFormatReader().decode(bitmap);
                 } catch (NotFoundException e) {
                     //No result...
                 }
-                
+
                 if (result != null) {
                     System.out.println(result);
                     loadTheoId(result.getText());
@@ -1678,7 +1716,7 @@ public class BanHangView extends javax.swing.JFrame implements Runnable, ThreadF
             System.out.println(e);
         }
     }
-    
+
     @Override
     public Thread newThread(Runnable r) {
         try {
