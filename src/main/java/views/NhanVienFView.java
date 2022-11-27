@@ -82,6 +82,20 @@ public class NhanVienFView extends javax.swing.JFrame {
             count = nhanVienService.getRow((page - 1) * limit, limit);
 
             model = (DefaultTableModel) TBBANG.getModel();
+            model.setColumnCount(0);
+            model.addColumn("Id");
+            model.addColumn("Mã");
+            model.addColumn("Họ tên");
+            model.addColumn("SĐT");
+            model.addColumn("Địa chỉ");
+            model.addColumn("Ngày sinh");
+            model.addColumn("Cửa hàng");
+            model.addColumn("Chức vụ");
+            model.addColumn("Mật khẩu");
+            model.addColumn("Email");
+            
+            
+            
 
             model.setRowCount(0);
 
