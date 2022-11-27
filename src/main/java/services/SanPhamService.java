@@ -4,6 +4,7 @@
  */
 package services;
 
+import domainModels.HoaDon;
 import domainModels.SanPham;
 import java.util.ArrayList;
 import java.util.List;
@@ -88,12 +89,44 @@ public class SanPhamService implements IManageSanPhamService {
             return false;
         }
     }
-    
+
     public static void main(String[] args) {
         SanPhamService spSV = new SanPhamService();
-         List<ViewModelSanPham> sp = spSV.getListSP();
-         for (ViewModelSanPham viewModelSanPham : sp) {
-             System.out.println(viewModelSanPham.toString());
+        List<ViewModelSanPham> sp = spSV.getListSP();
+        for (ViewModelSanPham viewModelSanPham : sp) {
+            System.out.println(viewModelSanPham.toString());
+        }
+    }
+
+    @Override
+    public List<ViewModelSanPham> getListSP(int i, int b) {
+        List<Object[]> lsp = spRp.getListSP(i, b);
+
+        List<ViewModelSanPham> sp = new ArrayList<>();
+        for (Object[] a : lsp) {
+            ViewModelSanPham x = new ViewModelSanPham();
+            x.setId(a[0].toString());
+            x.setMa(a[1].toString());
+            x.setTen(a[2].toString());
+            if (a[3].toString().equals("1")) {
+                x.setTrangThai("Còn Hàng");
+            } else {
+                x.setTrangThai("Hết hàng");
+            }
+            sp.add(x);
+
+        }
+
+        return sp;
+
+    }
+
+    @Override
+    public int row() {
+        try {
+            return spRp.getListSLRow();
+        } catch (Exception e) {
+            return 0;
         }
     }
 

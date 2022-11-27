@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Query;
 import org.hibernate.Session;
+import org.hibernate.Transaction;
 import utilities.mycompany.DBConext.HibernatUtil;
 
 /**
@@ -18,6 +19,46 @@ import utilities.mycompany.DBConext.HibernatUtil;
  * @author ktkha
  */
 public class SanPhamRepository {
+
+    Session session = HibernatUtil.getFACTORY().openSession();
+    Transaction transaction = session.getTransaction();
+
+    public List<Object[]> getListSP(int i, int b) {
+        try {
+            Transaction transaction = session.getTransaction();
+
+            Session session = HibernatUtil.getFACTORY().openSession();
+            org.hibernate.query.Query q = session.createNativeQuery(""
+                    + "  SELECT * FROM SanPham WHERE TrangThai = 1 \n"
+                    + "  ORDER BY Ma desc\n"
+                    + "  OFFSET " + i + " ROWS\n"
+                    + "  FETCH NEXT " + b + " ROWS ONLY");
+
+            List<Object[]> list = q.getResultList();
+            return list;
+        } catch (Exception e) {
+            return null;
+        }
+
+    }
+
+    public int getListSLRow() {
+        int index = -1;
+        try {
+            Transaction transaction = session.getTransaction();
+
+            Session session = HibernatUtil.getFACTORY().openSession();
+            org.hibernate.query.Query q = session.createNativeQuery("SELECT * FROM SanPham  WHERE TrangThai = 1\n"
+                    + "  ORDER BY Ma desc ");
+
+            List<Object[]> list = q.getResultList();
+            index = list.size();
+            return index;
+        } catch (Exception e) {
+            return -1;
+        }
+
+    }
 
     public List<SanPham> getListSP() {
         try {
@@ -124,7 +165,7 @@ public class SanPhamRepository {
             return false;
         }
     }
-    
+
     public static void main(String[] args) {
         SanPhamRepository sp = new SanPhamRepository();
 //        List<SanPham> list = sp.getListSP();

@@ -126,7 +126,7 @@ public class BaoHanhView extends javax.swing.JFrame {
         }
 
     }
-
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -267,6 +267,11 @@ public class BaoHanhView extends javax.swing.JFrame {
                 "ID", "ID HÐ", "SO LUONG", "THANH TIEN"
             }
         ));
+        tblHoaDonChiTiet.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblHoaDonChiTietMouseClicked(evt);
+            }
+        });
         jScrollPane3.setViewportView(tblHoaDonChiTiet);
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
@@ -356,7 +361,7 @@ public class BaoHanhView extends javax.swing.JFrame {
 
         jButton2.setText("BAO HANH");
 
-        jButton3.setText("jButton3");
+        jButton3.setText("BACK");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton3ActionPerformed(evt);
@@ -376,7 +381,7 @@ public class BaoHanhView extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addGap(48, 48, 48)
-                        .addComponent(jButton3)
+                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButton1)
                         .addGap(18, 18, 18)
@@ -524,6 +529,19 @@ public class BaoHanhView extends javax.swing.JFrame {
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         System.exit(0);
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void tblHoaDonChiTietMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblHoaDonChiTietMouseClicked
+        // TODO add your handling code here:
+        int index = tblHoaDonChiTiet.getSelectedRow();
+        
+        String idSP = tblHoaDonChiTiet.getValueAt(index, 0).toString();
+        
+        String tenSP = tblHoaDonChiTiet.getValueAt(index, 2).toString();
+        
+        
+        
+        
+    }//GEN-LAST:event_tblHoaDonChiTietMouseClicked
 
     /**
      * @param args the command line arguments

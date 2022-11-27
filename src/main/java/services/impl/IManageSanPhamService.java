@@ -13,6 +13,10 @@ import viewModel.ViewModelSanPham;
  * @author ktkha
  */
 public interface IManageSanPhamService {
+    
+    List<ViewModelSanPham> getListSP(int i, int b);
+    
+    int row();
 
     List<ViewModelSanPham> getListSP();
 
