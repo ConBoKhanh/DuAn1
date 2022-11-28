@@ -93,9 +93,6 @@ public class NhanVienFView extends javax.swing.JFrame {
             model.addColumn("Chức vụ");
             model.addColumn("Mật khẩu");
             model.addColumn("Email");
-            
-            
-            
 
             model.setRowCount(0);
 
@@ -992,11 +989,12 @@ public class NhanVienFView extends javax.swing.JFrame {
 
     private void txttimKiemnhanvienKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txttimKiemnhanvienKeyReleased
         // TODO add your handling code here:
-//           String hoTen = txttimKiemnhanvien.getText();
-//        List<ViewModelNhanVien> dg = nhanVienService.getAll();
+
+//     String timKiemTenNV = txttimKiemnhanvien.getText();
+//        List<ViewModelNhanVien> dg = nhanVienService.getAll(2, 5);
 //        for (ViewModelNhanVien v : dg) {
-//            if (hoTen.equals(v.getSdt())) {
-//                JOptionPane.showMessageDialog(this, "Không tìm thấy tên cần tìm");
+//            if (timKiemTenNV.equals(v.getHoTen())) {
+//                JOptionPane.showMessageDialog(this, "Không tìm thấy tên cần tìm!");
 //                return;
 //            }
 //        }
@@ -1041,16 +1039,20 @@ public class NhanVienFView extends javax.swing.JFrame {
             return;
         }
 
-//        String dienThoai1 = "0";
-//        String dienThoai2 = "1";
-//        String dienThoai3 = "2";
-//        String dienThoai4 = "3";
-//        String dienThoai5 = "4";
-//        
-//         if(!TXTSDT.getText().matches(dienThoai1) || TXTSDT.getText().matches(dienThoai2)) {
-//             JOptionPane.showMessageDialog(this, "Vui lòng nhập số điện thoại đúng định dạng ");
-//             return;
-//         }
+        String dienThoai1 = "^03\\d{8}$";
+        String dienThoai2 = "^05\\d{8}$";
+        String dienThoai3 = "^07\\d{8}$";
+        String dienThoai4 = "^08\\d{8}$";
+        String dienThoai5 = "^09\\d{8}$";
+
+        if (!(TXTSDT.getText().matches(dienThoai1)
+                || TXTSDT.getText().matches(dienThoai2)
+                || TXTSDT.getText().matches(dienThoai3)
+                || TXTSDT.getText().matches(dienThoai4)
+                || TXTSDT.getText().matches(dienThoai5))) {
+            JOptionPane.showMessageDialog(this, "Vui lòng nhập số điện thoại đúng định dạng ");
+            return;
+        }
         //    Validate email không được trùng
 //         String ten = txtemailNhanVien.getText();
 //        List<ViewModelNhanVien> dg = nhanVienService.getAll();
@@ -1068,8 +1070,8 @@ public class NhanVienFView extends javax.swing.JFrame {
                 return;
             }
         }
-        
-          String email1 = txtemailNhanVien.getText();
+
+        String email1 = txtemailNhanVien.getText();
         List<ViewModelNhanVien> em = nhanVienService.getAll(2, 5);
         for (ViewModelNhanVien v : em) {
             if (email1.equals(v.getEmail())) {
@@ -1405,6 +1407,7 @@ public class NhanVienFView extends javax.swing.JFrame {
 
     private void txttimKiemnhanvienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txttimKiemnhanvienActionPerformed
         // TODO add your handling code here:
+
 
     }//GEN-LAST:event_txttimKiemnhanvienActionPerformed
 
