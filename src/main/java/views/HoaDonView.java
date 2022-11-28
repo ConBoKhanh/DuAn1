@@ -431,6 +431,75 @@ public class HoaDonView extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        if (txtNVHD.getText().length() > 50) {
+            
+            JOptionPane.showMessageDialog(this, "Họ và tên không được quá 50 ký tự");
+            
+            return;
+        }
+        if (txtNVHD.getText().isEmpty()) {
+            
+            JOptionPane.showMessageDialog(this, "Tên nhân viên trống");
+            
+            return;
+            
+        }
+        if (!txtNVHD.getText().matches("[a-zA-Z\\s]+$")) {
+            
+            JOptionPane.showMessageDialog(this, "Họ tên phải là chữ, không được chứa số và ký tự đặc biệt");
+            
+            return;
+
+        }
+
+        if (txtNgayTaoHD.getText().isEmpty()) {
+            
+            JOptionPane.showMessageDialog(this, "Ngày tạo trống");
+            
+            
+            return;
+            
+        }
+        if (txtNgayThanhToanHD.getText().isEmpty()) {
+            
+            JOptionPane.showMessageDialog(this, "Ngày thanh toán trống");
+            
+            return;
+            
+        }
+        if (txtPhanTramKM.getText().isEmpty()) {
+            
+            JOptionPane.showMessageDialog(this, "Phần trăm KM trống");
+            
+            return;
+            
+        }
+        if (txtKH.getText().isEmpty()) {
+            
+            JOptionPane.showMessageDialog(this, "KH trống");
+            
+            return;
+            
+        }
+        if (!txtKH.getText().matches("[a-zA-Z\\s]+$")) {
+            
+            JOptionPane.showMessageDialog(this, "Họ tên phải là chữ, không được chứa số và ký tự đặc biệt");
+            
+            return;
+
+        }
+        if (!txtKH.getText().matches("[a-zA-Z\\s]+$")) {
+            
+            JOptionPane.showMessageDialog(this, "Họ tên phải là chữ, không được chứa số và ký tự đặc biệt");
+            
+            return;
+        }
+          if (txtKH.getText().length() > 50) {
+            
+            JOptionPane.showMessageDialog(this, "Họ và tên không được quá 50 ký tự");
+            
+            return;
+        }
 
         HoaDon hd = new HoaDon();
         NhanVien nv = new NhanVien();
@@ -509,7 +578,7 @@ public class HoaDonView extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "Trùng Mã Hóa Đơn", "Hóa Đơn !", JOptionPane.INFORMATION_MESSAGE, icon);
 
             }
-        }else{
+        } else {
             return;
         }
 
