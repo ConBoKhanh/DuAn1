@@ -43,7 +43,7 @@ public class BanHangHoaDonRepository {
     public int getMaxMa() {
         Session session = HibernatUtil.getFACTORY().openSession();
         String soMaLonNhat = null;
-        Query q = session.createQuery(" select A.Ma From HoaDon A  ");
+        Query q = session.createQuery(" select A.Ma From HoaDon A  where A.TrangThai = 1");
         List<String> i = q.getResultList();
         if (i.isEmpty()) {
             return 0;

@@ -118,8 +118,10 @@ public class BanHangView extends javax.swing.JFrame implements Runnable, ThreadF
         initWebcam();
         loadHD();
         loadCTHH(txtIdhd.getText());
-        int tongtien = cthdService.TongTien(txtIdhd.getText());
-        txtTongTien.setText(tongtien + "");
+        if (!txtIdhd.getText().equals("")) {
+            int tongtien = cthdService.TongTien(txtIdhd.getText());
+            txtTongTien.setText(tongtien + "");
+        }
         txtIdhd.setEditable(false);
         txtMahd.setEditable(false);
         txtNgayTao.setEditable(false);
@@ -1230,6 +1232,9 @@ public class BanHangView extends javax.swing.JFrame implements Runnable, ThreadF
             JOptionPane.showMessageDialog(this, "Tạo Hóa Đơn Thành Công", "Hóa Đơn", JOptionPane.INFORMATION_MESSAGE, icon);
             loadHD();
             addtxtNew();
+
+            int tongtien = cthdService.TongTien(txtIdhd.getText());
+            txtTongTien.setText(tongtien + "");
 
         } else {
             Icon icon = new javax.swing.ImageIcon(getClass().getResource("/img/deleteicon.png"));

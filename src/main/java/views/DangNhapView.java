@@ -21,7 +21,7 @@ public class DangNhapView extends javax.swing.JFrame {
      */
     private DangNhapService i = new DangNhapService();
     List<NhanVien> list = i.getTK();
-
+    
     public DangNhapView() {
         initComponents();
         this.setDefaultCloseOperation(DangNhapView.DO_NOTHING_ON_CLOSE);
@@ -175,7 +175,7 @@ public class DangNhapView extends javax.swing.JFrame {
         String id = null;
         String Ten = null;
         String cv = null;
-
+        
         boolean b = false;
         for (NhanVien n : list) {
             if (sdt.equals(n.getSdt()) && pass.equals(n.getMatKhau())) {
@@ -195,14 +195,14 @@ public class DangNhapView extends javax.swing.JFrame {
         } else {
             Icon icon = new javax.swing.ImageIcon(getClass().getResource("/img/deleteicon.png"));
             JOptionPane.showMessageDialog(this, "Tài Khoản sai ", "Login !", JOptionPane.INFORMATION_MESSAGE, icon);
-
+            
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-         Icon icon = new javax.swing.ImageIcon(getClass().getResource("/img/themmoiicon.png"));
-         JOptionPane.showMessageDialog(this, "Hẹn Gặp Lại", "Login", JOptionPane.INFORMATION_MESSAGE, icon);
-        this.dispose();
+        Icon icon = new javax.swing.ImageIcon(getClass().getResource("/img/themmoiicon.png"));
+        JOptionPane.showMessageDialog(this, "Hẹn Gặp Lại", "Login", JOptionPane.INFORMATION_MESSAGE, icon);
+        System.exit(0);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void txtSDTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSDTActionPerformed
