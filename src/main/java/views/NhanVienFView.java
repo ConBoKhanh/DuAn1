@@ -1041,13 +1041,13 @@ public class NhanVienFView extends javax.swing.JFrame {
             return;
         }
 
-//        String dienThoai1 = "^03\\d{8}$";
-//        String dienThoai2 = "^05\\d{8}$";
-//        String dienThoai3 = "^07\\d{8}$";
-//        String dienThoai4 = "^08\\d{8}$";
-//        String dienThoai5 = "^09\\d{8}$";
+//        String dienThoai1 = "0";
+//        String dienThoai2 = "1";
+//        String dienThoai3 = "2";
+//        String dienThoai4 = "3";
+//        String dienThoai5 = "4";
 //        
-//         if(!TXTSDT.getText().matches(dienThoai1)) {
+//         if(!TXTSDT.getText().matches(dienThoai1) || TXTSDT.getText().matches(dienThoai2)) {
 //             JOptionPane.showMessageDialog(this, "Vui lòng nhập số điện thoại đúng định dạng ");
 //             return;
 //         }
@@ -1065,6 +1065,15 @@ public class NhanVienFView extends javax.swing.JFrame {
         for (ViewModelNhanVien v : dg) {
             if (dienThoai.equals(v.getSdt())) {
                 JOptionPane.showMessageDialog(this, "Số điện thoại  đã tồn tại!");
+                return;
+            }
+        }
+        
+          String email1 = txtemailNhanVien.getText();
+        List<ViewModelNhanVien> em = nhanVienService.getAll(2, 5);
+        for (ViewModelNhanVien v : em) {
+            if (email1.equals(v.getEmail())) {
+                JOptionPane.showMessageDialog(this, "Email đã tồn tại!");
                 return;
             }
         }

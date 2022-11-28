@@ -28,7 +28,7 @@ public class NhanVienRepository {
             Query q = session.createNativeQuery("Select A.Id, A.Ma, A.HoTen, A.Sdt, A.DiaChi, A.NgaySinh , A.Email,"
                     + " A.MatKhau,C.TenChucVu, B.TenCuaHang  from NhanVien A  left JOIN CuaHang B "
                     + "on A.IdCuaHang = B.Id "
-                    + " left join ChucVu C On A.IdChucVu = C.Id "
+                    + " left join ChucVu C On A.IdChucVu = C.Id where A.TrangThai >= 1 "
                     + "order by Convert(int,A.Ma) desc "
                     + "OFFSET " + b + " ROWS "
                     + "FETCH NEXT " + c + " ROWS ONLY");
