@@ -90,11 +90,44 @@ public class NhaCungCapService implements IManageNhaCungCapService {
             return false;
         }
     }
-    
+
     public static void main(String[] args) {
         NhaCungCapService nc = new NhaCungCapService();
-        
-      
+
+    }
+
+    @Override
+    public List<ViewModelNhaCungCap> getListSP(int i, int b) {
+        List<Object[]> list = nhacc.getListSP(i, b);
+
+        List<ViewModelNhaCungCap> ncc = new ArrayList<>();
+        for (Object[] a : list) {
+
+            ViewModelNhaCungCap x = new ViewModelNhaCungCap();
+
+            x.setId(a[0].toString());
+            x.setMa(a[1].toString());
+            x.setTenNCC(a[2].toString());
+            x.setDiaChi(a[3].toString());
+            x.setSdt(a[4].toString());
+            if (a[5].toString().equals("1")) {
+                x.setTrangThai("Con Cung Cap");
+            } else {
+                x.setTrangThai("Het cung cap");
+            }
+            ncc.add(x);
+
+        }
+        return ncc;
+    }
+
+    @Override
+    public int row() {
+        try {
+            return nhacc.getListSLRow();
+        } catch (Exception e) {
+            return 0;
+        }
     }
 
 }

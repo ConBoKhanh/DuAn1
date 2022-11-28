@@ -10,6 +10,7 @@ import java.util.List;
 import javax.persistence.TemporalType;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
+import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 import utilities.mycompany.DBConext.HibernatUtil;
 
@@ -18,6 +19,48 @@ import utilities.mycompany.DBConext.HibernatUtil;
  * @author Phuong Bi
  */
 public class NhaCungCapRepository {
+
+    Session session = HibernatUtil.getFACTORY().openSession();
+    Transaction transaction = session.getTransaction();
+
+    public List<Object[]> getListSP(int i, int b) {
+        try {
+            Transaction transaction = session.getTransaction();
+
+            Session session = HibernatUtil.getFACTORY().openSession();
+            org.hibernate.query.Query q = session.createNativeQuery(""
+                    + "SELECT * FROM NhaCungCap WHERE TrangThai = 1 \n"
+                    + "  ORDER BY Ma desc \n"
+                    + "  OFFSET " + i + " ROWS \n"
+                    + "  FETCH NEXT " + b + " ROWS ONLY");
+
+            List<Object[]> list = q.getResultList();
+            return list;
+        } catch (Exception e) {
+            return null;
+        }
+
+    }
+
+    public int getListSLRow() {
+        int index = -1;
+        try {
+            Transaction transaction = session.getTransaction();
+
+            Session session = HibernatUtil.getFACTORY().openSession();
+            org.hibernate.query.Query q = session.createNativeQuery(""
+                    + "SELECT * FROM NhaCungCap"
+                    + "  WHERE TrangThai = 1\n"
+                    + "  ORDER BY Ma asc ");
+
+            List<Object[]> list = q.getResultList();
+            index = list.size();
+            return index;
+        } catch (Exception e) {
+            return -1;
+        }
+
+    }
 
     public List<NhaCungCap> getAll() {
         try {
@@ -135,7 +178,6 @@ public class NhaCungCapRepository {
         NhaCungCap ncc = new NhaCungCap();
 
 //        ncc.setTenNCC("Nguyen E");
-        
         //System.out.println(n.getNhaCungCap(ncc));
         //  ncc.setId("DE239AFE-3CE4-4E85-B790-6831793D6FB5");
         ncc.setTenNCC("Nguyen E");

@@ -13,7 +13,12 @@ import viewModel.ViewModelNhaCungCap;
  * @author Phuong Bi
  */
 public interface IManageNhaCungCapService {
-     List<ViewModelNhaCungCap> getAll();
+    
+    List<ViewModelNhaCungCap> getListSP(int i, int b);
+    
+    int row();
+
+    List<ViewModelNhaCungCap> getAll();
 
     List<ViewModelNhaCungCap> getNhaCungCap(String ten);
 
