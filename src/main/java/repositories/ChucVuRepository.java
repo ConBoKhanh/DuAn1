@@ -5,11 +5,17 @@
 package repositories;
 
 import domainModels.ChucVu;
+
 import java.util.ArrayList;
+
 import java.util.List;
+
 import org.hibernate.LockOptions;
+
 import org.hibernate.Session;
+
 import org.hibernate.query.Query;
+
 import utilities.mycompany.DBConext.HibernatUtil;
 
 /**
@@ -17,25 +23,31 @@ import utilities.mycompany.DBConext.HibernatUtil;
  * @author Phuong Bi
  */
 public class ChucVuRepository {
+    
 
     public List<ChucVu> getAll() {
+        
         try {
             Session se = HibernatUtil.getFACTORY().openSession();
-            Query q = se.createQuery("FROM ChucVu WHERE TrangThai = 1");
+            Query q = se.createQuery("FROM ChucVu WHERE TrangThai = 1 order by Ma asc");
             List<ChucVu> list = q.getResultList();
             return list;
+            
         } catch (Exception e) {
             return null;
         }
     }
 
     public List<ChucVu> tkTheoTen(String ten) {
+        
+        
         try {
             Session se = HibernatUtil.getFACTORY().openSession();
             Query q = se.createQuery("FROM ChucVu WHERE TrangThai = 1 AND TenChucVu like :ten");
             q.setParameter("ten", "%" + ten + "%");
             List<ChucVu> list = q.getResultList();
             return list;
+            
         } catch (Exception e) {
             return null;
         }
@@ -43,6 +55,8 @@ public class ChucVuRepository {
     }
 
     public int getMaMax() {
+        
+        
         Session se = HibernatUtil.getFACTORY().openSession();
         String maLonNhat = null;
         Query q = se.createQuery("select A.Ma From ChucVu A Where TrangThai = 1");
@@ -68,6 +82,8 @@ public class ChucVuRepository {
     }
 
     public boolean add(ChucVu cv) {
+        
+        
         String ma = String.valueOf(getMaMax() + 1);
         try {
             Session se = HibernatUtil.getFACTORY().openSession();
@@ -82,12 +98,15 @@ public class ChucVuRepository {
             se.getTransaction().commit();
             se.close();
             return true;
+            
         } catch (Exception e) {
             return false;
         }
     }
 
     public boolean update(ChucVu c) {
+        
+        
         try {
             Session se = HibernatUtil.getFACTORY().openSession();
             ChucVu cv = se.get(ChucVu.class, c.getId());
@@ -99,12 +118,16 @@ public class ChucVuRepository {
             se.getTransaction().commit();
             se.close();
             return true;
+            
+            
         } catch (Exception e) {
             return false;
         }
     }
 
     public boolean delete(ChucVu c) {
+        
+        
         try {
             Session se = HibernatUtil.getFACTORY().openSession();
             ChucVu cv = se.get(ChucVu.class, c.getId());
@@ -115,6 +138,7 @@ public class ChucVuRepository {
             se.getTransaction().commit();
             se.close();
             return true;
+            
         } catch (Exception e) {
             return false;
         }

@@ -5,28 +5,51 @@
 package views;
 
 import domainModels.ChucVu;
+
 import domainModels.CuaHang;
+
 import domainModels.NhanVien;
+
 import java.sql.Date;
+
 import java.text.ParseException;
+
 import java.text.SimpleDateFormat;
+
 import java.util.ArrayList;
+
 import java.util.List;
+
 import java.util.logging.Level;
+
 import java.util.logging.Logger;
+
 import javax.swing.Icon;
+
 import javax.swing.JOptionPane;
+
 import javax.swing.table.DefaultTableModel;
+
 import pagination.EventPagination;
+
 import pagination.style.PaginationItemRenderStyle1;
+
 import services.ChucVuSerivce;
+
 import services.CuaHangService;
+
 import services.NhanVienService;
+
 import services.impl.IManageChucVuService;
+
 import services.impl.IManageCuaHangService;
+
 import services.impl.IManageNhanVienService;
+
 import viewModel.ViewModelChucVu;
+
 import viewModel.ViewModelCuaHang;
+
 import viewModel.ViewModelNhanVien;
 
 /**
@@ -36,13 +59,17 @@ import viewModel.ViewModelNhanVien;
 public class NhanVienFView extends javax.swing.JFrame {
 
     private IManageNhanVienService nhanVienService = new NhanVienService();
+    
     private IManageCuaHangService cuaHangService = new CuaHangService();
+    
     private IManageChucVuService chucVuService = new ChucVuSerivce();
 
     DefaultTableModel model = new DefaultTableModel();
 
     String IdNV;
+    
     String TenNV;
+    
     String CV;
 
     /**
@@ -50,11 +77,16 @@ public class NhanVienFView extends javax.swing.JFrame {
      */
     public NhanVienFView(String Id, String Ten, String cv) {
         initComponents();
+        
         this.setDefaultCloseOperation(NhanVienFView.DO_NOTHING_ON_CLOSE);
         IdNV = Id;
+        
         TenNV = Ten;
+        
         CV = cv;
+        
         setLocationRelativeTo(null);
+        
         loadTable(1);
         pagination1.setPaginationItemRender(new PaginationItemRenderStyle1());
         pagination1.addEventPagination(new EventPagination() {
@@ -64,6 +96,8 @@ public class NhanVienFView extends javax.swing.JFrame {
             }
         });
 
+        
+        
         loadTbCuaHangPhanTrang(1);
         pagination2.setPaginationItemRender(new PaginationItemRenderStyle1());
         pagination2.addEventPagination(new EventPagination() {
@@ -74,10 +108,14 @@ public class NhanVienFView extends javax.swing.JFrame {
         });
 
         loadCBB();
+        
         loadTBChucVu();
+        
         loadPhanTu1();
+        
         //   loadTBCuaHang();
         loadPhanTuDAUTIEN();
+        
         loadTable1NhanVien(1);
     }
 
@@ -87,30 +125,45 @@ public class NhanVienFView extends javax.swing.JFrame {
             int count = 0;
             List<ViewModelNhanVien> nv = nhanVienService.getAll((page - 1) * limit, limit);
             if (nv == null) {
+                
                 System.out.println("1");
                 return;
             }
             count = nhanVienService.getRow((page - 1) * limit, limit);
 
             model = (DefaultTableModel) TBBANG.getModel();
+            
             model.setColumnCount(0);
+            
             model.addColumn("Id");
+            
             model.addColumn("Mã");
+            
             model.addColumn("Họ tên");
+            
             model.addColumn("SĐT");
+            
             model.addColumn("Địa chỉ");
+            
             model.addColumn("Ngày sinh");
+            
             model.addColumn("Cửa hàng");
+            
             model.addColumn("Chức vụ");
+            
             model.addColumn("Mật khẩu");
+            
             model.addColumn("Email");
 
             model.setRowCount(0);
 
             for (ViewModelNhanVien viewModelNhanVien : nv) {
                 model.addRow(new Object[]{
+                    
                     viewModelNhanVien.getId(), viewModelNhanVien.getMa(), viewModelNhanVien.getHoTen(),
+                    
                     viewModelNhanVien.getSdt(), viewModelNhanVien.getDiaChi(), viewModelNhanVien.getNgaySinh(),
+                    
                     viewModelNhanVien.getIdCH(), viewModelNhanVien.getIdCV(), viewModelNhanVien.getMatKhau(), viewModelNhanVien.getEmail()
                 });
 
@@ -138,10 +191,15 @@ public class NhanVienFView extends javax.swing.JFrame {
 
         model = (DefaultTableModel) tbbang.getModel();
         model.setColumnCount(0);
+        
         model.addColumn("Id");
+        
         model.addColumn("Ma");
+        
         model.addColumn("Ten");
+        
         model.addColumn("Dia chi");
+        
         model.setRowCount(0);
 
         for (ViewModelCuaHang v : sp) {
@@ -162,15 +220,25 @@ public class NhanVienFView extends javax.swing.JFrame {
     public void loadTableTimKiem(String ten) {
         model = (DefaultTableModel) TBBANG.getModel();
         model.setColumnCount(0);
+        
         model.addColumn("Id");
+        
         model.addColumn("Mã");
+        
         model.addColumn("Họ tên");
+        
         model.addColumn("SĐT");
+        
         model.addColumn("Địa chỉ");
+        
         model.addColumn("Ngày sinh");
+        
         model.addColumn("Cửa hàng");
+        
         model.addColumn("Chức vụ");
+        
         model.addColumn("Mật khẩu");
+        
         model.addColumn("Email");
 
         model.setRowCount(0);
@@ -178,7 +246,9 @@ public class NhanVienFView extends javax.swing.JFrame {
         for (ViewModelNhanVien viewModelNhanVien : nv) {
             model.addRow(new Object[]{
                 viewModelNhanVien.getId(), viewModelNhanVien.getMa(), viewModelNhanVien.getHoTen(),
+                
                 viewModelNhanVien.getSdt(), viewModelNhanVien.getDiaChi(), viewModelNhanVien.getNgaySinh(),
+                
                 viewModelNhanVien.getIdCH(), viewModelNhanVien.getIdCV(), viewModelNhanVien.getMatKhau(), viewModelNhanVien.getEmail()
             });
 
@@ -188,7 +258,9 @@ public class NhanVienFView extends javax.swing.JFrame {
     public String getCHCBB() {
         String id = null;
         List<ViewModelCuaHang> a = cuaHangService.getAll();
+        
         for (ViewModelCuaHang viewModelCuaHang : a) {
+            
             if (CBCCUAHANG.getSelectedItem().equals(viewModelCuaHang.getTenCuaHang())) {
                 id = viewModelCuaHang.getId();
             }
@@ -198,10 +270,15 @@ public class NhanVienFView extends javax.swing.JFrame {
     }
 
     public String getCBBCV() {
+        
         String id = null;
+        
         List<ViewModelChucVu> a = chucVuService.getAll();
+        
         for (ViewModelChucVu viewModelChucVu : a) {
+            
             if (CBCCHUCVU.getSelectedItem().equals(viewModelChucVu.getTen())) {
+                
                 id = viewModelChucVu.getId();
             }
 
@@ -210,62 +287,92 @@ public class NhanVienFView extends javax.swing.JFrame {
     }
 
     public void loadCBB() {
+        
         List<ViewModelCuaHang> a = cuaHangService.getAll();
+        
         for (ViewModelCuaHang viewModelCuaHang : a) {
+            
             CBCCUAHANG.addItem(viewModelCuaHang.getTenCuaHang());
 
         }
 
         List<ViewModelChucVu> b = chucVuService.getAll();
+        
         for (ViewModelChucVu viewModelChucVu : b) {
+            
             CBCCHUCVU.addItem(viewModelChucVu.getTen());
 
         }
     }
 
     public void loadTBChucVu() {
+        
         model = (DefaultTableModel) tbbangcv.getModel();
+        
         model.setColumnCount(0);
+        
         model.addColumn("ID");
+        
         model.addColumn("Mã");
+        
         model.addColumn("Tên");
         model.setRowCount(0);
+        
         List<ViewModelChucVu> sp = chucVuService.getAll();
+        
         for (ViewModelChucVu v : sp) {
+            
             model.addRow(new Object[]{
+                
                 v.getId(), v.getMa(), v.getTen()
             });
         }
     }
 
     public void loadTBChucVuTimKiem(String ten) {
+        
         model = (DefaultTableModel) tbbangcv.getModel();
+        
         model.setColumnCount(0);
+        
         model.addColumn("ID");
+        
         model.addColumn("Mã");
+        
         model.addColumn("Tên");
+        
         model.setRowCount(0);
+        
         List<ViewModelChucVu> sp = chucVuService.getListSPByName(ten);
+        
         for (ViewModelChucVu v : sp) {
+            
             model.addRow(new Object[]{
+                
                 v.getId(), v.getMa(), v.getTen()
             });
         }
     }
 
     public void loadPhanTu1() {
+        
         List<ViewModelChucVu> sp = chucVuService.getAll();
+        
         if (sp.isEmpty()) {
+            
             return;
         }
         int index = 0;
 
         txtID.setText(tbbangcv.getValueAt(index, 0).toString());
+        
         txtma.setText(tbbangcv.getValueAt(index, 1).toString());
+        
         txttenChucVu.setText(tbbangcv.getValueAt(index, 2).toString());
     }
 
     public void loadTable1NhanVien(int page) {
+        
         try {
             int limit = 5;
             int count = 0;
@@ -277,22 +384,35 @@ public class NhanVienFView extends javax.swing.JFrame {
             count = nhanVienService.getRow((page - 1) * limit, limit);
 
             int index = 0;
+            
             String ns = TBBANG.getValueAt(index, 5).toString();
+            
             // Date ngay = Date.valueOf(ngaySinh);
+            
             SimpleDateFormat sdt = new SimpleDateFormat("yyyy-MM-dd");
+            
             java.util.Date result;
 
             result = sdt.parse(ns);
+            
             ngaySinh.setDate(result);
+            
             TXTID.setText(TBBANG.getValueAt(index, 0).toString());
+            
             TXTMA.setText(TBBANG.getValueAt(index, 1).toString());
+            
             TXTHOTEN.setText(TBBANG.getValueAt(index, 2).toString());
+            
             TXTSDT.setText(TBBANG.getValueAt(index, 3).toString());
+            
             TXTDIACHI.setText(TBBANG.getValueAt(index, 4).toString());
 
             CBCCUAHANG.setSelectedItem(TBBANG.getValueAt(index, 6).toString());
+            
             CBCCHUCVU.setSelectedItem(TBBANG.getValueAt(index, 7).toString());
+            
             txtmatKhau.setText(TBBANG.getValueAt(index, 8).toString());
+            
             txtemailNhanVien.setText(TBBANG.getValueAt(index, 9).toString().trim());
 
 //            int totalPage = (int) Math.ceil(count / limit);
@@ -308,10 +428,15 @@ public class NhanVienFView extends javax.swing.JFrame {
     }
 
     public boolean checkTenCHUCVU() { //check ten sp
+        
         String ten = txttenChucVu.getText();
+        
         List<ViewModelChucVu> sp = chucVuService.getAll();
+        
         for (ViewModelChucVu v : sp) {
+            
             if (ten.equals(v.getTen())) {
+                
                 JOptionPane.showMessageDialog(this, "Tên đã tồn tại!");
                 return false;
             }
@@ -320,32 +445,55 @@ public class NhanVienFView extends javax.swing.JFrame {
     }
 
     public void loadTBCuaHang() {
+        
         model = (DefaultTableModel) tbbang.getModel();
+        
         model.setColumnCount(0);
+        
         model.addColumn("ID");
+        
         model.addColumn("Mã");
+        
         model.addColumn("Tên");
+        
         model.addColumn("Địa chỉ");
+        
         model.setRowCount(0);
+        
         List<ViewModelCuaHang> sp = cuaHangService.getAll();
+        
         for (ViewModelCuaHang v : sp) {
+            
             model.addRow(new Object[]{
+                
                 v.getId(), v.getMa(), v.getTenCuaHang(), v.getDiaChi()
             });
         }
     }
 
     public void loadTBCuaHang(String ten) {
+        
         model = (DefaultTableModel) tbbang.getModel();
+        
         model.setColumnCount(0);
+        
         model.addColumn("ID");
+        
         model.addColumn("Mã");
+        
         model.addColumn("Tên");
+        
         model.addColumn("Địa chỉ");
+        
         model.setRowCount(0);
+        
+        
         List<ViewModelCuaHang> sp = cuaHangService.getListSPByName(ten);
+        
         for (ViewModelCuaHang v : sp) {
+            
             model.addRow(new Object[]{
+                
                 v.getId(), v.getMa(), v.getTenCuaHang(), v.getDiaChi()
             });
         }
@@ -353,22 +501,30 @@ public class NhanVienFView extends javax.swing.JFrame {
 
     public void loadPhanTuDAUTIEN() {
         List<ViewModelCuaHang> sp = cuaHangService.getAll();
+        
         if (sp.isEmpty()) {
             return;
         }
         int index = 0;
 
         txtIDCH.setText(tbbang.getValueAt(index, 0).toString());
+        
         txtmaCH.setText(tbbang.getValueAt(index, 1).toString());
+        
         txttenCH.setText(tbbang.getValueAt(index, 2).toString());
+        
         txtdiaChi.setText(tbbang.getValueAt(index, 3).toString());
     }
 
     public boolean checkTen() { //check ten sp
         String ten = txttenChucVu.getText();
+        
         List<ViewModelCuaHang> sp = cuaHangService.getAll();
+        
         for (ViewModelCuaHang v : sp) {
+            
             if (ten.equals(v.getTenCuaHang())) {
+                
                 JOptionPane.showMessageDialog(this, "Tên đã tồn tại!");
                 return false;
             }
@@ -1115,21 +1271,34 @@ public class NhanVienFView extends javax.swing.JFrame {
         int index = TBBANG.getSelectedRow();
 
         String ns = TBBANG.getValueAt(index, 5).toString();
+        
         // Date ngay = Date.valueOf(ngaySinh);
         SimpleDateFormat sdt = new SimpleDateFormat("yyyy-MM-dd");
+        
         java.util.Date result;
         try {
             result = sdt.parse(ns);
+            
             ngaySinh.setDate(result);
+            
             TXTID.setText(TBBANG.getValueAt(index, 0).toString());
+            
+            
             TXTMA.setText(TBBANG.getValueAt(index, 1).toString());
+            
+            
             TXTHOTEN.setText(TBBANG.getValueAt(index, 2).toString());
+            
             TXTSDT.setText(TBBANG.getValueAt(index, 3).toString());
+            
             TXTDIACHI.setText(TBBANG.getValueAt(index, 4).toString());
 
             CBCCUAHANG.setSelectedItem(TBBANG.getValueAt(index, 6).toString());
+            
             CBCCHUCVU.setSelectedItem(TBBANG.getValueAt(index, 7).toString());
+            
             txtmatKhau.setText(TBBANG.getValueAt(index, 8).toString());
+            
             txtemailNhanVien.setText(TBBANG.getValueAt(index, 9).toString().trim());
 
         } catch (ParseException ex) {
@@ -1157,37 +1326,51 @@ public class NhanVienFView extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Họ và tên không được quá 50 ký tự");
             return;
         }
+        
+        
 
         if (txtemailNhanVien.getText().length() > 254) {
             JOptionPane.showMessageDialog(this, "Email không được quá 254 ký tự");
             return;
         }
+        
+        
 
         if (txtdiaChi.getText().length() > 200) {
             JOptionPane.showMessageDialog(this, "Địa chỉ không được quá 50 ký tự");
             return;
         }
+        
+        
 
         if (txtmatKhau.getText().length() < 8 || txtmatKhau.getText().length() > 15) {
             JOptionPane.showMessageDialog(this, "Mật khẩu phải ít nhất 8 ký tự và nhiều nhất 15 ký tự");
             return;
         }
+        
+        
 
         if (!TXTHOTEN.getText().matches("[a-zA-Z\\s]+$")) {
             JOptionPane.showMessageDialog(this, "Họ tên phải là chữ, không được chứa số và ký tự đặc biệt");
             return;
 
         }
+        
+        
 
         if (!txtmatKhau.getText().matches("^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%]).{8,15}$")) {
             JOptionPane.showMessageDialog(this, "Mật khẩu phải chứa 1 ký tự số, 1 ký tự hoa và 1 ký tự đặc biệt");
             return;
         }
+        
+        
 
         if (!txtemailNhanVien.getText().matches("^[\\w-_\\.+]*[\\w-_\\.]\\@([\\w]+\\.)+[\\w]+[\\w]$")) {
             JOptionPane.showMessageDialog(this, "Vui lòng nhập đúng định dang email");
             return;
         }
+        
+        
 
         String dienThoai1 = "^03\\d{8}$";
         String dienThoai2 = "^05\\d{8}$";
@@ -1203,6 +1386,8 @@ public class NhanVienFView extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Vui lòng nhập số điện thoại đúng định dạng ");
             return;
         }
+        
+        
         //    Validate email không được trùng
 //         String ten = txtemailNhanVien.getText();
 //        List<ViewModelNhanVien> dg = nhanVienService.getAll();
@@ -1220,6 +1405,8 @@ public class NhanVienFView extends javax.swing.JFrame {
                 return;
             }
         }
+        
+        
 
         String email1 = txtemailNhanVien.getText();
         List<ViewModelNhanVien> em = nhanVienService.getAll(2, 5);
@@ -1229,37 +1416,61 @@ public class NhanVienFView extends javax.swing.JFrame {
                 return;
             }
         }
+        
+        
 
         java.util.Date date = ngaySinh.getDate();
+        
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        
         String now = format.format(date);
 
         String idCH = getCHCBB();
+        
         String idCV = getCBBCV();
+        
         String hoTen = TXTHOTEN.getText();
+        
         String sdt = TXTSDT.getText();
+        
         String diaChi = TXTDIACHI.getText();
+        
         // String ngaySinh = getDate.getDateFormatString();
         String matKhau = txtmatKhau.getText();
+        
         String email = txtemailNhanVien.getText();
 
         NhanVien nv = new NhanVien();
 
         CuaHang ch = new CuaHang();
+        
         ch.setId(idCH);
 
         ChucVu cv = new ChucVu();
+        
         cv.setId(idCV);
 
         nv.setIdCuaHang(ch);
+        
         nv.setIdChucVu(cv);
+        
+        
         nv.setHoTen(hoTen);
+        
+        
         nv.setSdt(sdt);
+        
+        
         nv.setDiaChi(diaChi);
+        
+        
         //nv.setNgaySinh(ngaySinh);
         nv.setNgaySinh(Date.valueOf(now));
+        
 
         nv.setMatKhau(matKhau);
+        
+        
         nv.setEmail(email);
 
         boolean b = nhanVienService.add(nv);
@@ -1268,6 +1479,8 @@ public class NhanVienFView extends javax.swing.JFrame {
             Icon icon = new javax.swing.ImageIcon(getClass().getResource("/img/themmoiicon.png"));
             JOptionPane.showMessageDialog(this, "Thêm sp thành công", "Sản Phẩm", JOptionPane.INFORMATION_MESSAGE, icon);
             loadTable(1);
+      
+        
         } else {
             Icon icon = new javax.swing.ImageIcon(getClass().getResource("/img/deleteicon.png"));
             JOptionPane.showMessageDialog(this, "Trùng Tên Sản Phẩm", "Sản Phẩm", JOptionPane.INFORMATION_MESSAGE, icon);
@@ -1278,11 +1491,14 @@ public class NhanVienFView extends javax.swing.JFrame {
         // TODO add your handling code here:
 
         boolean b = nhanVienService.delete(TXTID.getText());
+        
         if (b == true) {
             Icon icon = new javax.swing.ImageIcon(getClass().getResource("/img/themmoiicon.png"));
             JOptionPane.showMessageDialog(this, "Delete sp thành công", "Sản Phẩm", JOptionPane.INFORMATION_MESSAGE, icon);
             loadTable(1);
 
+        
+        
         } else {
             Icon icon = new javax.swing.ImageIcon(getClass().getResource("/img/deleteicon.png"));
             JOptionPane.showMessageDialog(this, "Delete Tên Sản Phẩm", "Sản Phẩm", JOptionPane.INFORMATION_MESSAGE, icon);
@@ -1293,16 +1509,26 @@ public class NhanVienFView extends javax.swing.JFrame {
         // TODO add your handling code here:
 
         java.util.Date date = ngaySinh.getDate();
+        
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        
         String now = format.format(date);
+        
         String id = TXTID.getText();
+        
         String idCH = getCHCBB();
+        
         String idCV = getCBBCV();
+        
         String hoTen = TXTHOTEN.getText();
+        
         String sdt = TXTSDT.getText();
+        
         String diaChi = TXTDIACHI.getText();
+        
         // String ngaySinh = getDate.getDateFormatString();
         String matKhau = txtmatKhau.getText();
+        
         String email = txtemailNhanVien.getText();
 
         NhanVien nv = new NhanVien();
@@ -1310,19 +1536,31 @@ public class NhanVienFView extends javax.swing.JFrame {
         CuaHang ch = new CuaHang();
         ch.setId(idCH);
 
+        
+        
         ChucVu cv = new ChucVu();
         cv.setId(idCV);
 
         nv.setId(id);
+        
         nv.setIdCuaHang(ch);
+        
         nv.setIdChucVu(cv);
+        
+        
         nv.setHoTen(hoTen);
+        
         nv.setSdt(sdt);
+        
         nv.setDiaChi(diaChi);
+        
         //nv.setNgaySinh(ngaySinh);
         nv.setNgaySinh(Date.valueOf(now));
+        
 
         nv.setMatKhau(matKhau);
+        
+        
         nv.setEmail(email);
 
         boolean b = nhanVienService.update(nv);
@@ -1331,6 +1569,9 @@ public class NhanVienFView extends javax.swing.JFrame {
             Icon icon = new javax.swing.ImageIcon(getClass().getResource("/img/themmoiicon.png"));
             JOptionPane.showMessageDialog(this, "Sửa sp thành công", "Sản Phẩm", JOptionPane.INFORMATION_MESSAGE, icon);
             loadTable(1);
+       
+        
+        
         } else {
             Icon icon = new javax.swing.ImageIcon(getClass().getResource("/img/deleteicon.png"));
             JOptionPane.showMessageDialog(this, "Sửa thất Sản Phẩm", "Sản Phẩm", JOptionPane.INFORMATION_MESSAGE, icon);
@@ -1357,6 +1598,8 @@ public class NhanVienFView extends javax.swing.JFrame {
         // TODO add your handling code here:
 
         ChucVu sp = new ChucVu();
+        
+        
         sp.setId(txtID.getText());
         boolean b = chucVuService.delete(sp);
 
@@ -1365,6 +1608,8 @@ public class NhanVienFView extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Delete sp thành công", "Sản Phẩm", JOptionPane.INFORMATION_MESSAGE, icon);
             loadTBChucVu();
 
+       
+        
         } else {
             JOptionPane.showMessageDialog(this, "Delete Tên Sản Phẩm", "Sản Phẩm", JOptionPane.INFORMATION_MESSAGE);
         }
@@ -1377,16 +1622,21 @@ public class NhanVienFView extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Tên chức vụ không được quá 100 ký tự");
             return;
         }
+        
+        
 
         if (!txttenChucVu.getText().matches("[a-zA-Z\\s]+$")) {
             JOptionPane.showMessageDialog(this, "Tên chức vụ phải là chữ, không được chứa số và ký tự đặc biệt");
             return;
 
         }
+        
+        
 
         ChucVu cv = new ChucVu();
         cv.setTenChucVu(txttenChucVu.getText());
 
+       
         if (checkTenCHUCVU()) {
             boolean b = chucVuService.add(cv);
             if (b == true) {
@@ -1394,6 +1644,7 @@ public class NhanVienFView extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "Thêm sp thành công", "Sản Phẩm", JOptionPane.INFORMATION_MESSAGE, icon);
                 loadTBChucVu();
 
+           
             } else {
                 Icon icon = new javax.swing.ImageIcon(getClass().getResource("/img/deleteicon.png"));
                 JOptionPane.showMessageDialog(this, "Trùng Tên Sản Phẩm", "Sản Phẩm", JOptionPane.INFORMATION_MESSAGE, icon);
@@ -1406,7 +1657,9 @@ public class NhanVienFView extends javax.swing.JFrame {
         int index = tbbangcv.getSelectedRow();
 
         txtID.setText(tbbangcv.getValueAt(index, 0).toString());
+        
         txtma.setText(tbbangcv.getValueAt(index, 1).toString());
+        
         txttenChucVu.setText(tbbangcv.getValueAt(index, 2).toString());
     }//GEN-LAST:event_tbbangcvMouseClicked
 
@@ -1428,6 +1681,8 @@ public class NhanVienFView extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "Sửa sp thành công", "Sản Phẩm", JOptionPane.INFORMATION_MESSAGE, icon);
                 loadTBChucVu();
 
+           
+            
             } else {
                 Icon icon = new javax.swing.ImageIcon(getClass().getResource("/img/deleteicon.png"));
                 JOptionPane.showMessageDialog(this, "Sửa thất bại", "Sản Phẩm", JOptionPane.INFORMATION_MESSAGE, icon);
@@ -1446,7 +1701,9 @@ public class NhanVienFView extends javax.swing.JFrame {
     private void btnxoa1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnxoa1ActionPerformed
         // TODO add your handling code here:
         CuaHang ch = new CuaHang();
+        
         ch.setId(txtIDCH.getText());
+        
         boolean b = cuaHangService.delete(ch);
 
         if (b == true) {
@@ -1454,6 +1711,8 @@ public class NhanVienFView extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Delete sp thành công", "Sản Phẩm", JOptionPane.INFORMATION_MESSAGE, icon);
             loadTbCuaHangPhanTrang(1);
 
+       
+        
         } else {
             JOptionPane.showMessageDialog(this, "Delete Tên Sản Phẩm", "Sản Phẩm", JOptionPane.INFORMATION_MESSAGE);
         }
@@ -1463,12 +1722,15 @@ public class NhanVienFView extends javax.swing.JFrame {
         // TODO add your handling code here:
 
         CuaHang ch = new CuaHang();
+        
         ch.setId(txtIDCH.getText());
         ch.setTenCuaHang(txttenCH.getText());
+        
         ch.setDiaChi(txtdiaChi.getText());
 
         if (checkTen()) {
             boolean b = cuaHangService.update(ch);
+            
             if (b == true) {
                 Icon icon = new javax.swing.ImageIcon(getClass().getResource("/img/themmoiicon.png"));
                 JOptionPane.showMessageDialog(this, "Sửa sp thành công", "Sản Phẩm", JOptionPane.INFORMATION_MESSAGE, icon);
@@ -1488,13 +1750,20 @@ public class NhanVienFView extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Tên cửa hàng không được quá 150 ký tự");
             return;
         }
+        
+        
+        
         if (txtdiaChi.getText().length() > 250) {
             JOptionPane.showMessageDialog(this, "Tên cửa hàng không được quá 250 ký tự");
             return;
         }
+        
+        
 
         String tenCH = txttenCH.getText();
+        
         String diaChi = txtdiaChi.getText();
+        
         List<ViewModelCuaHang> dg = cuaHangService.getAll();
 
         for (ViewModelCuaHang v : dg) {
@@ -1504,10 +1773,13 @@ public class NhanVienFView extends javax.swing.JFrame {
 
             }
         }
+        
+        
 
         CuaHang ch = new CuaHang();
 
         ch.setTenCuaHang(txttenCH.getText());
+        
         ch.setDiaChi(txtdiaChi.getText());
 
         boolean b = cuaHangService.add(ch);
@@ -1516,6 +1788,8 @@ public class NhanVienFView extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Thêm sp thành công", "Sản Phẩm", JOptionPane.INFORMATION_MESSAGE, icon);
             loadTbCuaHangPhanTrang(1);
 
+      
+        
         } else {
             Icon icon = new javax.swing.ImageIcon(getClass().getResource("/img/deleteicon.png"));
             JOptionPane.showMessageDialog(this, "Trùng Tên Sản Phẩm", "Sản Phẩm", JOptionPane.INFORMATION_MESSAGE, icon);
@@ -1529,8 +1803,11 @@ public class NhanVienFView extends javax.swing.JFrame {
         int index = tbbang.getSelectedRow();
 
         txtIDCH.setText(tbbang.getValueAt(index, 0).toString());
+        
         txtmaCH.setText(tbbang.getValueAt(index, 1).toString());
+        
         txttenCH.setText(tbbang.getValueAt(index, 2).toString());
+        
         txtdiaChi.setText(tbbang.getValueAt(index, 3).toString());
     }//GEN-LAST:event_tbbangMouseClicked
 
@@ -1563,8 +1840,12 @@ public class NhanVienFView extends javax.swing.JFrame {
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         MenuView v = new MenuView(IdNV, TenNV, CV);
+        
         v.setLocationRelativeTo(null);
+        
         v.setVisible(true);
+        
+        
         this.dispose();
     }//GEN-LAST:event_jButton6ActionPerformed
 

@@ -17,12 +17,13 @@ import utilities.mycompany.DBConext.HibernatUtil;
  * @author Phuong Bi
  */
 public class CuaHangRepository {
-    
-    
-           Session session = HibernatUtil.getFACTORY().openSession();
+
+    Session session = HibernatUtil.getFACTORY().openSession();
     Transaction transaction = session.getTransaction();
 
     public List<Object[]> getListSP(int i, int b) {
+        
+        
         try {
             Transaction transaction = session.getTransaction();
 
@@ -35,6 +36,8 @@ public class CuaHangRepository {
 
             List<Object[]> list = q.getResultList();
             return list;
+            
+            
         } catch (Exception e) {
             return null;
         }
@@ -42,6 +45,8 @@ public class CuaHangRepository {
     }
 
     public int getListSLRow() {
+        
+        
         int index = -1;
         try {
             Transaction transaction = session.getTransaction();
@@ -55,37 +60,48 @@ public class CuaHangRepository {
             List<Object[]> list = q.getResultList();
             index = list.size();
             return index;
+            
+            
         } catch (Exception e) {
             return -1;
         }
 
     }
-    
 
     public List<CuaHang> getAll() {
+        
+        
         try {
             Session se = HibernatUtil.getFACTORY().openSession();
             Query q = se.createQuery("FROM CuaHang WHERE TrangThai = 1");
             List<CuaHang> list = q.getResultList();
             return list;
+            
+            
         } catch (Exception e) {
             return null;
         }
     }
 
     public List<CuaHang> getListSPByName(String ten) {
+        
+        
         try {
             Session session = HibernatUtil.getFACTORY().openSession();
             Query q = session.createQuery("FROM CuaHang WHERE TrangThai = 1 AND TenCuaHang like :ten ");
             q.setParameter("ten", "%" + ten + "%");
             List<CuaHang> list = q.getResultList();
             return list;
+            
+            
         } catch (Exception e) {
             return null;
         }
     }
 
     public int getMaxMa() { //Lấy mã lớn nhất + 1 => Tự động tăng
+        
+        
         Session session = HibernatUtil.getFACTORY().openSession();
         String soMaLonNhat = null;
         Query q = session.createQuery(" select A.Ma From CuaHang A Where TrangThai = 1 ");
@@ -111,6 +127,8 @@ public class CuaHangRepository {
     }
 
     public boolean add(CuaHang c) {
+        
+        
         String getMa = String.valueOf(getMaxMa() + 1);
 
         try {
@@ -127,12 +145,15 @@ public class CuaHangRepository {
             session.getTransaction().commit();
             session.close();
             return true;
+            
         } catch (Exception e) {
             return false;
         }
     }
 
     public boolean update(CuaHang c) {
+        
+        
         String getMa = String.valueOf(getMaxMa() + 1);
         try {
             Session session = HibernatUtil.getFACTORY().openSession();
@@ -146,23 +167,26 @@ public class CuaHangRepository {
             session.getTransaction().commit();
             session.close();
             return true;
+            
         } catch (Exception e) {
             return false;
         }
     }
-    
+
     public boolean delete(CuaHang c) {
+        
+        
         try {
             Session se = HibernatUtil.getFACTORY().openSession();
             CuaHang sp = se.get(CuaHang.class, c.getId());
             sp.setTrangThai(0);
-            
+
             se.getTransaction().begin();
             se.save(sp);
             se.getTransaction().commit();
             se.close();
             return true;
-                    
+
         } catch (Exception e) {
             return false;
         }
@@ -173,7 +197,6 @@ public class CuaHangRepository {
         CuaHang ch = new CuaHang();
         ch.setId("CCCBCD9E-6D95-4572-8BC8-36E8E23BE07A");
 
-        
         chr.delete(ch);
 
         //System.out.println(chr.add(ch));

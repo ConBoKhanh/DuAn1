@@ -26,12 +26,19 @@ public class CuaHangService implements IManageCuaHangService {
         try {
             List<ViewModelCuaHang> sanPhams = new ArrayList<>();
             for (CuaHang x : sp) {
+                
                 ViewModelCuaHang v = new ViewModelCuaHang();
+                
                 v.setId(x.getId());
+                
                 v.setMa(x.getMa());
+                
                 v.setTenCuaHang(x.getTenCuaHang());
+                
                 v.setDiaChi(x.getDiaChi());
+                
                 v.setTrangThai(String.valueOf(x.getTrangThai()));
+                
                 sanPhams.add(v);
             }
             return sanPhams;
@@ -44,16 +51,25 @@ public class CuaHangService implements IManageCuaHangService {
 
     @Override
     public List<ViewModelCuaHang> getListSPByName(String ten) {
+        
+        
          List<CuaHang> sp = ch.getListSPByName(ten);
         try {
             List<ViewModelCuaHang> sanPhams = new ArrayList<>();
             for (CuaHang x : sp) {
+                
                 ViewModelCuaHang v = new ViewModelCuaHang();
+                
                 v.setId(x.getId());
+                
                 v.setMa(x.getMa());
+                
                 v.setTenCuaHang(x.getTenCuaHang());
+                
                 v.setDiaChi(x.getDiaChi());
+                
                 v.setTrangThai(String.valueOf(x.getTrangThai()));
+                
                 sanPhams.add(v);
             }
             return sanPhams;
@@ -65,6 +81,7 @@ public class CuaHangService implements IManageCuaHangService {
 
     @Override
     public boolean add(CuaHang c) {
+        
         try {
             return ch.add(c);
         } catch (Exception e) {
@@ -74,6 +91,7 @@ public class CuaHangService implements IManageCuaHangService {
 
     @Override
     public boolean update(CuaHang c) {
+        
         try {
             return ch.update(c);
         } catch (Exception e) {
@@ -83,6 +101,7 @@ public class CuaHangService implements IManageCuaHangService {
 
     @Override
     public boolean delete(CuaHang c) {
+        
         try {
             
             return ch.delete(c);
@@ -93,6 +112,7 @@ public class CuaHangService implements IManageCuaHangService {
 
     @Override
     public List<ViewModelCuaHang> getListSP(int i, int b) {
+        
             List<Object[]> list = ch.getListSP(i, b);
 
         List<ViewModelCuaHang> ncc = new ArrayList<>();
@@ -101,8 +121,11 @@ public class CuaHangService implements IManageCuaHangService {
             ViewModelCuaHang x = new ViewModelCuaHang();
 
             x.setId(a[0].toString());
+            
             x.setMa(a[1].toString());
+            
             x.setTenCuaHang(a[2].toString());
+            
             x.setDiaChi(a[3].toString());
           
             ncc.add(x);

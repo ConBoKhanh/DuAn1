@@ -27,14 +27,23 @@ public class NhanVienService implements IManageNhanVienService{
              for (Object[] sp : sps) {
                  ViewModelNhanVien v = new ViewModelNhanVien();
                  v.setId(sp[0].toString());
+                 
                  v.setMa(sp[1].toString());
+                 
                  v.setHoTen(sp[2].toString());
+                 
                  v.setSdt(sp[3].toString());
+                 
                  v.setDiaChi(sp[4].toString());
+                 
                  v.setNgaySinh(sp[5].toString());
+                 
                  v.setEmail(sp[6].toString());
+                 
                  v.setMatKhau(sp[7].toString());
+                 
                  v.setIdCV(sp[8].toString());
+                 
                  v.setIdCH(sp[9].toString());
                  
                  list.add(v);
@@ -49,11 +58,18 @@ public class NhanVienService implements IManageNhanVienService{
             List<ViewModelNhanVien> list = new ArrayList<>();
             List<NhanVien> sps = nhan.listtk(Ten);
             for (NhanVien sp : sps) {
-                list.add(new ViewModelNhanVien(sp.getId(), sp.getMa(),sp.getHoTen(),
+                list.add(new ViewModelNhanVien(sp.getId(),
+                        
+                        sp.getMa(),sp.getHoTen(),
+                        
                         sp.getSdt(),
+                        
                         sp.getDiaChi(),
+                        
                         sp.getNgaySinh()+ "",
+                        
                         sp.getIdCuaHang().getTenCuaHang(),sp.getIdChucVu().getTenChucVu(), sp.getMatKhau(),
+                        
                         sp.getEmail()));
             }
             return list;
@@ -64,6 +80,7 @@ public class NhanVienService implements IManageNhanVienService{
 
     @Override
     public boolean add(NhanVien nv) {
+        
         try {
             return nhan.add(nv);
         } catch (Exception e) {
@@ -73,6 +90,7 @@ public class NhanVienService implements IManageNhanVienService{
 
     @Override
     public boolean update(NhanVien nv) {
+        
         try {
             return nhan.update(nv);
         } catch (Exception e) {
@@ -82,6 +100,7 @@ public class NhanVienService implements IManageNhanVienService{
 
     @Override
     public boolean delete(String id) {
+        
         try {
             return nhan.delete(id);
         } catch (Exception e) {
@@ -91,6 +110,7 @@ public class NhanVienService implements IManageNhanVienService{
 
     @Override
     public int getRow(int b, int c) {
+        
         try {
             return nhan.getRow(b, c);
         } catch (Exception e) {
@@ -111,21 +131,33 @@ public class NhanVienService implements IManageNhanVienService{
 
     @Override
     public List<ViewModelNhanVien> getListNV() {
+        
         try {
             List<ViewModelNhanVien> list = new ArrayList<>();
             List<NhanVien> sps = nhan.getListNV();
             
             for (NhanVien sp : sps) {
+                
                 ViewModelNhanVien x = new ViewModelNhanVien();
+                
                 x.setId(sp.getId());
+                
                 x.setMa(sp.getMa());
+                
                 x.setHoTen(sp.getHoTen());
+                
                 x.setSdt(sp.getSdt());
+                
                 x.setDiaChi(sp.getDiaChi());
+                
                 x.setNgaySinh(String.valueOf(sp.getNgaySinh()));
+                
                 x.setIdCH(String.valueOf(sp.getIdCuaHang()));
+                
                 x.setIdCV(String.valueOf(sp.getIdChucVu()));
+                
                 x.setMatKhau(sp.getMatKhau());
+                
                 x.setEmail(sp.getEmail());
                 
                 list.add(x);

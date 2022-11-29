@@ -27,15 +27,20 @@ public class ChucVuSerivce implements IManageChucVuService {
             for (ChucVu c : cv) {
 
                 ViewModelChucVu v = new ViewModelChucVu();
+                
                 v.setId(c.getId());
+                
                 v.setMa(c.getMa());
+                
                 v.setTen(c.getTenChucVu());
+                
                 v.setTrangThai(String.valueOf(c.getTrangThai()));
                 chucVu.add(v);
 
             }
 
             return chucVu;
+            
         } catch (Exception e) {
             return null;
         }
@@ -43,15 +48,21 @@ public class ChucVuSerivce implements IManageChucVuService {
 
     @Override
     public List<ViewModelChucVu> getListSPByName(String ten) {
+        
+        
         List<ChucVu> sp = ch.tkTheoTen(ten);
         try {
             List<ViewModelChucVu> chuc = new ArrayList<>();
             for (ChucVu x : sp) {
                 ViewModelChucVu v = new ViewModelChucVu();
                 v.setId(x.getId());
+                
                 v.setMa(x.getMa());
+                
                 v.setTen(x.getTenChucVu());
+                
                 v.setTrangThai(String.valueOf(x.getTrangThai()));
+                
                 chuc.add(v);
 
             }
@@ -64,6 +75,7 @@ public class ChucVuSerivce implements IManageChucVuService {
 
     @Override
     public boolean add(ChucVu c) {
+        
         try {
             return ch.add(c);
         } catch (Exception e) {
@@ -73,6 +85,7 @@ public class ChucVuSerivce implements IManageChucVuService {
 
     @Override
     public boolean update(ChucVu c) {
+        
         try {
             return ch.update(c);
         } catch (Exception e) {
@@ -82,6 +95,7 @@ public class ChucVuSerivce implements IManageChucVuService {
 
     @Override
     public boolean delete(ChucVu c) {
+        
         try {
             return ch.delete(c);
         } catch (Exception e) {

@@ -22,6 +22,7 @@ import utilities.mycompany.DBConext.HibernatUtil;
 public class NhanVienRepository {
 
     public List<Object[]> getAll(int b, int c) {
+        
 
         try {
             Session session = HibernatUtil.getFACTORY().openSession();
@@ -35,6 +36,7 @@ public class NhanVienRepository {
 
             List<Object[]> list = q.getResultList();
             return list;
+            
         } catch (HibernateException hibernateException) {
             return null;
         }
@@ -46,11 +48,14 @@ public class NhanVienRepository {
     
 
     public List<NhanVien> getListNV() {
+        
+        
         try {
             Session session = HibernatUtil.getFACTORY().openSession();
             Query q = session.createQuery("FROM NhanVien where TrangThai = 1");
             List<NhanVien> list = q.getResultList();
             return list;
+            
         } catch (Exception e) {
             return null;
         }
@@ -70,6 +75,8 @@ public class NhanVienRepository {
     }
 
     public int getRow(int b, int c) {
+        
+        
         int index = -1;
         try {
             Session se = HibernatUtil.getFACTORY().openSession();
@@ -82,24 +89,30 @@ public class NhanVienRepository {
             List<Object[]> list = q.getResultList();
             index = list.size();
             return index;
+            
         } catch (Exception e) {
             return -1;
         }
     }
 
     public List<NhanVien> listtk(String ten) {
+        
+        
         try {
             Session session = HibernatUtil.getFACTORY().openSession();
             Query q = session.createQuery("from NhanVien where TrangThai = 1 and HoTen like :ten");
             q.setParameter("ten", "%" + ten + "%");
             List<NhanVien> list = q.getResultList();
             return list;
+            
         } catch (Exception e) {
             return null;
         }
     }
 
     public int getMaMax() {
+        
+        
         Session se = HibernatUtil.getFACTORY().openSession();
         String maLonNhat = null;
         Query q = se.createQuery("select A.Ma From NhanVien A Where TrangThai = 1");
@@ -125,6 +138,8 @@ public class NhanVienRepository {
     }
 
     public boolean add(NhanVien nv) {
+        
+        
         String ma = String.valueOf(getMaMax() + 1);
 
         try {
@@ -136,19 +151,31 @@ public class NhanVienRepository {
             ChucVu b = session.get(ChucVu.class, nv.getIdChucVu().getId());
 
             v.setMa(ma);
+            
             v.setIdCuaHang(a);
+            
             v.setIdChucVu(b);
+            
             v.setHoTen(nv.getHoTen());
+            
             v.setSdt(nv.getSdt());
+            
             v.setDiaChi(nv.getDiaChi());
+            
             v.setNgaySinh(nv.getNgaySinh());
+            
             v.setMatKhau(nv.getMatKhau());
+            
             v.setEmail(nv.getEmail());
+            
             v.setTrangThai(1);
 
             session.getTransaction().begin();
+            
             session.save(v);
+            
             session.getTransaction().commit();
+            
             session.close();
 
             return true;
@@ -159,6 +186,8 @@ public class NhanVienRepository {
     }
 
     public boolean update(NhanVien nv) {
+        
+        
         try {
             Session session = HibernatUtil.getFACTORY().openSession();
 
@@ -168,13 +197,21 @@ public class NhanVienRepository {
             ChucVu b = session.get(ChucVu.class, nv.getIdChucVu().getId());
 
             v.setIdCuaHang(a);
+            
             v.setIdChucVu(b);
+            
             v.setHoTen(nv.getHoTen());
+            
             v.setSdt(nv.getSdt());
+            
             v.setDiaChi(nv.getDiaChi());
+            
             v.setNgaySinh(nv.getNgaySinh());
+            
             v.setMatKhau(nv.getMatKhau());
+            
             v.setEmail(nv.getEmail());
+            
             v.setTrangThai(1);
 
             session.getTransaction().begin();
@@ -183,6 +220,7 @@ public class NhanVienRepository {
             session.close();
 
             return true;
+            
         } catch (Exception e) {
             return false;
         }
@@ -190,9 +228,12 @@ public class NhanVienRepository {
     }
 
     public boolean delete(String id) {
+        
+        
         try {
             Session se = HibernatUtil.getFACTORY().openSession();
             NhanVien sp = se.get(NhanVien.class, id);
+            
             sp.setTrangThai(0);
 
             se.getTransaction().begin();
