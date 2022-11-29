@@ -17,11 +17,14 @@ import javax.swing.table.DefaultTableModel;
 import services.ChiTietDoGoService;
 import services.HoaDonBanHangService;
 import services.HoadonService;
+import services.QRHoaDonService;
 import services.impl.IManageChiTietDoGoService;
 import services.impl.IManageHoaDonBanHangService;
 import services.impl.IManageHoaDonService;
+import services.impl.IManageQRHoaDonService;
 import viewModel.ChiTietDoGoViewModel;
 import viewModel.ViewModelHoaDonBanHang;
+import viewModel.ViewModelQRHoaDon;
 import viewModel.ViewModelSanPham;
 
 /**
@@ -29,10 +32,14 @@ import viewModel.ViewModelSanPham;
  * @author admin
  */
 public class CreateQR extends javax.swing.JFrame {
+
     private IManageChiTietDoGoService chiTietSv = new ChiTietDoGoService();
     private IManageHoaDonService hdSv = new HoadonService();
     private IManageHoaDonBanHangService hdBanHangSv = new HoaDonBanHangService();
+
+    private IManageQRHoaDonService qr = new QRHoaDonService();
     DefaultTableModel model = new DefaultTableModel();
+
     /**
      * Creates new form CreateQR
      */
@@ -40,9 +47,10 @@ public class CreateQR extends javax.swing.JFrame {
         initComponents();
         setLocationRelativeTo(null);
         loadChiTiet();
+//        loadHoaDon();
         loadHoaDon();
     }
-    
+
     public void loadChiTiet() {
 
         model = (DefaultTableModel) tbChiTiet.getModel();
@@ -50,25 +58,37 @@ public class CreateQR extends javax.swing.JFrame {
         List<ChiTietDoGoViewModel> lsp = chiTietSv.list();
         for (ChiTietDoGoViewModel sp : lsp) {
             model.addRow(new Object[]{
-                sp.getId(), sp.getTensp(),sp.getGiaBan(),sp.getGiaNhap()
+                sp.getId(), sp.getTensp(), sp.getGiaBan(), sp.getGiaNhap()
             });
         }
 
     }
-       
+
     public void loadHoaDon() {
 
         model = (DefaultTableModel) tbHD.getModel();
         model.setRowCount(0);
-        List<ViewModelHoaDonBanHang> lsp = hdBanHangSv.getList();
-        for (ViewModelHoaDonBanHang sp : lsp) {
+        List<ViewModelQRHoaDon> lsp = qr.getList();
+        for (ViewModelQRHoaDon sp : lsp) {
             model.addRow(new Object[]{
-                sp.getId(),sp.getMa(),sp.getNgayTao(),sp.getTenNV()
+                sp.getId(), sp.getMa(), sp.getNgayTao(), sp.getTenNV()
             });
         }
 
     }
-    
+
+//    public void loadHoaDon() {
+//
+//        model = (DefaultTableModel) tbHD.getModel();
+//        model.setRowCount(0);
+//        List<ViewModelHoaDonBanHang> lsp = hdBanHangSv.getList();
+//        for (ViewModelHoaDonBanHang sp : lsp) {
+//            model.addRow(new Object[]{
+//                sp.getId(),sp.getMa(),sp.getNgayTao(),sp.getTenNV()
+//            });
+//        }
+//
+//    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -231,13 +251,13 @@ public class CreateQR extends javax.swing.JFrame {
 
     private void btnQRChiTietActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQRChiTietActionPerformed
         // TODO add your handling code here:
-               try {
+        try {
             String data = txtIDChiTiet.getText();
 //            String path = "D:\\DuAnGitHub\\Qr.png";
             JFileChooser file = new JFileChooser();
             file.showOpenDialog(null);
             File f = file.getSelectedFile();
-            
+
             BitMatrix matrix = new MultiFormatWriter()
                     .encode(data, BarcodeFormat.QR_CODE, 500, 500);
 
@@ -257,13 +277,13 @@ public class CreateQR extends javax.swing.JFrame {
 
     private void btnQRHoaDonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQRHoaDonActionPerformed
         // TODO add your handling code here:
-                 try {
+        try {
             String data = txtIdHD.getText();
 //            String path = "D:\\DuAnGitHub\\Qr.png";
             JFileChooser file = new JFileChooser();
             file.showOpenDialog(null);
             File f = file.getSelectedFile();
-            
+
             BitMatrix matrix = new MultiFormatWriter()
                     .encode(data, BarcodeFormat.QR_CODE, 500, 500);
 
@@ -277,7 +297,7 @@ public class CreateQR extends javax.swing.JFrame {
 
     private void tbHDMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbHDMouseClicked
         // TODO add your handling code here:
-        int index =tbHD.getSelectedRow();
+        int index = tbHD.getSelectedRow();
         txtIdHD.setText(tbHD.getValueAt(index, 0).toString());
     }//GEN-LAST:event_tbHDMouseClicked
 
