@@ -7,6 +7,7 @@ package services.impl;
 import domainModels.HoaDon;
 import domainModels.HoaDonChiTiet;
 import java.util.List;
+import viewModel.ViewModelBAOHANHCHITIET;
 import viewModel.ViewModelHDCTBH;
 import viewModel.ViewModelHoaDonBaoHanh;
 import viewModel.ViewModelHoaDonDeBaoHanh;
@@ -22,6 +23,16 @@ public interface IManageHoaDonDeBaoHanhService {
     
     List<ViewModelHoaDonBaoHanh> getListHDBH();
     
+    List<ViewModelBAOHANHCHITIET> getListCTHDbaoHanh(String id);
+    
      boolean addHoadon(HoaDon hd);
+     
+     boolean updateHoadon(HoaDon hd);
+          
+     boolean add(HoaDonChiTiet hd);
+     
+     boolean update(HoaDonChiTiet hd);
+     
+     boolean delete(String idsp ,String idhd);
      
 }

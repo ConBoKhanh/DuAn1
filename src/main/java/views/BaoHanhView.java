@@ -4,23 +4,31 @@
  */
 package views;
 
+import domainModels.ChiTietDoGo;
 import domainModels.HoaDon;
+import domainModels.HoaDonChiTiet;
 import domainModels.KhachHang;
 import domainModels.NhanVien;
 import java.beans.BeanProperty;
+import java.math.BigDecimal;
 import java.sql.Date;
 import java.util.List;
 import javax.swing.Icon;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import services.BaoHanhService;
+import services.HoaDonChiTietService;
 import services.HoaDonDeBaoHanhSerivice;
 import services.NhanVienService;
 import services.impl.IManageBaoHanhService;
+import services.impl.IManageChiTietHoaDonBanHang;
 import services.impl.IManageHoaDonDeBaoHanhService;
 import services.impl.IManageNhanVienService;
+import viewModel.ViewModelBAOHANHCHITIET;
+import viewModel.ViewModelChiTietSanPhamBanHang;
 import viewModel.ViewModelHDCTBH;
 import viewModel.ViewModelHoaDonBaoHanh;
+import viewModel.ViewModelHoaDonChiTietBanHang;
 import viewModel.ViewModelHoaDonDeBaoHanh;
 import viewModel.ViewModelKhachHang;
 import viewModel.ViewModelNhanVien;
@@ -30,13 +38,15 @@ import viewModel.ViewModelNhanVien;
  * @author Admin
  */
 public class BaoHanhView extends javax.swing.JFrame {
-
+    
     private IManageBaoHanhService bh = new BaoHanhService();
-
+    
     private IManageHoaDonDeBaoHanhService hdbh = new HoaDonDeBaoHanhSerivice();
-
+    
     private IManageNhanVienService nvSV = new NhanVienService();
-
+    
+    private IManageChiTietHoaDonBanHang ct = new HoaDonChiTietService();
+    
     DefaultTableModel model = new DefaultTableModel();
 
     /**
@@ -45,7 +55,6 @@ public class BaoHanhView extends javax.swing.JFrame {
     public BaoHanhView() {
 
 //        setUndecorated(true);
-
         initComponents();
         
         this.setDefaultCloseOperation(BaoHanhView.DO_NOTHING_ON_CLOSE);
@@ -56,7 +65,7 @@ public class BaoHanhView extends javax.swing.JFrame {
 //        loadTBHD("A0A56FC7-A093-41FB-B0DF-D0FC62F46267");
 //        loadTBHDCT("0FF804AB-10D0-4694-A332-21A688669FB8");
     }
-
+    
     public void loadtb() {
         model = (DefaultTableModel) tbkhachhang.getModel();
         model.setRowCount(0);
@@ -66,9 +75,9 @@ public class BaoHanhView extends javax.swing.JFrame {
                 x.getID(), x.getMa(), x.getTenkh(), x.getSdt()
             });
         }
-
+        
     }
-
+    
     public void loadtbTKSDT(String sdt) {
         model = (DefaultTableModel) tbkhachhang.getModel();
         model.setRowCount(0);
@@ -78,20 +87,20 @@ public class BaoHanhView extends javax.swing.JFrame {
                 x.getID(), x.getMa(), x.getTenkh(), x.getSdt()
             });
         }
-
+        
     }
-
+    
     public void loadTBHD(String id) {
         model = (DefaultTableModel) tblHoaDon.getModel();
         model.setRowCount(0);
         List<ViewModelHoaDonDeBaoHanh> hd = hdbh.getListHD(id);
         for (ViewModelHoaDonDeBaoHanh x : hd) {
             model.addRow(new Object[]{
-                x.getId(), x.getMa(), x.getNgayThanhToan(), x.getTenNV(), x.getIdKH(), x.getTongTien()
+                x.getId(), x.getMa(), x.getNgayThanhToan(), x.getTenNV(), x.getIdKH(), x.getTongTien(), x.getSLBH()
             });
         }
     }
-
+    
     public void loadTBHDCT(String id) {
         model = (DefaultTableModel) tblHoaDonChiTiet.getModel();
         model.setRowCount(0);
@@ -102,18 +111,29 @@ public class BaoHanhView extends javax.swing.JFrame {
             });
         }
     }
-
+    
+    public void loadTBBAOHANHCT(String id) {
+        model = (DefaultTableModel) tblHDBHChiTiet.getModel();
+        model.setRowCount(0);
+        List<ViewModelBAOHANHCHITIET> hd = hdbh.getListCTHDbaoHanh(id);
+        for (ViewModelBAOHANHCHITIET x : hd) {
+            model.addRow(new Object[]{
+                x.getIdbh(), x.getIdsp(), x.getTensp(), x.getSoluong()
+            });
+        }
+    }
+    
     public void loadTBHDBH() {
         model = (DefaultTableModel) tblHDBaoHanh.getModel();
         model.setRowCount(0);
         List<ViewModelHoaDonBaoHanh> hd = hdbh.getListHDBH();
         for (ViewModelHoaDonBaoHanh x : hd) {
             model.addRow(new Object[]{
-                x.getId(), x.getNgayTao(), x.getTenNV(), x.getTenKH(), x.getTrangThai() == 3 ? "Hoa Don bao hanh" : ""
+                x.getId(), x.getNgayTao(), x.getTenNV(), x.getTenKH(), x.getTrangThai() == 3 ? "Hoa Don dang bao hanh" : "Hoa Don da bao hanh"
             });
         }
     }
-
+    
     public void getIdNhanVien() {
         int index = tblHDBaoHanh.getSelectedRow();
         String ten = tblHDBaoHanh.getValueAt(index, 2).toString();
@@ -124,9 +144,27 @@ public class BaoHanhView extends javax.swing.JFrame {
                 System.out.println(x.toString());
             }
         }
-
+        
     }
     
+    public int getSoluong(String idsp) {
+        int i = 0;
+        int index = tblHDBaoHanh.getSelectedRow();
+        String idsp1 = tblHDBaoHanh.getValueAt(index, 0).toString();
+        
+        List<ViewModelHoaDonChiTietBanHang> lisst = ct.list(idsp1);
+        if (lisst == null) {
+            i = 0;
+        } else {
+            for (ViewModelHoaDonChiTietBanHang a : lisst) {
+                if (idsp.equals(a.getIdsp())) {
+                    i = a.getSoluong();
+                }
+            }
+        }
+        return i;
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -221,13 +259,13 @@ public class BaoHanhView extends javax.swing.JFrame {
 
         tblHoaDon.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
             },
             new String [] {
-                "ID", "MA", "NGAY THANH TOAN", "TEN NV", "ID KH", "TONG TIEN"
+                "ID", "MA", "NGAY THANH TOAN", "TEN NV", "ID KH", "TONG TIEN", "So Lan Bao Hanh"
             }
         ));
         tblHoaDon.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -301,6 +339,11 @@ public class BaoHanhView extends javax.swing.JFrame {
                 "ID", "NGAY TAO", "TÊN NV", "TÊN KH", "TRANG THAI"
             }
         ));
+        tblHDBaoHanh.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblHDBaoHanhMouseClicked(evt);
+            }
+        });
         jScrollPane5.setViewportView(tblHDBaoHanh);
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
@@ -324,15 +367,20 @@ public class BaoHanhView extends javax.swing.JFrame {
 
         tblHDBHChiTiet.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
             },
             new String [] {
-                "ID", "TENSP", "SO LUONG"
+                "IDBH", "IDSP", "TENSP", "SO LUONG"
             }
         ));
+        tblHDBHChiTiet.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblHDBHChiTietMouseClicked(evt);
+            }
+        });
         jScrollPane4.setViewportView(tblHDBHChiTiet);
 
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
@@ -360,6 +408,11 @@ public class BaoHanhView extends javax.swing.JFrame {
         });
 
         jButton2.setText("BAO HANH");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jButton3.setText("BACK");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
@@ -444,9 +497,9 @@ public class BaoHanhView extends javax.swing.JFrame {
     private void tbkhachhangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbkhachhangMouseClicked
         // TODO add your handling code here:
         int index = tbkhachhang.getSelectedRow();
-
+        
         loadTBHD(tbkhachhang.getValueAt(index, 0).toString());
-
+        
         model = (DefaultTableModel) tblHoaDonChiTiet.getModel();
         model.setRowCount(0);
     }//GEN-LAST:event_tbkhachhangMouseClicked
@@ -455,7 +508,7 @@ public class BaoHanhView extends javax.swing.JFrame {
         // TODO add your handling code here:
         try {
             int index = tblHoaDon.getSelectedRow();
-
+            
             loadTBHDCT(tblHoaDon.getValueAt(index, 0).toString());
         } catch (Exception e) {
         }
@@ -463,19 +516,21 @@ public class BaoHanhView extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        int hdi = tblHoaDon.getSelectedRow();
+        
         int indexhd = tblHoaDon.getSelectedRow();
         if (indexhd < 0) {
             JOptionPane.showMessageDialog(this, "Vui Long Chon Hoa Don Muon Bao Hanh");
             return;
         } else {
             String[] buttons = {"Update", "Delete", "Cancel"};
-
+            
             int rc = JOptionPane.showOptionDialog(null, "Bạn Có Muốn Tạo Bảo Hành Cho Hóa Đơn Này Không", "Confirmation",
                     JOptionPane.WARNING_MESSAGE, 0, null, buttons, buttons[2]);
             if (rc == 0) {
             }
         }
-
+        
         int index = tbkhachhang.getSelectedRow();
         if (index
                 < 0) {
@@ -483,45 +538,47 @@ public class BaoHanhView extends javax.swing.JFrame {
             return;
         }
         String idKH = tbkhachhang.getValueAt(index, 0).toString();
-
+        
         if (tblHoaDon.getRowCount()
                 == 0) {
             JOptionPane.showMessageDialog(this, "Khong co hoa don de bao hanh");
             return;
         }
-
+        
         System.out.println(tblHoaDon.getRowCount());
-
+        
         NhanVien nv = new NhanVien();
-
+        
         nv.setId(
-                "612B3352-EE22-4CBB-8BE7-6AE5F761A099");
+                "e8a8ea9a-d368-44f5-81f8-30f2ebddafb3");
         KhachHang kh = new KhachHang();
-
+        
         kh.setId(idKH);
-
+        
         HoaDon hd = new HoaDon();
-
+        
         hd.setIdNhanVien(nv);
-
+        
         hd.setIdKhachHang(kh);
-
+        
         hd.setTrangThai(
                 3);
-
+        
         System.out.println(hd.toString());
-
+        
         boolean b = hdbh.addHoadon(hd);
         if (b
                 == true) {
             Icon icon = new javax.swing.ImageIcon(getClass().getResource("/img/themmoiicon.png"));
             JOptionPane.showMessageDialog(this, "Tạo Hóa Đơn Bảo Hành Thành Công", "Hóa Đơn", JOptionPane.INFORMATION_MESSAGE, icon);
+            
             loadTBHDBH();
-
+            loadTBHD(idKH);
+            
         } else {
             Icon icon = new javax.swing.ImageIcon(getClass().getResource("/img/deleteicon.png"));
             JOptionPane.showMessageDialog(this, "Lỗi!", "Hóa Đơn !", JOptionPane.INFORMATION_MESSAGE, icon);
-
+            
         }
 
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -531,17 +588,228 @@ public class BaoHanhView extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void tblHoaDonChiTietMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblHoaDonChiTietMouseClicked
-        // TODO add your handling code here:
-        int index = tblHoaDonChiTiet.getSelectedRow();
         
-        String idSP = tblHoaDonChiTiet.getValueAt(index, 0).toString();
+        int bh = tblHDBaoHanh.getSelectedRow();
         
-        String tenSP = tblHoaDonChiTiet.getValueAt(index, 2).toString();
-        
-        
-        
-        
+        String Idhdbh = (String) tblHDBaoHanh.getValueAt(bh, 0);// id sản phẩm
+        //String IdHd = (String) tblHoaDonChiTiet.getValueAt(index, 1);
+
+        int hdct = tblHoaDonChiTiet.getSelectedRow();
+        String idSp = (String) tblHoaDonChiTiet.getValueAt(hdct, 0);
+        System.out.println(idSp);
+        System.out.println(Idhdbh);
+        int check = getSoluong(idSp);// nếu sản phẩm tồn tại thì lấy số lượng nếu nó là 0 thì không tồn tại
+        System.out.println(check);
+        if (check == 0) {
+            String soLuongNhapinpit = JOptionPane.showInputDialog("Nhập Số Lượng Sản Phẩm " + " ");
+            // NHẬP SỐ LƯỢNG ĐỂ INSERT 
+            if (soLuongNhapinpit == null) {
+                JOptionPane.showMessageDialog(this, "oke");
+                return;
+            }
+            if (Integer.parseInt(soLuongNhapinpit) > Integer.parseInt(tblHoaDonChiTiet.getValueAt(hdct, 2).toString())) {
+                JOptionPane.showMessageDialog(this, "Số lượng không đủ!");
+                return;
+            }
+            
+            int soluongnhap = Integer.parseInt(soLuongNhapinpit);
+            
+            HoaDonChiTiet hd = new HoaDonChiTiet();
+            HoaDon a = new HoaDon();
+            a.setId(Idhdbh);
+            
+            ChiTietDoGo b = new ChiTietDoGo();
+            b.setId(idSp);
+            
+            hd.setIdHoaDon(a);
+            hd.setIdChiTietDoGo(b);
+            hd.setSoLuong(soluongnhap);
+            System.out.println(hd.toString());
+            boolean c = hdbh.add(hd);
+            
+            if (c == true) {
+                Icon icon = new javax.swing.ImageIcon(getClass().getResource("/img/themmoiicon.png"));
+                JOptionPane.showMessageDialog(this, "Thêm  thành công", "Sản Phẩm", JOptionPane.INFORMATION_MESSAGE, icon);
+                
+                loadTBBAOHANHCT(Idhdbh);
+                
+            } else {
+                Icon icon = new javax.swing.ImageIcon(getClass().getResource("/img/deleteicon.png"));
+                JOptionPane.showMessageDialog(this, "lỗi", "Sản Phẩm", JOptionPane.INFORMATION_MESSAGE, icon);
+            }
+        } else { //////////////////////////////////////////////////////////////////////////////////////////////////////////
+            String soLuongNhapinpit = JOptionPane.showInputDialog("Nhập Số Lượng Sản Phẩm " + " ");
+            // NHẬP SỐ LƯỢNG ĐỂ INSERT 
+            if (soLuongNhapinpit == null) {
+                JOptionPane.showMessageDialog(this, "oke");
+                return;
+            }
+            if (!soLuongNhapinpit.matches("^[0-9]+$")) {
+                JOptionPane.showMessageDialog(this, "0-9");
+                return;
+            }
+            int soluonghientai = Integer.parseInt(tblHoaDonChiTiet.getValueAt(hdct, 2).toString());
+            if (Integer.parseInt(soLuongNhapinpit) > soluonghientai) {
+                Icon icon = new javax.swing.ImageIcon(getClass().getResource("/img/deleteicon.png"));
+                JOptionPane.showMessageDialog(this, "Sản Phẩm Không Đủ", "Sản Phẩm", JOptionPane.INFORMATION_MESSAGE, icon);
+                return;
+            }
+            
+            HoaDonChiTiet hd = new HoaDonChiTiet();
+            HoaDon a = new HoaDon();
+            a.setId(Idhdbh);
+            
+            ChiTietDoGo b = new ChiTietDoGo();
+            b.setId(idSp);
+            int soluongnhap = Integer.parseInt(soLuongNhapinpit);
+            hd.setIdHoaDon(a);
+            hd.setIdChiTietDoGo(b);
+            hd.setSoLuong(soluongnhap + check);
+            
+            boolean c = hdbh.update(hd);
+            
+            if (c == true) {
+                Icon icon = new javax.swing.ImageIcon(getClass().getResource("/img/themmoiicon.png"));
+                JOptionPane.showMessageDialog(this, "Thêm  thành công", "Sản Phẩm", JOptionPane.INFORMATION_MESSAGE, icon);
+                
+                loadTBBAOHANHCT(Idhdbh);
+                
+            } else {
+                Icon icon = new javax.swing.ImageIcon(getClass().getResource("/img/deleteicon.png"));
+                JOptionPane.showMessageDialog(this, "Lỗi Trống Hóa Đơn", "Sản Phẩm", JOptionPane.INFORMATION_MESSAGE, icon);
+            }
+            
+        }
     }//GEN-LAST:event_tblHoaDonChiTietMouseClicked
+
+    private void tblHDBaoHanhMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblHDBaoHanhMouseClicked
+        int index = tblHDBaoHanh.getSelectedRow();
+//       int bh = tblHDBaoHanh.getSelectedRow();
+
+        String Idhdbh = (String) tblHDBaoHanh.getValueAt(index, 0);
+        loadTBBAOHANHCT(Idhdbh);
+        
+
+    }//GEN-LAST:event_tblHDBaoHanhMouseClicked
+
+    private void tblHDBHChiTietMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblHDBHChiTietMouseClicked
+        String[] buttons = {"Update", "Delete", "Cancel"};
+        
+        int hdct = tblHDBHChiTiet.getSelectedRow();
+        String idhdbh = (String) tblHDBHChiTiet.getValueAt(hdct, 0);
+        String idspbh = (String) tblHDBHChiTiet.getValueAt(hdct, 1);
+        int soLuong = Integer.parseInt(tblHDBHChiTiet.getValueAt(hdct, 3).toString());
+        
+        int rc = JOptionPane.showOptionDialog(null, "Question ?", "Confirmation",
+                JOptionPane.WARNING_MESSAGE, 0, null, buttons, buttons[2]);
+        if (rc == 0) {
+            String soLuongNhapinpit = JOptionPane.showInputDialog("Nhập Số Lượng Update của Sản Phẩm Sản Phẩm ");
+            // NHẬP SỐ LƯỢNG ĐỂ INSERT 
+            if (soLuongNhapinpit.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Vui Lòng Nhập");
+                return;
+            }
+            if (!soLuongNhapinpit.matches("^[0-9]+$")) {
+                JOptionPane.showMessageDialog(this, "0-9");
+                return;
+            }
+            int SoLuongNhap = Integer.parseInt(soLuongNhapinpit);
+            
+            HoaDonChiTiet hd = new HoaDonChiTiet();
+            HoaDon a = new HoaDon();
+            a.setId(idhdbh);
+            
+            ChiTietDoGo b = new ChiTietDoGo();
+            b.setId(idspbh);
+            
+            hd.setIdHoaDon(a);
+            hd.setIdChiTietDoGo(b);
+            hd.setSoLuong(soLuong - SoLuongNhap);
+            
+            boolean c = hdbh.update(hd);
+            
+            if (c == true) {//update
+                if (SoLuongNhap == soLuong) {
+                    JOptionPane.showMessageDialog(this, "xóa di dung update ve 0");
+                    if (SoLuongNhap > soLuong) {
+                        Icon icon = new javax.swing.ImageIcon(getClass().getResource("/img/deleteicon.png"));
+                        JOptionPane.showMessageDialog(this, "Sản Phẩm Không Đủ Để Update", "Sản Phẩm", JOptionPane.INFORMATION_MESSAGE, icon);
+                        return;
+                    }
+                    
+                    Icon icon = new javax.swing.ImageIcon(getClass().getResource("/img/themmoiicon.png"));
+                    JOptionPane.showMessageDialog(this, "Update thành công", "Sản Phẩm", JOptionPane.INFORMATION_MESSAGE, icon);
+                    loadTBBAOHANHCT(idhdbh);
+                    
+                } else if (SoLuongNhap < soLuong) {
+                    
+                    Icon icon = new javax.swing.ImageIcon(getClass().getResource("/img/themmoiicon.png"));
+                    JOptionPane.showMessageDialog(this, "Update thành công", "Sản Phẩm", JOptionPane.INFORMATION_MESSAGE, icon);
+                    loadTBBAOHANHCT(idhdbh);
+                    
+                }
+            } else {
+                Icon icon = new javax.swing.ImageIcon(getClass().getResource("/img/deleteicon.png"));
+                JOptionPane.showMessageDialog(this, "lỗi", "Sản Phẩm", JOptionPane.INFORMATION_MESSAGE, icon);
+            }
+        }
+        if (rc == 1) {// delete
+
+            boolean c = hdbh.delete(idspbh, idhdbh);
+            
+            if (c == true) {
+                Icon icon = new javax.swing.ImageIcon(getClass().getResource("/img/themmoiicon.png"));
+                JOptionPane.showMessageDialog(this, "delete thành công", "Sản Phẩm", JOptionPane.INFORMATION_MESSAGE, icon);
+                loadTBBAOHANHCT(idhdbh);
+            } else {
+                Icon icon = new javax.swing.ImageIcon(getClass().getResource("/img/deleteicon.png"));
+                JOptionPane.showMessageDialog(this, "lỗi", "Sản Phẩm", JOptionPane.INFORMATION_MESSAGE, icon);
+            }
+        }
+        if (rc == 2) {// thoat
+            Icon icon = new javax.swing.ImageIcon(getClass().getResource("/img/themmoiicon.png"));
+            JOptionPane.showMessageDialog(this, "DẠ Dạ", "Hóa Đơn ChiTiet", JOptionPane.INFORMATION_MESSAGE, icon);
+        }
+
+    }//GEN-LAST:event_tblHDBHChiTietMouseClicked
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        int index = tbkhachhang.getSelectedRow();
+        String idKH = tbkhachhang.getValueAt(index, 0).toString();
+        int hdi = tblHDBaoHanh.getSelectedRow();
+        String idhd = tblHDBaoHanh.getValueAt(hdi, 0).toString();
+        //int solan = Integer.parseInt(tblHoaDon.getValueAt(hdi, 6).toString());
+        NhanVien nv = new NhanVien();
+        
+        nv.setId("e8a8ea9a-d368-44f5-81f8-30f2ebddafb3");
+        KhachHang kh = new KhachHang();
+        
+        kh.setId(idKH);
+        
+        HoaDon hd = new HoaDon();
+        hd.setId(idhd);
+        hd.setIdNhanVien(nv);
+        
+        hd.setIdKhachHang(kh);
+        
+        hd.setTrangThai(4);
+        
+        System.out.println(hd.toString());
+        
+        boolean b = hdbh.updateHoadon(hd);
+        if (b == true){
+            Icon icon = new javax.swing.ImageIcon(getClass().getResource("/img/themmoiicon.png"));
+            JOptionPane.showMessageDialog(this, "Thành Công", "Hóa Đơn", JOptionPane.INFORMATION_MESSAGE, icon);
+          
+            loadTBHDBH();
+            loadTBHD(idKH);
+            
+        } else {
+            Icon icon = new javax.swing.ImageIcon(getClass().getResource("/img/deleteicon.png"));
+            JOptionPane.showMessageDialog(this, "Lỗi!", "Hóa Đơn !", JOptionPane.INFORMATION_MESSAGE, icon);
+            
+        }
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -557,21 +825,21 @@ public class BaoHanhView extends javax.swing.JFrame {
                 if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
-
+                    
                 }
             }
         } catch (ClassNotFoundException ex) {
             java.util.logging.Logger.getLogger(BaoHanhView.class
                     .getName()).log(java.util.logging.Level.SEVERE, null, ex);
-
+            
         } catch (InstantiationException ex) {
             java.util.logging.Logger.getLogger(BaoHanhView.class
                     .getName()).log(java.util.logging.Level.SEVERE, null, ex);
-
+            
         } catch (IllegalAccessException ex) {
             java.util.logging.Logger.getLogger(BaoHanhView.class
                     .getName()).log(java.util.logging.Level.SEVERE, null, ex);
-
+            
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(BaoHanhView.class
                     .getName()).log(java.util.logging.Level.SEVERE, null, ex);

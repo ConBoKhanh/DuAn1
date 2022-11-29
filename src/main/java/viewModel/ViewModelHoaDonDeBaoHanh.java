@@ -18,17 +18,19 @@ public class ViewModelHoaDonDeBaoHanh {
     private String tenNV;
     private String idKH;
     private BigDecimal tongTien;
+    private int SLBH;
 
     public ViewModelHoaDonDeBaoHanh() {
     }
 
-    public ViewModelHoaDonDeBaoHanh(String id, String ma, String ngayThanhToan, String tenNV, String idKH, BigDecimal tongTien) {
+    public ViewModelHoaDonDeBaoHanh(String id, String ma, String ngayThanhToan, String tenNV, String idKH, BigDecimal tongTien, int SLBH) {
         this.id = id;
         this.ma = ma;
         this.ngayThanhToan = ngayThanhToan;
         this.tenNV = tenNV;
         this.idKH = idKH;
         this.tongTien = tongTien;
+        this.SLBH = SLBH;
     }
 
     public String getId() {
@@ -79,10 +81,20 @@ public class ViewModelHoaDonDeBaoHanh {
         this.tongTien = tongTien;
     }
 
+    public int getSLBH() {
+        return SLBH;
+    }
+
+    public void setSLBH(int SLBH) {
+        this.SLBH = SLBH;
+    }
+
     @Override
     public String toString() {
-        return "ViewModelHoaDonDeBaoHanh{" + "id=" + id + ", ma=" + ma + ", ngayThanhToan=" + ngayThanhToan + ", tenNV=" + tenNV + ", idKH=" + idKH + ", tongTien=" + tongTien + '}';
+        return "ViewModelHoaDonDeBaoHanh{" + "id=" + id + ", ma=" + ma + ", ngayThanhToan=" + ngayThanhToan + ", tenNV=" + tenNV + ", idKH=" + idKH + ", tongTien=" + tongTien + ", SLBH=" + SLBH + '}';
     }
+
+    
     
     
 

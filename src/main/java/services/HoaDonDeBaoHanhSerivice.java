@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 import repositories.HoaDonDeBaoHanhRepository;
 import services.impl.IManageHoaDonDeBaoHanhService;
+import viewModel.ViewModelBAOHANHCHITIET;
 import viewModel.ViewModelHDCTBH;
 import viewModel.ViewModelHoaDonBaoHanh;
 import viewModel.ViewModelHoaDonDeBaoHanh;
@@ -36,6 +37,7 @@ public class HoaDonDeBaoHanhSerivice implements IManageHoaDonDeBaoHanhService {
                 x.setTenNV(a.getIdNhanVien().getHoTen());
                 x.setIdKH(a.getIdKhachHang().getTenKhachHang());
                 x.setTongTien(a.getThanhTien());
+                x.setSLBH(a.getTrangThaiHoaDon());
                 list.add(x);
             }
 
@@ -90,15 +92,36 @@ public class HoaDonDeBaoHanhSerivice implements IManageHoaDonDeBaoHanhService {
     public List<ViewModelHoaDonBaoHanh> getListHDBH() {
         List<HoaDon> hd = hdBH.getListHDBH();
         List<ViewModelHoaDonBaoHanh> list = new ArrayList<>();
-        try {
-            for (HoaDon a : hd) {
-                ViewModelHoaDonBaoHanh x = new ViewModelHoaDonBaoHanh();
-                x.setId(a.getId());
-                x.setNgayTao(String.valueOf(a.getNgayTao()));
-                x.setTenNV(a.getIdNhanVien().getHoTen());
-                x.setTenKH(a.getIdKhachHang().getTenKhachHang());
-                x.setTrangThai(3);
+//        try {
+        for (HoaDon a : hd) {
+            ViewModelHoaDonBaoHanh x = new ViewModelHoaDonBaoHanh();
+            x.setId(a.getId());
+            x.setNgayTao(String.valueOf(a.getNgayTao()));
+            x.setTenNV(a.getIdNhanVien().getHoTen());
+            x.setTenKH(a.getIdKhachHang().getTenKhachHang());
+            x.setTrangThai(3);
 
+            list.add(x);
+        }
+        return list;
+//        } catch (Exception e) {
+//            return null;
+//        }
+    }
+
+    @Override
+    public List<ViewModelBAOHANHCHITIET> getListCTHDbaoHanh(String id) {
+        List<HoaDonChiTiet> hdct = hdBH.getListCTHD(id);
+        List<ViewModelBAOHANHCHITIET> list = new ArrayList<>();
+        try {
+            for (HoaDonChiTiet a : hdct) {
+                ViewModelBAOHANHCHITIET x = new ViewModelBAOHANHCHITIET();
+
+                x.setIdbh(a.getIdHoaDon().getId());
+                x.setIdsp(a.getIdChiTietDoGo().getId());
+                x.setTensp(a.getIdChiTietDoGo().getTenSP());
+                x.setSoluong(a.getSoLuong());
+                
                 list.add(x);
             }
             return list;
@@ -106,5 +129,42 @@ public class HoaDonDeBaoHanhSerivice implements IManageHoaDonDeBaoHanhService {
             return null;
         }
     }
+
+    @Override
+    public boolean add(HoaDonChiTiet hd) {
+       try {
+            return hdBH.add(hd);
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    @Override
+    public boolean update(HoaDonChiTiet hd) {
+       try {
+            return hdBH.update(hd);
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    @Override
+    public boolean delete(String idsp, String idhd) {
+      try {
+            return hdBH.delete(idsp, idhd);
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    @Override
+    public boolean updateHoadon(HoaDon hd) {
+        try {
+            return hdBH.updateHoadon(hd);
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
 
 }

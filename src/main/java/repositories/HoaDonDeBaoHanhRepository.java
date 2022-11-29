@@ -4,6 +4,7 @@
  */
 package repositories;
 
+import domainModels.ChiTietDoGo;
 import domainModels.HoaDon;
 import domainModels.HoaDonChiTiet;
 import domainModels.KhachHang;
@@ -48,6 +49,20 @@ public class HoaDonDeBaoHanhRepository {
     }
 
     public List<HoaDonChiTiet> getListCTHD(String id) {
+
+        try {
+            Session session = HibernatUtil.getFACTORY().openSession();
+            Transaction transaction = session.getTransaction();
+            javax.persistence.Query q = session.createQuery("from HoaDonChiTiet A where A.IdHoaDon = '" + id + "' ");
+            List<HoaDonChiTiet> list = q.getResultList();
+            return list;
+        } catch (Exception e) {
+            return null;
+        }
+
+    }
+
+    public List<HoaDonChiTiet> getListCTHDbaoHanh(String id) {
 
         try {
             Session session = HibernatUtil.getFACTORY().openSession();
@@ -117,9 +132,109 @@ public class HoaDonDeBaoHanhRepository {
         }
     }
 
+    public boolean updateHoadon(HoaDon hd) {
+        try {
+            Session session = HibernatUtil.getFACTORY().openSession();
+            Transaction transaction = session.getTransaction();
+            java.util.Date date = java.util.Calendar.getInstance().getTime();
+            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+
+            String now = format.format(date);
+            
+            HoaDon i = session.get(HoaDon.class, hd.getId());
+            
+            NhanVien nv = session.get(NhanVien.class, hd.getIdNhanVien().getId());
+            i.setIdNhanVien(nv);
+            KhachHang kh = session.get(KhachHang.class, hd.getIdKhachHang().getId());
+            i.setIdKhachHang(kh);
+            i.setNgayTao(Date.valueOf(now)); // lấy thời gian ở trên gán vô 
+            i.setTrangThai(4);// trang thai outo la 1 , 0 là đã xóa , 3 la bao hanh
+
+            transaction.begin();
+            session.save(i);
+            session.getTransaction().commit();
+            session.close();
+            return true;
+        } catch (Exception e) {
+            System.out.println(e.toString());
+            return false;
+        }
+    }
+
+    public boolean add(HoaDonChiTiet hd) {
+        try {
+            Session session = HibernatUtil.getFACTORY().openSession();
+            HoaDonChiTiet i = new HoaDonChiTiet();
+
+            HoaDon h = session.get(HoaDon.class, hd.getIdHoaDon().getId());
+
+            i.setIdHoaDon(h);
+
+            ChiTietDoGo b = session.get(ChiTietDoGo.class, hd.getIdChiTietDoGo().getId());
+
+            i.setIdChiTietDoGo(b);
+            i.setSoLuong(hd.getSoLuong());
+
+            session.getTransaction().begin();
+            session.save(i);
+            session.getTransaction().commit();
+            session.close();
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    public boolean update(HoaDonChiTiet hd) {
+        try {
+            Session session = HibernatUtil.getFACTORY().openSession();
+            HoaDonChiTiet i = new HoaDonChiTiet();
+
+            HoaDon h = session.get(HoaDon.class, hd.getIdHoaDon().getId());
+
+            i.setIdHoaDon(h);
+
+            ChiTietDoGo b = session.get(ChiTietDoGo.class, hd.getIdChiTietDoGo().getId());
+
+            i.setIdChiTietDoGo(b);
+            i.setSoLuong(hd.getSoLuong());
+//            i.setDonGia(hd.getDonGia());
+
+            session.getTransaction().begin();
+            session.update(i);
+            session.getTransaction().commit();
+            session.close();
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    public boolean delete(String idsp, String idhd) {
+        try {
+            Session session = HibernatUtil.getFACTORY().openSession();
+            HoaDonChiTiet i = new HoaDonChiTiet();
+
+            HoaDon a = session.get(HoaDon.class, idhd);
+
+            ChiTietDoGo b = session.get(ChiTietDoGo.class, idsp);
+
+            i.setIdHoaDon(a);
+            i.setIdChiTietDoGo(b);
+
+            session.getTransaction().begin();
+            session.delete(i);
+            session.getTransaction().commit();
+            session.close();
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
     public static void main(String[] args) {
         HoaDonDeBaoHanhRepository a = new HoaDonDeBaoHanhRepository();
-        List<HoaDon> list = a.getListHD("3A0EC275-3876-4C1C-9808-0EB84385F009");
+        List<HoaDon> list = a.getListHDBH();
         if (list == null) {
             System.out.println("OKE");
         }
