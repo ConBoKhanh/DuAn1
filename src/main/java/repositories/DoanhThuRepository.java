@@ -187,7 +187,7 @@ public class DoanhThuRepository {
     //doanhthusanpham
     public List<Object[]> getListDoanhthu() {
 
-        try {
+        //try {
             Session session = HibernatUtil.getFACTORY().openSession();
             Transaction transaction = session.getTransaction();
             Query q = session.createQuery("select C.Id,C.Ma,C.NgayThanhToan,A.DonGia from HoaDonChiTiet A , ChiTietDoGo B , HoaDon C\n"
@@ -195,9 +195,9 @@ public class DoanhThuRepository {
                     + "group by C.Id,C.Ma,C.NgayThanhToan,A.DonGia");
             List<Object[]> list = q.getResultList();
             return list;
-        } catch (Exception e) {
-            return null;
-        }
+//        } catch (Exception e) {
+//            return null;
+//        }
     }
 
     public int getDoanhthuTheoNam() {
@@ -412,8 +412,8 @@ public class DoanhThuRepository {
 //        for (Object[] hoaDon : list) {
 //            System.out.println(hoaDon[1].toString());
 //        }
-        for (Object[] a : hd.getList1()) {
-            System.out.println(a[1].toString());
+        for (Object[] a : hd.getListDoanhthu()) {
+            System.out.println(a[0].toString()+a[1].toString()+a[2].toString()+a[3].toString());
         }
 
         //System.out.println(i.getDoanhtHUTHEOnGAY());
