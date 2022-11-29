@@ -91,4 +91,34 @@ public class CuaHangService implements IManageCuaHangService {
         }
     }
 
+    @Override
+    public List<ViewModelCuaHang> getListSP(int i, int b) {
+            List<Object[]> list = ch.getListSP(i, b);
+
+        List<ViewModelCuaHang> ncc = new ArrayList<>();
+        for (Object[] a : list) {
+
+            ViewModelCuaHang x = new ViewModelCuaHang();
+
+            x.setId(a[0].toString());
+            x.setMa(a[1].toString());
+            x.setTenCuaHang(a[2].toString());
+            x.setDiaChi(a[3].toString());
+          
+            ncc.add(x);
+
+        }
+        return ncc;
+    }
+
+    @Override
+    public int row() {
+        
+           try {
+            return ch.getListSLRow();
+        } catch (Exception e) {
+            return 0;
+        }
+    }
+
 }

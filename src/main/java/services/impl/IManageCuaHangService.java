@@ -13,7 +13,8 @@ import viewModel.ViewModelCuaHang;
  * @author Phuong Bi
  */
 public interface IManageCuaHangService {
-      List<ViewModelCuaHang> getAll();
+
+    List<ViewModelCuaHang> getAll();
 
     List<ViewModelCuaHang> getListSPByName(String ten);
 
@@ -22,4 +23,8 @@ public interface IManageCuaHangService {
     boolean update(CuaHang c);
 
     boolean delete(CuaHang c);
+
+    List<ViewModelCuaHang> getListSP(int i, int b);
+
+    int row();
 }

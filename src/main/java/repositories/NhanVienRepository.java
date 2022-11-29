@@ -29,7 +29,7 @@ public class NhanVienRepository {
                     + " A.MatKhau,C.TenChucVu, B.TenCuaHang  from NhanVien A  left JOIN CuaHang B "
                     + "on A.IdCuaHang = B.Id "
                     + " left join ChucVu C On A.IdChucVu = C.Id where A.TrangThai >= 1 "
-                    + "order by Convert(int,A.Ma) desc "
+                    + "order by Convert(int,A.Ma) asc "
                     + "OFFSET " + b + " ROWS "
                     + "FETCH NEXT " + c + " ROWS ONLY");
 
@@ -40,6 +40,10 @@ public class NhanVienRepository {
         }
 
     }
+    
+    
+    
+    
 
     public List<NhanVien> getListNV() {
         try {
@@ -73,7 +77,7 @@ public class NhanVienRepository {
                     + " C.TenChucVu, B.TenCuaHang  from NhanVien A  left JOIN CuaHang B  "
                     + " on A.IdCuaHang = B.Id  "
                     + " left join ChucVu C On A.IdChucVu = C.Id "
-                    + " order by Convert(int,A.Ma) desc  ");
+                    + " order by Convert(int,A.Ma) asc  ");
 
             List<Object[]> list = q.getResultList();
             index = list.size();
