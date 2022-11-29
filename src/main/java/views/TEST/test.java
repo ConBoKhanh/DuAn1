@@ -162,19 +162,7 @@ public class test extends javax.swing.JFrame {
                     "TenSP", "soluong", dataset2,
                     PlotOrientation.VERTICAL, true,
                     true, false);
-            //////////////////
-            PiePlot3D p1 = (PiePlot3D) chart.getPlot();
-//        CategoryPlot p1 = (CategoryPlot) barChart.getCategoryPlot();
 
-//        p1.setRangeGridlinePaint(Color.ORANGE);
-            ChartFrame frame = new ChartFrame("Bang", chart, true);
-            ChartFrame frame1 = new ChartFrame("Bang", barChart, true);
-//            frame.setVisible(true);
-//            frame.setSize(1200, 800);
-//            frame.setVisible(true);
-//            frame1.setVisible(true);
-//            frame1.setSize(1200, 800);
-//            frame1.setVisible(true);
             
             ChartPanel chartPanel = new ChartPanel(chart);// add cái biểu dồ vào jfanel
 
@@ -198,7 +186,7 @@ public class test extends javax.swing.JFrame {
             List<ChiTietDoGo> list = q.getResultList();
             session.close();
             for (ChiTietDoGo a : list) {
-                dataset.setValue(a.getTenSP()+" SL"+a.getSoLuong(), a.getSoLuong());
+                dataset.setValue(a.getTenSP()+"SL"+a.getSoLuong(), a.getSoLuong());
                 System.out.println(a.toString());
             }
             for (ChiTietDoGo a : list) {

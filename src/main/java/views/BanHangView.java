@@ -450,7 +450,7 @@ public class BanHangView extends javax.swing.JFrame implements Runnable, ThreadF
         jPanel1.setBackground(new java.awt.Color(255, 153, 153));
         jPanel1.setBorder(javax.swing.BorderFactory.createMatteBorder(5, 5, 5, 5, new java.awt.Color(0, 0, 0)));
 
-        jPanel11.setBackground(new java.awt.Color(255, 153, 153));
+        jPanel11.setBackground(new java.awt.Color(204, 204, 255));
         jPanel11.setBorder(javax.swing.BorderFactory.createMatteBorder(5, 5, 5, 5, new java.awt.Color(0, 0, 0)));
 
         javax.swing.GroupLayout jPanel11Layout = new javax.swing.GroupLayout(jPanel11);
@@ -812,7 +812,7 @@ public class BanHangView extends javax.swing.JFrame implements Runnable, ThreadF
             .addComponent(result_field, javax.swing.GroupLayout.Alignment.TRAILING)
         );
 
-        jPanel14.setBackground(new java.awt.Color(255, 153, 153));
+        jPanel14.setBackground(new java.awt.Color(204, 204, 255));
         jPanel14.setBorder(javax.swing.BorderFactory.createMatteBorder(3, 3, 3, 3, new java.awt.Color(0, 0, 0)));
 
         javax.swing.GroupLayout jPanel14Layout = new javax.swing.GroupLayout(jPanel14);
@@ -858,7 +858,7 @@ public class BanHangView extends javax.swing.JFrame implements Runnable, ThreadF
             .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE)
         );
 
-        jPanel10.setBackground(new java.awt.Color(255, 153, 153));
+        jPanel10.setBackground(new java.awt.Color(204, 204, 255));
         jPanel10.setBorder(javax.swing.BorderFactory.createMatteBorder(5, 5, 5, 5, new java.awt.Color(0, 0, 0)));
 
         jLabel8.setFont(new java.awt.Font("NSimSun", 1, 14)); // NOI18N
@@ -885,7 +885,7 @@ public class BanHangView extends javax.swing.JFrame implements Runnable, ThreadF
             }
         });
 
-        jPanel21.setBackground(new java.awt.Color(255, 153, 153));
+        jPanel21.setBackground(new java.awt.Color(204, 204, 255));
         jPanel21.setBorder(javax.swing.BorderFactory.createMatteBorder(5, 5, 5, 5, new java.awt.Color(0, 0, 0)));
 
         javax.swing.GroupLayout jPanel21Layout = new javax.swing.GroupLayout(jPanel21);
@@ -926,7 +926,7 @@ public class BanHangView extends javax.swing.JFrame implements Runnable, ThreadF
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPanel15.setBackground(new java.awt.Color(255, 153, 153));
+        jPanel15.setBackground(new java.awt.Color(204, 204, 255));
         jPanel15.setBorder(javax.swing.BorderFactory.createMatteBorder(5, 5, 5, 5, new java.awt.Color(0, 0, 0)));
 
         javax.swing.GroupLayout jPanel15Layout = new javax.swing.GroupLayout(jPanel15);

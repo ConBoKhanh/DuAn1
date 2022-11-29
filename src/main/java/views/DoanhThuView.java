@@ -4,6 +4,7 @@
  */
 package views;
 
+import domainModels.ChiTietDoGo;
 import static java.lang.String.format;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
@@ -294,10 +295,11 @@ public class DoanhThuView extends javax.swing.JFrame {
         txtsotiennhaptheothang = new javax.swing.JTextField();
         txttimkiem = new javax.swing.JButton();
         jPanel6 = new javax.swing.JPanel();
-        iii = new javax.swing.JPanel();
         jButton7 = new javax.swing.JButton();
         jButton8 = new javax.swing.JButton();
         jButton9 = new javax.swing.JButton();
+        a = new javax.swing.JPanel();
+        jButton10 = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -900,17 +902,6 @@ public class DoanhThuView extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Doanh Thu", jPanel2);
 
-        javax.swing.GroupLayout iiiLayout = new javax.swing.GroupLayout(iii);
-        iii.setLayout(iiiLayout);
-        iiiLayout.setHorizontalGroup(
-            iiiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 527, Short.MAX_VALUE)
-        );
-        iiiLayout.setVerticalGroup(
-            iiiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 641, Short.MAX_VALUE)
-        );
-
         jButton7.setText("BD");
         jButton7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -932,31 +923,43 @@ public class DoanhThuView extends javax.swing.JFrame {
             }
         });
 
+        a.setLayout(new javax.swing.BoxLayout(a, javax.swing.BoxLayout.LINE_AXIS));
+
+        jButton10.setText("BD");
+        jButton10.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton10ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
         jPanel6Layout.setHorizontalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButton8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(54, 54, 54)
-                .addComponent(iii, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(279, Short.MAX_VALUE))
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jButton8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jButton10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(a, javax.swing.GroupLayout.DEFAULT_SIZE, 855, Short.MAX_VALUE))
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(iii, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addGap(81, 81, 81)
                 .addComponent(jButton7)
-                .addGap(226, 226, 226)
-                .addComponent(jButton8)
                 .addGap(18, 18, 18)
+                .addComponent(jButton10)
+                .addGap(145, 145, 145)
+                .addComponent(jButton8)
+                .addGap(59, 59, 59)
                 .addComponent(jButton9)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(250, Short.MAX_VALUE))
+            .addComponent(a, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         jTabbedPane1.addTab("BD", jPanel6);
@@ -1028,39 +1031,47 @@ public class DoanhThuView extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
-       
+
+        DefaultPieDataset dataset = new DefaultPieDataset();
         DefaultCategoryDataset dataset2 = new DefaultCategoryDataset();
 
         try {
+
             Session session = HibernatUtil.getFACTORY().openSession();
             session.beginTransaction();
             Query q = session.createNativeQuery("select B.TenSP,Sum(A.SoLuong) from HoaDonChiTiet A , ChiTietDoGo B , HoaDon C\n"
                     + "where A.IdChiTietDoGo = B.Id and A.IdHoaDon = C.Id AND year(NgayThanhToan) = year(GETDATE()) AND C.TRANGTHAI >1\n"
                     + "group by B.Id,b.TenSP");
             List<Object[]> list = q.getResultList();
-            session.close();         
+            session.close();
+            for (Object[] a : list) {
+                dataset.setValue(a[0].toString(), Integer.parseInt(a[1].toString()));
+                System.out.println(a.toString());
+            }
             for (Object[] a : list) {
                 dataset2.setValue(Integer.parseInt(a[1].toString()), a[0].toString(), "");
             }
-        } catch (HibernateException hibernateException) {           
+        } catch (HibernateException hibernateException) {
         }
+        //////////////
         try {
+            JFreeChart chart = ChartFactory.createPieChart3D("Bang",
+                    dataset, true, true,
+                    false);
             ///////////////
             JFreeChart barChart = ChartFactory.createBarChart3D("Bang2",
                     "TenSP", "soluong", dataset2,
                     PlotOrientation.VERTICAL, true,
                     true, false);
-            //////////////////
 
-            ChartFrame frame1 = new ChartFrame("Bang", barChart, true);
+            ChartPanel chartPanel = new ChartPanel(chart);// add cái biểu dồ vào jfanel
 
-            ChartPanel chartPanel = new ChartPanel(barChart);// add cái biểu dồ vào jfanel
-
-            iii.removeAll();
-            iii.add(chartPanel);
-            iii.updateUI();
+            a.removeAll();
+            a.add(chartPanel);
+            a.updateUI();
         } catch (Exception e) {
         }
+
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
@@ -1077,11 +1088,10 @@ public class DoanhThuView extends javax.swing.JFrame {
             List<Object[]> THANG = q.getResultList();
             session.close();
             for (Object[] a : THANG) {
-                dataset.setValue(a[2].toString() + " SL" + a[0].toString(), Double.parseDouble(a[0].toString()));
-                System.out.println(a.toString());
+                dataset.setValue(a[2].toString(),Integer.parseInt(a[0].toString()));
             }
             for (Object[] a : THANG) {
-                dataset2.setValue(Double.parseDouble(a[0].toString()), a[2].toString(), "");
+                dataset2.setValue(Integer.parseInt(a[0].toString()), a[2].toString(), "");
             }
         } catch (HibernateException hibernateException) {
         }
@@ -1095,23 +1105,16 @@ public class DoanhThuView extends javax.swing.JFrame {
                 PlotOrientation.VERTICAL, true,
                 true, false);
         //////////////////
-        PiePlot3D p1 = (PiePlot3D) chart.getPlot();
+//        PiePlot3D p1 = (PiePlot3D) chart.getPlot();
 //        CategoryPlot p1 = (CategoryPlot) barChart.getCategoryPlot();
 
 //        p1.setRangeGridlinePaint(Color.ORANGE);
-        ChartFrame frame = new ChartFrame("Bang", chart, true);
-        ChartFrame frame1 = new ChartFrame("Bang", barChart, true);
-        frame.setVisible(true);
-        frame.setSize(500, 400);
-        frame.setVisible(true);
-        frame1.setVisible(true);
-        frame1.setSize(500, 400);
-        frame1.setVisible(true);
+
         ChartPanel chartPanel = new ChartPanel(chart);
 
-        iii.removeAll();
-        iii.add(chartPanel);
-        iii.updateUI();
+        a.removeAll();
+        a.add(chartPanel);
+        a.updateUI();
     }//GEN-LAST:event_jButton8ActionPerformed
 
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
@@ -1128,11 +1131,10 @@ public class DoanhThuView extends javax.swing.JFrame {
             List<Object[]> THANG = q.getResultList();
             session.close();
             for (Object[] a : THANG) {
-                dataset.setValue(a[0].toString() + " SL" + a[2].toString(), Double.parseDouble(a[0].toString()));
-                System.out.println(a.toString());
+                dataset.setValue(a[2].toString() ,Integer.parseInt(a[0].toString()) );
             }
             for (Object[] a : THANG) {
-                dataset2.setValue(Double.parseDouble(a[2].toString()), a[0].toString(), "");
+                dataset2.setValue(Integer.parseInt(a[0].toString()), a[0].toString(), "");
             }
         } catch (HibernateException hibernateException) {
         }
@@ -1146,24 +1148,60 @@ public class DoanhThuView extends javax.swing.JFrame {
                 PlotOrientation.VERTICAL, true,
                 true, false);
         //////////////////
-        PiePlot3D p1 = (PiePlot3D) chart.getPlot();
+
 //        CategoryPlot p1 = (CategoryPlot) barChart.getCategoryPlot();
 
 //        p1.setRangeGridlinePaint(Color.ORANGE);
-        ChartFrame frame = new ChartFrame("Bang", chart, true);
-        ChartFrame frame1 = new ChartFrame("Bang", barChart, true);
-        frame.setVisible(true);
-        frame.setSize(500, 400);
-        frame.setVisible(true);
-        frame1.setVisible(true);
-        frame1.setSize(500, 400);
-        frame1.setVisible(true);
+
         ChartPanel chartPanel = new ChartPanel(chart);
 
-        iii.removeAll();
-        iii.add(chartPanel);
-        iii.updateUI();
+        a.removeAll();
+        a.add(chartPanel);
+        a.updateUI();
     }//GEN-LAST:event_jButton9ActionPerformed
+
+    private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
+        // TODO add your handling code here:
+        DefaultPieDataset dataset = new DefaultPieDataset();
+        DefaultCategoryDataset dataset2 = new DefaultCategoryDataset();
+
+        try {
+
+            Session session = HibernatUtil.getFACTORY().openSession();
+            session.beginTransaction();
+            Query q = session.createNativeQuery("select B.TenSP,Sum(A.SoLuong) from HoaDonChiTiet A , ChiTietDoGo B , HoaDon C\n"
+                    + "where A.IdChiTietDoGo = B.Id and A.IdHoaDon = C.Id AND year(NgayThanhToan) = year(GETDATE()) AND C.TRANGTHAI >1\n"
+                    + "group by B.Id,b.TenSP");
+            List<Object[]> list = q.getResultList();
+            session.close();
+            for (Object[] a : list) {
+                dataset.setValue(a[0].toString(), Integer.parseInt(a[1].toString()));
+                System.out.println(a.toString());
+            }
+            for (Object[] a : list) {
+                dataset2.setValue(Integer.parseInt(a[1].toString()), a[0].toString(), "");
+            }
+        } catch (HibernateException hibernateException) {
+        }
+        //////////////
+        try {
+            JFreeChart chart = ChartFactory.createPieChart3D("Bang",
+                    dataset, true, true,
+                    false);
+            ///////////////
+            JFreeChart barChart = ChartFactory.createBarChart3D("Bang2",
+                    "TenSP", "soluong", dataset2,
+                    PlotOrientation.VERTICAL, true,
+                    true, false);
+
+            ChartPanel chartPanel = new ChartPanel(barChart);// add cái biểu dồ vào jfanel
+
+            a.removeAll();
+            a.add(chartPanel);
+            a.updateUI();
+        } catch (Exception e) {
+        }
+    }//GEN-LAST:event_jButton10ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1202,10 +1240,11 @@ public class DoanhThuView extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private com.toedter.calendar.JDateChooser DateNgayKetThuc;
+    private javax.swing.JPanel a;
     private javax.swing.JComboBox<String> cbbdoanhthu;
     private com.toedter.calendar.JDateChooser dateNgayBatdau;
-    private javax.swing.JPanel iii;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton7;

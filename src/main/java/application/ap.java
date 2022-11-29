@@ -22,7 +22,7 @@ public class ap {
         DangNhapView v = new DangNhapView();
         v.setLocationRelativeTo(null);
         v.setVisible(true);
-        
+
 //        SanPhamView sp = new SanPhamView();
 //        sp.setLocationRelativeTo(null);
 //        sp.setVisible(true);

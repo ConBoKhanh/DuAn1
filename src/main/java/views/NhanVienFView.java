@@ -27,6 +27,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.swing.Icon;
+import javax.swing.JFileChooser;
 
 import javax.swing.JOptionPane;
 
@@ -895,17 +896,14 @@ public class NhanVienFView extends javax.swing.JFrame {
                         .addComponent(btnXoa, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(11, 11, 11)))
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addGap(7, 7, 7)
-                                .addComponent(txtmatKhau, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(txtemailNhanVien, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(42, 42, 42)
-                        .addComponent(txttimKiemnhanvien, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtemailNhanVien, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(7, 7, 7)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtmatKhau, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(42, 42, 42)
+                .addComponent(txttimKiemnhanvien, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(8, 8, 8)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -1209,12 +1207,12 @@ public class NhanVienFView extends javax.swing.JFrame {
                                         .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(18, 18, 18)
                                         .addComponent(txtmaCH, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 631, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(txttenCH, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 631, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(jPanel2Layout.createSequentialGroup()
+                                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(txttenCH, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(0, 0, Short.MAX_VALUE))))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
                         .addGap(64, 64, 64)
                         .addComponent(btnthem1, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1838,120 +1836,95 @@ public class NhanVienFView extends javax.swing.JFrame {
         // TODO add your handling code here:
 
         XSSFWorkbook w = new XSSFWorkbook();
-        
-        
+
         XSSFSheet sheet = w.createSheet("danhsach");
-        
-        
+
         XSSFRow r = null;
-        
-        
+
         Cell cell = null;
-        
-        
+
         r = sheet.createRow(0);//số dòng cách đầu ở excel
-        
-        
+
         cell = r.createCell(1, org.apache.poi.ss.usermodel.CellType.STRING);
         cell.setCellValue("Id");
 
         cell = r.createCell(2, org.apache.poi.ss.usermodel.CellType.STRING);
         cell.setCellValue("Mã");
-        
 
         cell = r.createCell(3, org.apache.poi.ss.usermodel.CellType.STRING);
         cell.setCellValue("Họ Tên");
-        
 
         cell = r.createCell(4, org.apache.poi.ss.usermodel.CellType.STRING);
         cell.setCellValue("SĐT");
-        
 
         cell = r.createCell(5, org.apache.poi.ss.usermodel.CellType.STRING);
         cell.setCellValue("Địa chỉ");
-        
 
         cell = r.createCell(6, org.apache.poi.ss.usermodel.CellType.STRING);
         cell.setCellValue("Ngày sinh");
-        
 
         cell = r.createCell(7, org.apache.poi.ss.usermodel.CellType.STRING);
         cell.setCellValue("Cửa hàng");
-        
 
         cell = r.createCell(8, org.apache.poi.ss.usermodel.CellType.STRING);
         cell.setCellValue("Chức vụ");
-        
 
         cell = r.createCell(9, org.apache.poi.ss.usermodel.CellType.STRING);
         cell.setCellValue("Mật khẩu");
-        
 
         cell = r.createCell(10, org.apache.poi.ss.usermodel.CellType.STRING);
         cell.setCellValue("Email");
-        
 
         List<ViewModelNhanVien> v = nhanVienService.getListNV();
         // List<NhanVien> sps = nhanVienService.getListNV();
 
-        
         int s = v.size();
         for (int i = 0; i < s; i++) {
             ViewModelNhanVien chh = v.get(i);
             r = sheet.createRow(1 + i);
 
-            
             cell = r.createCell(0, org.apache.poi.ss.usermodel.CellType.STRING);
             cell.setCellValue(i + 1);
 
-            
             cell = r.createCell(1, org.apache.poi.ss.usermodel.CellType.STRING);
             cell.setCellValue(v.get(i).getId());
 
-            
             cell = r.createCell(2, org.apache.poi.ss.usermodel.CellType.STRING);
             cell.setCellValue(v.get(i).getMa());
 
-            
             cell = r.createCell(3, org.apache.poi.ss.usermodel.CellType.STRING);
             cell.setCellValue(v.get(i).getHoTen());
 
-            
             cell = r.createCell(4, org.apache.poi.ss.usermodel.CellType.STRING);
             cell.setCellValue(v.get(i).getSdt());
 
-            
             cell = r.createCell(5, org.apache.poi.ss.usermodel.CellType.STRING);
             cell.setCellValue(v.get(i).getDiaChi());
 
-            
             cell = r.createCell(6, org.apache.poi.ss.usermodel.CellType.STRING);
             cell.setCellValue(v.get(i).getNgaySinh());
 
-            
             cell = r.createCell(7, org.apache.poi.ss.usermodel.CellType.STRING);
             cell.setCellValue(v.get(i).getIdCH());
 
-            
             cell = r.createCell(8, org.apache.poi.ss.usermodel.CellType.STRING);
             cell.setCellValue(v.get(i).getIdCV());
 
-            
             cell = r.createCell(9, org.apache.poi.ss.usermodel.CellType.STRING);
             cell.setCellValue(v.get(i).getMatKhau());
 
-            
             cell = r.createCell(10, org.apache.poi.ss.usermodel.CellType.STRING);
             cell.setCellValue(v.get(i).getEmail());
 
         }
-
-        File f = new File("danhsachnhanvien.xlsx");
+        JFileChooser chooser = new JFileChooser();// mở file lên 
+        chooser.showOpenDialog(null);//để chọn lưu vào đâu
+        File f = chooser.getSelectedFile();
+      
 
         try {
-            
-            
-            FileOutputStream f1 = new FileOutputStream(f);
+
+            FileOutputStream f1 = new FileOutputStream(new File(f + ".xlsx"));
 
             w.write(f1);
             f1.close();
@@ -1969,21 +1942,16 @@ public class NhanVienFView extends javax.swing.JFrame {
         // TODO add your handling code here:
 
         XSSFWorkbook w = new XSSFWorkbook();
-        
-        
+
         XSSFSheet sheet = w.createSheet("danhsach");
         XSSFRow r = null;
-        
-        
+
         Cell cell = null;
         r = sheet.createRow(0);//số dòng cách đầu ở excel
-        
-        
+
         cell = r.createCell(1, org.apache.poi.ss.usermodel.CellType.STRING);
         cell.setCellValue("Id");
 
-        
-        
         cell = r.createCell(2, org.apache.poi.ss.usermodel.CellType.STRING);
         cell.setCellValue("Mã");
 
@@ -2003,13 +1971,9 @@ public class NhanVienFView extends javax.swing.JFrame {
 
             cell = r.createCell(1, org.apache.poi.ss.usermodel.CellType.STRING);
             cell.setCellValue(v.get(i).getId());
-            
-            
 
             cell = r.createCell(2, org.apache.poi.ss.usermodel.CellType.STRING);
             cell.setCellValue(v.get(i).getMa());
-            
-            
 
             cell = r.createCell(3, org.apache.poi.ss.usermodel.CellType.STRING);
             cell.setCellValue(v.get(i).getTen());
@@ -2019,8 +1983,7 @@ public class NhanVienFView extends javax.swing.JFrame {
         File f = new File("danhsachchucvu.xlsx");
 
         try {
-            
-            
+
             FileOutputStream f1 = new FileOutputStream(f);
 
             w.write(f1);
@@ -2038,67 +2001,52 @@ public class NhanVienFView extends javax.swing.JFrame {
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
         XSSFWorkbook w = new XSSFWorkbook();
-        
-        
+
         XSSFSheet sheet = w.createSheet("danhsach");
-        
-        
+
         XSSFRow r = null;
-        
+
         Cell cell = null;
-        
+
         r = sheet.createRow(0);//số dòng cách đầu ở excel
         cell = r.createCell(1, org.apache.poi.ss.usermodel.CellType.STRING);
         cell.setCellValue("Id");
 
         cell = r.createCell(2, org.apache.poi.ss.usermodel.CellType.STRING);
         cell.setCellValue("Mã");
-        
-        
 
         cell = r.createCell(3, org.apache.poi.ss.usermodel.CellType.STRING);
         cell.setCellValue("Tên cửa hàng");
-        
-        
 
         List<ViewModelCuaHang> v = cuaHangService.getAll();
         // List<NhanVien> sps = nhanVienService.getListNV();
 
         int s = v.size();
         for (int i = 0; i < s; i++) {
-            
-            
+
             ViewModelCuaHang chh = v.get(i);
-            
+
             r = sheet.createRow(1 + i);
-            
-            
 
             cell = r.createCell(0, org.apache.poi.ss.usermodel.CellType.STRING);
             cell.setCellValue(i + 1);
-            
-            
 
             cell = r.createCell(1, org.apache.poi.ss.usermodel.CellType.STRING);
             cell.setCellValue(v.get(i).getId());
-            
-            
 
             cell = r.createCell(2, org.apache.poi.ss.usermodel.CellType.STRING);
             cell.setCellValue(v.get(i).getMa());
-            
-            
 
             cell = r.createCell(3, org.apache.poi.ss.usermodel.CellType.STRING);
             cell.setCellValue(v.get(i).getTenCuaHang());
-            
 
         }
-
-        File f = new File("danhsachcuahang.xlsx");
+        JFileChooser chooser = new JFileChooser();// mở file lên 
+        chooser.showOpenDialog(null);//để chọn lưu vào đâu
+        File f = chooser.getSelectedFile();
 
         try {
-            FileOutputStream f1 = new FileOutputStream(f);
+            FileOutputStream f1 = new FileOutputStream(new File(f + ".xlsx"));
 
             w.write(f1);
             f1.close();
