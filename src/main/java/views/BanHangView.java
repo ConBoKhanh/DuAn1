@@ -127,6 +127,9 @@ public class BanHangView extends javax.swing.JFrame implements Runnable, ThreadF
         txtNgayTao.setEditable(false);
         txtTenNV.setEditable(false);
         txtTongTien.setEditable(false);
+        txtTenKH.setEditable(false);
+        txtSdt.setEditable(false);
+        txtkm.setEditable(false);
 
     }
 
@@ -1265,7 +1268,7 @@ public class BanHangView extends javax.swing.JFrame implements Runnable, ThreadF
                     i.setLocationRelativeTo(null);
                     i.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
                     return;
-                } else{
+                } else {
                     return;
                 }
             }
