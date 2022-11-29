@@ -461,72 +461,71 @@ public class HoaDonView extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         if (txtNVHD.getText().length() > 50) {
-            
+
             JOptionPane.showMessageDialog(this, "Họ và tên không được quá 50 ký tự");
-            
+
             return;
         }
         if (txtNVHD.getText().isEmpty()) {
-            
+
             JOptionPane.showMessageDialog(this, "Tên nhân viên trống");
-            
+
             return;
-            
+
         }
         if (!txtNVHD.getText().matches("[a-zA-Z\\s]+$")) {
-            
+
             JOptionPane.showMessageDialog(this, "Họ tên phải là chữ, không được chứa số và ký tự đặc biệt");
-            
+
             return;
 
         }
 
         if (txtNgayTaoHD.getText().isEmpty()) {
-            
+
             JOptionPane.showMessageDialog(this, "Ngày tạo trống");
-            
-            
+
             return;
-            
+
         }
         if (txtNgayThanhToanHD.getText().isEmpty()) {
-            
+
             JOptionPane.showMessageDialog(this, "Ngày thanh toán trống");
-            
+
             return;
-            
+
         }
         if (txtPhanTramKM.getText().isEmpty()) {
-            
+
             JOptionPane.showMessageDialog(this, "Phần trăm KM trống");
-            
+
             return;
-            
+
         }
         if (txtKH.getText().isEmpty()) {
-            
+
             JOptionPane.showMessageDialog(this, "KH trống");
-            
-            return;
-            
-        }
-        if (!txtKH.getText().matches("[a-zA-Z\\s]+$")) {
-            
-            JOptionPane.showMessageDialog(this, "Họ tên phải là chữ, không được chứa số và ký tự đặc biệt");
-            
+
             return;
 
         }
         if (!txtKH.getText().matches("[a-zA-Z\\s]+$")) {
-            
+
             JOptionPane.showMessageDialog(this, "Họ tên phải là chữ, không được chứa số và ký tự đặc biệt");
-            
+
+            return;
+
+        }
+        if (!txtKH.getText().matches("[a-zA-Z\\s]+$")) {
+
+            JOptionPane.showMessageDialog(this, "Họ tên phải là chữ, không được chứa số và ký tự đặc biệt");
+
             return;
         }
-          if (txtKH.getText().length() > 50) {
-            
+        if (txtKH.getText().length() > 50) {
+
             JOptionPane.showMessageDialog(this, "Họ và tên không được quá 50 ký tự");
-            
+
             return;
         }
 
@@ -629,7 +628,8 @@ public class HoaDonView extends javax.swing.JFrame {
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
         
-          XSSFWorkbook w = new XSSFWorkbook();
+
+        XSSFWorkbook w = new XSSFWorkbook();
 
         XSSFSheet sheet = w.createSheet("danhsach");
 
@@ -639,70 +639,85 @@ public class HoaDonView extends javax.swing.JFrame {
 
         r = sheet.createRow(0);//số dòng cách đầu ở excel
 
+        
         cell = r.createCell(1, org.apache.poi.ss.usermodel.CellType.STRING);
         cell.setCellValue("Id");
 
+        
         cell = r.createCell(2, org.apache.poi.ss.usermodel.CellType.STRING);
         cell.setCellValue("Mã HĐ");
 
+        
         cell = r.createCell(3, org.apache.poi.ss.usermodel.CellType.STRING);
         cell.setCellValue("Tên NV");
-        
+
         
         cell = r.createCell(4, org.apache.poi.ss.usermodel.CellType.STRING);
         cell.setCellValue("Tên KH");
+
         
         cell = r.createCell(5, org.apache.poi.ss.usermodel.CellType.STRING);
         cell.setCellValue("Ngày tạo");
+
         
         cell = r.createCell(6, org.apache.poi.ss.usermodel.CellType.STRING);
         cell.setCellValue("Ngày thanh toán");
+
         
         cell = r.createCell(7, org.apache.poi.ss.usermodel.CellType.STRING);
         cell.setCellValue("Phần trăm KM");
+
         
         cell = r.createCell(8, org.apache.poi.ss.usermodel.CellType.STRING);
         cell.setCellValue("Trạng thái");
+
         
-        
-          List<ViewModelHoadon> v = hdService.getListHoaDon(0, 5);
-          int s = v.size();
+        List<ViewModelHoadon> v = hdService.getListHD();
+        int s = v.size();
         for (int i = 0; i < s; i++) {
             ViewModelHoadon chh = v.get(i);
             r = sheet.createRow(1 + i);
 
+            
             cell = r.createCell(0, org.apache.poi.ss.usermodel.CellType.STRING);
             cell.setCellValue(i + 1);
 
+            
             cell = r.createCell(1, org.apache.poi.ss.usermodel.CellType.STRING);
             cell.setCellValue(v.get(i).getId());
 
+            
             cell = r.createCell(2, org.apache.poi.ss.usermodel.CellType.STRING);
             cell.setCellValue(v.get(i).getMa());
 
+            
             cell = r.createCell(3, org.apache.poi.ss.usermodel.CellType.STRING);
             cell.setCellValue(v.get(i).getTenNV());
+
             
-            
-             cell = r.createCell(4, org.apache.poi.ss.usermodel.CellType.STRING);
+            cell = r.createCell(4, org.apache.poi.ss.usermodel.CellType.STRING);
             cell.setCellValue(v.get(i).getTenKH());
+
             
-             cell = r.createCell(5, org.apache.poi.ss.usermodel.CellType.STRING);
+            cell = r.createCell(5, org.apache.poi.ss.usermodel.CellType.STRING);
             cell.setCellValue(v.get(i).getNgayTao());
+
             
-             cell = r.createCell(6, org.apache.poi.ss.usermodel.CellType.STRING);
+            cell = r.createCell(6, org.apache.poi.ss.usermodel.CellType.STRING);
             cell.setCellValue(v.get(i).getNgayThanhToan());
+
             
-             cell = r.createCell(7, org.apache.poi.ss.usermodel.CellType.STRING);
+            cell = r.createCell(7, org.apache.poi.ss.usermodel.CellType.STRING);
             cell.setCellValue(v.get(i).getPhamtramKM());
+
             
-             cell = r.createCell(8, org.apache.poi.ss.usermodel.CellType.STRING);
-            cell.setCellValue(v.get(i).getTenKH());
-            
-              JFileChooser chooser = new JFileChooser();// mở file lên 
+            cell = r.createCell(8, org.apache.poi.ss.usermodel.CellType.STRING);
+            cell.setCellValue(v.get(i).getTrangThaiHoaDon());
+
+        }
+        JFileChooser chooser = new JFileChooser();// mở file lên 
         chooser.showOpenDialog(null);//để chọn lưu vào đâu
         File f = chooser.getSelectedFile();
-      
 
         try {
 
@@ -716,18 +731,7 @@ public class HoaDonView extends javax.swing.JFrame {
         }
         JOptionPane
                 .showMessageDialog(this, "In thành công");
-            
-        }
-            
-            
-            
-            
-        
-        
-        
-        
-        
-        
+
 
     }//GEN-LAST:event_jButton4ActionPerformed
 

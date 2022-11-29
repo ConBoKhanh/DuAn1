@@ -129,4 +129,45 @@ public class HoadonService implements IManageHoaDonService {
         }
     }
 
+    @Override
+    public List<ViewModelHoadon> getListHD() {
+
+        try {
+            List<ViewModelHoadon> list = new ArrayList<>();
+            List<HoaDon> sps = hdrp.getListHD();
+
+            for (HoaDon sp : sps) {
+
+                ViewModelHoadon x = new ViewModelHoadon();
+
+                x.setId(sp.getId());
+
+                x.setMa(sp.getMa());
+
+                x.setTenNV(sp.getIdNhanVien().getHoTen());
+
+                x.setTenKH(sp.getIdKhachHang().getTenKhachHang());
+
+                x.setNgayTao(String.valueOf(sp.getNgayTao()));
+                
+                
+
+                x.setNgayThanhToan(String.valueOf(sp.getNgayThanhToan()));
+                
+                x.setPhamtramKM(sp.getIdKhuyenMai().getPhanTramKM()+ "");
+                
+                x.setTrangThaiHoaDon(sp.getTrangThai()+ "");
+
+                list.add(x);
+            }
+            return list;
+        } catch (Exception e) {
+            return null;
+        }
+    }
+    
+    
+
+
+
 }

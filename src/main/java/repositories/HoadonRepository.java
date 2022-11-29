@@ -148,6 +148,22 @@ public class HoadonRepository {
             return null;
         }
     }
+    
+    
+    
+     public List<HoaDon> getListHD() {
+        
+        
+        try {
+            Session session = HibernatUtil.getFACTORY().openSession();
+            Query q = session.createQuery("FROM HoaDon where TrangThai >= 1");
+            List<HoaDon> list = q.getResultList();
+            return list;
+            
+        } catch (Exception e) {
+            return null;
+        }
+    }
 
     public static void main(String[] args) {
         HoadonRepository hd = new HoadonRepository();
@@ -160,9 +176,11 @@ public class HoadonRepository {
 //        }
      //   List<Object[]> list = hd.getList(2, 5);
         
-         for (Object[] arg : hd.getList(0, 5)) {
-             System.out.println(arg.toString());
-        }
+//         for (Object[] arg : hd.getList(0, 5)) {
+//             System.out.println(arg.toString());
+//        }
+
+        System.out.println(hd.getListHD());
         
 
     }

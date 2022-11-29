@@ -23,4 +23,6 @@ public interface IManageHoaDonService {
     boolean add(HoaDon hd);
 
     boolean delete(String id);
+    
+     List<ViewModelHoadon> getListHD();
 }
