@@ -152,9 +152,9 @@ public class NhanVienService implements IManageNhanVienService{
                 
                 x.setNgaySinh(String.valueOf(sp.getNgaySinh()));
                 
-                x.setIdCH(String.valueOf(sp.getIdCuaHang()));
+                x.setIdCH(String.valueOf(sp.getIdCuaHang().getTenCuaHang()));
                 
-                x.setIdCV(String.valueOf(sp.getIdChucVu()));
+                x.setIdCV(String.valueOf(sp.getIdChucVu().getTenChucVu()));
                 
                 x.setMatKhau(sp.getMatKhau());
                 
