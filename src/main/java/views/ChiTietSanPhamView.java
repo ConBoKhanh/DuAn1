@@ -5,39 +5,73 @@
 package views;
 
 import domainModels.ChiTietDoGo;
+
 import domainModels.DonViTinh;
+
 import domainModels.DongGo;
+
 import domainModels.LoaiSP;
+
 import domainModels.NguonGoc;
+
 import domainModels.NhaCungCap;
+
 import domainModels.SanPham;
+
 import java.math.BigDecimal;
+
 import java.util.List;
+
 import javax.swing.Icon;
+
 import javax.swing.JFrame;
+
 import javax.swing.JOptionPane;
+
 import javax.swing.table.DefaultTableModel;
+
 import services.ChiTietDoGoService;
+
 import services.DonViTinhService;
+
 import services.DongGoService;
+
 import services.LoaiSanPhamService;
+
 import services.NguonGocService;
+
 import services.NhaCungCapService;
+
 import services.SanPhamService;
+
 import services.impl.IManageChiTietDoGoService;
+
 import services.impl.IManageDonViTinhService;
+
 import services.impl.IManageDongGoService;
+
 import services.impl.IManageLoaiSanPhamService;
+
 import services.impl.IManageNguonGocService;
+
 import services.impl.IManageNhaCungCapService;
+
 import services.impl.IManageSanPhamService;
+
 import viewModel.ChiTietDoGoViewModel;
+
 import viewModel.ViewModelDonViTinh;
+
 import viewModel.ViewModelDongGo;
+
 import viewModel.ViewModelLoaiSanPham;
+
 import viewModel.ViewModelNguonGoc;
+
 import viewModel.ViewModelNhaCungCap;
+
 import viewModel.ViewModelSanPham;
+
 
 /**
  *
@@ -49,167 +83,299 @@ public class ChiTietSanPhamView extends javax.swing.JFrame {
      * Creates new form ChiTietSanPhamView
      */
     private static IManageChiTietDoGoService a = new ChiTietDoGoService();
+    
     private IManageSanPhamService spSV = new SanPhamService();
+    
     private IManageLoaiSanPhamService lSpSv = new LoaiSanPhamService();
+    
     private IManageNhaCungCapService nhaCungCapService = new NhaCungCapService();
+    
     private IManageDonViTinhService dvtrp = new DonViTinhService();
+    
     private IManageNguonGocService ngSv = new NguonGocService();
+    
     private IManageDongGoService dgSV = new DongGoService();
 
     static DefaultTableModel model = new DefaultTableModel();
 
     String IdNV;
+    
     String TenNV;
+    
     String CV;
 
     public ChiTietSanPhamView(String Id, String Ten, String cv) {
+        
          this.setDefaultCloseOperation(ChiTietSanPhamView.DO_NOTHING_ON_CLOSE);
+         
         initComponents();
+        
         IdNV = Id;
+        
         TenNV = Ten;
+        
         CV = cv;
+        
         setLocationRelativeTo(null);
+        
         load(a.list());
+        
         loadcbc();
     }
 
     public static void load(List<ChiTietDoGoViewModel> list) {
+        
         model = (DefaultTableModel) tbl.getModel();
+        
         model.setRowCount(0);
+        
         for (ChiTietDoGoViewModel n : list) {
+            
             model.addRow(new Object[]{
+                
                 model.getRowCount() + 1,
+                
                 n.getId(),
+                
                 n.getTensp(),
+                
                 n.getSp(),
+                
                 n.getLoad(),
+                
                 n.getDonggo(),
+                
                 n.getNcc(),
+                
                 n.getNguongoc(),
+                
                 n.getDonvi(),
+                
                 n.getMota(),
+                
                 n.getSoluong(),
+                
                 n.getGiaNhap(),
+                
                 n.getGiaBan()
+                    
 
             });
         }
     }
 
     public void timKiem() {
+        
         model = (DefaultTableModel) tbl.getModel();
+        
         model.setRowCount(0);
+        
         List<ChiTietDoGoViewModel> list = a.listtk(txtTimKiem.getText());
+        
         for (ChiTietDoGoViewModel n : list) {
+            
             model.addRow(new Object[]{
+                
                 n.getId(),
+                
                 n.getTensp(),
+                
                 n.getSp(),
+                
                 n.getLoad(),
+                
                 n.getDonggo(),
+                
                 n.getNcc(),
+                
                 n.getNguongoc(),
+                
                 n.getDonvi(),
+                
                 n.getMota(),
+                
                 n.getSoluong(),
+                
                 n.getGiaNhap(),
+                
                 n.getGiaBan()
+                    
 
             });
+            
         }
+        
     }
 
     public String getSPCBC() {
+        
         String id = null;
+        
+        
         List<ViewModelSanPham> a = spSV.getListSP();
+        
         for (ViewModelSanPham sp : a) {
+            
             if (cbcSP.getSelectedItem().equals(sp.getTen())) {
+                
                 id = sp.getId();
+                
             }
         }
+        
         return id;
     }
 
     public String getDGCBC() {
+        
         String id = null;
+        
         List<ViewModelDongGo> b = dgSV.getListDongGo();
+        
+        
         for (ViewModelDongGo dg : b) {
+            
             if (cbcDongGo.getSelectedItem().equals(dg.getTenLoaiGo())) {
+                
                 id = dg.getId();
+                
             }
+            
         }
+        
         return id;
+        
     }
 
     public String getLoaiCBC() {
+        
         String id = null;
+        
         List<ViewModelLoaiSanPham> c = lSpSv.getListLoaiSP();
+        
         for (ViewModelLoaiSanPham l : c) {
+            
             if (cbcLoaiSP.getSelectedItem().equals(l.getTenDongSP())) {
+                
                 id = l.getId();
+                
             }
+            
         }
+        
         return id;
+        
     }
 
     public String getNCCCBC() {
+        
         String id = null;
+        
         List<ViewModelNhaCungCap> d = nhaCungCapService.getAll();
+        
         for (ViewModelNhaCungCap ncc : d) {
+            
             if (ncc.getTenNCC().equals(cbNhaCC.getSelectedItem())) {
+                
                 id = ncc.getId();
+                
             }
+            
         }
+        
         return id;
+        
     }
 
     public String getDVTCBC() {
+        
         String id = null;
+        
         List<ViewModelDonViTinh> e = dvtrp.getListDVT();
+        
         for (ViewModelDonViTinh dvt : e) {
+            
             if (cbcDVT.getSelectedItem().equals(dvt.getDonViTinh())) {
+                
                 id = dvt.getId();
+                
             }
+            
         }
+        
         return id;
+        
     }
 
     public String getNguonGocTCBC() {
+        
         String id = null;
+        
         List<ViewModelNguonGoc> f = ngSv.getAll();
+        
         for (ViewModelNguonGoc ng : f) {
+            
             if (cbcNguonGoc.getSelectedItem().equals(ng.getquocgia())) {
+                
                 id = ng.getId();
+                
             }
+            
         }
+        
         return id;
+        
     }
 
     public void loadcbc() {
+        
         List<ViewModelSanPham> a = spSV.getListSP();
+        
         for (ViewModelSanPham sp : a) {
+            
             cbcSP.addItem(sp.getTen());
+            
         }
+        
         List<ViewModelDongGo> b = dgSV.getListDongGo();
+        
         for (ViewModelDongGo dg : b) {
+            
             cbcDongGo.addItem(dg.getTenLoaiGo());
+            
         }
         List<ViewModelLoaiSanPham> c = lSpSv.getListLoaiSP();
+        
         for (ViewModelLoaiSanPham l : c) {
+            
             cbcLoaiSP.addItem(l.getTenDongSP());
+            
         }
+        
         List<ViewModelNhaCungCap> d = nhaCungCapService.getAll();
+        
         for (ViewModelNhaCungCap ncc : d) {
+            
             cbNhaCC.addItem(ncc.getTenNCC());
+            
         }
+        
         List<ViewModelDonViTinh> e = dvtrp.getListDVT();
+        
         for (ViewModelDonViTinh dvt : e) {
+            
             cbcDVT.addItem(dvt.getDonViTinh());
+            
         }
+        
         List<ViewModelNguonGoc> f = ngSv.getAll();
+        
         for (ViewModelNguonGoc ng : f) {
+            
             cbcNguonGoc.addItem(ng.getquocgia());
+            
         }
+        
     }
 
     /**
@@ -522,22 +688,19 @@ public class ChiTietSanPhamView extends javax.swing.JFrame {
                                 .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addComponent(txtSoLuong, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(129, 129, 129)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addGap(25, 25, 25)
+                                    .addComponent(cbcNguonGoc, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(cbcDVT, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                            .addComponent(jLabel11, javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                                 .addComponent(jLabel12)
-                                                .addGap(18, 18, 18)
-                                                .addComponent(cbcNguonGoc, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addComponent(jLabel9)
-                                            .addComponent(jLabel11))
-                                        .addGap(18, 18, 18)
-                                        .addComponent(cbNhaCC, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                                .addComponent(jLabel9)))
+                                        .addGap(23, 23, 23)
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(cbNhaCC, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(cbcDVT, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE))))))
                         .addGap(34, 34, 34))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(23, 23, 23)
@@ -548,7 +711,7 @@ public class ChiTietSanPhamView extends javax.swing.JFrame {
                                 .addGap(0, 0, Short.MAX_VALUE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addContainerGap(13, Short.MAX_VALUE))))))
+                                .addContainerGap(24, Short.MAX_VALUE))))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -640,160 +803,261 @@ public class ChiTietSanPhamView extends javax.swing.JFrame {
 
     private void txtTimKiemKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTimKiemKeyReleased
         if (txtTimKiem.getText().equals("")) {
+            
             load(a.list());
+            
         } else {
+            
             timKiem();
+            
         }
+        
     }//GEN-LAST:event_txtTimKiemKeyReleased
 
     private void tblMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblMouseClicked
         int index = tbl.getSelectedRow();
+        
         txtid.setText(tbl.getValueAt(index, 1).toString());
+        
         txtTen.setText(tbl.getValueAt(index, 2).toString());
+        
         txtGiaNhap.setText(tbl.getValueAt(index, 11).toString());
+        
         System.out.println(tbl.getValueAt(index, 10).toString());
+        
         txtGiaBan.setText(tbl.getValueAt(index, 12).toString());
+        
         taMoTa.setText(tbl.getValueAt(index, 9).toString());
+        
         txtSoLuong.setText(tbl.getValueAt(index, 10).toString());
+        
         cbcSP.setSelectedItem(tbl.getValueAt(index, 3).toString());
+        
         cbcLoaiSP.setSelectedItem(tbl.getValueAt(index, 4).toString());
+        
+        
         cbcDongGo.setSelectedItem(tbl.getValueAt(index, 5).toString());
+        
         cbNhaCC.setSelectedItem(tbl.getValueAt(index, 6).toString());
+        
+        
         cbcDVT.setSelectedItem(tbl.getValueAt(index, 7).toString());
+        
         cbcNguonGoc.setSelectedItem(tbl.getValueAt(index, 8).toString());
+        
     }//GEN-LAST:event_tblMouseClicked
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         String idsp = getSPCBC();
+        
         String iddonggo = getDGCBC();
+        
         String idLoai = getLoaiCBC();
+        
         String Ncc = getNCCCBC();
+        
         String dvt = getDVTCBC();
+        
         String nguongoc = getNguonGocTCBC();
+        
         String tensp = txtTen.getText();
+        
         BigDecimal giaNhap = new BigDecimal(txtGiaNhap.getText());
+        
         BigDecimal giaBan = new BigDecimal(txtGiaBan.getText());
+        
         String mota = taMoTa.getText();
 
         ChiTietDoGo dg = new ChiTietDoGo();
 
         SanPham aa = new SanPham();
+        
         aa.setId(idsp);
 
         DongGo bb = new DongGo();
+        
         bb.setId(iddonggo);
 
         LoaiSP c = new LoaiSP();
+        
         c.setId(idLoai);
 
         NhaCungCap d = new NhaCungCap();
+        
         d.setId(Ncc);
 
         DonViTinh e = new DonViTinh();
+        
         e.setId(dvt);
 
         NguonGoc f = new NguonGoc();
+        
         f.setId(nguongoc);
 
         dg.setIdSanPham(aa);
+        
         dg.setIdDongGo(bb);
+        
         dg.setIdLoaiSP(c);
+        
         dg.setIdNhaCungCap(d);
+        
         dg.setIdDonViTinh(e);
+        
         dg.setIdNguocGoc(f);
+        
         dg.setTenSP(tensp);
+        
         dg.setMoTa(mota);
+        
         dg.setGiaNhap(giaNhap);
+        
         dg.setGiaBan(giaBan);
 
         boolean b = a.add(dg);
+        
         if (b == true) {
             Icon icon = new javax.swing.ImageIcon(getClass().getResource("/img/themmoiicon.png"));
+            
             JOptionPane.showMessageDialog(this, "Thêm sp thành công", "Sản Phẩm", JOptionPane.INFORMATION_MESSAGE, icon);
+            
             load(a.list());
+            
 
         } else {
+            
             Icon icon = new javax.swing.ImageIcon(getClass().getResource("/img/deleteicon.png"));
+            
             JOptionPane.showMessageDialog(this, "Lỗi Sản Phẩm", "Sản Phẩm", JOptionPane.INFORMATION_MESSAGE, icon);
+            
         }
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         String id = txtid.getText();
+        
         String idsp = getSPCBC();
+        
         String iddonggo = getDGCBC();
+        
         String idLoai = getLoaiCBC();
+        
         String Ncc = getNCCCBC();
+        
         String dvt = getDVTCBC();
+        
         String nguongoc = getNguonGocTCBC();
+        
         String tensp = txtTen.getText();
+        
         BigDecimal giaNhap = new BigDecimal(txtGiaNhap.getText());
+        
         BigDecimal giaBan = new BigDecimal(txtGiaBan.getText());
+        
         String mota = taMoTa.getText();
+        
 
         ChiTietDoGo dg = new ChiTietDoGo();
 
         SanPham aa = new SanPham();
+        
         aa.setId(idsp);
 
         DongGo bb = new DongGo();
+        
         bb.setId(iddonggo);
 
         LoaiSP c = new LoaiSP();
+        
         c.setId(idLoai);
 
         NhaCungCap d = new NhaCungCap();
+        
         d.setId(Ncc);
 
         DonViTinh e = new DonViTinh();
+        
         e.setId(dvt);
 
         NguonGoc f = new NguonGoc();
+        
         f.setId(nguongoc);
 
+        
         dg.setId(id);
+        
         dg.setIdSanPham(aa);
+        
         dg.setIdDongGo(bb);
+        
         dg.setIdLoaiSP(c);
+        
         dg.setIdNhaCungCap(d);
+        
         dg.setIdDonViTinh(e);
+        
         dg.setIdNguocGoc(f);
+        
         dg.setTenSP(tensp);
+        
         dg.setMoTa(mota);
+        
         dg.setGiaNhap(giaNhap);
+        
         dg.setGiaBan(giaBan);
 
         boolean b = a.update(dg);
+        
         if (b == true) {
+            
             Icon icon = new javax.swing.ImageIcon(getClass().getResource("/img/themmoiicon.png"));
+            
             JOptionPane.showMessageDialog(this, "Update sp thành công", "Sản Phẩm", JOptionPane.INFORMATION_MESSAGE, icon);
+            
             load(a.list());
+            
 
         } else {
             Icon icon = new javax.swing.ImageIcon(getClass().getResource("/img/deleteicon.png"));
+            
             JOptionPane.showMessageDialog(this, "Update Tên Sản Phẩm", "Sản Phẩm", JOptionPane.INFORMATION_MESSAGE, icon);
+            
         }
+        
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         boolean b = a.delete(txtid.getText());
+        
         if (b == true) {
+            
             Icon icon = new javax.swing.ImageIcon(getClass().getResource("/img/themmoiicon.png"));
+            
             JOptionPane.showMessageDialog(this, "Delete sp thành công", "Sản Phẩm", JOptionPane.INFORMATION_MESSAGE, icon);
+            
             load(a.list());
+            
 
         } else {
+            
             Icon icon = new javax.swing.ImageIcon(getClass().getResource("/img/deleteicon.png"));
+            
             JOptionPane.showMessageDialog(this, "Delete Tên Sản Phẩm", "Sản Phẩm", JOptionPane.INFORMATION_MESSAGE, icon);
+            
         }
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         NhapXuatView i = new NhapXuatView(txtid.getText(), txtTen.getText(), txtGiaNhap.getText(), txtSoLuong.getText());
+        
         i.setVisible(true);
+        
         i.pack();
+        
         i.setLocationRelativeTo(null);
+        
         i.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void tblKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tblKeyTyped
@@ -802,9 +1066,13 @@ public class ChiTietSanPhamView extends javax.swing.JFrame {
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         MenuView v = new MenuView(IdNV, TenNV, CV);
+        
         v.setLocationRelativeTo(null);
+        
         v.setVisible(true);
+        
         this.dispose();
+        
     }//GEN-LAST:event_jButton6ActionPerformed
 
     /**
