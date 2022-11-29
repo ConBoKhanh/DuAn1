@@ -2,10 +2,17 @@ package views;
 
 import domainModels.HoaDon;
 import domainModels.NhanVien;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.util.List;
 import javax.swing.Icon;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.xssf.usermodel.XSSFRow;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import pagination.EventPagination;
 import pagination.style.PaginationItemRenderStyle1;
 import services.HoaDonBanHangService;
@@ -621,6 +628,107 @@ public class HoaDonView extends javax.swing.JFrame {
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
+        
+          XSSFWorkbook w = new XSSFWorkbook();
+
+        XSSFSheet sheet = w.createSheet("danhsach");
+
+        XSSFRow r = null;
+
+        Cell cell = null;
+
+        r = sheet.createRow(0);//số dòng cách đầu ở excel
+
+        cell = r.createCell(1, org.apache.poi.ss.usermodel.CellType.STRING);
+        cell.setCellValue("Id");
+
+        cell = r.createCell(2, org.apache.poi.ss.usermodel.CellType.STRING);
+        cell.setCellValue("Mã HĐ");
+
+        cell = r.createCell(3, org.apache.poi.ss.usermodel.CellType.STRING);
+        cell.setCellValue("Tên NV");
+        
+        
+        cell = r.createCell(4, org.apache.poi.ss.usermodel.CellType.STRING);
+        cell.setCellValue("Tên KH");
+        
+        cell = r.createCell(5, org.apache.poi.ss.usermodel.CellType.STRING);
+        cell.setCellValue("Ngày tạo");
+        
+        cell = r.createCell(6, org.apache.poi.ss.usermodel.CellType.STRING);
+        cell.setCellValue("Ngày thanh toán");
+        
+        cell = r.createCell(7, org.apache.poi.ss.usermodel.CellType.STRING);
+        cell.setCellValue("Phần trăm KM");
+        
+        cell = r.createCell(8, org.apache.poi.ss.usermodel.CellType.STRING);
+        cell.setCellValue("Trạng thái");
+        
+        
+          List<ViewModelHoadon> v = hdService.getListHoaDon(0, 5);
+          int s = v.size();
+        for (int i = 0; i < s; i++) {
+            ViewModelHoadon chh = v.get(i);
+            r = sheet.createRow(1 + i);
+
+            cell = r.createCell(0, org.apache.poi.ss.usermodel.CellType.STRING);
+            cell.setCellValue(i + 1);
+
+            cell = r.createCell(1, org.apache.poi.ss.usermodel.CellType.STRING);
+            cell.setCellValue(v.get(i).getId());
+
+            cell = r.createCell(2, org.apache.poi.ss.usermodel.CellType.STRING);
+            cell.setCellValue(v.get(i).getMa());
+
+            cell = r.createCell(3, org.apache.poi.ss.usermodel.CellType.STRING);
+            cell.setCellValue(v.get(i).getTenNV());
+            
+            
+             cell = r.createCell(4, org.apache.poi.ss.usermodel.CellType.STRING);
+            cell.setCellValue(v.get(i).getTenKH());
+            
+             cell = r.createCell(5, org.apache.poi.ss.usermodel.CellType.STRING);
+            cell.setCellValue(v.get(i).getNgayTao());
+            
+             cell = r.createCell(6, org.apache.poi.ss.usermodel.CellType.STRING);
+            cell.setCellValue(v.get(i).getNgayThanhToan());
+            
+             cell = r.createCell(7, org.apache.poi.ss.usermodel.CellType.STRING);
+            cell.setCellValue(v.get(i).getPhamtramKM());
+            
+             cell = r.createCell(8, org.apache.poi.ss.usermodel.CellType.STRING);
+            cell.setCellValue(v.get(i).getTenKH());
+            
+              JFileChooser chooser = new JFileChooser();// mở file lên 
+        chooser.showOpenDialog(null);//để chọn lưu vào đâu
+        File f = chooser.getSelectedFile();
+      
+
+        try {
+
+            FileOutputStream f1 = new FileOutputStream(new File(f + ".xlsx"));
+
+            w.write(f1);
+            f1.close();
+
+        } catch (Exception e) {
+
+        }
+        JOptionPane
+                .showMessageDialog(this, "In thành công");
+            
+        }
+            
+            
+            
+            
+        
+        
+        
+        
+        
+        
+
     }//GEN-LAST:event_jButton4ActionPerformed
 
     /**
