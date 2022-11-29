@@ -26,7 +26,7 @@ public class NhapXuatRepository {
     public List<LichSuNhap> getList() {
 
         Session session = HibernatUtil.getFACTORY().openSession();
-        Query q = session.createQuery("from LichSuNhap");
+        Query q = session.createQuery("from LichSuNhap order by NgayNhap desc");
         List<LichSuNhap> list = q.getResultList();
         return list;
 

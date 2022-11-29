@@ -43,7 +43,7 @@ public class BanHangHoaDonRepository {
     public int getMaxMa() {
         Session session = HibernatUtil.getFACTORY().openSession();
         String soMaLonNhat = null;
-        Query q = session.createQuery(" select A.Ma From HoaDon A  where A.TrangThai = 1");
+        Query q = session.createQuery(" select A.Ma From HoaDon A  where A.TrangThai >=1");
         List<String> i = q.getResultList();
         if (i.isEmpty()) {
             return 0;
@@ -141,12 +141,14 @@ public class BanHangHoaDonRepository {
 
     public static void main(String[] args) {
         BanHangHoaDonRepository o = new BanHangHoaDonRepository();
-        HoaDon i = new HoaDon();
+//        HoaDon i = new HoaDon();
+//
+//        NhanVien a = new NhanVien();
+//        a.setId("8DAA9DA3-B007-4052-9CE3-6724AF09D2D3");
+//
+//        i.setIdNhanVien(a);
 
-        NhanVien a = new NhanVien();
-        a.setId("8DAA9DA3-B007-4052-9CE3-6724AF09D2D3");
-
-        i.setIdNhanVien(a);
+        System.out.println(o.getMaxMa());
 
     }
 }
