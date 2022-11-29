@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package views;
+package views.TEST;
 
 import java.util.Properties;
 
@@ -38,63 +38,71 @@ import services.impl.IManageQuenMatKhauService;
 
 import viewModel.ViewModelQuenMatKhau;
 
+import views.ThongTinCaNhanView;
+
 
 /**
  *
- * @author admin
+ * @author ktkha
  */
-public class QuenMKView extends javax.swing.JFrame {
-
+public class LayLaiMatKhauView extends javax.swing.JFrame {
+    
     private IManageQuenMatKhauService qMkService = new QuenMatKhauService();
 
     /**
-     * Creates new form QuenMKView
+     * Creates new form LayLaiMatKhauView
      */
-    public QuenMKView() {
+    public LayLaiMatKhauView() {
         
         initComponents();
-
+        
+        setLocationRelativeTo(null);
+        
+        
         txtEmail.setEditable(false);
-
-        this.setDefaultCloseOperation(QuenMKView.DO_NOTHING_ON_CLOSE);
+        
+        
+//        this.setDefaultCloseOperation(QuenMKView.DO_NOTHING_ON_CLOSE);
 
     }
-
+    
     private final static String emailGui = "duymaidinh2003@gmail.com";
-
+    
     private final static String matKhau = "kbryrjbmkrrxyiub";
-
+    
     public void guiMail(String emailNhan,
+            
             String tieuDe, String noiDung, String ten, String pass)
+            
             throws AddressException, MessagingException {
-
+        
         Properties prop = new Properties();
-
+        
         prop.put("mail.smtp.auth", true);
-
+        
         prop.put("mail.smtp.starttls.enable", "true");
-
+        
         prop.put("mail.smtp.host", "smtp.gmail.com");
-
+        
         prop.put("mail.smtp.port", "587");
-
+        
         prop.put("mail.smtp.ssl.protocols", "TLSv1.2");
-
+        
         prop.put("mail.smtp.ssl.trust", "smtp.gmail.com");
-
+        
         Session session = Session.getInstance(prop, new Authenticator() {
-
+            
             @Override
             protected PasswordAuthentication getPasswordAuthentication() {
-
+                
                 return new PasswordAuthentication(emailGui, matKhau);
             }
         });
-
+        
         Message message = new MimeMessage(session);
-
+        
         message.setFrom(new InternetAddress(emailGui));
-
+        
         message.setRecipients(
                 Message.RecipientType.TO, InternetAddress.parse(emailNhan));
 
@@ -103,21 +111,21 @@ public class QuenMKView extends javax.swing.JFrame {
 
         // Nội dung
         MimeBodyPart mimeBodyPart = new MimeBodyPart();
-
+        
         MimeBodyPart mimeBodyPart1 = new MimeBodyPart();
         //
         mimeBodyPart.setContent(tieuDe, "text/html; charset=utf-8");
-
+        
         mimeBodyPart1.setContent(noiDung + "<br>" + "Ten  : " + ten + "<br> Pass : " + pass, "text/html; charset=utf-8");
-
+        
         Multipart multipart = new MimeMultipart();
-
+        
         multipart.addBodyPart(mimeBodyPart);
-
+        
         multipart.addBodyPart(mimeBodyPart1);
-
+        
         message.setContent(multipart);
-
+        
         Transport.send(message);
     }
 
@@ -130,15 +138,12 @@ public class QuenMKView extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         txtSDT = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         btnLayMatKhau = new javax.swing.JButton();
         txtEmail = new javax.swing.JTextField();
         btnLayMatKhau1 = new javax.swing.JButton();
-
-        jLabel1.setText("jLabel1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -163,6 +168,7 @@ public class QuenMKView extends javax.swing.JFrame {
         jLabel2.setText("Lấy Lại Mật Khẩu");
 
         btnLayMatKhau.setBackground(new java.awt.Color(255, 153, 153));
+        btnLayMatKhau.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnLayMatKhau.setText("Lấy Mật Khẩu");
         btnLayMatKhau.setBorder(javax.swing.BorderFactory.createMatteBorder(2, 2, 2, 2, new java.awt.Color(0, 0, 0)));
         btnLayMatKhau.addActionListener(new java.awt.event.ActionListener() {
@@ -180,6 +186,7 @@ public class QuenMKView extends javax.swing.JFrame {
         });
 
         btnLayMatKhau1.setBackground(new java.awt.Color(255, 153, 153));
+        btnLayMatKhau1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnLayMatKhau1.setText("Back");
         btnLayMatKhau1.setBorder(javax.swing.BorderFactory.createMatteBorder(2, 2, 2, 2, new java.awt.Color(0, 0, 0)));
         btnLayMatKhau1.addActionListener(new java.awt.event.ActionListener() {
@@ -195,18 +202,23 @@ public class QuenMKView extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(66, 66, 66)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtSDT, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(btnLayMatKhau, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnLayMatKhau1, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(113, 113, 113)
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(47, Short.MAX_VALUE))
+                                .addGap(66, 66, 66)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtSDT, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(113, 113, 113)
+                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(140, 140, 140)
+                                .addComponent(btnLayMatKhau, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 75, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(btnLayMatKhau1, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -217,53 +229,38 @@ public class QuenMKView extends javax.swing.JFrame {
                 .addComponent(txtSDT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(26, 26, 26)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnLayMatKhau, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnLayMatKhau1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(72, Short.MAX_VALUE))
+                .addGap(30, 30, 30)
+                .addComponent(btnLayMatKhau, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
+                .addComponent(btnLayMatKhau1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtSDTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSDTActionPerformed
+    private void btnLayMatKhau1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLayMatKhau1ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtSDTActionPerformed
-
-    private void txtEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEmailActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtEmailActionPerformed
-
-    private void txtSDTKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSDTKeyReleased
-        // TODO add your handling code here:
-        if (txtSDT.getText().equals("")) {
-
-            txtEmail.setText("");
-
-        } else {
-
-            for (ViewModelQuenMatKhau a : qMkService.getSDT(txtSDT.getText())) {
-
-                if (a.getSdt().equals(txtSDT.getText())) {
-
-                    txtEmail.setText(a.getEmail());
-
-                }
-            }
-        }
-    }//GEN-LAST:event_txtSDTKeyReleased
+        ThongTinCaNhanView tt = new ThongTinCaNhanView();
+        
+        tt.setLocationRelativeTo(null);
+        
+        tt.setVisible(true);
+        
+        this.dispose();
+        
+    }//GEN-LAST:event_btnLayMatKhau1ActionPerformed
 
     private void btnLayMatKhauActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLayMatKhauActionPerformed
         // TODO add your handling code here:
@@ -293,16 +290,32 @@ public class QuenMKView extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnLayMatKhauActionPerformed
 
-    private void btnLayMatKhau1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLayMatKhau1ActionPerformed
+    private void txtSDTKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSDTKeyReleased
         // TODO add your handling code here:
-        DangNhapView qmk = new DangNhapView();
+        if (txtSDT.getText().equals("")) {
 
-        qmk.setLocationRelativeTo(null);
+            txtEmail.setText("");
 
-        qmk.setVisible(true);
+        } else {
 
-        this.dispose();
-    }//GEN-LAST:event_btnLayMatKhau1ActionPerformed
+            for (ViewModelQuenMatKhau a : qMkService.getSDT(txtSDT.getText())) {
+
+                if (a.getSdt().equals(txtSDT.getText())) {
+
+                    txtEmail.setText(a.getEmail());
+
+                }
+            }
+        }
+    }//GEN-LAST:event_txtSDTKeyReleased
+
+    private void txtSDTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSDTActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtSDTActionPerformed
+
+    private void txtEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEmailActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtEmailActionPerformed
 
     /**
      * @param args the command line arguments
@@ -321,17 +334,14 @@ public class QuenMKView extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(QuenMKView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(LayLaiMatKhauView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(QuenMKView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(LayLaiMatKhauView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(QuenMKView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(LayLaiMatKhauView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(QuenMKView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(LayLaiMatKhauView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
@@ -339,7 +349,7 @@ public class QuenMKView extends javax.swing.JFrame {
             
             public void run() {
                 
-                new QuenMKView().setVisible(true);
+                new LayLaiMatKhauView().setVisible(true);
                 
             }
             
@@ -350,7 +360,6 @@ public class QuenMKView extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnLayMatKhau;
     private javax.swing.JButton btnLayMatKhau1;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField txtEmail;
