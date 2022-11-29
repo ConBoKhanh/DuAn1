@@ -67,9 +67,13 @@ public class ThongTinCaNhanView extends javax.swing.JFrame {
 
     private IManageDoiMatKhauService dmkSV = new DoiMatKhauService();
     
-    private String id = "121D16CE-B94A-4AFF-8E6C-887C2657A694";
+  
     
-    
+    String IdNV;
+
+    String TenNV;
+
+    String CV;
     
     
     
@@ -77,8 +81,14 @@ public class ThongTinCaNhanView extends javax.swing.JFrame {
     /**
      * Creates new form thongTinCaNhanView
      */
-    public ThongTinCaNhanView() {
+    public ThongTinCaNhanView(String Id, String Ten, String cv) {
         initComponents();
+        
+        IdNV = Id;
+
+        TenNV = Ten;
+
+        CV = cv;
         
         setLocationRelativeTo(null);
         
@@ -87,7 +97,7 @@ public class ThongTinCaNhanView extends javax.swing.JFrame {
     }
 
     public void loadTT() {
-        List<ViewModelNhanVien> list = dmkSV.getNVbyId(id);
+        List<ViewModelNhanVien> list = dmkSV.getNVbyId(IdNV);
         
         for (ViewModelNhanVien v : list) {
             
@@ -497,7 +507,7 @@ public class ThongTinCaNhanView extends javax.swing.JFrame {
             
             public void run() {
                 
-                new ThongTinCaNhanView().setVisible(true);
+//                new ThongTinCaNhanView().setVisible(true);
                 
             }
         });

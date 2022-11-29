@@ -252,13 +252,13 @@ public class LayLaiMatKhauView extends javax.swing.JFrame {
 
     private void btnLayMatKhau1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLayMatKhau1ActionPerformed
         // TODO add your handling code here:
-        ThongTinCaNhanView tt = new ThongTinCaNhanView();
-        
-        tt.setLocationRelativeTo(null);
-        
-        tt.setVisible(true);
-        
-        this.dispose();
+//        ThongTinCaNhanView tt = new ThongTinCaNhanView();
+//        
+//        tt.setLocationRelativeTo(null);
+//        
+//        tt.setVisible(true);
+//        
+//        this.dispose();
         
     }//GEN-LAST:event_btnLayMatKhau1ActionPerformed
 

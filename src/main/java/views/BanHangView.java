@@ -1265,8 +1265,8 @@ public class BanHangView extends javax.swing.JFrame implements Runnable, ThreadF
                     i.setLocationRelativeTo(null);
                     i.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
                     return;
-                } else if (rc == 1) {
-                    txtkm.setText("Không Chọn Khuyến Mãi");
+                } else{
+                    return;
                 }
             }
 
