@@ -45,7 +45,7 @@ public class CreateQR extends javax.swing.JFrame {
      */
     public CreateQR() {
         initComponents();
-        setLocationRelativeTo(null);
+        this.setLocationRelativeTo(null);
         loadChiTiet();
 //        loadHoaDon();
         loadHoaDon();
@@ -65,13 +65,13 @@ public class CreateQR extends javax.swing.JFrame {
     }
 
     public void loadHoaDon() {
-
+        
         model = (DefaultTableModel) tbHD.getModel();
         model.setRowCount(0);
         List<ViewModelQRHoaDon> lsp = qr.getList();
         for (ViewModelQRHoaDon sp : lsp) {
             model.addRow(new Object[]{
-                sp.getId(), sp.getMa(), sp.getNgayTao(), sp.getTenNV()
+                sp.getId(), sp.getMa(), sp.getNgayThanhToan(), sp.getTenNV()
             });
         }
 
@@ -99,13 +99,14 @@ public class CreateQR extends javax.swing.JFrame {
     private void initComponents() {
 
         pagination1 = new pagination.Pagination();
-        jTabbedPane2 = new javax.swing.JTabbedPane();
-        jPanel2 = new javax.swing.JPanel();
-        pagination2 = new pagination.Pagination();
+        jTabbedPane3 = new javax.swing.JTabbedPane();
+        jPanel3 = new javax.swing.JPanel();
+        pagination3 = new pagination.Pagination();
         txtIdHD = new javax.swing.JTextField();
-        jScrollPane2 = new javax.swing.JScrollPane();
+        jScrollPane3 = new javax.swing.JScrollPane();
         tbHD = new javax.swing.JTable();
-        btnQRHoaDon = new javax.swing.JButton();
+        btnQRHoaDon1 = new javax.swing.JButton();
+        btnback = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         txtIDChiTiet = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -115,9 +116,11 @@ public class CreateQR extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel2.setBackground(new java.awt.Color(255, 204, 204));
+        jTabbedPane3.setBorder(new javax.swing.border.MatteBorder(null));
 
-        pagination2.setOpaque(false);
+        jPanel3.setBackground(new java.awt.Color(255, 204, 204));
+
+        pagination3.setOpaque(false);
 
         txtIdHD.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createMatteBorder(2, 2, 2, 2, new java.awt.Color(0, 0, 0))));
 
@@ -129,7 +132,7 @@ public class CreateQR extends javax.swing.JFrame {
                 {null, null, null, null}
             },
             new String [] {
-                "ID", "Mã", "Ngày Tạo", "Tên NV"
+                "ID", "Mã", "Ngày Thanh Toán", "Tên NV"
             }
         ));
         tbHD.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -137,53 +140,73 @@ public class CreateQR extends javax.swing.JFrame {
                 tbHDMouseClicked(evt);
             }
         });
-        jScrollPane2.setViewportView(tbHD);
+        jScrollPane3.setViewportView(tbHD);
 
-        btnQRHoaDon.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        btnQRHoaDon.setText("Tạo QR");
-        btnQRHoaDon.addActionListener(new java.awt.event.ActionListener() {
+        btnQRHoaDon1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnQRHoaDon1.setText("Tạo QR");
+        btnQRHoaDon1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnQRHoaDonActionPerformed(evt);
             }
         });
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(pagination2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(280, 280, 280))
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(25, 25, 25)
-                        .addComponent(txtIdHD, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(47, 47, 47)
-                        .addComponent(btnQRHoaDon))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 388, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        btnback.setBackground(new java.awt.Color(255, 204, 204));
+        btnback.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnback.setText("BACK");
+        btnback.setBorder(javax.swing.BorderFactory.createMatteBorder(2, 2, 2, 2, new java.awt.Color(0, 0, 0)));
+        btnback.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnbackActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 388, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                                .addComponent(pagination3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(280, 280, 280))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                                .addComponent(btnback, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(txtIdHD, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnQRHoaDon1)
+                                .addGap(71, 71, 71))))))
         );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(35, 35, 35)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtIdHD, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnQRHoaDon))
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(35, 35, 35)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtIdHD, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnQRHoaDon1)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(btnback, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(257, 257, 257)
-                .addComponent(pagination2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(pagination3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jTabbedPane2.addTab("QR Hóa Đơn", jPanel2);
+        jTabbedPane3.addTab("QR Hóa Đơn", jPanel3);
 
         jPanel4.setBackground(new java.awt.Color(255, 204, 204));
+        jPanel4.setBorder(new javax.swing.border.MatteBorder(null));
 
         txtIDChiTiet.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createMatteBorder(2, 2, 2, 2, new java.awt.Color(0, 0, 0))));
 
@@ -227,7 +250,7 @@ public class CreateQR extends javax.swing.JFrame {
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 388, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(16, Short.MAX_VALUE))
+                .addContainerGap(12, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -236,15 +259,15 @@ public class CreateQR extends javax.swing.JFrame {
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtIDChiTiet, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnQRChiTiet))
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(53, Short.MAX_VALUE))
+                .addGap(34, 34, 34)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(37, Short.MAX_VALUE))
         );
 
-        jTabbedPane2.addTab("QR Chi Tiết Đồ Gỗ", jPanel4);
+        jTabbedPane3.addTab("QR Chi Tiết Đồ Gỗ", jPanel4);
 
-        getContentPane().add(jTabbedPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 0, 410, 340));
-        jTabbedPane2.getAccessibleContext().setAccessibleName("Chức Vụ");
+        getContentPane().add(jTabbedPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 410, 340));
+        jTabbedPane3.getAccessibleContext().setAccessibleName("Chức Vụ");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -253,16 +276,16 @@ public class CreateQR extends javax.swing.JFrame {
         // TODO add your handling code here:
         try {
             String data = txtIDChiTiet.getText();
-//            String path = "D:\\DuAnGitHub\\Qr.png";
+            //            String path = "D:\\DuAnGitHub\\Qr.png";
             JFileChooser file = new JFileChooser();
             file.showOpenDialog(null);
             File f = file.getSelectedFile();
 
             BitMatrix matrix = new MultiFormatWriter()
-                    .encode(data, BarcodeFormat.QR_CODE, 500, 500);
+            .encode(data, BarcodeFormat.QR_CODE, 500, 500);
 
             MatrixToImageWriter.writeToPath(matrix,
-                    "jpg", Paths.get(f + ".png"));
+                "jpg", Paths.get(f + ".png"));
             JOptionPane.showMessageDialog(this, "Tạo QR thành công");
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Tạo QR thất bại");
@@ -279,16 +302,16 @@ public class CreateQR extends javax.swing.JFrame {
         // TODO add your handling code here:
         try {
             String data = txtIdHD.getText();
-//            String path = "D:\\DuAnGitHub\\Qr.png";
+            //            String path = "D:\\DuAnGitHub\\Qr.png";
             JFileChooser file = new JFileChooser();
             file.showOpenDialog(null);
             File f = file.getSelectedFile();
 
             BitMatrix matrix = new MultiFormatWriter()
-                    .encode(data, BarcodeFormat.QR_CODE, 500, 500);
+            .encode(data, BarcodeFormat.QR_CODE, 500, 500);
 
             MatrixToImageWriter.writeToPath(matrix,
-                    "jpg", Paths.get(f + ".png"));
+                "jpg", Paths.get(f + ".png"));
             JOptionPane.showMessageDialog(this, "Tạo QR thành công");
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Tạo QR thất bại");
@@ -300,6 +323,11 @@ public class CreateQR extends javax.swing.JFrame {
         int index = tbHD.getSelectedRow();
         txtIdHD.setText(tbHD.getValueAt(index, 0).toString());
     }//GEN-LAST:event_tbHDMouseClicked
+
+    private void btnbackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnbackActionPerformed
+
+        this.dispose();
+    }//GEN-LAST:event_btnbackActionPerformed
 
     /**
      * @param args the command line arguments
@@ -341,14 +369,15 @@ public class CreateQR extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnQRChiTiet;
-    private javax.swing.JButton btnQRHoaDon;
-    private javax.swing.JPanel jPanel2;
+    private javax.swing.JButton btnQRHoaDon1;
+    private javax.swing.JButton btnback;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTabbedPane jTabbedPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JTabbedPane jTabbedPane3;
     private pagination.Pagination pagination1;
-    private pagination.Pagination pagination2;
+    private pagination.Pagination pagination3;
     private javax.swing.JTable tbChiTiet;
     private javax.swing.JTable tbHD;
     private javax.swing.JTextField txtIDChiTiet;

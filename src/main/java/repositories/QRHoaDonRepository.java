@@ -20,7 +20,7 @@ public class QRHoaDonRepository {
      public List<HoaDon> getList() {
         try {
             Session session = HibernatUtil.getFACTORY().openSession(); //Ket noi DB thuc hien hien truy van
-            Query q = session.createQuery("FROM HoaDon "); //Tao cau truy van lay du lieu tu bang dong go
+            Query q = session.createQuery("FROM HoaDon where TrangThai >= 2 order by convert(int,Ma) desc"); //Tao cau truy van lay du lieu tu bang dong go
             List<HoaDon> list = q.getResultList();
             return list;
         } catch (Exception e) {

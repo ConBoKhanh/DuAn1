@@ -599,7 +599,7 @@ public class MenuView extends javax.swing.JFrame {
         BaoHanh.setBackground(new java.awt.Color(255, 204, 204));
         BaoHanh.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         BaoHanh.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/web-browser.png"))); // NOI18N
-        BaoHanh.setText("Bảo Hành");
+        BaoHanh.setText("QR Code");
         BaoHanh.setBorder(javax.swing.BorderFactory.createMatteBorder(2, 2, 2, 2, new java.awt.Color(0, 0, 0)));
         BaoHanh.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1816,14 +1816,13 @@ public class MenuView extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton10ActionPerformed
 
     private void BaoHanhActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BaoHanhActionPerformed
-        BaoHanhView v = new BaoHanhView();
+        CreateQR v = new CreateQR();
         v.setLocationRelativeTo(null);
         v.setVisible(true);
-        this.dispose();
     }//GEN-LAST:event_BaoHanhActionPerformed
 
     private void DoanhThuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DoanhThuActionPerformed
-        DoanhThuView v = new DoanhThuView();
+        DoanhThuView v = new DoanhThuView(lbId.getText(), lbTen.getText(), lbCv.getText());
         v.setLocationRelativeTo(null);
         v.setVisible(true);
         this.dispose();

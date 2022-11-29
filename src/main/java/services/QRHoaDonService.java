@@ -27,10 +27,8 @@ public class QRHoaDonService implements IManageQRHoaDonService{
                 ViewModelQRHoaDon b = new ViewModelQRHoaDon();
                 b.setId(a.getId());
                 b.setMa(a.getMa());
-                b.setNgayTao(a.getNgayTao() + "");
-                if (a.getTrangThaiHoaDon() == 0) {
-                    b.setTrangThaiHoaDon("Chưa Thanh Toán");
-                }
+                b.setNgayThanhToan(a.getNgayThanhToan()+ "");
+                
                 b.setTenNV(a.getIdNhanVien().getHoTen());
 
                 lists.add(b);
