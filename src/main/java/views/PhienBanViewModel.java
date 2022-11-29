@@ -57,6 +57,7 @@ public class PhienBanViewModel extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 204));
+        jPanel1.setBorder(new javax.swing.border.MatteBorder(null));
 
         jPanel2.setBackground(new java.awt.Color(204, 255, 255));
 
@@ -256,7 +257,7 @@ public class PhienBanViewModel extends javax.swing.JFrame {
                                 .addComponent(jLabel9)
                                 .addGap(26, 26, 26)
                                 .addComponent(jLabel5)
-                                .addGap(0, 79, Short.MAX_VALUE))
+                                .addGap(0, 77, Short.MAX_VALUE))
                             .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel1Layout.createSequentialGroup()
