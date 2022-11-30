@@ -108,7 +108,7 @@ public class DoanhThuRepository {
             int a = -1;
             Session session = HibernatUtil.getFACTORY().openSession();
             Transaction transaction = session.getTransaction();
-            Query q = session.createQuery("select COUNT(A.SoLuong),COUNT(A.SoLuong) from ChiTietDoGo A where A.SoLuong > 10 And A.TrangThai = 1");
+            Query q = session.createQuery("select COUNT(A.SoLuong),COUNT(A.SoLuong) from ChiTietDoGo A where A.TrangThai = 1");
             List<Object[]> list = q.getResultList();
             for (Object[] o : list) {
                 a = Integer.parseInt(o[0].toString());
@@ -124,7 +124,7 @@ public class DoanhThuRepository {
             int a = -1;
             Session session = HibernatUtil.getFACTORY().openSession();
             Transaction transaction = session.getTransaction();
-            Query q = session.createQuery("select COUNT(A.SoLuong),COUNT(A.SoLuong) from ChiTietDoGo A where A.SoLuong > 0 AND A.SoLuong <= 10 And A.TrangThai = 1");
+            Query q = session.createQuery("select COUNT(A.SoLuong),COUNT(A.SoLuong) from ChiTietDoGo A where A.SoLuong > 0 AND A.SoLuong < 10 And A.TrangThai = 1");
             List<Object[]> list = q.getResultList();
             for (Object[] o : list) {
                 a = Integer.parseInt(o[0].toString());
