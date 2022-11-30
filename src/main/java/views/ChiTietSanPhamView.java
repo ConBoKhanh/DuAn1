@@ -41,6 +41,8 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import pagination.EventPagination;
+import pagination.style.PaginationItemRenderStyle1;
 
 import services.ChiTietDoGoService;
 
@@ -56,6 +58,7 @@ import services.NhaCungCapService;
 import services.NhapXuatService;
 
 import services.SanPhamService;
+import services.TimKiemCTSPService;
 
 import services.impl.IManageChiTietDoGoService;
 
@@ -70,9 +73,11 @@ import services.impl.IManageNguonGocService;
 import services.impl.IManageNhaCungCapService;
 
 import services.impl.IManageSanPhamService;
+import services.impl.IManageTimKiemCTSPSService;
 import services.impl.IManagerNhapXuat;
 
 import viewModel.ChiTietDoGoViewModel;
+import viewModel.ViewModelChiTietSanPhamBanHang;
 
 import viewModel.ViewModelDonViTinh;
 
@@ -114,6 +119,12 @@ public class ChiTietSanPhamView extends javax.swing.JFrame {
 
     private IManagerNhapXuat nhapxuatServic = new NhapXuatService();
 
+    private IManageTimKiemCTSPSService timKiemSV = new TimKiemCTSPService();
+
+    private static int page1 = 1;
+
+    private static int page2 = 1;
+
     String IdNV;
 
     String TenNV;
@@ -134,19 +145,40 @@ public class ChiTietSanPhamView extends javax.swing.JFrame {
 
         setLocationRelativeTo(null);
 
-        load(a.list());
-
         loadcbc();
+
+        phanTrang(page1);
+        pagination1.setPaginationItemRender(new PaginationItemRenderStyle1());
+        pagination1.addEventPagination(new EventPagination() {
+            @Override
+            public void pageChanged(int page) {
+                if (txtTimKiem.getText().equals("")) {
+                    page1 = page;
+                    phanTrang(page);
+                } else {
+                    page2 = page;
+                    searchByTen(txtTimKiem.getText(), page);
+                }
+            }
+        });
+
     }
 
-    public static void load(List<ChiTietDoGoViewModel> list) {
+    public static void phanTrang(int page) {
+        int limit = 3;
+        int count = 0;
+
+        List<ChiTietDoGoViewModel> ct = a.phanTrangCTDG((page - 1) * limit, limit);
+        if (ct == null) {
+            return;
+        }
+
+        count = a.row();
 
         model = (DefaultTableModel) tbl.getModel();
-
         model.setRowCount(0);
 
-        for (ChiTietDoGoViewModel n : list) {
-
+        for (ChiTietDoGoViewModel n : ct) {
             model.addRow(new Object[]{
                 model.getRowCount() + 1,
                 n.getId(),
@@ -159,11 +191,81 @@ public class ChiTietSanPhamView extends javax.swing.JFrame {
                 n.getDonvi(),
                 n.getMota(),
                 n.getSoluong(),
-                n.getGiaNhap(),
-                n.getGiaBan()
-
-            });
+                String.valueOf(n.getGiaNhap().intValue()),
+                String.valueOf(n.getGiaBan().intValue()),});
         }
+
+        int totalPage = (int) Math.ceil(count / limit);
+
+        pagination1.setPagegination(page, totalPage + 1);
+
+    }
+
+    public void searchByTen(String ten, int page1) {
+        try {
+            int limit = 3;
+            int count = 0;
+
+            List<ChiTietDoGoViewModel> list = timKiemSV.timKiemPhanTrang((page1 - 1) * limit, limit, ten);
+
+            if (list == null) {
+                return;
+            }
+
+            count = timKiemSV.row(ten);
+
+            int totalPage = (int) Math.ceil(count / limit);
+
+            model = (DefaultTableModel) tbl.getModel();
+            model.setColumnCount(0);
+            model.addColumn("STT");
+            model.addColumn("Id");
+            model.addColumn("TenSP");
+            model.addColumn("SPham");
+            model.addColumn("LoaiSP");
+            model.addColumn("DongGo");
+            model.addColumn("NhaCungCap");
+            model.addColumn("NguonGoc");
+            model.addColumn("Dv Tinh");
+            model.addColumn("MoTa");
+            model.addColumn("SoLuong");
+            model.addColumn("GiaNhap");
+            model.addColumn("GiaBan");
+            model.setRowCount(0);
+
+            for (ChiTietDoGoViewModel x : list) {
+                model.addRow(new Object[]{
+                    model.getRowCount() + 1,
+                    x.getId(),
+                    x.getTensp(),
+                    x.getSp(),
+                    x.getLoad(),
+                    x.getDonggo(),
+                    x.getNcc(),
+                    x.getNguongoc(),
+                    x.getDonvi(),
+                    x.getMota(),
+                    x.getSoluong(),
+                    String.valueOf(x.getGiaNhap().intValue()),
+                    String.valueOf(x.getGiaBan().intValue()),});
+            }
+
+            if (count / limit != 0) {
+                pagination1.setPagegination(page1, totalPage + 1);
+            } else if (count / limit == 0) {
+                pagination1.setPagegination(page1, totalPage);
+            }
+        } catch (Exception e) {
+        }
+    }
+
+    public static void load() {
+
+        model = (DefaultTableModel) tbl.getModel();
+
+        model.setRowCount(0);
+
+        phanTrang(page1);
     }
 
     public void timKiem() {
@@ -177,6 +279,7 @@ public class ChiTietSanPhamView extends javax.swing.JFrame {
         for (ChiTietDoGoViewModel n : list) {
 
             model.addRow(new Object[]{
+                model.getRowCount() + 1,
                 n.getId(),
                 n.getTensp(),
                 n.getSp(),
@@ -379,6 +482,7 @@ public class ChiTietSanPhamView extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tbl = new javax.swing.JTable();
         txtTimKiem = new javax.swing.JTextField();
+        pagination1 = new pagination.Pagination();
         cbcLoaiSP = new javax.swing.JComboBox<>();
         cbcSP = new javax.swing.JComboBox<>();
         cbcDongGo = new javax.swing.JComboBox<>();
@@ -456,6 +560,8 @@ public class ChiTietSanPhamView extends javax.swing.JFrame {
             }
         });
 
+        pagination1.setOpaque(false);
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -468,6 +574,10 @@ public class ChiTietSanPhamView extends javax.swing.JFrame {
                         .addComponent(txtTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 351, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(342, 342, 342)
+                .addComponent(pagination1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -475,7 +585,10 @@ public class ChiTietSanPhamView extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(txtTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(pagination1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(9, 9, 9))
         );
 
         cbcLoaiSP.setBackground(new java.awt.Color(255, 204, 255));
@@ -556,6 +669,7 @@ public class ChiTietSanPhamView extends javax.swing.JFrame {
         jLabel12.setText("Nguồn Gốc");
 
         jPanel3.setBackground(new java.awt.Color(204, 204, 255));
+        jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jButton2.setBackground(new java.awt.Color(255, 204, 255));
         jButton2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -566,6 +680,7 @@ public class ChiTietSanPhamView extends javax.swing.JFrame {
                 jButton2ActionPerformed(evt);
             }
         });
+        jPanel3.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 0, 111, 38));
 
         jButton3.setBackground(new java.awt.Color(255, 204, 255));
         jButton3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -576,6 +691,7 @@ public class ChiTietSanPhamView extends javax.swing.JFrame {
                 jButton3ActionPerformed(evt);
             }
         });
+        jPanel3.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(294, 2, 111, 40));
 
         jButton4.setBackground(new java.awt.Color(255, 204, 255));
         jButton4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -586,6 +702,7 @@ public class ChiTietSanPhamView extends javax.swing.JFrame {
                 jButton4ActionPerformed(evt);
             }
         });
+        jPanel3.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 0, 111, 40));
 
         jButton5.setBackground(new java.awt.Color(255, 204, 255));
         jButton5.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -596,30 +713,7 @@ public class ChiTietSanPhamView extends javax.swing.JFrame {
                 jButton5ActionPerformed(evt);
             }
         });
-
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(30, 30, 30)
-                .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(30, 30, 30)
-                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(30, 30, 30)
-                .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE)
-                .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
+        jPanel3.add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(435, 2, 111, 40));
 
         jLabel13.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel13.setText("Số  Lượng");
@@ -835,11 +929,12 @@ public class ChiTietSanPhamView extends javax.swing.JFrame {
     private void txtTimKiemKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTimKiemKeyReleased
         if (txtTimKiem.getText().equals("")) {
 
-            load(a.list());
+            phanTrang(page1);
 
         } else {
 
-            timKiem();
+//            timKiem();
+            searchByTen(txtTimKiem.getText(), page2);
 
         }
 
@@ -950,7 +1045,7 @@ public class ChiTietSanPhamView extends javax.swing.JFrame {
 
             JOptionPane.showMessageDialog(this, "Thêm sp thành công", "Sản Phẩm", JOptionPane.INFORMATION_MESSAGE, icon);
 
-            load(a.list());
+            phanTrang(page1);
 
         } else {
 
@@ -1040,7 +1135,7 @@ public class ChiTietSanPhamView extends javax.swing.JFrame {
 
             JOptionPane.showMessageDialog(this, "Update sp thành công", "Sản Phẩm", JOptionPane.INFORMATION_MESSAGE, icon);
 
-            load(a.list());
+            phanTrang(page1);
 
         } else {
             Icon icon = new javax.swing.ImageIcon(getClass().getResource("/img/deleteicon.png"));
@@ -1060,7 +1155,7 @@ public class ChiTietSanPhamView extends javax.swing.JFrame {
 
             JOptionPane.showMessageDialog(this, "Delete sp thành công", "Sản Phẩm", JOptionPane.INFORMATION_MESSAGE, icon);
 
-            load(a.list());
+            phanTrang(page1);
 
         } else {
 
@@ -1258,6 +1353,7 @@ public class ChiTietSanPhamView extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private static pagination.Pagination pagination1;
     private javax.swing.JTextArea taMoTa;
     private static javax.swing.JTable tbl;
     private javax.swing.JTextField txtGiaBan;

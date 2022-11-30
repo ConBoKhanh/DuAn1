@@ -222,7 +222,7 @@ public class NhapXuatView extends javax.swing.JFrame {
             Icon icon = new javax.swing.ImageIcon(getClass().getResource("/img/themmoiicon.png"));
             JOptionPane.showMessageDialog(this, "Nhập sp thành công", "Sản Phẩm", JOptionPane.INFORMATION_MESSAGE, icon);
             a.congSanPham(id, soLuongNhap);
-            ChiTietSanPhamView.load(a.list());
+            ChiTietSanPhamView.load();
             this.dispose();
 
         } else {

@@ -13,6 +13,10 @@ import viewModel.ChiTietDoGoViewModel;
  * @author Admin
  */
 public interface IManageChiTietDoGoService {
+    
+    List<ChiTietDoGoViewModel> phanTrangCTDG(int i, int b);
+    
+    int row();
 
     List<ChiTietDoGoViewModel> list();
 
