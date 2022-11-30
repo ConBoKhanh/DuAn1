@@ -192,7 +192,8 @@ public class DoanhThuRepository {
             Transaction transaction = session.getTransaction();
             Query q = session.createQuery("select C.Id,C.Ma,C.NgayThanhToan,A.DonGia from HoaDonChiTiet A , ChiTietDoGo B , HoaDon C\n"
                     + "where A.IdChiTietDoGo = B.Id and A.IdHoaDon = C.Id\n"
-                    + "group by C.Id,C.Ma,C.NgayThanhToan,A.DonGia");
+                    + "group by C.Id,C.Ma,C.NgayThanhToan,A.DonGia "
+                    + "order by C.NgayThanhToan asc");
             List<Object[]> list = q.getResultList();
             return list;
 //        } catch (Exception e) {
