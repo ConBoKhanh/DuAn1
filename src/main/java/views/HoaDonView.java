@@ -627,7 +627,6 @@ public class HoaDonView extends javax.swing.JFrame {
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
-        
 
         XSSFWorkbook w = new XSSFWorkbook();
 
@@ -639,78 +638,60 @@ public class HoaDonView extends javax.swing.JFrame {
 
         r = sheet.createRow(0);//số dòng cách đầu ở excel
 
-        
         cell = r.createCell(1, org.apache.poi.ss.usermodel.CellType.STRING);
         cell.setCellValue("Id");
 
-        
         cell = r.createCell(2, org.apache.poi.ss.usermodel.CellType.STRING);
         cell.setCellValue("Mã HĐ");
 
-        
         cell = r.createCell(3, org.apache.poi.ss.usermodel.CellType.STRING);
         cell.setCellValue("Tên NV");
 
-        
         cell = r.createCell(4, org.apache.poi.ss.usermodel.CellType.STRING);
         cell.setCellValue("Tên KH");
 
-        
         cell = r.createCell(5, org.apache.poi.ss.usermodel.CellType.STRING);
         cell.setCellValue("Ngày tạo");
 
-        
         cell = r.createCell(6, org.apache.poi.ss.usermodel.CellType.STRING);
         cell.setCellValue("Ngày thanh toán");
 
-        
         cell = r.createCell(7, org.apache.poi.ss.usermodel.CellType.STRING);
         cell.setCellValue("Phần trăm KM");
 
-        
         cell = r.createCell(8, org.apache.poi.ss.usermodel.CellType.STRING);
         cell.setCellValue("Trạng thái");
 
-        
         List<ViewModelHoadon> v = hdService.getListHD();
         int s = v.size();
         for (int i = 0; i < s; i++) {
             ViewModelHoadon chh = v.get(i);
             r = sheet.createRow(1 + i);
 
-            
             cell = r.createCell(0, org.apache.poi.ss.usermodel.CellType.STRING);
             cell.setCellValue(i + 1);
 
-            
             cell = r.createCell(1, org.apache.poi.ss.usermodel.CellType.STRING);
             cell.setCellValue(v.get(i).getId());
 
-            
             cell = r.createCell(2, org.apache.poi.ss.usermodel.CellType.STRING);
             cell.setCellValue(v.get(i).getMa());
 
-            
             cell = r.createCell(3, org.apache.poi.ss.usermodel.CellType.STRING);
             cell.setCellValue(v.get(i).getTenNV());
 
-            
             cell = r.createCell(4, org.apache.poi.ss.usermodel.CellType.STRING);
             cell.setCellValue(v.get(i).getTenKH());
 
-            
             cell = r.createCell(5, org.apache.poi.ss.usermodel.CellType.STRING);
             cell.setCellValue(v.get(i).getNgayTao());
 
-            
             cell = r.createCell(6, org.apache.poi.ss.usermodel.CellType.STRING);
             cell.setCellValue(v.get(i).getNgayThanhToan());
 
-            
             cell = r.createCell(7, org.apache.poi.ss.usermodel.CellType.STRING);
-            cell.setCellValue(v.get(i).getPhamtramKM());
+                cell.setCellValue(v.get(i).getPhamtramKM());
 
-            
             cell = r.createCell(8, org.apache.poi.ss.usermodel.CellType.STRING);
             cell.setCellValue(v.get(i).getTrangThaiHoaDon());
 

@@ -156,7 +156,7 @@ public class HoadonRepository {
         
         try {
             Session session = HibernatUtil.getFACTORY().openSession();
-            Query q = session.createQuery("FROM HoaDon where TrangThai >= 1");
+            Query q = session.createQuery("FROM HoaDon where TrangThai >= 1 order by Convert(int,Ma) desc");
             List<HoaDon> list = q.getResultList();
             return list;
             

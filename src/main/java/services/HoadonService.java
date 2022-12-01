@@ -149,14 +149,17 @@ public class HoadonService implements IManageHoaDonService {
                 x.setTenKH(sp.getIdKhachHang().getTenKhachHang());
 
                 x.setNgayTao(String.valueOf(sp.getNgayTao()));
-                
-                
 
                 x.setNgayThanhToan(String.valueOf(sp.getNgayThanhToan()));
-                
-                x.setPhamtramKM(sp.getIdKhuyenMai().getPhanTramKM()+ "");
-                
-                x.setTrangThaiHoaDon(sp.getTrangThai()+ "");
+
+                if (sp.getIdKhuyenMai() == null) {
+                    x.setPhamtramKM("Khong Chon");
+                } else {
+
+                    x.setPhamtramKM(sp.getIdKhuyenMai().getPhanTramKM() + "");
+                }
+
+                x.setTrangThaiHoaDon(sp.getTrangThai() + "");
 
                 list.add(x);
             }
@@ -165,9 +168,5 @@ public class HoadonService implements IManageHoaDonService {
             return null;
         }
     }
-    
-    
-
-
 
 }
