@@ -32,12 +32,14 @@ public class HoaDonChiTiet implements Serializable {
 
     private int SoLuong;
     private BigDecimal DonGia;
+    private int Luot;
 
-    public HoaDonChiTiet(ChiTietDoGo IdChiTietDoGo, HoaDon IdHoaDon, int SoLuong, BigDecimal DonGia) {
+    public HoaDonChiTiet(ChiTietDoGo IdChiTietDoGo, HoaDon IdHoaDon, int SoLuong, BigDecimal DonGia, int Luot) {
         this.IdChiTietDoGo = IdChiTietDoGo;
         this.IdHoaDon = IdHoaDon;
         this.SoLuong = SoLuong;
         this.DonGia = DonGia;
+        this.Luot = Luot;
     }
 
     public HoaDonChiTiet() {
@@ -75,9 +77,17 @@ public class HoaDonChiTiet implements Serializable {
         this.DonGia = DonGia;
     }
 
+    public int getLuot() {
+        return Luot;
+    }
+
+    public void setLuot(int Luot) {
+        this.Luot = Luot;
+    }
+
     @Override
     public String toString() {
-        return "HoaDonChiTiet{" + "IdChiTietDoGo=" + IdChiTietDoGo + ", IdHoaDon=" + IdHoaDon + ", SoLuong=" + SoLuong + ", DonGia=" + DonGia + '}';
+        return "HoaDonChiTiet{" + "IdChiTietDoGo=" + IdChiTietDoGo + ", IdHoaDon=" + IdHoaDon + ", SoLuong=" + SoLuong + ", DonGia=" + DonGia + ", Luot=" + Luot + '}';
     }
 
 }

@@ -48,7 +48,7 @@ public class ChiTietHoaDonRepository {
             i.setIdChiTietDoGo(b);
             i.setSoLuong(hd.getSoLuong());
             i.setDonGia(hd.getDonGia());
-            
+            i.setLuot(0);
             session.getTransaction().begin();
             session.save(i);
             session.getTransaction().commit();
@@ -140,7 +140,7 @@ public class ChiTietHoaDonRepository {
     
     public static void main(String[] args) {
         ChiTietHoaDonRepository i = new ChiTietHoaDonRepository();
-        List<HoaDonChiTiet> list = i.getList("C22E1F90-9D49-45BA-A073-559EC2A04C37");
+        List<HoaDonChiTiet> list = i.getList("EBA6848C-7FEB-4CD4-8537-188B4631068C");
         for (HoaDonChiTiet hoaDonChiTiet : list) {
             System.out.println(hoaDonChiTiet.toString());
         }
