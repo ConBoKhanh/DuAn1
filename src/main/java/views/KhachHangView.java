@@ -6,10 +6,17 @@ package views;
 
 import domainModels.KhachHang;
 import java.awt.HeadlessException;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.util.List;
 import javax.swing.Icon;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.xssf.usermodel.XSSFRow;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import services.KhachHangService;
 import services.impl.IManageKhachHangService;
 import viewModel.ViewModelKhachHang;
@@ -174,6 +181,7 @@ public class KhachHangView extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tbtable = new javax.swing.JTable();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -231,7 +239,7 @@ public class KhachHangView extends javax.swing.JFrame {
                 btnthemActionPerformed(evt);
             }
         });
-        jPanel1.add(btnthem, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 280, 90, 50));
+        jPanel1.add(btnthem, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 270, 90, 50));
 
         btnsua.setBackground(new java.awt.Color(255, 153, 204));
         btnsua.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -242,7 +250,7 @@ public class KhachHangView extends javax.swing.JFrame {
                 btnsuaActionPerformed(evt);
             }
         });
-        jPanel1.add(btnsua, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 280, 90, 50));
+        jPanel1.add(btnsua, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 270, 90, 50));
 
         btnxoa.setBackground(new java.awt.Color(255, 153, 204));
         btnxoa.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -253,7 +261,7 @@ public class KhachHangView extends javax.swing.JFrame {
                 btnxoaActionPerformed(evt);
             }
         });
-        jPanel1.add(btnxoa, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 280, 80, 50));
+        jPanel1.add(btnxoa, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 270, 80, 50));
 
         btnback.setBackground(new java.awt.Color(255, 153, 204));
         btnback.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -308,6 +316,18 @@ public class KhachHangView extends javax.swing.JFrame {
         );
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 350, -1, -1));
+
+        jButton1.setBackground(new java.awt.Color(255, 153, 204));
+        jButton1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/excel.png"))); // NOI18N
+        jButton1.setText("Xuất File Excel");
+        jButton1.setBorder(javax.swing.BorderFactory.createMatteBorder(3, 3, 3, 3, new java.awt.Color(0, 0, 0)));
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 270, -1, 50));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -413,6 +433,80 @@ public class KhachHangView extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_btnbackActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+
+        XSSFWorkbook w = new XSSFWorkbook();
+
+        XSSFSheet sheet = w.createSheet("danhsach");
+
+        XSSFRow r = null;
+
+        Cell cell = null;
+
+        r = sheet.createRow(0);//số dòng cách đầu ở excel
+
+        cell = r.createCell(1, org.apache.poi.ss.usermodel.CellType.STRING);
+        cell.setCellValue("Id");
+
+        cell = r.createCell(2, org.apache.poi.ss.usermodel.CellType.STRING);
+        cell.setCellValue("Mã");
+
+        cell = r.createCell(3, org.apache.poi.ss.usermodel.CellType.STRING);
+        cell.setCellValue("Họ Tên");
+
+        cell = r.createCell(4, org.apache.poi.ss.usermodel.CellType.STRING);
+        cell.setCellValue("SĐT");
+
+        cell = r.createCell(5, org.apache.poi.ss.usermodel.CellType.STRING);
+        cell.setCellValue("Địa chỉ");
+
+        List<ViewModelKhachHang> v = khrp.getListKhachHang();
+        // List<NhanVien> sps = nhanVienService.getListNV();
+
+        int s = v.size();
+        for (int i = 0; i < s; i++) {
+            ViewModelKhachHang chh = v.get(i);
+            r = sheet.createRow(1 + i);
+
+            cell = r.createCell(0, org.apache.poi.ss.usermodel.CellType.STRING);
+            cell.setCellValue(i + 1);
+
+            cell = r.createCell(1, org.apache.poi.ss.usermodel.CellType.STRING);
+            cell.setCellValue(v.get(i).getID());
+
+            cell = r.createCell(2, org.apache.poi.ss.usermodel.CellType.STRING);
+            cell.setCellValue(v.get(i).getMa());
+
+            cell = r.createCell(3, org.apache.poi.ss.usermodel.CellType.STRING);
+            cell.setCellValue(v.get(i).getTenkh());
+
+            cell = r.createCell(4, org.apache.poi.ss.usermodel.CellType.STRING);
+            cell.setCellValue(v.get(i).getSdt());
+
+            cell = r.createCell(5, org.apache.poi.ss.usermodel.CellType.STRING);
+            cell.setCellValue(v.get(i).getDiachi());
+
+        }
+
+        JFileChooser chooser = new JFileChooser();// mở file lên
+        chooser.showOpenDialog(null);//để chọn lưu vào đâu
+        File f = chooser.getSelectedFile();
+
+        try {
+
+            FileOutputStream f1 = new FileOutputStream(new File(f + ".xlsx"));
+
+            w.write(f1);
+            f1.close();
+            JOptionPane
+                    .showMessageDialog(this, "In thành công");
+
+        } catch (Exception e) {
+        }
+
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -456,6 +550,7 @@ public class KhachHangView extends javax.swing.JFrame {
     private javax.swing.JButton btnsua;
     private javax.swing.JButton btnthem;
     private javax.swing.JButton btnxoa;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
