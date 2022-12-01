@@ -519,8 +519,13 @@ public class BaoHanhVipProView extends javax.swing.JFrame {
                 return;
             }
         }
+        List<HoaDon> lisst;
+        if (rdoHD.isSelected()) {
+            lisst = vip.getListHoaDonById(txtTimKiem.getText());
+        } else {
+            lisst = vip.getListHoaDonBySDT(txtTimKiem.getText());
+        }
 
-        List<HoaDon> lisst = vip.getListHoaDonBySDT(txtTimKiem.getText());
         HoaDon gethd = lisst.get(index);
         KhachHang getkh = gethd.getIdKhachHang();
 
