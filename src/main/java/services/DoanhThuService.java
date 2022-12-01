@@ -231,12 +231,7 @@ public class DoanhThuService implements IManageDoanhThu {
 
     @Override
     public int getListTongBoRaDaChon(String nbd, String nkt) {
-       return dt.getListTongBoRaDaChon(nbd, nkt);
-    }
-
-    @Override
-    public List<Object[]> getList1(int i, int b) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return dt.getListTongBoRaDaChon(nbd, nkt);
     }
 
     @Override
@@ -261,4 +256,66 @@ public class DoanhThuService implements IManageDoanhThu {
         }
     }
 
+    @Override
+    public int getListSL() {
+        try {
+            return dt.getListSL();
+        } catch (Exception e) {
+            return 0;
+        }
+    }
+
+    @Override
+    public List<ViewModelDoanhThu> getList1(int i, int b) {
+
+        List<ViewModelDoanhThu> list = new ArrayList<>();
+        try {
+            List<Object[]> lists = dt.getList1(i, b);
+            for (Object[] a : lists) {
+                ViewModelDoanhThu d = new ViewModelDoanhThu();
+                d.setIdsp(a[0].toString());
+                d.setTensanpham(a[1].toString());
+                d.setSoluongton(a[2].toString());
+                d.setSoluongban(a[3].toString());
+                d.setTongtien(a[4].toString());
+
+                list.add(d);
+            }
+
+            return list;
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+    @Override
+    public List<ViewModelDoanhThu> getListBdenL(int i, int b) {
+      List<ViewModelDoanhThu> list = new ArrayList<>();
+        try {
+            List<Object[]> lists = dt.getListBdenL(i, b);
+            for (Object[] a : lists) {
+                ViewModelDoanhThu d = new ViewModelDoanhThu();
+                d.setIdsp(a[0].toString());
+                d.setTensanpham(a[1].toString());
+                d.setSoluongton(a[2].toString());
+                d.setSoluongban(a[3].toString());
+                d.setTongtien(a[4].toString());
+
+                list.add(d);
+            }
+
+            return list;
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+    @Override
+    public int getListSLBdenL() {
+       try {
+            return dt.getListSLBdenL();
+        } catch (Exception e) {
+            return 0;
+        }
+    }
 }

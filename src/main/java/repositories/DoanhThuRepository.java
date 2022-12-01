@@ -25,31 +25,32 @@ public class DoanhThuRepository {
     public List<Object[]> getList() {
 
 //        try {
-            Session session = HibernatUtil.getFACTORY().openSession();
-            Transaction transaction = session.getTransaction();
-            Query q = session.createQuery("select B.Id,B.TenSP,B.SoLuong ,Sum(A.SoLuong),SUM(A.DonGia)\n"
-                    + "from HoaDonChiTiet A Join ChiTietDoGo B on A.IdChiTietDoGo = B.Id\n"
-                    + "group by B.TenSP,B.Id,B.SoLuong \n"
-                    + "order by Sum(A.SoLuong)  asc"
-            );
-            List<Object[]> list = q.getResultList().subList(0, 2);
-            return list;
+        Session session = HibernatUtil.getFACTORY().openSession();
+        Transaction transaction = session.getTransaction();
+        Query q = session.createQuery("select B.Id,B.TenSP,B.SoLuong ,Sum(A.SoLuong),SUM(A.DonGia)\n"
+                + "from HoaDonChiTiet A Join ChiTietDoGo B on A.IdChiTietDoGo = B.Id\n"
+                + "group by B.TenSP,B.Id,B.SoLuong \n"
+                + "order by Sum(A.SoLuong)  asc"
+        );
+        List<Object[]> list = q.getResultList();
+        return list;
 //        } catch (Exception e) {
 //            return null;
 //        }
     }
-      public List<Object[]> getList1() {
+
+    public List<Object[]> getList1() {
 
 //        try {
-            Session session = HibernatUtil.getFACTORY().openSession();
-            Transaction transaction = session.getTransaction();
-            Query q = session.createQuery("select B.Id,B.TenSP,B.SoLuong ,Sum(A.SoLuong),SUM(A.DonGia)\n"
-                    + "from HoaDonChiTiet A Join ChiTietDoGo B on A.IdChiTietDoGo = B.Id\n"
-                    + "group by B.TenSP,B.Id,B.SoLuong \n"
-                    + "order by Sum(A.SoLuong)  asc"
-            );
-            List<Object[]> list = q.getResultList().subList(3, 4);
-            return list;
+        Session session = HibernatUtil.getFACTORY().openSession();
+        Transaction transaction = session.getTransaction();
+        Query q = session.createQuery("select B.Id,B.TenSP,B.SoLuong ,Sum(A.SoLuong),SUM(A.DonGia)\n"
+                + "from HoaDonChiTiet A Join ChiTietDoGo B on A.IdChiTietDoGo = B.Id\n"
+                + "group by B.TenSP,B.Id,B.SoLuong \n"
+                + "order by Sum(A.SoLuong)  asc"
+        );
+        List<Object[]> list = q.getResultList();
+        return list;
 //        } catch (Exception e) {
 //            return null;
 //        }
@@ -188,14 +189,14 @@ public class DoanhThuRepository {
     public List<Object[]> getListDoanhthu() {
 
         //try {
-            Session session = HibernatUtil.getFACTORY().openSession();
-            Transaction transaction = session.getTransaction();
-            Query q = session.createQuery("select C.Id,C.Ma,C.NgayThanhToan,A.DonGia from HoaDonChiTiet A , ChiTietDoGo B , HoaDon C\n"
-                    + "where A.IdChiTietDoGo = B.Id and A.IdHoaDon = C.Id\n"
-                    + "group by C.Id,C.Ma,C.NgayThanhToan,A.DonGia "
-                    + "order by C.NgayThanhToan asc");
-            List<Object[]> list = q.getResultList();
-            return list;
+        Session session = HibernatUtil.getFACTORY().openSession();
+        Transaction transaction = session.getTransaction();
+        Query q = session.createQuery("select C.Id,C.Ma,C.NgayThanhToan,A.DonGia from HoaDonChiTiet A , ChiTietDoGo B , HoaDon C\n"
+                + "where A.IdChiTietDoGo = B.Id and A.IdHoaDon = C.Id\n"
+                + "group by C.Id,C.Ma,C.NgayThanhToan,A.DonGia "
+                + "order by C.NgayThanhToan asc");
+        List<Object[]> list = q.getResultList();
+        return list;
 //        } catch (Exception e) {
 //            return null;
 //        }
@@ -365,42 +366,83 @@ public class DoanhThuRepository {
 
     public List<Object[]> getList1(int i, int b) {
         try {
-        Transaction transaction = session.getTransaction();
+            Transaction transaction = session.getTransaction();
 
-        Session session = HibernatUtil.getFACTORY().openSession();
-        Query q = session.createNativeQuery(" select B.Id,B.TenSP,B.SoLuong ,Sum(A.SoLuong),SUM(A.DonGia) as '2'\n"
-                + "from HoaDonChiTiet A Join ChiTietDoGo B on A.IdChiTietDoGo = B.Id\n"
-                + "group by B.TenSP,B.Id,B.SoLuong \n"
-                + "order by Sum(A.SoLuong)  asc"
-                + " OFFSET " + i + " ROWS "
-                + " FETCH NEXT " + b + " ROWS ONLY ");
+            Session session = HibernatUtil.getFACTORY().openSession();
+            Query q = session.createNativeQuery(" select B.Id,B.TenSP,B.SoLuong ,Sum(A.SoLuong),SUM(A.DonGia) as '2'\n"
+                    + "from HoaDonChiTiet A Join ChiTietDoGo B on A.IdChiTietDoGo = B.Id\n"
+                    + "group by B.TenSP,B.Id,B.SoLuong \n"
+                    + "order by Sum(A.DonGia)  desc"
+                    + " OFFSET " + i + " ROWS "
+                    + " FETCH NEXT " + b + " ROWS ONLY ");
 //                    
-        List<Object[]> list = q.getResultList();
+            List<Object[]> list = q.getResultList();
 
-        return list;
+            return list;
         } catch (Exception e) {
             return null;
         }
 
     }
 
-    public int getListSL(int i, int b) {
+    public int getListSL() {
         int index = -1;
-        //try {
-        Transaction transaction = session.getTransaction();
+        try {
+            Transaction transaction = session.getTransaction();
 
-        Session session = HibernatUtil.getFACTORY().openSession();
-        Query q = session.createNativeQuery("select B.Id,B.TenSP,B.SoLuong "
-                + "from HoaDonChiTiet A left join ChiTietDoGo B on A.IdChiTietDoGo = B.Id where TrangThai>=1 "
-                //                   + "group by B.TenSP,B.Id,B.SoLuong "
-                + " order by Convert(int,B.SoLuong) asc ");
+            Session session = HibernatUtil.getFACTORY().openSession();
+            Query q = session.createNativeQuery("select B.Id,B.TenSP,B.SoLuong ,Sum(A.SoLuong),SUM(A.DonGia) as '2'\n"
+                    + "from HoaDonChiTiet A Join ChiTietDoGo B on A.IdChiTietDoGo = B.Id\n"
+                    + "group by B.TenSP,B.Id,B.SoLuong \n"
+                    + "order by Sum(A.DonGia)  desc ");
 
-        List<Object[]> list = q.getResultList();
-        index = list.size();
-        return index;
-//        } catch (Exception e) {
-//            return -1;
-//        }
+            List<Object[]> list = q.getResultList();
+            index = list.size();
+            return index;
+        } catch (Exception e) {
+            return -1;
+        }
+
+    }
+
+    public List<Object[]> getListBdenL(int i, int b) {
+        try {
+            Transaction transaction = session.getTransaction();
+
+            Session session = HibernatUtil.getFACTORY().openSession();
+            Query q = session.createNativeQuery(" select B.Id,B.TenSP,B.SoLuong ,Sum(A.SoLuong),SUM(A.DonGia) as '2'\n"
+                    + "from HoaDonChiTiet A Join ChiTietDoGo B on A.IdChiTietDoGo = B.Id\n"
+                    + "group by B.TenSP,B.Id,B.SoLuong \n"
+                    + "order by Sum(A.DonGia)  asc"
+                    + " OFFSET " + i + " ROWS "
+                    + " FETCH NEXT " + b + " ROWS ONLY ");
+//                    
+            List<Object[]> list = q.getResultList();
+
+            return list;
+        } catch (Exception e) {
+            return null;
+        }
+
+    }
+    
+    public int getListSLBdenL() {
+        int index = -1;
+        try {
+            Transaction transaction = session.getTransaction();
+
+            Session session = HibernatUtil.getFACTORY().openSession();
+            Query q = session.createNativeQuery("select B.Id,B.TenSP,B.SoLuong ,Sum(A.SoLuong),SUM(A.DonGia) as '2'\n"
+                    + "from HoaDonChiTiet A Join ChiTietDoGo B on A.IdChiTietDoGo = B.Id\n"
+                    + "group by B.TenSP,B.Id,B.SoLuong \n"
+                    + "order by Sum(A.DonGia)  asc ");
+
+            List<Object[]> list = q.getResultList();
+            index = list.size();
+            return index;
+        } catch (Exception e) {
+            return -1;
+        }
 
     }
 
@@ -414,7 +456,7 @@ public class DoanhThuRepository {
 //            System.out.println(hoaDon[1].toString());
 //        }
         for (Object[] a : hd.getListDoanhthu()) {
-            System.out.println(a[0].toString()+a[1].toString()+a[2].toString()+a[3].toString());
+            System.out.println(a[0].toString() + a[1].toString() + a[2].toString() + a[3].toString());
         }
 
         //System.out.println(i.getDoanhtHUTHEOnGAY());

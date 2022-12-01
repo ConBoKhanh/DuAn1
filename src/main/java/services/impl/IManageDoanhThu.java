@@ -16,9 +16,9 @@ import viewModel.ViewModelNhanVienDoanhThu;
 public interface IManageDoanhThu {
 
     List<ViewModelDoanhThu> getList();
-    
+
     List<ViewModelDoanhThu> getList1();
-    
+
     List<ViewModelDoanhThu> getListTUBEDENLON();
 
     List<ViewModelDoanhThu> getListTULONDENBE();
@@ -58,5 +58,11 @@ public interface IManageDoanhThu {
 
     int getListTongBoRaDaChon(String nbd, String nkt);
 
-    List<Object[]> getList1(int i, int b);
+    List<ViewModelDoanhThu> getList1(int i, int b);
+
+    int getListSL();
+
+    List<ViewModelDoanhThu> getListBdenL(int i, int b);
+
+    int getListSLBdenL();
 }
