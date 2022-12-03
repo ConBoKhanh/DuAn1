@@ -16,8 +16,10 @@ public class ViewModelDoanhThu {
     private String soluongton;
     private String soluongban;
     private String tongtien;
+    
 
     public ViewModelDoanhThu() {
+        
     }
 
     public ViewModelDoanhThu(String idsp, String masp, String tensanpham, String soluongton, String soluongban, String tongtien) {

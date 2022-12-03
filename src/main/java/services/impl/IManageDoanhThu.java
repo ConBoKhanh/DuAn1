@@ -34,9 +34,11 @@ public interface IManageDoanhThu {
     int getListNgungKinhdoanh();
 
     //doanhthunhanvien
+    
     List<ViewModelNhanVienDoanhThu> getListNhanVien();
 
     //doanhthu
+    
     public List<ViewModelDoanhThuThongKe> getListDoanhthu();
 
     int getDoanhthuTheoNam();
@@ -46,6 +48,7 @@ public interface IManageDoanhThu {
     int getDoanhtHUTHEOnGAY();
 
     //so tien bo ra mua sp
+    
     int getsotiennhaptheonam();
 
     int getsotiennhaptheothang();

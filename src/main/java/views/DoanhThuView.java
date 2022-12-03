@@ -39,11 +39,13 @@ import static views.ChiTietSanPhamView.phanTrang;
 public class DoanhThuView extends javax.swing.JFrame {
 
     private DefaultTableModel model;
+    
     private IManageDoanhThu im = new DoanhThuService();
 
     private static int page1 = 1;
 
     private static int page2 = 1;
+    
     String IdNV;
 
     String TenNV;
@@ -63,39 +65,68 @@ public class DoanhThuView extends javax.swing.JFrame {
         setLocationRelativeTo(null);
 
         loadTbsanPhamtulondenbe(page1);
+        
         loadTbTOP3();
+        
         laysospdangban();
+        
         laysospsaphet();
+        
         laysosphethang();
+        
         laysospngungkinhdoanh();
+        
 
         //doanhthu nhanvien
+        
         loadTbNhanVien();
+        
         loadAlldoanhthu();
+        
 
         //doanhthuthongke
+        
         laydoanhthutheonam();
+        
         laydoanhthutheothang();
+        
         laydoanhthutheongay();
+        
         // laydoanhthuttheochon();
+        
 
         //so tien bo ra mua sp
+        
         sotienboratheonam();
+        
         sotienboratheothang();
+        
         sotienboratheongay();
+        
 //        sotienboratheodachon();
 
+
         pagination1.setPaginationItemRender(new PaginationItemRenderStyle1());
+        
         int index = cbbdoanhthu.getSelectedIndex();
+        
         pagination1.addEventPagination(new EventPagination() {
+            
             @Override
             public void pageChanged(int page) {
                 if (index == 0) {
+                    
                     page1 = page;
+                    
                     loadTbsanPhamtulondenbe(page);
+                    
+                    
                 } else {
+                    
                     page2 = page;
+                    
                     loadTbsanPhamtubedenlon(page);
+                    
                 }
             }
         });
@@ -114,16 +145,21 @@ public class DoanhThuView extends javax.swing.JFrame {
         count = im.getListSL();
 
         model = (DefaultTableModel) tbbangsanpham.getModel();
+        
         model.setRowCount(0);
+        
         List<ViewModelDoanhThu> hd = im.getList1((page - 1) * limit, limit);
+        
         for (ViewModelDoanhThu v : hd) {
             model.addRow(new Object[]{
                 v.getIdsp(), v.getTensanpham(), v.getSoluongton(), v.getSoluongban(), v.getTongtien()
             });
         }
+        
         int totalPage = (int) Math.ceil(count / limit);
 
         pagination1.setPagegination(page, totalPage + 1);
+        
     }
 
     public void loadTbsanPhamtubedenlon(int page1) {
@@ -139,13 +175,18 @@ public class DoanhThuView extends javax.swing.JFrame {
         count = im.getListSLBdenL();
 
         model = (DefaultTableModel) tbbangsanpham.getModel();
+        
         model.setRowCount(0);
+        
         List<ViewModelDoanhThu> hd = im.getListBdenL((page1 - 1) * limit, limit);
+        
         for (ViewModelDoanhThu v : hd) {
             model.addRow(new Object[]{
                 v.getIdsp(), v.getTensanpham(), v.getSoluongton(), v.getSoluongban(), v.getTongtien()
             });
         }
+        
+        
         int totalPage = (int) Math.ceil(count / limit);
 
         pagination1.setPagegination(page1, totalPage + 1);
@@ -153,150 +194,232 @@ public class DoanhThuView extends javax.swing.JFrame {
     }
 
     public void laysospdangban() {
+        
         int sp = im.getListSanPham();
+        
         txtsospdangkd.setText(sp + "");
+        
     }
 
     public void laysospsaphet() {
+        
         int sp = im.getListGanHet();
+        
         txtsospsaphethang.setText(sp + "");
+        
     }
 
     public void laysosphethang() {
+        
         int sp = im.getListhethang();
+        
         txtsophanhethang.setText(sp + "");
+        
     }
 
     public void laysospngungkinhdoanh() {
         int sp = im.getListNgungKinhdoanh();
+        
         txtsospngungkinhdoanh.setText(sp + "");
+        
     }
 
     public void loadTbsanPhamALL() {
+        
         model = (DefaultTableModel) tbbangsanpham.getModel();
+        
         model.setRowCount(0);
+        
         List<ViewModelDoanhThu> hd = im.getList();
+        
         for (ViewModelDoanhThu v : hd) {
             model.addRow(new Object[]{
                 v.getIdsp(), v.getTensanpham(), v.getSoluongton(), v.getSoluongban(), v.getTongtien()
             });
+            
         }
+        
     }
 
     public void loadTbsanPhamALL1() {
+        
         model = (DefaultTableModel) tbbangsanpham.getModel();
+        
         model.setRowCount(0);
+        
         List<ViewModelDoanhThu> hd = im.getList1();
+        
         for (ViewModelDoanhThu v : hd) {
             model.addRow(new Object[]{
                 v.getIdsp(), v.getTensanpham(), v.getSoluongton(), v.getSoluongban(), v.getTongtien()
             });
+            
         }
+        
     }
 
     public void loadTbTOP3() {
         model = (DefaultTableModel) tbbangsanphamtop3.getModel();
+        
         model.setRowCount(0);
+        
         List<ViewModelDoanhThu> hd = im.getListtop3();
+        
         for (ViewModelDoanhThu v : hd) {
             model.addRow(new Object[]{
                 v.getIdsp(), v.getTensanpham(), v.getSoluongban()
             });
+            
         }
+        
     }
 
     //doanhthunhanvien   
     public void loadTbNhanVien() {
+        
         model = (DefaultTableModel) tbbangnhanhvien.getModel();
+        
         model.setRowCount(0);
+        
         List<ViewModelNhanVienDoanhThu> hd = im.getListNhanVien();
+        
         for (ViewModelNhanVienDoanhThu v : hd) {
             model.addRow(new Object[]{
                 v.getId(), v.getMa(), v.getTennv(), v.getChucvu(), v.getHddalam()
             });
+            
         }
+        
     }
 
     //doanhthuthongke
     public void laydoanhthutheonam() {
+        
         int sp = im.getDoanhthuTheoNam();
+        
         txtdoanhthutheonam.setText(sp + "");
+        
     }
 
     public void laydoanhthutheothang() {
+        
         int sp = im.getDoanhthutheoThang();
+        
         txtdoanthuthang.setText(sp + "");
+        
     }
 
     public void laydoanhthutheongay() {
+        
         int sp = im.getDoanhtHUTHEOnGAY();
+        
         txtdoanhthungay.setText(sp + "");
+        
     }
 
     public void laydoanhthuttheochon() {
+        
         java.util.Date dateBD = dateNgayBatdau.getDate();
+        
         java.util.Date dateKT = DateNgayKetThuc.getDate();
+        
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        
         String nbd = format.format(dateBD);
+        
         String nkt = format.format(dateKT);
 
         int sp = im.getListTongtiendachon(nbd, nkt);
+        
         txtdoanthudachon.setText(sp + "");
+        
     }
 
     public void loadTbdoanhthuthongke() {
         java.util.Date dateBD = dateNgayBatdau.getDate();
+        
         java.util.Date dateKT = DateNgayKetThuc.getDate();
+        
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        
         String nbd = format.format(dateBD);
+        
         String nkt = format.format(dateKT);
+        
 
         model = (DefaultTableModel) tbdongthuthongke.getModel();
+        
         model.setRowCount(0);
+        
         List<ViewModelDoanhThuThongKe> hd = im.getListHoaDonDaChon(nbd, nkt);
+        
         for (ViewModelDoanhThuThongKe v : hd) {
             model.addRow(new Object[]{
                 v.getId(), v.getMa(), nbd + "  đến  " + nkt, v.getTongtien()
             });
+            
         }
+        
     }
 
     public void loadAlldoanhthu() {
+        
         model = (DefaultTableModel) tbdongthuthongke.getModel();
+        
         model.setRowCount(0);
+        
         List<ViewModelDoanhThuThongKe> hd = im.getListDoanhthu();
+        
         for (ViewModelDoanhThuThongKe v : hd) {
             model.addRow(new Object[]{
                 v.getId(), v.getMa(), v.getNgaytt(), v.getTongtien()
             });
+            
         }
     }
 
     //so tien bo ra mua sp
     public void sotienboratheonam() {
+        
         int sp = im.getsotiennhaptheonam();
+        
         txtsotiennhapnam.setText(sp + "");
+        
     }
 
     public void sotienboratheothang() {
+        
         int sp = im.getsotiennhaptheothang();
+        
         txtsotiennhaptheothang.setText(sp + "");
+        
     }
 
     public void sotienboratheongay() {
+        
         int sp = im.getsotiennhaptheoNgay();
+        
         txtsotiennhapngay.setText(sp + "");
+        
     }
 
     public void sotienboratheodachon() {
+        
         java.util.Date dateBD = dateNgayBatdau.getDate();
+        
         java.util.Date dateKT = DateNgayKetThuc.getDate();
+        
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        
         String nbd = format.format(dateBD);
+        
         String nkt = format.format(dateKT);
+        
 
         int sp = im.getListTongBoRaDaChon(nbd, nkt);
+        
         txtsotiennhapdachon.setText(sp + "");
+        
 
     }
 
@@ -1164,11 +1287,16 @@ public class DoanhThuView extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void cbbdoanhthuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbbdoanhthuActionPerformed
-        int index = cbbdoanhthu.getSelectedIndex();
-        if (index == 0) {
-            loadTbsanPhamtulondenbe(1);
+        String index = String.valueOf(cbbdoanhthu.getSelectedItem());
+        
+        if (index.equals("Doanh Thu Từ Lớn Đến Bé")) {
+            
+            loadTbsanPhamtulondenbe(page1);
+            
         } else {
-            loadTbsanPhamtubedenlon(1);
+            
+            loadTbsanPhamtubedenlon(page2);
+            
         }
 
     }//GEN-LAST:event_cbbdoanhthuActionPerformed
@@ -1179,9 +1307,13 @@ public class DoanhThuView extends javax.swing.JFrame {
 
     private void txttimkiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txttimkiemActionPerformed
         for (int i = 0; i < 1000; i++) {
+            
             loadTbdoanhthuthongke();
+            
             laydoanhthuttheochon();
+            
             sotienboratheodachon();
+            
         }
     }//GEN-LAST:event_txttimkiemActionPerformed
 
@@ -1193,20 +1325,31 @@ public class DoanhThuView extends javax.swing.JFrame {
         try {
 
             Session session = HibernatUtil.getFACTORY().openSession();
+            
             session.beginTransaction();
+            
             Query q = session.createNativeQuery("select B.TenSP,Sum(A.SoLuong) from HoaDonChiTiet A , ChiTietDoGo B , HoaDon C\n"
                     + "where A.IdChiTietDoGo = B.Id and A.IdHoaDon = C.Id AND Month(NgayThanhToan) = Month(GETDATE()) AND C.TRANGTHAI >1\n"
                     + "group by B.Id,b.TenSP");
+            
             List<Object[]> list = q.getResultList();
+            
             session.close();
+            
             for (Object[] a : list) {
+                
                 dataset.setValue(a[0].toString(), Integer.parseInt(a[1].toString()));
+                
                 System.out.println(a.toString());
+                
             }
             for (Object[] a : list) {
+                
                 dataset2.setValue(Integer.parseInt(a[1].toString()), a[0].toString(), "");
+           
             }
         } catch (HibernateException hibernateException) {
+            
         }
         //////////////
         try {
@@ -1222,33 +1365,49 @@ public class DoanhThuView extends javax.swing.JFrame {
             ChartPanel chartPanel = new ChartPanel(chart);// add cái biểu dồ vào jfanel
 
             a.removeAll();
+            
             a.add(chartPanel);
+            
             a.updateUI();
+            
         } catch (Exception e) {
+            
         }
 
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
         DefaultPieDataset dataset = new DefaultPieDataset();
+        
         DefaultCategoryDataset dataset2 = new DefaultCategoryDataset();
+        
 
         try {
 
             Session session = HibernatUtil.getFACTORY().openSession();
+            
             session.beginTransaction();
+            
             Query q = session.createNativeQuery("select SUM(A.DonGia) AS'TONG TIEN',COUNT(C.ID)'SO HOA DON',MONTH(C.NgayThanhToan) AS'THANG',COUNT(A.SoLuong) AS 'SL' from HoaDonChiTiet A  ,HoaDon C \n"
                     + "WHERE  A.IdHoaDon = C.Id AND C.TRANGTHAI =2\n"
                     + "GROUP BY  MONTH(C.NgayThanhToan)");
+            
             List<Object[]> THANG = q.getResultList();
+            
             session.close();
+            
             for (Object[] a : THANG) {
+                
                 dataset.setValue(a[2].toString(), Integer.parseInt(a[0].toString()));
+            
             }
             for (Object[] a : THANG) {
+                
                 dataset2.setValue(Integer.parseInt(a[0].toString()), a[2].toString(), "");
+           
             }
         } catch (HibernateException hibernateException) {
+            
         }
         //////////////
         JFreeChart chart = ChartFactory.createPieChart3D("Bang",
@@ -1267,30 +1426,44 @@ public class DoanhThuView extends javax.swing.JFrame {
         ChartPanel chartPanel = new ChartPanel(chart);
 
         a.removeAll();
+        
         a.add(chartPanel);
+        
         a.updateUI();
+        
     }//GEN-LAST:event_jButton8ActionPerformed
 
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
         DefaultPieDataset dataset = new DefaultPieDataset();
+        
         DefaultCategoryDataset dataset2 = new DefaultCategoryDataset();
 
         try {
 
             Session session = HibernatUtil.getFACTORY().openSession();
+            
             session.beginTransaction();
+            
             Query q = session.createNativeQuery("select SUM(A.DonGia) AS'TONG TIEN',COUNT(C.ID)'SO HOA DON',YEAR(C.NgayThanhToan) AS'THANG',COUNT(A.SoLuong) AS 'SL' from HoaDonChiTiet A  ,HoaDon C \n"
                     + "WHERE  A.IdHoaDon = C.Id AND C.TRANGTHAI =2\n"
                     + "GROUP BY  YEAR(C.NgayThanhToan)");
+            
             List<Object[]> THANG = q.getResultList();
+            
             session.close();
+            
             for (Object[] a : THANG) {
+                
                 dataset.setValue(a[2].toString(), Integer.parseInt(a[0].toString()));
+           
             }
             for (Object[] a : THANG) {
+                
                 dataset2.setValue(Integer.parseInt(a[0].toString()), a[0].toString(), "");
+            
             }
         } catch (HibernateException hibernateException) {
+            
         }
         //////////////
         JFreeChart chart = ChartFactory.createPieChart3D("Bang",
@@ -1305,34 +1478,50 @@ public class DoanhThuView extends javax.swing.JFrame {
 
 //        CategoryPlot p1 = (CategoryPlot) barChart.getCategoryPlot();
 //        p1.setRangeGridlinePaint(Color.ORANGE);
+
         ChartPanel chartPanel = new ChartPanel(chart);
 
         a.removeAll();
+        
         a.add(chartPanel);
+        
         a.updateUI();
+        
     }//GEN-LAST:event_jButton9ActionPerformed
 
     private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
         // TODO add your handling code here:
         DefaultPieDataset dataset = new DefaultPieDataset();
+        
         DefaultCategoryDataset dataset2 = new DefaultCategoryDataset();
 
         try {
             Session session = HibernatUtil.getFACTORY().openSession();
+            
             session.beginTransaction();
+            
             Query q = session.createNativeQuery("select B.TenSP,Sum(A.SoLuong) from HoaDonChiTiet A , ChiTietDoGo B , HoaDon C\n"
                     + "where A.IdChiTietDoGo = B.Id and A.IdHoaDon = C.Id AND year(NgayThanhToan) = year(GETDATE()) AND C.TRANGTHAI >1\n"
                     + "group by B.Id,b.TenSP");
+            
             List<Object[]> list = q.getResultList();
+            
             session.close();
+            
             for (Object[] a : list) {
+                
                 dataset.setValue(a[0].toString(), Integer.parseInt(a[1].toString()));
+               
                 System.out.println(a.toString());
+                
             }
             for (Object[] a : list) {
+                
                 dataset2.setValue(Integer.parseInt(a[1].toString()), a[0].toString(), "");
+           
             }
         } catch (HibernateException hibernateException) {
+            
         }
         //////////////
         try {
@@ -1348,9 +1537,13 @@ public class DoanhThuView extends javax.swing.JFrame {
             ChartPanel chartPanel = new ChartPanel(barChart);// add cái biểu dồ vào jfanel
 
             a.removeAll();
+            
             a.add(chartPanel);
+            
             a.updateUI();
+            
         } catch (Exception e) {
+            
         }
     }//GEN-LAST:event_jButton10ActionPerformed
 
@@ -1363,6 +1556,7 @@ public class DoanhThuView extends javax.swing.JFrame {
         v.setVisible(true);
 
         this.dispose();
+        
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
@@ -1395,7 +1589,9 @@ public class DoanhThuView extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
+                
 //                new DoanhThuView().setVisible(true);
+
             }
         });
     }
