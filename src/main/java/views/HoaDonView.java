@@ -531,7 +531,7 @@ public class HoaDonView extends javax.swing.JFrame {
 
         HoaDon hd = new HoaDon();
         NhanVien nv = new NhanVien();
-        nv.setId("121D16CE-B94A-4AFF-8E6C-887C2657A694");
+        nv.setId(IdNV);
         hd.setIdNhanVien(nv);
 
         boolean b = hdService.add(hd);

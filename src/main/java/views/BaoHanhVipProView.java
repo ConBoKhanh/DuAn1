@@ -574,6 +574,9 @@ public class BaoHanhVipProView extends javax.swing.JFrame {
             model.setRowCount(0);
             model = (DefaultTableModel) tblHoaDonChiTiet.getModel();
             model.setRowCount(0);
+            CreateBill a = new CreateBill(idhd);
+            a.setLocationRelativeTo(null);
+            a.setVisible(true);
         } else {
             Icon icon = new javax.swing.ImageIcon(getClass().getResource("/img/deleteicon.png"));
             JOptionPane.showMessageDialog(this, "Trùng Mã Hóa Đơn", "Hóa Đơn !", JOptionPane.INFORMATION_MESSAGE, icon);

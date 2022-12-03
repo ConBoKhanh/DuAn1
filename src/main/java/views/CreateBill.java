@@ -36,11 +36,11 @@ public class CreateBill extends javax.swing.JFrame {
      */
     private static IManageChiTietHoaDonBanHang cthdService = new HoaDonChiTietService();
     DefaultTableModel model = new DefaultTableModel();
-
+    
     public CreateBill(String id) {
         initComponents();
         setbill(id);
-
+        
     }
 
     /**
@@ -202,22 +202,24 @@ public class CreateBill extends javax.swing.JFrame {
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd      hh:mm:ss");
         String tenkh = null;
         String sdt = null;
+        String sale = null;
         Session session = HibernatUtil.getFACTORY().openSession();
         Query q = session.createQuery("FROM HoaDon Where Id = '" + id + "' ");
         List<HoaDon> list = q.getResultList();
         for (HoaDon hoaDon : list) {
             tenkh = hoaDon.getIdKhachHang().getTenKhachHang();
             sdt = hoaDon.getIdKhachHang().getSdt();
+            if (hoaDon.getIdKhuyenMai() != null) {
+                sale = String.valueOf(hoaDon.getIdKhuyenMai().getPhanTramKM());
+            }
         }
-
+        
         List<ViewModelHoaDonChiTietBanHang> lisst = cthdService.list(id);
         if (lisst == null) {
             return;
         }
         int tongtien = cthdService.TongTien(id);
-
-        int sale = 15;
-
+        
         String now = format.format(date);
         int i = 1;
         bill.setText(bill.getText() + "===================================================================================");
