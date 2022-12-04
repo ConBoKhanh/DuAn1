@@ -14,6 +14,10 @@ import viewModel.ChiTietDoGoViewModel;
  */
 public interface IManageChiTietDoGoService {
     
+    List<ChiTietDoGoViewModel> getListLonHon1Trieu();
+    
+    List<ChiTietDoGoViewModel> getListNhoHon1Trieu();
+    
     List<ChiTietDoGoViewModel> phanTrangCTDG(int i, int b);
     
     int row();

@@ -26,9 +26,28 @@ public class ChiTietDoGoRepository {
 
     Session session = HibernatUtil.getFACTORY().openSession();
     Transaction transaction = session.getTransaction();
-    
-    
-    
+
+    public List<ChiTietDoGo> getListLonHon1Trieu() {
+        try {
+            Session session = HibernatUtil.getFACTORY().openSession();
+            Query q = session.createQuery("FROM ChiTietDoGo where GiaBan > 1000000 AND TrangThai = 1");
+            List<ChiTietDoGo> list = q.getResultList();
+            return list;
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+    public List<ChiTietDoGo> getListNhoHon1Trieu() {
+        try {
+            Session session = HibernatUtil.getFACTORY().openSession();
+            Query q = session.createQuery("FROM ChiTietDoGo where GiaBan < 1000000 AND TrangThai = 1");
+            List<ChiTietDoGo> list = q.getResultList();
+            return list;
+        } catch (Exception e) {
+            return null;
+        }
+    }
 
     public List<Object[]> phanTrangCTDG(int i, int b) {
         try {
@@ -54,7 +73,6 @@ public class ChiTietDoGoRepository {
         } catch (Exception e) {
             return null;
         }
-
 
     }
 
@@ -249,10 +267,7 @@ public class ChiTietDoGoRepository {
         ChiTietDoGoRepository ctRepo = new ChiTietDoGoRepository();
 //        ctRepo.truSanPham("4771CF52-B40D-4A93-B0EB-13DE20BA0F2E", 1);
 
-        List<Object[]> list = ctRepo.phanTrangCTDG(0, 2);
-        for (Object[] objects : list) {
-            System.out.println(objects.toString());
-        }
-
+        System.out.println(ctRepo.getListNhoHon1Trieu().toString());
     }
+
 }

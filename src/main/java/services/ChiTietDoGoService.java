@@ -164,9 +164,60 @@ public class ChiTietDoGoService implements IManageChiTietDoGoService {
 
     public static void main(String[] args) {
         ChiTietDoGoService a = new ChiTietDoGoService();
-        List<ChiTietDoGoViewModel> list = a.phanTrangCTDG(0, 2);
-        for (ChiTietDoGoViewModel objects : list) {
-            System.out.println(objects.toString());
+        System.out.println(a.getListLonHon1Trieu().toString());
+//        List<ChiTietDoGoViewModel> list = a.phanTrangCTDG(0, 2);
+//        for (ChiTietDoGoViewModel objects : list) {
+//            System.out.println(objects.toString());
+//        }
+    }
+
+    @Override
+    public List<ChiTietDoGoViewModel> getListLonHon1Trieu() {
+        try {
+            List<ChiTietDoGoViewModel> list = new ArrayList<>();
+            List<ChiTietDoGo> sps = a.getListLonHon1Trieu();
+            for (ChiTietDoGo sp : sps) {
+                list.add(new ChiTietDoGoViewModel(
+                        sp.getId(), sp.getTenSP(),
+                        sp.getIdLoaiSP().getTenDongSP(),
+                        sp.getIdSanPham().getTen(),
+                        sp.getIdDongGo().getTenLoaiGo(),
+                        sp.getIdNhaCungCap().getTenNCC(),
+                        sp.getIdNguocGoc().getQuocGia(),
+                        sp.getIdDonViTinh().getDonViTinh(),
+                        sp.getMoTa(),
+                        sp.getSoLuong(),
+                        sp.getGiaNhap(),
+                        sp.getGiaBan()));
+            }
+            return list;
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+    @Override
+    public List<ChiTietDoGoViewModel> getListNhoHon1Trieu() {
+        try {
+            List<ChiTietDoGoViewModel> list = new ArrayList<>();
+            List<ChiTietDoGo> sps = a.getListNhoHon1Trieu();
+            for (ChiTietDoGo sp : sps) {
+                list.add(new ChiTietDoGoViewModel(
+                        sp.getId(), sp.getTenSP(),
+                        sp.getIdLoaiSP().getTenDongSP(),
+                        sp.getIdSanPham().getTen(),
+                        sp.getIdDongGo().getTenLoaiGo(),
+                        sp.getIdNhaCungCap().getTenNCC(),
+                        sp.getIdNguocGoc().getQuocGia(),
+                        sp.getIdDonViTinh().getDonViTinh(),
+                        sp.getMoTa(),
+                        sp.getSoLuong(),
+                        sp.getGiaNhap(),
+                        sp.getGiaBan()));
+            }
+            return list;
+        } catch (Exception e) {
+            return null;
         }
     }
 
