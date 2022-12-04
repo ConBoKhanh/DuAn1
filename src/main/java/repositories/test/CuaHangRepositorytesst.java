@@ -19,6 +19,10 @@ public class CuaHangRepositorytesst {
     
     public List<CuaHang> getAll() {
         
+        
+        
+        
+        
         try {
             Session se = HibernatUtil.getFACTORY().openSession();
             Query q = se.createQuery("FROM CuaHang WHERE TrangThai = 1");
@@ -33,6 +37,9 @@ public class CuaHangRepositorytesst {
 
     public List<CuaHang> getListSPByName(String ten) {
         
+        
+        
+        
         try {
             Session session = HibernatUtil.getFACTORY().openSession();
             Query q = session.createQuery("FROM CuaHang WHERE TrangThai = 1 AND TenCuaHang like :ten ");
@@ -46,6 +53,9 @@ public class CuaHangRepositorytesst {
     }
 
     public int getMaxMa() {
+        
+        
+        
         
         Session session = HibernatUtil.getFACTORY().openSession();
         String soMaLonNhat = null;
@@ -73,6 +83,9 @@ public class CuaHangRepositorytesst {
 
     public boolean add(CuaHang c) {
         
+        
+        
+        
         String getMa = String.valueOf(getMaxMa() + 1);
 
         try {
@@ -96,6 +109,9 @@ public class CuaHangRepositorytesst {
 
     public boolean update(CuaHang c) {
         
+        
+        
+        
         String getMa = String.valueOf(getMaxMa() + 1);
         
         try {
@@ -116,6 +132,9 @@ public class CuaHangRepositorytesst {
     }
     
     public boolean delete(CuaHang c) {
+        
+        
+        
         
         try {
             Session se = HibernatUtil.getFACTORY().openSession();

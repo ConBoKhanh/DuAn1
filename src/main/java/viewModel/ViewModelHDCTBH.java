@@ -17,6 +17,7 @@ public class ViewModelHDCTBH {
     private BigDecimal thanhTien;
 
     public ViewModelHDCTBH() {
+        
     }
 
     public ViewModelHDCTBH(String id, String idHD, int soLuong, BigDecimal thanhTien) {
@@ -27,30 +28,37 @@ public class ViewModelHDCTBH {
     }
 
     public String getId() {
+        
         return id;
     }
 
     public void setId(String id) {
+        
         this.id = id;
     }
 
     public String getIdHD() {
+        
         return idHD;
     }
 
     public void setIdHD(String idHD) {
+        
         this.idHD = idHD;
     }
 
     public int getSoLuong() {
+        
         return soLuong;
     }
 
     public void setSoLuong(int soLuong) {
+        
         this.soLuong = soLuong;
     }
 
     public BigDecimal getThanhTien() {
+        
         return thanhTien;
     }
 

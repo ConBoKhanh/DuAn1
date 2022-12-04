@@ -27,47 +27,58 @@ public class ViewModelHoaDonBaoHanh {
     }
 
     public String getId() {
+        
         return id;
     }
 
     public void setId(String id) {
+        
         this.id = id;
     }
 
     public String getNgayTao() {
+        
         return ngayTao;
     }
 
     public void setNgayTao(String ngayTao) {
+        
         this.ngayTao = ngayTao;
     }
 
     public String getTenNV() {
+        
         return tenNV;
     }
 
     public void setTenNV(String tenNV) {
+        
         this.tenNV = tenNV;
     }
 
     public String getTenKH() {
+        
         return tenKH;
     }
 
     public void setTenKH(String tenKH) {
+        
         this.tenKH = tenKH;
     }
 
     public int getTrangThai() {
+        
         return trangThai;
     }
 
     public void setTrangThai(int trangThai) {
+        
         this.trangThai = trangThai;
     }
 
     @Override
     public String toString() {
+        
         return "ViewModelHoaDonBaoHanh{" + "id=" + id + ", ngayTao=" + ngayTao + ", tenNV=" + tenNV + ", tenKH=" + tenKH + ", trangThai=" + trangThai + '}';
     }
     

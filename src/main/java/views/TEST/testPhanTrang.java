@@ -31,6 +31,8 @@ public class testPhanTrang extends javax.swing.JFrame {
     IManageHoaDonService i = new HoadonService();
 
     public testPhanTrang() {
+        
+        
         initComponents();
         setLocationRelativeTo(null);
         pagination1.setPaginationItemRender(new PaginationItemRenderStyle1());
@@ -38,11 +40,16 @@ public class testPhanTrang extends javax.swing.JFrame {
             @Override
             public void pageChanged(int page) {
                 load(page);
+                
+                
             }
         });
     }
 
     public int getSoLuong() {
+        
+        
+        
         int count = 0;
         try {
             Session session = HibernatUtil.getFACTORY().openSession();
@@ -55,9 +62,15 @@ public class testPhanTrang extends javax.swing.JFrame {
         } catch (HibernateException hibernateException) {
             return count;
         }
+        
+        
+        
     }
 
     public void loadtb(int i, int b) {
+        
+        
+        
         Session session = HibernatUtil.getFACTORY().openSession();
         DefaultTableModel model = (DefaultTableModel) tbl.getModel();
         
@@ -76,6 +89,8 @@ public class testPhanTrang extends javax.swing.JFrame {
             });
 
         }
+        
+        
     }
 
     public void load(int page) {
@@ -211,6 +226,38 @@ public class testPhanTrang extends javax.swing.JFrame {
         }
         //</editor-fold>
 
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {

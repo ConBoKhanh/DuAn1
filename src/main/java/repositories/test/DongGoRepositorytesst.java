@@ -19,6 +19,9 @@ import utilities.mycompany.DBConext.HibernatUtil;
 public class DongGoRepositorytesst {
 
     public List<DongGo> getListDongGo() {
+        
+        
+        
         try {
             Session session = HibernatUtil.getFACTORY().openSession(); //Ket noi DB thuc hien hien truy van
             Query q = session.createQuery("FROM DongGo WHERE TrangThai = 1"); //Tao cau truy van lay du lieu tu bang dong go
@@ -30,6 +33,9 @@ public class DongGoRepositorytesst {
     }
 
     public List<DongGo> getDongGoByName(String ten) {
+        
+        
+        
         try {
             Session session = HibernatUtil.getFACTORY().openSession();
             Query q = session.createQuery("FROM DongGo WHERE TrangThai = 1 AND TenLoaiGo like :ten ");
@@ -42,6 +48,9 @@ public class DongGoRepositorytesst {
     }
 
     public int getMaxMa() { //Lấy mã lớn nhất + 1 => Tự động tăng
+        
+        
+        
         Session session = HibernatUtil.getFACTORY().openSession();
         String soMaLonNhat = null;
         Query q = session.createQuery(" select A.Ma From DongGo A Where TrangThai = 1 ");
@@ -67,6 +76,10 @@ public class DongGoRepositorytesst {
     }
 
     public boolean add(DongGo dg) {
+        
+        
+        
+        
         String getMaxMa = String.valueOf(getMaxMa() + 1);
         try {
             Session session = HibernatUtil.getFACTORY().openSession();
@@ -86,6 +99,9 @@ public class DongGoRepositorytesst {
     }
 
     public boolean update(DongGo dg) {
+        
+        
+        
         String getMaxMa = String.valueOf(getMaxMa() + 1);
         try {
             Session session = HibernatUtil.getFACTORY().openSession();
@@ -103,6 +119,9 @@ public class DongGoRepositorytesst {
     }
 
     public boolean delete(DongGo dg) {
+        
+        
+        
         String getMaxMa = String.valueOf(getMaxMa() + 1);
         try {
             Session session = HibernatUtil.getFACTORY().openSession();
@@ -120,6 +139,10 @@ public class DongGoRepositorytesst {
     }
 
     public static void main(String[] args) {
+        
+        
+        
+        
         DongGoRepository dg = new DongGoRepository();
         List<DongGo> dongGo = dg.getListDongGo();
         for (DongGo d : dongGo) {

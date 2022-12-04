@@ -32,55 +32,68 @@ public class ViewModelDoanhThu {
     }
 
     public String getIdsp() {
+        
         return idsp;
     }
 
     public void setIdsp(String idsp) {
+        
         this.idsp = idsp;
     }
 
     public String getMasp() {
+        
         return masp;
     }
 
     public void setMasp(String masp) {
+        
         this.masp = masp;
     }
 
     public String getTensanpham() {
+        
         return tensanpham;
     }
 
     public void setTensanpham(String tensanpham) {
+        
         this.tensanpham = tensanpham;
     }
 
     public String getSoluongton() {
+        
         return soluongton;
     }
 
     public void setSoluongton(String soluongton) {
+        
         this.soluongton = soluongton;
     }
 
     public String getSoluongban() {
+        
         return soluongban;
     }
 
     public void setSoluongban(String soluongban) {
+        
         this.soluongban = soluongban;
     }
 
     public String getTongtien() {
+        
         return tongtien;
     }
 
     public void setTongtien(String tongtien) {
+        
         this.tongtien = tongtien;
     }
 
     @Override
     public String toString() {
+        
         return "ViewModelDoanhThua{" + "idsp=" + idsp + ", masp=" + masp + ", tensanpham=" + tensanpham + ", soluongton=" + soluongton + ", soluongban=" + soluongban + ", tongtien=" + tongtien + '}';
     }
 

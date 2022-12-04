@@ -17,6 +17,7 @@ public class ViewModelBAOHANHCHITIET {
     private int soluong;
 
     public ViewModelBAOHANHCHITIET() {
+        
     }
 
     public ViewModelBAOHANHCHITIET(String idbh, String idsp, String tensp, int soluong) {
@@ -27,39 +28,48 @@ public class ViewModelBAOHANHCHITIET {
     }
 
     public String getIdbh() {
+        
         return idbh;
     }
 
     public void setIdbh(String idbh) {
+        
         this.idbh = idbh;
     }
 
     public String getIdsp() {
+        
         return idsp;
     }
 
     public void setIdsp(String idsp) {
+        
         this.idsp = idsp;
     }
 
     public String getTensp() {
+        
         return tensp;
     }
 
     public void setTensp(String tensp) {
+        
         this.tensp = tensp;
     }
 
     public int getSoluong() {
+        
         return soluong;
     }
 
     public void setSoluong(int soluong) {
+        
         this.soluong = soluong;
     }
 
     @Override
     public String toString() {
+        
         return "ViewModelBAOHANHCHITIET{" + "idbh=" + idbh + ", idsp=" + idsp + ", tensp=" + tensp + ", soluong=" + soluong + '}';
     }
 

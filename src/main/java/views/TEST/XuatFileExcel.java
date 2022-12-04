@@ -71,9 +71,13 @@ public class XuatFileExcel {
         for (String key : keyset2){
             Row row2 = sheet2.createRow(rownum2++);
             Object [] objArr2 = data1.get(key);
+            
+            
             int cellnum2 = 0;
             for (Object obj : objArr2){
                 Cell cell2 = row2.createCell(cellnum2++);
+                
+                
                if(obj instanceof String)
                     cell2.setCellValue((String)obj);
                 else if(obj instanceof Integer)

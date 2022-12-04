@@ -15,6 +15,7 @@ public class ViewModelDoanhThuThongKe {
     private String tongtien;
 
     public ViewModelDoanhThuThongKe() {
+        
     }
 
     public ViewModelDoanhThuThongKe(String id, String ma, String ngaytt, String tongtien) {
@@ -25,39 +26,48 @@ public class ViewModelDoanhThuThongKe {
     }
 
     public String getId() {
+        
         return id;
     }
 
     public void setId(String id) {
+        
         this.id = id;
     }
 
     public String getMa() {
+        
         return ma;
     }
 
     public void setMa(String ma) {
+        
         this.ma = ma;
     }
 
     public String getNgaytt() {
+        
         return ngaytt;
     }
 
     public void setNgaytt(String ngaytt) {
+        
         this.ngaytt = ngaytt;
     }
 
     public String getTongtien() {
+        
         return tongtien;
     }
 
     public void setTongtien(String tongtien) {
+        
         this.tongtien = tongtien;
     }
 
     @Override
     public String toString() {
+        
         return "ViewModelDoanhThuThongKe{" + "id=" + id + ", ma=" + ma + ", ngaytt=" + ngaytt + ", tongtien=" + tongtien + '}';
     }
     

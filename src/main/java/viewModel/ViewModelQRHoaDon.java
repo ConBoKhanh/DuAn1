@@ -19,6 +19,7 @@ public class ViewModelQRHoaDon {
     private String tenNV;
 
     public ViewModelQRHoaDon() {
+        
     }
 
     public ViewModelQRHoaDon(String Id, String ma, String NgayTao, String NgayThanhToan, String TrangThaiHoaDon, String phamtramKM, String tenKH, String tenNV) {
@@ -33,71 +34,88 @@ public class ViewModelQRHoaDon {
     }
 
     public String getId() {
+        
         return Id;
     }
 
     public void setId(String Id) {
+        
         this.Id = Id;
     }
 
     public String getMa() {
+        
         return ma;
     }
 
     public void setMa(String ma) {
+        
         this.ma = ma;
     }
 
     public String getNgayTao() {
+        
         return NgayTao;
     }
 
     public void setNgayTao(String NgayTao) {
+        
         this.NgayTao = NgayTao;
     }
 
     public String getNgayThanhToan() {
+        
         return NgayThanhToan;
     }
 
     public void setNgayThanhToan(String NgayThanhToan) {
+        
         this.NgayThanhToan = NgayThanhToan;
     }
 
     public String getTrangThaiHoaDon() {
+        
         return TrangThaiHoaDon;
     }
 
     public void setTrangThaiHoaDon(String TrangThaiHoaDon) {
+        
         this.TrangThaiHoaDon = TrangThaiHoaDon;
     }
 
     public String getPhamtramKM() {
+        
         return phamtramKM;
     }
 
     public void setPhamtramKM(String phamtramKM) {
+        
         this.phamtramKM = phamtramKM;
     }
 
     public String getTenKH() {
+        
         return tenKH;
     }
 
     public void setTenKH(String tenKH) {
+        
         this.tenKH = tenKH;
     }
 
     public String getTenNV() {
+        
         return tenNV;
     }
 
     public void setTenNV(String tenNV) {
+        
         this.tenNV = tenNV;
     }
 
     @Override
     public String toString() {
+        
         return "ViewModelQRHoaDon{" + "Id=" + Id + ", ma=" + ma + ", NgayTao=" + NgayTao + ", NgayThanhToan=" + NgayThanhToan + ", TrangThaiHoaDon=" + TrangThaiHoaDon + ", phamtramKM=" + phamtramKM + ", tenKH=" + tenKH + ", tenNV=" + tenNV + '}';
     }
 

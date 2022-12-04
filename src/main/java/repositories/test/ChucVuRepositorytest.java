@@ -30,6 +30,10 @@ public class ChucVuRepositorytest {
     }
 
     public List<ChucVu> tkTheoTen(String ten) {
+         
+        
+        
+        
         try {
             Session se = HibernatUtil.getFACTORY().openSession();
             Query q = se.createQuery("FROM ChucVu WHERE TrangThai = 1 AND TenChucVu like :ten");
@@ -43,6 +47,10 @@ public class ChucVuRepositorytest {
     }
 
     public int getMaMax() {
+        
+        
+        
+        
         Session se = HibernatUtil.getFACTORY().openSession();
         String maLonNhat = null;
         Query q = se.createQuery("select A.Ma From ChucVu A Where TrangThai = 1");
@@ -68,6 +76,9 @@ public class ChucVuRepositorytest {
     }
 
     public boolean add(ChucVu cv) {
+        
+        
+        
         String ma = String.valueOf(getMaMax() + 1);
         try {
             Session se = HibernatUtil.getFACTORY().openSession();
@@ -88,6 +99,10 @@ public class ChucVuRepositorytest {
     }
 
     public boolean update(ChucVu c) {
+        
+        
+        
+        
         try {
             Session se = HibernatUtil.getFACTORY().openSession();
             ChucVu cv = se.get(ChucVu.class, c.getId());
@@ -105,6 +120,10 @@ public class ChucVuRepositorytest {
     }
 
     public boolean delete(ChucVu c) {
+        
+        
+        
+        
         try {
             Session se = HibernatUtil.getFACTORY().openSession();
             ChucVu cv = se.get(ChucVu.class, c.getId());
@@ -121,6 +140,10 @@ public class ChucVuRepositorytest {
     }
 
     public static void main(String[] args) {
+        
+        
+        
+        
         ChucVuRepository chucVuRepository = new ChucVuRepository();
         ChucVu cv = new ChucVu();
        // cv.setId("5E6AA4AC-3549-4C7E-9777-1A868A578EF3");

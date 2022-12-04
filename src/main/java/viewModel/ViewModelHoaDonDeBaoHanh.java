@@ -34,63 +34,78 @@ public class ViewModelHoaDonDeBaoHanh {
     }
 
     public String getId() {
+        
         return id;
     }
 
     public void setId(String id) {
+        
         this.id = id;
     }
 
     public String getMa() {
+        
         return ma;
     }
 
     public void setMa(String ma) {
+        
         this.ma = ma;
     }
 
     public String getNgayThanhToan() {
+        
         return ngayThanhToan;
     }
 
     public void setNgayThanhToan(String ngayThanhToan) {
+        
         this.ngayThanhToan = ngayThanhToan;
     }
 
     public String getTenNV() {
+        
         return tenNV;
     }
 
     public void setTenNV(String tenNV) {
+        
         this.tenNV = tenNV;
     }
 
     public String getIdKH() {
+        
         return idKH;
     }
 
     public void setIdKH(String idKH) {
+        
         this.idKH = idKH;
     }
 
     public BigDecimal getTongTien() {
+        
         return tongTien;
     }
 
     public void setTongTien(BigDecimal tongTien) {
+        
         this.tongTien = tongTien;
     }
 
     public int getSLBH() {
+        
         return SLBH;
     }
 
     public void setSLBH(int SLBH) {
+        
         this.SLBH = SLBH;
     }
 
     @Override
     public String toString() {
+        
         return "ViewModelHoaDonDeBaoHanh{" + "id=" + id + ", ma=" + ma + ", ngayThanhToan=" + ngayThanhToan + ", tenNV=" + tenNV + ", idKH=" + idKH + ", tongTien=" + tongTien + ", SLBH=" + SLBH + '}';
     }
 

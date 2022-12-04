@@ -20,6 +20,7 @@ public class ViewModelNhapView {
     private BigDecimal TongTien;
 
     public ViewModelNhapView() {
+        
     }
 
     public ViewModelNhapView(String id, String idsp, String Tensp, int slNhap, String NgayNhap, BigDecimal TongTien) {
@@ -32,55 +33,68 @@ public class ViewModelNhapView {
     }
 
     public String getId() {
+        
         return id;
     }
 
     public void setId(String id) {
+        
         this.id = id;
     }
 
     public String getIdsp() {
+        
         return idsp;
     }
 
     public void setIdsp(String idsp) {
+        
         this.idsp = idsp;
     }
 
     public String getTensp() {
+        
         return Tensp;
     }
 
     public void setTensp(String Tensp) {
+        
         this.Tensp = Tensp;
     }
 
     public int getSlNhap() {
+        
         return slNhap;
     }
 
     public void setSlNhap(int slNhap) {
+        
         this.slNhap = slNhap;
     }
 
     public String getNgayNhap() {
+        
         return NgayNhap;
     }
 
     public void setNgayNhap(String NgayNhap) {
+        
         this.NgayNhap = NgayNhap;
     }
 
     public BigDecimal getTongTien() {
+        
         return TongTien;
     }
 
     public void setTongTien(BigDecimal TongTien) {
+        
         this.TongTien = TongTien;
     }
 
     @Override
     public String toString() {
+        
         return "ViewModelNhapView{" + "id=" + id + ", idsp=" + idsp + ", Tensp=" + Tensp + ", slNhap=" + slNhap + ", NgayNhap=" + NgayNhap + ", TongTien=" + TongTien + '}';
     }
 

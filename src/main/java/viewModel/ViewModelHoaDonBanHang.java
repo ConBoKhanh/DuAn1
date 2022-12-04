@@ -24,45 +24,56 @@ public class ViewModelHoaDonBanHang {
     }
 
     public ViewModelHoaDonBanHang() {
+        
     }
 
     public String getId() {
+        
         return Id;
     }
 
     public void setId(String Id) {
+        
         this.Id = Id;
     }
 
     public String getMa() {
+        
         return Ma;
     }
 
     public void setMa(String Ma) {
+        
         this.Ma = Ma;
     }
 
     public String getNgayTao() {
+        
         return ngayTao;
     }
 
     public void setNgayTao(String ngayTao) {
+        
         this.ngayTao = ngayTao;
     }
 
     public String getTrangThaiHoaDon() {
+        
         return TrangThaiHoaDon;
     }
 
     public void setTrangThaiHoaDon(String TrangThaiHoaDon) {
+        
         this.TrangThaiHoaDon = TrangThaiHoaDon;
     }
 
     public String getTenNV() {
+        
         return TenNV;
     }
 
     public void setTenNV(String TenNV) {
+        
         this.TenNV = TenNV;
     }
     

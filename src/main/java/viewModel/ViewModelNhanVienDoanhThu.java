@@ -27,42 +27,52 @@ public class ViewModelNhanVienDoanhThu {
     }
 
     public String getId() {
+        
         return id;
     }
 
     public void setId(String id) {
+        
         this.id = id;
     }
 
     public String getMa() {
+        
         return ma;
     }
 
     public void setMa(String ma) {
+        
         this.ma = ma;
     }
 
     public String getTennv() {
+        
         return tennv;
     }
 
     public void setTennv(String tennv) {
+        
         this.tennv = tennv;
     }
 
     public String getChucvu() {
+        
         return chucvu;
     }
 
     public void setChucvu(String chucvu) {
+        
         this.chucvu = chucvu;
     }
 
     public String getHddalam() {
+        
         return hddalam;
     }
 
     public void setHddalam(String hddalam) {
+        
         this.hddalam = hddalam;
     }
 

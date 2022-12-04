@@ -15,5 +15,6 @@ import viewModel.ViewModelKhachHang;
  */
 public interface IManageBaoHanhService {
     List<ViewModelKhachHang> getListKhachHang();
+    
      List<ViewModelKhachHang> getTKSDT(String sdt);
 }

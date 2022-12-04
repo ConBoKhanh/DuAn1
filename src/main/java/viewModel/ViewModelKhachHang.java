@@ -17,6 +17,7 @@ public class ViewModelKhachHang {
     private String Trangthai;
 
     public ViewModelKhachHang() {
+        
     }
 
     public ViewModelKhachHang(String ID, String ma, String tenkh, String sdt, String diachi, String Trangthai) {
@@ -29,55 +30,68 @@ public class ViewModelKhachHang {
     }
 
     public String getID() {
+        
         return ID;
     }
 
     public void setID(String ID) {
+        
         this.ID = ID;
     }
 
     public String getMa() {
+        
         return ma;
     }
 
     public void setMa(String ma) {
+        
         this.ma = ma;
     }
 
     public String getTenkh() {
+        
         return tenkh;
     }
 
     public void setTenkh(String tenkh) {
+        
         this.tenkh = tenkh;
     }
 
     public String getSdt() {
+        
         return sdt;
     }
 
     public void setSdt(String sdt) {
+        
         this.sdt = sdt;
     }
 
     public String getDiachi() {
+        
         return diachi;
     }
 
     public void setDiachi(String diachi) {
+        
         this.diachi = diachi;
     }
 
     public String getTrangthai() {
+        
         return Trangthai;
     }
 
     public void setTrangthai(String Trangthai) {
+        
         this.Trangthai = Trangthai;
     }
 
     @Override
     public String toString() {
+        
         return "ViewModelKhachHang{" + "ID=" + ID + ", ma=" + ma + ", tenkh=" + tenkh + ", sdt=" + sdt + ", diachi=" + diachi + ", Trangthai=" + Trangthai + '}';
     }
     

@@ -31,6 +31,7 @@ public class ViewModelQuenMatKhau {
     private String email;
 
     public ViewModelQuenMatKhau() {
+        
     }
 
     public ViewModelQuenMatKhau(String id, String ma, String hoTen, String sdt, String diaChi, String ngaySinh, String idCH, String idCV, String matKhau, String email) {
@@ -47,6 +48,7 @@ public class ViewModelQuenMatKhau {
     }
 
     public String getId() {
+        
         
         return id;
         

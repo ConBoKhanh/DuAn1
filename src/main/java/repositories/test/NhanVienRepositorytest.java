@@ -22,6 +22,8 @@ import utilities.mycompany.DBConext.HibernatUtil;
 public class NhanVienRepositorytest {
     public List<Object[]> getAll(int b, int c) {
 
+        
+        
         try {
             Session session = HibernatUtil.getFACTORY().openSession();
             Query q = session.createNativeQuery("Select A.Id, A.Ma, A.HoTen, A.Sdt, A.DiaChi, A.NgaySinh , A.Email,"
@@ -41,6 +43,10 @@ public class NhanVienRepositorytest {
     }
 
     public List<NhanVien> getListNV() {
+        
+        
+        
+        
         
         try {
             Session session = HibernatUtil.getFACTORY().openSession();
@@ -66,6 +72,9 @@ public class NhanVienRepositorytest {
 
     public int getRow(int b, int c) {
         
+        
+        
+        
         int index = -1;
         try {
             Session se = HibernatUtil.getFACTORY().openSession();
@@ -85,6 +94,9 @@ public class NhanVienRepositorytest {
 
     public List<NhanVien> listtk(String ten) {
         
+        
+        
+        
         try {
             Session session = HibernatUtil.getFACTORY().openSession();
             Query q = session.createQuery("from NhanVien where TrangThai = 1 and HoTen like :ten");
@@ -97,6 +109,9 @@ public class NhanVienRepositorytest {
     }
 
     public int getMaMax() {
+        
+        
+        
         
         Session se = HibernatUtil.getFACTORY().openSession();
         String maLonNhat = null;
@@ -123,6 +138,9 @@ public class NhanVienRepositorytest {
     }
 
     public boolean add(NhanVien nv) {
+        
+        
+        
         String ma = String.valueOf(getMaMax() + 1);
 
         try {
@@ -157,6 +175,10 @@ public class NhanVienRepositorytest {
     }
 
     public boolean update(NhanVien nv) {
+        
+        
+        
+        
         try {
             Session session = HibernatUtil.getFACTORY().openSession();
 
@@ -188,6 +210,9 @@ public class NhanVienRepositorytest {
     }
 
     public boolean delete(String id) {
+        
+        
+        
         try {
             Session se = HibernatUtil.getFACTORY().openSession();
             NhanVien sp = se.get(NhanVien.class, id);

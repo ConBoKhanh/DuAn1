@@ -24,6 +24,9 @@ public class ChucVuView extends javax.swing.JFrame {
     DefaultTableModel model = new DefaultTableModel();
 
     public void loadTBChucVu() {
+        
+        
+        
         model = (DefaultTableModel) tbbang.getModel();
         model.setColumnCount(0);
         model.addColumn("ID");
@@ -36,9 +39,15 @@ public class ChucVuView extends javax.swing.JFrame {
                 v.getId(), v.getMa(), v.getTen()
             });
         }
+        
+        
+        
     }
 
     public void loadTBChucVuTimKiem(String ten) {
+        
+        
+        
         model = (DefaultTableModel) tbbang.getModel();
         model.setColumnCount(0);
         model.addColumn("ID");
@@ -51,9 +60,15 @@ public class ChucVuView extends javax.swing.JFrame {
                 v.getId(), v.getMa(), v.getTen()
             });
         }
+        
+        
+        
     }
 
     public void loadPhanTu1() {
+        
+        
+        
         List<ViewModelChucVu> sp = chucVuService.getAll();
         if (sp.isEmpty()) {
             return;
@@ -63,9 +78,14 @@ public class ChucVuView extends javax.swing.JFrame {
         txtID.setText(tbbang.getValueAt(index, 0).toString());
         txtma.setText(tbbang.getValueAt(index, 1).toString());
         txtten.setText(tbbang.getValueAt(index, 2).toString());
+        
+        
+        
     }
 
     public boolean checkTen() { //check ten sp
+        
+        
         String ten = txtten.getText();
         List<ViewModelChucVu> sp = chucVuService.getAll();
         for (ViewModelChucVu v : sp) {
@@ -75,17 +95,25 @@ public class ChucVuView extends javax.swing.JFrame {
             }
         }
         return true;
+        
+        
+        
     }
 
     /**
      * Creates new form ChucVuView
      */
     public ChucVuView() {
+        
+        
+        
         initComponents();
         this.setDefaultCloseOperation(ChucVuView.DO_NOTHING_ON_CLOSE);
         setLocationRelativeTo(null);
         loadTBChucVu();
         loadPhanTu1();
+        
+        
     }
 
     /**
@@ -270,13 +298,16 @@ public class ChucVuView extends javax.swing.JFrame {
         if (checkTen()) {
             boolean b = chucVuService.add(cv);
             if (b == true) {
+                
                 Icon icon = new javax.swing.ImageIcon(getClass().getResource("/img/themmoiicon.png"));
                 JOptionPane.showMessageDialog(this, "Thêm sp thành công", "Sản Phẩm", JOptionPane.INFORMATION_MESSAGE, icon);
                 loadTBChucVu();
 
             } else {
+                
                 Icon icon = new javax.swing.ImageIcon(getClass().getResource("/img/deleteicon.png"));
                 JOptionPane.showMessageDialog(this, "Trùng Tên Sản Phẩm", "Sản Phẩm", JOptionPane.INFORMATION_MESSAGE, icon);
+            
             }
         }
     }//GEN-LAST:event_btnthemActionPerformed
@@ -293,11 +324,14 @@ public class ChucVuView extends javax.swing.JFrame {
 
     private void btnsuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnsuaActionPerformed
         // TODO add your handling code here:
+        
         ChucVu cv = new ChucVu();
         cv.setId(txtID.getText());
         cv.setTenChucVu(txtten.getText());
 
         if (checkTen()) {
+            
+            
             boolean b = chucVuService.update(cv);
             if (b == true) {
                 Icon icon = new javax.swing.ImageIcon(getClass().getResource("/img/themmoiicon.png"));
@@ -305,6 +339,7 @@ public class ChucVuView extends javax.swing.JFrame {
                 loadTBChucVu();
 
             } else {
+                
                 Icon icon = new javax.swing.ImageIcon(getClass().getResource("/img/deleteicon.png"));
                 JOptionPane.showMessageDialog(this, "Sửa thất bại", "Sản Phẩm", JOptionPane.INFORMATION_MESSAGE, icon);
             }
@@ -321,12 +356,18 @@ public class ChucVuView extends javax.swing.JFrame {
         boolean b = chucVuService.delete(sp);
 
         if (b == true) {
+            
+            
             Icon icon = new javax.swing.ImageIcon(getClass().getResource("/img/themmoiicon.png"));
             JOptionPane.showMessageDialog(this, "Delete sp thành công", "Sản Phẩm", JOptionPane.INFORMATION_MESSAGE, icon);
             loadTBChucVu();
+            
+            
 
         } else {
+            
             JOptionPane.showMessageDialog(this, "Delete Tên Sản Phẩm", "Sản Phẩm", JOptionPane.INFORMATION_MESSAGE);
+       
         }
 
     }//GEN-LAST:event_btnxoaActionPerformed
@@ -364,6 +405,11 @@ public class ChucVuView extends javax.swing.JFrame {
         }
         //</editor-fold>
 
+        
+        
+        
+        
+        
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {

@@ -36,110 +36,139 @@ public class ChiTietDoGoViewModel {
         this.mota = mota;
         this.soluong = soluong;
         this.giaNhap = giaNhap;
-        this.GiaBan = GiaBan;
+        this.GiaBan = GiaBan; 
+        
+        
+        
     }
 
     public ChiTietDoGoViewModel() {
+        
     }
 
     public String getId() {
+        
         return id;
     }
 
     public void setId(String id) {
+        
         this.id = id;
     }
 
     public String getTensp() {
+        
         return tensp;
     }
 
     public void setTensp(String tensp) {
+        
         this.tensp = tensp;
     }
 
     public String getSp() {
+        
         return sp;
     }
 
     public void setSp(String sp) {
+        
         this.sp = sp;
     }
 
     public String getLoad() {
+        
         return load;
     }
 
     public void setLoad(String load) {
+        
         this.load = load;
     }
 
     public String getDonggo() {
+        
         return donggo;
     }
 
     public void setDonggo(String donggo) {
+        
         this.donggo = donggo;
     }
 
     public String getNcc() {
+        
         return ncc;
     }
 
     public void setNcc(String ncc) {
+        
         this.ncc = ncc;
     }
 
     public String getNguongoc() {
+        
         return nguongoc;
     }
 
     public void setNguongoc(String nguongoc) {
+        
         this.nguongoc = nguongoc;
     }
 
     public String getDonvi() {
+        
         return donvi;
     }
 
     public void setDonvi(String donvi) {
+        
         this.donvi = donvi;
     }
 
     public String getMota() {
+        
         return mota;
     }
 
     public void setMota(String mota) {
+        
         this.mota = mota;
     }
 
     public int getSoluong() {
+        
         return soluong;
     }
 
     public void setSoluong(int soluong) {
+        
         this.soluong = soluong;
     }
 
     public BigDecimal getGiaNhap() {
+        
         return giaNhap;
     }
 
     public void setGiaNhap(BigDecimal giaNhap) {
+        
         this.giaNhap = giaNhap;
     }
 
     public BigDecimal getGiaBan() {
+        
         return GiaBan;
     }
 
     public void setGiaBan(BigDecimal GiaBan) {
+        
         this.GiaBan = GiaBan;
     }
 
     @Override
     public String toString() {
+        
         return "ChiTietDoGoViewModel{" + "id=" + id + ", tensp=" + tensp + ", sp=" + sp + ", load=" + load + ", donggo=" + donggo + ", ncc=" + ncc + ", nguongoc=" + nguongoc + ", donvi=" + donvi + ", mota=" + mota + ", soluong=" + soluong + ", giaNhap=" + giaNhap + ", GiaBan=" + GiaBan + '}';
     }
 

@@ -18,10 +18,15 @@ import viewModel.ViewModelCuaHang;
  * @author Phuong Bi
  */
 public class CuaHangView extends javax.swing.JFrame {
+    
+    
     private IManageCuaHangService cuaHangService = new CuaHangService();
     DefaultTableModel model = new DefaultTableModel();
     
+    
+    
      public void loadTBCuaHang() {
+         
         model = (DefaultTableModel) tbbang.getModel();
         model.setColumnCount(0);
         model.addColumn("ID");
@@ -34,11 +39,14 @@ public class CuaHangView extends javax.swing.JFrame {
             model.addRow(new Object[]{
                 v.getId(), v.getMa(), v.getTenCuaHang(),v.getDiaChi()
             });
+            
         }
     }
      
      
       public void loadTBCuaHang(String ten) {
+          
+          
         model = (DefaultTableModel) tbbang.getModel();
         model.setColumnCount(0);
         model.addColumn("ID");
@@ -51,13 +59,19 @@ public class CuaHangView extends javax.swing.JFrame {
             model.addRow(new Object[]{
                 v.getId(), v.getMa(), v.getTenCuaHang(),v.getDiaChi()
             });
+            
+            
         }
     }
      
       public void loadPhanTu1() {
+          
+          
         List<ViewModelCuaHang> sp = cuaHangService.getAll();
         if (sp.isEmpty()) {
             return;
+            
+            
         }
         int index = 0;
 
@@ -65,18 +79,24 @@ public class CuaHangView extends javax.swing.JFrame {
         txtma.setText(tbbang.getValueAt(index, 1).toString());
         txtten.setText(tbbang.getValueAt(index, 2).toString());
         txtdiaChi.setText(tbbang.getValueAt(index, 3).toString());
+        
+        
     }
       
       
        public boolean checkTen() { //check ten sp
+           
+           
         String ten = txtten.getText();
         List<ViewModelCuaHang> sp = cuaHangService.getAll();
         for (ViewModelCuaHang v : sp) {
             if (ten.equals(v.getTenCuaHang())) {
                 JOptionPane.showMessageDialog(this, "Tên đã tồn tại!");
                 return false;
+                
             }
         }
+        
         return true;
     }
 
@@ -275,11 +295,14 @@ public class CuaHangView extends javax.swing.JFrame {
           if (checkTen()) {
             boolean b = cuaHangService.add(ch);
             if (b == true) {
+                
+                
                 Icon icon = new javax.swing.ImageIcon(getClass().getResource("/img/themmoiicon.png"));
                 JOptionPane.showMessageDialog(this, "Thêm sp thành công", "Sản Phẩm", JOptionPane.INFORMATION_MESSAGE, icon);
                loadTBCuaHang();
 
             } else {
+                
                 Icon icon = new javax.swing.ImageIcon(getClass().getResource("/img/deleteicon.png"));
                 JOptionPane.showMessageDialog(this, "Trùng Tên Sản Phẩm", "Sản Phẩm", JOptionPane.INFORMATION_MESSAGE, icon);
             }
@@ -289,6 +312,8 @@ public class CuaHangView extends javax.swing.JFrame {
     private void btnsuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnsuaActionPerformed
         // TODO add your handling code here:
         
+        
+        
         CuaHang ch =  new CuaHang();
         ch.setId(txtID.getText());
         ch.setTenCuaHang(txtten.getText());
@@ -297,13 +322,16 @@ public class CuaHangView extends javax.swing.JFrame {
           if (checkTen()) {
             boolean b = cuaHangService.update(ch);
             if (b == true) {
+                
                 Icon icon = new javax.swing.ImageIcon(getClass().getResource("/img/themmoiicon.png"));
                 JOptionPane.showMessageDialog(this, "Sửa sp thành công", "Sản Phẩm", JOptionPane.INFORMATION_MESSAGE, icon);
                loadTBCuaHang();
 
             } else {
+                
                 Icon icon = new javax.swing.ImageIcon(getClass().getResource("/img/deleteicon.png"));
                 JOptionPane.showMessageDialog(this, "Sửa SP thất bại", "Sản Phẩm", JOptionPane.INFORMATION_MESSAGE, icon);
+            
             }
         }
     }//GEN-LAST:event_btnsuaActionPerformed
@@ -317,21 +345,27 @@ public class CuaHangView extends javax.swing.JFrame {
         txtma.setText(tbbang.getValueAt(index, 1).toString());
         txtten.setText(tbbang.getValueAt(index, 2).toString());
         txtdiaChi.setText(tbbang.getValueAt(index, 3).toString());
+        
     }//GEN-LAST:event_tbbangMouseClicked
 
     private void btnxoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnxoaActionPerformed
         // TODO add your handling code here:
+        
+        
         CuaHang ch = new CuaHang();
           ch.setId(txtID.getText());
         boolean b = cuaHangService.delete(ch);
 
         if (b == true) {
+            
             Icon icon = new javax.swing.ImageIcon(getClass().getResource("/img/themmoiicon.png"));
             JOptionPane.showMessageDialog(this, "Delete sp thành công", "Sản Phẩm", JOptionPane.INFORMATION_MESSAGE, icon);
            loadTBCuaHang();
 
         } else {
+            
             JOptionPane.showMessageDialog(this, "Delete Tên Sản Phẩm", "Sản Phẩm", JOptionPane.INFORMATION_MESSAGE);
+        
         }
     }//GEN-LAST:event_btnxoaActionPerformed
 
@@ -367,6 +401,13 @@ public class CuaHangView extends javax.swing.JFrame {
         }
         //</editor-fold>
 
+        
+        
+        
+        
+        
+        
+        
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {

@@ -16,6 +16,7 @@ public class ViewModelNguonGoc {
     private String trangThai;
 
     public ViewModelNguonGoc() {
+        
     }
 
     public ViewModelNguonGoc(String id, String ma, String quocgia, String trangThai) {
@@ -27,40 +28,49 @@ public class ViewModelNguonGoc {
     }
 
     public String getId() {
+        
         return id;
     }
 
     public void setId(String id) {
+        
         this.id = id;
     }
 
     public String getMa() {
+        
         return ma;
     }
 
     public void setMa(String ma) {
+        
         this.ma = ma;
     }
 
     public String getquocgia() {
+        
         return quocgia;
     }
 
     public void setquocgia(String quocgia) {
+        
         this.quocgia = quocgia;
     }
 
   
     public String getTrangThai() {
+        
         return trangThai;
     }
 
     public void setTrangThai(String trangThai) {
+        
         this.trangThai = trangThai;
     }
 
     @Override
     public String toString() {
+        
         return "ViewModelNguonGoc{" + "id=" + id + ", ma=" + ma + ", quocgia=" + quocgia + ", trangThai=" + trangThai + '}';
     }
 

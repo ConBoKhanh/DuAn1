@@ -1600,8 +1600,8 @@ public class SanPhamView extends javax.swing.JFrame {
         String ten = txtTenDongSp.getText();
         List<ViewModelLoaiSanPham> sp = lSpSv.getListLoaiSP();
         for (ViewModelLoaiSanPham v : sp) {
-            if (ten.equals(v.getTenDongSP())) {
-                JOptionPane.showMessageDialog(this, "Tên loại sp đã tồn tại!");
+            if (ten.isBlank()) {
+                JOptionPane.showMessageDialog(this, "Tên loại sp trống!");
                 return false;
             }
         }
@@ -1845,15 +1845,17 @@ public class SanPhamView extends javax.swing.JFrame {
         String ten = txtten.getText();
         List<ViewModelNhaCungCap> ncc = nhaCungCapService.getAll();
         for (ViewModelNhaCungCap v : ncc) {
-            if (ten.equals(v.getTenNCC())) {
-                JOptionPane.showMessageDialog(this, "Tên NCC đã tồn tại!");
+            if (ten.isBlank()) {
+                
+                JOptionPane.showMessageDialog(this, "Tên NCC trống!");
                 return false;
             }
         }
         return true;
     }
 
-    public void load1stNhaCungCap() {
+    public void load1stNhaCungCap() 
+    {
         List<ViewModelNhaCungCap> v = nhaCungCapService.getAll();
         int index = 0;
 
@@ -1866,6 +1868,7 @@ public class SanPhamView extends javax.swing.JFrame {
     }
 
     public void loadTbaleTimKiemTenNCC(String ten) {
+        
         List<ViewModelNhaCungCap> v = nhaCungCapService.getNhaCungCap(ten);
         model = (DefaultTableModel) tbNhaSanXuat.getModel();
         model.setColumnCount(0);
@@ -1887,6 +1890,7 @@ public class SanPhamView extends javax.swing.JFrame {
     }
 
     public void load1stNCC() {
+        
         int index = 0;
 
         txtid.setText(tbNhaSanXuat.getValueAt(index, 0).toString());
@@ -1898,6 +1902,8 @@ public class SanPhamView extends javax.swing.JFrame {
     }
     private void btntimkiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btntimkiemActionPerformed
         // TODO add your handling code here:
+        
+        
         NhaCungCap sp = new NhaCungCap();
 
         // nhaCungCapService.getNhaCungCap(txttimkiem.getText());
@@ -1924,6 +1930,7 @@ public class SanPhamView extends javax.swing.JFrame {
         nc.setSdt(txtdienthoai.getText());
 
         if (checkTenNCC()) {
+            
             boolean b = nhaCungCapService.add(nc);
             if (b == true) {
                 Icon icon = new javax.swing.ImageIcon(getClass().getResource("/img/themmoiicon.png"));
