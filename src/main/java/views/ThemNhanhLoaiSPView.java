@@ -4,28 +4,24 @@
  */
 package views;
 
-import domainModels.DongGo;
-import domainModels.SanPham;
+import domainModels.LoaiSP;
 import javax.swing.Icon;
 import javax.swing.JOptionPane;
-import static org.apache.poi.util.LocaleID.SV;
-import services.ThemNhanhDongGoService;
-import services.impl.IManageThemNhanhDongGoService;
+import services.ThemNhanhLoaiSPService;
+import services.impl.IManageThemNhanhLoaiSPService;
 
 /**
  *
  * @author ktkha
  */
-public class ThemNhanhDongGoView extends javax.swing.JFrame {
+public class ThemNhanhLoaiSPView extends javax.swing.JFrame {
     
-    private IManageThemNhanhDongGoService SV = new ThemNhanhDongGoService();
-    
-    
+    private IManageThemNhanhLoaiSPService SV = new ThemNhanhLoaiSPService();
 
     /**
-     * Creates new form ThemNhanhDongGoView
+     * Creates new form ThemNhanhLoaiSPView
      */
-    public ThemNhanhDongGoView() {
+    public ThemNhanhLoaiSPView() {
         initComponents();
         
         setLocationRelativeTo(null);
@@ -54,11 +50,11 @@ public class ThemNhanhDongGoView extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(255, 204, 255));
 
         jPanel2.setBackground(new java.awt.Color(255, 204, 255));
-        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createMatteBorder(2, 2, 2, 2, new java.awt.Color(0, 0, 0)), "Thêm Nhanh Dòng Gỗ", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 12))); // NOI18N
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createMatteBorder(2, 2, 2, 2, new java.awt.Color(0, 0, 0)), "Thêm Nhanh Loại SP", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 12))); // NOI18N
         jPanel2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jLabel3.setText("Tên Dòng Gỗ");
+        jLabel3.setText("Tên Loại SP");
 
         txtTen.setBackground(new java.awt.Color(255, 204, 255));
         txtTen.setActionCommand("<Not Set>");
@@ -128,9 +124,9 @@ public class ThemNhanhDongGoView extends javax.swing.JFrame {
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(48, 48, 48)
+                .addGap(29, 29, 29)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(51, Short.MAX_VALUE))
+                .addContainerGap(57, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -149,19 +145,18 @@ public class ThemNhanhDongGoView extends javax.swing.JFrame {
 
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
         // TODO add your handling code here:
-        DongGo d = new DongGo();
-        d.setTenLoaiGo(txtTen.getText());
+        LoaiSP sp = new LoaiSP();
+        sp.setTenDongSP(txtTen.getText());
 
-        boolean b = SV.add(d);
+        boolean b = SV.add(sp);
         if (b == true) {
             Icon icon = new javax.swing.ImageIcon(getClass().getResource("/img/themmoiicon.png"));
-            JOptionPane.showMessageDialog(this, "Thêm nhanh thành công", "Dòng Sản Phẩm", JOptionPane.INFORMATION_MESSAGE, icon);
+            JOptionPane.showMessageDialog(this, "Thêm nhanh thành công", "Loại Sản Phẩm", JOptionPane.INFORMATION_MESSAGE, icon);
             ChiTietSanPhamView.loadcbc();
         } else {
             Icon icon = new javax.swing.ImageIcon(getClass().getResource("/img/deleteicon.png"));
-            JOptionPane.showMessageDialog(this, "Thêm nhanh thất bại!", "Dòng Sản Phẩm", JOptionPane.INFORMATION_MESSAGE, icon);
+            JOptionPane.showMessageDialog(this, "Thêm nhanh thất bại!", "Loại Sản Phẩm", JOptionPane.INFORMATION_MESSAGE, icon);
         }
-
     }//GEN-LAST:event_btnThemActionPerformed
 
     private void jLabel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseClicked
@@ -186,20 +181,20 @@ public class ThemNhanhDongGoView extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ThemNhanhDongGoView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ThemNhanhLoaiSPView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ThemNhanhDongGoView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ThemNhanhLoaiSPView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ThemNhanhDongGoView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ThemNhanhLoaiSPView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ThemNhanhDongGoView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ThemNhanhLoaiSPView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ThemNhanhDongGoView().setVisible(true);
+                new ThemNhanhLoaiSPView().setVisible(true);
             }
         });
     }

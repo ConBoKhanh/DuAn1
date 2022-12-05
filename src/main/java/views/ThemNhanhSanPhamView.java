@@ -25,6 +25,8 @@ public class ThemNhanhSanPhamView extends javax.swing.JFrame {
      */
     public ThemNhanhSanPhamView() {
         initComponents();
+        
+        
         setLocationRelativeTo(null);
 
     }

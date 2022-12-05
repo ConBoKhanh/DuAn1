@@ -12,7 +12,7 @@ import services.impl.IManageThemNhanhDongGoService;
  *
  * @author ktkha
  */
-public class ThanhNhanhDongGoService implements IManageThemNhanhDongGoService {
+public class ThemNhanhDongGoService implements IManageThemNhanhDongGoService {
 
     private ThemNhanhDongGoRepository sv = new ThemNhanhDongGoRepository();
 
