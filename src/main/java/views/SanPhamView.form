@@ -130,6 +130,9 @@
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="cc" green="cc" red="ff" type="rgb"/>
                     </Property>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Segoe UI" size="12" style="1"/>
+                    </Property>
                   </Properties>
 
                   <Layout class="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout"/>
@@ -175,6 +178,7 @@
                                                   <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
                                                   <Component id="btnTimKiemDongGo" min="-2" pref="91" max="-2" attributes="0"/>
                                               </Group>
+                                              <Component id="jScrollPane3" alignment="0" min="-2" pref="476" max="-2" attributes="0"/>
                                           </Group>
                                       </Group>
                                       <Group type="102" alignment="0" attributes="0">
@@ -185,12 +189,8 @@
                                           <EmptySpace min="-2" pref="43" max="-2" attributes="0"/>
                                           <Component id="btnSua1" min="-2" pref="92" max="-2" attributes="0"/>
                                       </Group>
-                                      <Group type="102" alignment="0" attributes="0">
-                                          <EmptySpace min="-2" pref="53" max="-2" attributes="0"/>
-                                          <Component id="jScrollPane3" min="-2" pref="476" max="-2" attributes="0"/>
-                                      </Group>
                                   </Group>
-                                  <EmptySpace pref="97" max="32767" attributes="0"/>
+                                  <EmptySpace pref="107" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>
@@ -219,9 +219,9 @@
                                       <Component id="btnXoa1" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
                                       <Component id="btnSua1" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
                                   </Group>
-                                  <EmptySpace max="-2" attributes="0"/>
+                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                   <Component id="jScrollPane3" min="-2" pref="179" max="-2" attributes="0"/>
-                                  <EmptySpace pref="62" max="32767" attributes="0"/>
+                                  <EmptySpace pref="63" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>
@@ -229,6 +229,9 @@
                       <SubComponents>
                         <Component class="javax.swing.JLabel" name="jLabel7">
                           <Properties>
+                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                              <Font name="Segoe UI" size="12" style="1"/>
+                            </Property>
                             <Property name="text" type="java.lang.String" value="ID"/>
                           </Properties>
                         </Component>
@@ -247,6 +250,9 @@
                         </Component>
                         <Component class="javax.swing.JLabel" name="jLabel8">
                           <Properties>
+                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                              <Font name="Segoe UI" size="12" style="1"/>
+                            </Property>
                             <Property name="text" type="java.lang.String" value="M&#xe3;"/>
                           </Properties>
                         </Component>
@@ -265,6 +271,9 @@
                         </Component>
                         <Component class="javax.swing.JLabel" name="jLabel9">
                           <Properties>
+                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                              <Font name="Segoe UI" size="12" style="1"/>
+                            </Property>
                             <Property name="text" type="java.lang.String" value="T&#xea;n"/>
                           </Properties>
                         </Component>
@@ -315,7 +324,7 @@
                             <Property name="text" type="java.lang.String" value="Search Name"/>
                             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                               <Border info="org.netbeans.modules.form.compat2.border.MatteColorBorderInfo">
-                                <MatteColorBorder/>
+                                <MatteColorBorder bottom="2" left="2" right="2" top="2"/>
                               </Border>
                             </Property>
                           </Properties>
@@ -350,7 +359,7 @@
                             <Property name="text" type="java.lang.String" value="Add"/>
                             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                               <Border info="org.netbeans.modules.form.compat2.border.MatteColorBorderInfo">
-                                <MatteColorBorder/>
+                                <MatteColorBorder bottom="2" left="2" right="2" top="2"/>
                               </Border>
                             </Property>
                           </Properties>
@@ -369,7 +378,7 @@
                             <Property name="text" type="java.lang.String" value="Update"/>
                             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                               <Border info="org.netbeans.modules.form.compat2.border.MatteColorBorderInfo">
-                                <MatteColorBorder/>
+                                <MatteColorBorder bottom="2" left="2" right="2" top="2"/>
                               </Border>
                             </Property>
                           </Properties>
@@ -388,7 +397,7 @@
                             <Property name="text" type="java.lang.String" value="Delete"/>
                             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                               <Border info="org.netbeans.modules.form.compat2.border.MatteColorBorderInfo">
-                                <MatteColorBorder/>
+                                <MatteColorBorder bottom="2" left="2" right="2" top="2"/>
                               </Border>
                             </Property>
                           </Properties>
@@ -420,38 +429,38 @@
                       <Layout>
                         <DimensionLayout dim="0">
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="102" alignment="0" attributes="0">
+                              <Group type="102" attributes="0">
                                   <EmptySpace min="-2" pref="58" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
                                       <Component id="jScrollPane6" alignment="0" min="-2" pref="476" max="-2" attributes="0"/>
                                       <Group type="102" alignment="0" attributes="0">
-                                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                              <Component id="txtMaNguonGoc" alignment="0" pref="192" max="32767" attributes="0"/>
-                                              <Component id="jLabel19" alignment="0" min="-2" pref="70" max="-2" attributes="0"/>
-                                              <Component id="jLabel18" alignment="0" min="-2" pref="70" max="-2" attributes="0"/>
-                                              <Component id="jLabel20" alignment="0" min="-2" pref="28" max="-2" attributes="0"/>
-                                              <Component id="txtIDNguonGoc" alignment="0" max="32767" attributes="0"/>
-                                              <Component id="txtQuocGia" alignment="0" max="32767" attributes="0"/>
-                                          </Group>
-                                          <Group type="103" groupAlignment="0" attributes="0">
+                                          <Group type="103" groupAlignment="1" max="-2" attributes="0">
                                               <Group type="102" alignment="0" attributes="0">
-                                                  <EmptySpace min="-2" pref="52" max="-2" attributes="0"/>
-                                                  <Component id="txtTimKiemNG" min="-2" pref="122" max="-2" attributes="0"/>
-                                                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                                                  <Component id="btnTimKiemDongGo1" min="-2" pref="91" max="-2" attributes="0"/>
+                                                  <EmptySpace min="-2" pref="65" max="-2" attributes="0"/>
+                                                  <Component id="btnThemNG" min="-2" pref="92" max="-2" attributes="0"/>
+                                                  <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
+                                                  <Component id="btnXoaNG" min="-2" pref="92" max="-2" attributes="0"/>
+                                                  <EmptySpace pref="36" max="32767" attributes="0"/>
+                                                  <Component id="btnSuaNG" min="-2" pref="92" max="-2" attributes="0"/>
                                               </Group>
                                               <Group type="102" alignment="0" attributes="0">
-                                                  <EmptySpace min="-2" pref="192" max="-2" attributes="0"/>
-                                                  <Group type="103" groupAlignment="0" attributes="0">
-                                                      <Component id="btnXoaNG" min="-2" pref="92" max="-2" attributes="0"/>
-                                                      <Component id="btnThemNG" min="-2" pref="92" max="-2" attributes="0"/>
-                                                      <Component id="btnSuaNG" alignment="0" min="-2" pref="92" max="-2" attributes="0"/>
+                                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                                      <Component id="txtMaNguonGoc" alignment="0" pref="192" max="32767" attributes="0"/>
+                                                      <Component id="jLabel19" alignment="0" min="-2" pref="70" max="-2" attributes="0"/>
+                                                      <Component id="jLabel18" alignment="0" min="-2" pref="70" max="-2" attributes="0"/>
+                                                      <Component id="jLabel20" alignment="0" min="-2" pref="28" max="-2" attributes="0"/>
+                                                      <Component id="txtIDNguonGoc" alignment="0" max="32767" attributes="0"/>
+                                                      <Component id="txtQuocGia" alignment="0" max="32767" attributes="0"/>
                                                   </Group>
+                                                  <EmptySpace min="-2" pref="52" max="-2" attributes="0"/>
+                                                  <Component id="txtTimKiemNG" min="-2" pref="164" max="-2" attributes="0"/>
                                               </Group>
                                           </Group>
+                                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                                          <Component id="btnTimKiemDongGo1" min="-2" pref="91" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
-                                  <EmptySpace pref="127" max="32767" attributes="0"/>
+                                  <EmptySpace pref="96" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>
@@ -460,37 +469,36 @@
                               <Group type="102" alignment="0" attributes="0">
                                   <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
                                   <Component id="jLabel20" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="3" attributes="0">
-                                      <Component id="txtIDNguonGoc" alignment="3" min="-2" pref="29" max="-2" attributes="0"/>
-                                      <Component id="txtTimKiemNG" alignment="3" min="-2" pref="29" max="-2" attributes="0"/>
-                                      <Component id="btnTimKiemDongGo1" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
-                                  </Group>
-                                  <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="3" attributes="0">
-                                      <Component id="jLabel19" alignment="3" min="-2" pref="23" max="-2" attributes="0"/>
-                                      <Component id="btnThemNG" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
-                                  </Group>
                                   <Group type="103" groupAlignment="0" attributes="0">
                                       <Group type="102" attributes="0">
                                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                          <Group type="103" groupAlignment="3" attributes="0">
+                                              <Component id="txtIDNguonGoc" alignment="3" min="-2" pref="29" max="-2" attributes="0"/>
+                                              <Component id="txtTimKiemNG" alignment="3" min="-2" pref="29" max="-2" attributes="0"/>
+                                              <Component id="btnTimKiemDongGo1" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
+                                          </Group>
+                                          <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
+                                          <Component id="jLabel19" min="-2" pref="23" max="-2" attributes="0"/>
+                                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                           <Component id="txtMaNguonGoc" min="-2" pref="29" max="-2" attributes="0"/>
+                                          <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
+                                          <Component id="jLabel18" min="-2" pref="23" max="-2" attributes="0"/>
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Component id="txtQuocGia" min="-2" pref="29" max="-2" attributes="0"/>
+                                          <EmptySpace pref="81" max="32767" attributes="0"/>
+                                          <Component id="jScrollPane6" min="-2" pref="179" max="-2" attributes="0"/>
+                                          <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
                                       </Group>
-                                      <Group type="102" alignment="0" attributes="0">
-                                          <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
-                                          <Component id="btnXoaNG" min="-2" pref="31" max="-2" attributes="0"/>
+                                      <Group type="102" alignment="1" attributes="0">
+                                          <EmptySpace max="32767" attributes="0"/>
+                                          <Group type="103" groupAlignment="3" attributes="0">
+                                              <Component id="btnThemNG" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
+                                              <Component id="btnXoaNG" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
+                                              <Component id="btnSuaNG" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
+                                          </Group>
+                                          <EmptySpace min="-2" pref="240" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
-                                  <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="3" attributes="0">
-                                      <Component id="jLabel18" alignment="3" min="-2" pref="23" max="-2" attributes="0"/>
-                                      <Component id="btnSuaNG" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
-                                  </Group>
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="txtQuocGia" min="-2" pref="29" max="-2" attributes="0"/>
-                                  <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
-                                  <Component id="jScrollPane6" min="-2" pref="179" max="-2" attributes="0"/>
-                                  <EmptySpace pref="71" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>
@@ -505,6 +513,9 @@
                           <SubComponents>
                             <Component class="javax.swing.JTable" name="tblNguonGoc">
                               <Properties>
+                                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                                  <Font name="Segoe UI" size="12" style="1"/>
+                                </Property>
                                 <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                                   <Table columnCount="3" rowCount="4">
                                     <Column editable="true" title="ID" type="java.lang.Object"/>
@@ -533,7 +544,7 @@
                             <Property name="text" type="java.lang.String" value="Delete"/>
                             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                               <Border info="org.netbeans.modules.form.compat2.border.MatteColorBorderInfo">
-                                <MatteColorBorder/>
+                                <MatteColorBorder bottom="2" left="2" right="2" top="2"/>
                               </Border>
                             </Property>
                           </Properties>
@@ -552,7 +563,7 @@
                             <Property name="text" type="java.lang.String" value="Update"/>
                             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                               <Border info="org.netbeans.modules.form.compat2.border.MatteColorBorderInfo">
-                                <MatteColorBorder/>
+                                <MatteColorBorder bottom="2" left="2" right="2" top="2"/>
                               </Border>
                             </Property>
                           </Properties>
@@ -571,7 +582,7 @@
                             <Property name="text" type="java.lang.String" value="Search Name"/>
                             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                               <Border info="org.netbeans.modules.form.compat2.border.MatteColorBorderInfo">
-                                <MatteColorBorder/>
+                                <MatteColorBorder bottom="2" left="2" right="2" top="2"/>
                               </Border>
                             </Property>
                           </Properties>
@@ -590,7 +601,7 @@
                             <Property name="text" type="java.lang.String" value="Add"/>
                             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                               <Border info="org.netbeans.modules.form.compat2.border.MatteColorBorderInfo">
-                                <MatteColorBorder/>
+                                <MatteColorBorder bottom="2" left="2" right="2" top="2"/>
                               </Border>
                             </Property>
                           </Properties>
@@ -632,11 +643,17 @@
                         </Component>
                         <Component class="javax.swing.JLabel" name="jLabel18">
                           <Properties>
+                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                              <Font name="Segoe UI" size="12" style="1"/>
+                            </Property>
                             <Property name="text" type="java.lang.String" value="Qu&#x1ed1;c Gia"/>
                           </Properties>
                         </Component>
                         <Component class="javax.swing.JLabel" name="jLabel19">
                           <Properties>
+                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                              <Font name="Segoe UI" size="12" style="1"/>
+                            </Property>
                             <Property name="text" type="java.lang.String" value="M&#xe3;"/>
                           </Properties>
                         </Component>
@@ -671,6 +688,9 @@
                         </Component>
                         <Component class="javax.swing.JLabel" name="jLabel20">
                           <Properties>
+                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                              <Font name="Segoe UI" size="12" style="1"/>
+                            </Property>
                             <Property name="text" type="java.lang.String" value="ID"/>
                           </Properties>
                         </Component>
@@ -698,7 +718,7 @@
                       <Layout>
                         <DimensionLayout dim="0">
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <EmptySpace min="0" pref="661" max="32767" attributes="0"/>
+                              <EmptySpace min="0" pref="671" max="32767" attributes="0"/>
                               <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
                                   <Group type="102" attributes="0">
                                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
@@ -751,23 +771,26 @@
                                                       </Group>
                                                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                                                   </Group>
-                                                  <Group type="102" alignment="0" attributes="0">
-                                                      <Component id="TXTIDDVT" min="-2" pref="225" max="-2" attributes="0"/>
-                                                      <EmptySpace max="32767" attributes="0"/>
-                                                      <Component id="TXTTIMKIEMDVT" min="-2" pref="122" max="-2" attributes="0"/>
+                                                  <Group type="102" alignment="1" attributes="0">
+                                                      <Group type="103" groupAlignment="1" attributes="0">
+                                                          <Group type="102" attributes="0">
+                                                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                                                              <Component id="btnThem2" min="-2" pref="92" max="-2" attributes="0"/>
+                                                              <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
+                                                              <Component id="btnSua2" min="-2" pref="92" max="-2" attributes="0"/>
+                                                              <EmptySpace min="-2" pref="42" max="-2" attributes="0"/>
+                                                              <Component id="btnXoa2" min="-2" pref="92" max="-2" attributes="0"/>
+                                                          </Group>
+                                                          <Group type="102" attributes="0">
+                                                              <Component id="TXTIDDVT" min="-2" pref="225" max="-2" attributes="0"/>
+                                                              <EmptySpace max="32767" attributes="0"/>
+                                                              <Component id="TXTTIMKIEMDVT" min="-2" pref="122" max="-2" attributes="0"/>
+                                                          </Group>
+                                                      </Group>
                                                       <EmptySpace max="-2" attributes="0"/>
                                                       <Component id="btnTimKiem1" min="-2" pref="91" max="-2" attributes="0"/>
                                                   </Group>
                                               </Group>
-                                          </Group>
-                                          <Group type="102" alignment="1" attributes="0">
-                                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                                              <Component id="btnThem2" min="-2" pref="92" max="-2" attributes="0"/>
-                                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                                              <Component id="btnSua2" min="-2" pref="92" max="-2" attributes="0"/>
-                                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                                              <Component id="btnXoa2" min="-2" pref="92" max="-2" attributes="0"/>
-                                              <EmptySpace min="-2" pref="154" max="-2" attributes="0"/>
                                           </Group>
                                       </Group>
                                       <EmptySpace max="-2" attributes="0"/>
@@ -811,6 +834,9 @@
                           <SubComponents>
                             <Component class="javax.swing.JLabel" name="jLabel15">
                               <Properties>
+                                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                                  <Font name="Segoe UI" size="12" style="1"/>
+                                </Property>
                                 <Property name="text" type="java.lang.String" value="ID"/>
                               </Properties>
                             </Component>
@@ -829,6 +855,9 @@
                             </Component>
                             <Component class="javax.swing.JLabel" name="jLabel16">
                               <Properties>
+                                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                                  <Font name="Segoe UI" size="12" style="1"/>
+                                </Property>
                                 <Property name="text" type="java.lang.String" value="Ma&#x303;"/>
                               </Properties>
                             </Component>
@@ -847,6 +876,9 @@
                             </Component>
                             <Component class="javax.swing.JLabel" name="jLabel17">
                               <Properties>
+                                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                                  <Font name="Segoe UI" size="12" style="1"/>
+                                </Property>
                                 <Property name="text" type="java.lang.String" value="&#x110;&#x1a1;n V&#x1ecb; T&#xed;nh"/>
                               </Properties>
                             </Component>
@@ -874,7 +906,7 @@
                                 <Property name="text" type="java.lang.String" value="Add"/>
                                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                                   <Border info="org.netbeans.modules.form.compat2.border.MatteColorBorderInfo">
-                                    <MatteColorBorder/>
+                                    <MatteColorBorder bottom="2" left="2" right="2" top="2"/>
                                   </Border>
                                 </Property>
                               </Properties>
@@ -893,7 +925,7 @@
                                 <Property name="text" type="java.lang.String" value="Update"/>
                                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                                   <Border info="org.netbeans.modules.form.compat2.border.MatteColorBorderInfo">
-                                    <MatteColorBorder/>
+                                    <MatteColorBorder bottom="2" left="2" right="2" top="2"/>
                                   </Border>
                                 </Property>
                               </Properties>
@@ -912,7 +944,7 @@
                                 <Property name="text" type="java.lang.String" value="Delete"/>
                                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                                   <Border info="org.netbeans.modules.form.compat2.border.MatteColorBorderInfo">
-                                    <MatteColorBorder/>
+                                    <MatteColorBorder bottom="2" left="2" right="2" top="2"/>
                                   </Border>
                                 </Property>
                               </Properties>
@@ -1024,14 +1056,15 @@
                                       <Component id="jLabel5" alignment="0" min="-2" pref="79" max="-2" attributes="0"/>
                                       <Component id="txtTenDongSp" alignment="0" min="-2" pref="225" max="-2" attributes="0"/>
                                       <Group type="102" alignment="0" attributes="0">
+                                          <EmptySpace min="-2" pref="54" max="-2" attributes="0"/>
                                           <Component id="btnThemLoaiSp" min="-2" pref="92" max="-2" attributes="0"/>
                                           <EmptySpace type="separate" max="-2" attributes="0"/>
                                           <Component id="btnSuaLoaiSp" min="-2" pref="92" max="-2" attributes="0"/>
-                                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                          <EmptySpace type="separate" max="-2" attributes="0"/>
                                           <Component id="btnXoaLoaiSp" min="-2" pref="92" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
-                                  <EmptySpace pref="61" max="32767" attributes="0"/>
+                                  <EmptySpace pref="71" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>
@@ -1054,15 +1087,21 @@
                                   <Component id="jLabel5" min="-2" pref="23" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Component id="txtTenDongSp" min="-2" pref="29" max="-2" attributes="0"/>
-                                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="3" attributes="0">
-                                      <Component id="btnThemLoaiSp" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
-                                      <Component id="btnSuaLoaiSp" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
-                                      <Component id="btnXoaLoaiSp" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Group type="102" attributes="0">
+                                          <EmptySpace min="-2" pref="95" max="-2" attributes="0"/>
+                                          <Component id="jScrollPane2" min="-2" pref="167" max="-2" attributes="0"/>
+                                      </Group>
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
+                                          <Group type="103" groupAlignment="3" attributes="0">
+                                              <Component id="btnXoaLoaiSp" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
+                                              <Component id="btnSuaLoaiSp" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
+                                              <Component id="btnThemLoaiSp" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
+                                          </Group>
+                                      </Group>
                                   </Group>
-                                  <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
-                                  <Component id="jScrollPane2" min="-2" pref="167" max="-2" attributes="0"/>
-                                  <EmptySpace min="-2" pref="88" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="68" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>
@@ -1070,6 +1109,9 @@
                       <SubComponents>
                         <Component class="javax.swing.JLabel" name="jLabel4">
                           <Properties>
+                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                              <Font name="Segoe UI" size="12" style="1"/>
+                            </Property>
                             <Property name="text" type="java.lang.String" value="ID"/>
                           </Properties>
                         </Component>
@@ -1088,6 +1130,9 @@
                         </Component>
                         <Component class="javax.swing.JLabel" name="jLabel5">
                           <Properties>
+                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                              <Font name="Segoe UI" size="12" style="1"/>
+                            </Property>
                             <Property name="text" type="java.lang.String" value="T&#xea;n D&#xf2;ng SP"/>
                           </Properties>
                         </Component>
@@ -1109,6 +1154,9 @@
                         </Component>
                         <Component class="javax.swing.JLabel" name="jLabel6">
                           <Properties>
+                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                              <Font name="Segoe UI" size="12" style="1"/>
+                            </Property>
                             <Property name="text" type="java.lang.String" value="Ma&#x303;"/>
                           </Properties>
                         </Component>
@@ -1137,6 +1185,9 @@
                           <SubComponents>
                             <Component class="javax.swing.JTable" name="tblLoaiSanPham">
                               <Properties>
+                                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                                  <Font name="Segoe UI" size="12" style="1"/>
+                                </Property>
                                 <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                                   <Table columnCount="3" rowCount="4">
                                     <Column editable="true" title="ID" type="java.lang.Object"/>
@@ -1184,7 +1235,7 @@
                             <Property name="text" type="java.lang.String" value="Add"/>
                             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                               <Border info="org.netbeans.modules.form.compat2.border.MatteColorBorderInfo">
-                                <MatteColorBorder/>
+                                <MatteColorBorder bottom="2" left="2" right="2" top="2"/>
                               </Border>
                             </Property>
                           </Properties>
@@ -1203,7 +1254,7 @@
                             <Property name="text" type="java.lang.String" value="Update"/>
                             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                               <Border info="org.netbeans.modules.form.compat2.border.MatteColorBorderInfo">
-                                <MatteColorBorder/>
+                                <MatteColorBorder bottom="2" left="2" right="2" top="2"/>
                               </Border>
                             </Property>
                           </Properties>
@@ -1222,7 +1273,7 @@
                             <Property name="text" type="java.lang.String" value="Delete"/>
                             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                               <Border info="org.netbeans.modules.form.compat2.border.MatteColorBorderInfo">
-                                <MatteColorBorder/>
+                                <MatteColorBorder bottom="2" left="2" right="2" top="2"/>
                               </Border>
                             </Property>
                           </Properties>
@@ -1241,7 +1292,7 @@
                             <Property name="text" type="java.lang.String" value="T&#xec;m"/>
                             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                               <Border info="org.netbeans.modules.form.compat2.border.MatteColorBorderInfo">
-                                <MatteColorBorder/>
+                                <MatteColorBorder bottom="2" left="2" right="2" top="2"/>
                               </Border>
                             </Property>
                           </Properties>
@@ -1287,7 +1338,7 @@
                         <DimensionLayout dim="0">
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" alignment="1" attributes="0">
-                                  <EmptySpace min="0" pref="79" max="32767" attributes="0"/>
+                                  <EmptySpace min="0" pref="89" max="32767" attributes="0"/>
                                   <Component id="jScrollPane1" min="-2" pref="529" max="-2" attributes="0"/>
                                   <EmptySpace min="-2" pref="53" max="-2" attributes="0"/>
                               </Group>
@@ -1376,7 +1427,7 @@
                             <Property name="text" type="java.lang.String" value="Add"/>
                             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                               <Border info="org.netbeans.modules.form.compat2.border.MatteColorBorderInfo">
-                                <MatteColorBorder/>
+                                <MatteColorBorder bottom="2" left="2" right="2" top="2"/>
                               </Border>
                             </Property>
                           </Properties>
@@ -1431,16 +1482,25 @@
                         </Container>
                         <Component class="javax.swing.JLabel" name="jLabel1">
                           <Properties>
+                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                              <Font name="Segoe UI" size="12" style="1"/>
+                            </Property>
                             <Property name="text" type="java.lang.String" value="Ma&#x303;"/>
                           </Properties>
                         </Component>
                         <Component class="javax.swing.JLabel" name="jLabel2">
                           <Properties>
+                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                              <Font name="Segoe UI" size="12" style="1"/>
+                            </Property>
                             <Property name="text" type="java.lang.String" value="ID"/>
                           </Properties>
                         </Component>
                         <Component class="javax.swing.JLabel" name="jLabel3">
                           <Properties>
+                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                              <Font name="Segoe UI" size="12" style="1"/>
+                            </Property>
                             <Property name="text" type="java.lang.String" value="T&#xea;n"/>
                           </Properties>
                         </Component>
@@ -1494,7 +1554,7 @@
                             <Property name="text" type="java.lang.String" value="Update"/>
                             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                               <Border info="org.netbeans.modules.form.compat2.border.MatteColorBorderInfo">
-                                <MatteColorBorder/>
+                                <MatteColorBorder bottom="2" left="2" right="2" top="2"/>
                               </Border>
                             </Property>
                           </Properties>
@@ -1513,7 +1573,7 @@
                             <Property name="text" type="java.lang.String" value="Delete"/>
                             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                               <Border info="org.netbeans.modules.form.compat2.border.MatteColorBorderInfo">
-                                <MatteColorBorder/>
+                                <MatteColorBorder bottom="2" left="2" right="2" top="2"/>
                               </Border>
                             </Property>
                           </Properties>
@@ -1547,7 +1607,7 @@
                             <Property name="text" type="java.lang.String" value="T&#xec;m ki&#x1ebf;m"/>
                             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                               <Border info="org.netbeans.modules.form.compat2.border.MatteColorBorderInfo">
-                                <MatteColorBorder/>
+                                <MatteColorBorder bottom="2" left="2" right="2" top="2"/>
                               </Border>
                             </Property>
                           </Properties>
@@ -1586,46 +1646,49 @@
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" alignment="0" attributes="0">
                                   <EmptySpace min="-2" pref="86" max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="1" attributes="0">
-                                      <Component id="btnadd" min="-2" pref="89" max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="jLabel10" alignment="0" min="-2" pref="37" max="-2" attributes="0"/>
-                                          <Component id="txtid" alignment="0" min="-2" pref="153" max="-2" attributes="0"/>
-                                          <Component id="jLabel11" alignment="0" min="-2" pref="37" max="-2" attributes="0"/>
-                                          <Component id="txtma" alignment="0" min="-2" pref="153" max="-2" attributes="0"/>
-                                          <Component id="txtten" alignment="0" min="-2" pref="153" max="-2" attributes="0"/>
-                                          <Component id="jLabel12" alignment="0" min="-2" pref="54" max="-2" attributes="0"/>
-                                      </Group>
-                                  </Group>
                                   <Group type="103" groupAlignment="0" attributes="0">
-                                      <Group type="102" attributes="0">
-                                          <EmptySpace pref="195" max="32767" attributes="0"/>
-                                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                              <Component id="jLabel14" min="-2" max="-2" attributes="0"/>
-                                              <Component id="txtdienthoai" alignment="0" max="32767" attributes="0"/>
-                                              <Component id="txtdiachi" alignment="0" max="32767" attributes="0"/>
-                                              <Group type="102" alignment="1" attributes="0">
-                                                  <Component id="txttimkiem" min="-2" pref="127" max="-2" attributes="0"/>
-                                                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                                                  <Component id="btntimkiem" min="-2" pref="69" max="-2" attributes="0"/>
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <Group type="103" groupAlignment="1" attributes="0">
+                                              <Component id="btnadd" min="-2" pref="89" max="-2" attributes="0"/>
+                                              <Group type="103" groupAlignment="0" attributes="0">
+                                                  <Component id="jLabel10" alignment="0" min="-2" pref="37" max="-2" attributes="0"/>
+                                                  <Component id="txtid" alignment="0" min="-2" pref="153" max="-2" attributes="0"/>
+                                                  <Component id="jLabel11" alignment="0" min="-2" pref="37" max="-2" attributes="0"/>
+                                                  <Component id="txtma" alignment="0" min="-2" pref="153" max="-2" attributes="0"/>
+                                                  <Component id="txtten" alignment="0" min="-2" pref="153" max="-2" attributes="0"/>
+                                                  <Component id="jLabel12" alignment="0" min="-2" pref="54" max="-2" attributes="0"/>
                                               </Group>
-                                              <Component id="jLabel13" alignment="0" min="-2" pref="56" max="-2" attributes="0"/>
                                           </Group>
-                                          <EmptySpace max="32767" attributes="0"/>
+                                          <Group type="103" groupAlignment="0" attributes="0">
+                                              <Group type="102" attributes="0">
+                                                  <EmptySpace pref="194" max="32767" attributes="0"/>
+                                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                                      <Component id="jLabel14" min="-2" max="-2" attributes="0"/>
+                                                      <Component id="txtdienthoai" alignment="0" max="32767" attributes="0"/>
+                                                      <Component id="txtdiachi" alignment="0" max="32767" attributes="0"/>
+                                                      <Group type="102" alignment="1" attributes="0">
+                                                          <Component id="txttimkiem" min="-2" pref="127" max="-2" attributes="0"/>
+                                                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                                                          <Component id="btntimkiem" min="-2" pref="69" max="-2" attributes="0"/>
+                                                      </Group>
+                                                      <Component id="jLabel13" alignment="0" min="-2" pref="56" max="-2" attributes="0"/>
+                                                  </Group>
+                                                  <EmptySpace max="32767" attributes="0"/>
+                                              </Group>
+                                              <Group type="102" alignment="0" attributes="0">
+                                                  <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
+                                                  <Component id="btndelete" min="-2" pref="81" max="-2" attributes="0"/>
+                                                  <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
+                                                  <Component id="btnupdate" min="-2" pref="85" max="-2" attributes="0"/>
+                                                  <EmptySpace pref="205" max="32767" attributes="0"/>
+                                              </Group>
+                                          </Group>
                                       </Group>
                                       <Group type="102" alignment="0" attributes="0">
-                                          <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
-                                          <Component id="btndelete" min="-2" pref="81" max="-2" attributes="0"/>
-                                          <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
-                                          <Component id="btnupdate" min="-2" pref="85" max="-2" attributes="0"/>
-                                          <EmptySpace max="32767" attributes="0"/>
+                                          <Component id="jScrollPane4" min="-2" pref="524" max="-2" attributes="0"/>
+                                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                                       </Group>
                                   </Group>
-                              </Group>
-                              <Group type="102" alignment="1" attributes="0">
-                                  <EmptySpace pref="79" max="32767" attributes="0"/>
-                                  <Component id="jScrollPane4" min="-2" pref="524" max="-2" attributes="0"/>
-                                  <EmptySpace min="-2" pref="58" max="-2" attributes="0"/>
                               </Group>
                               <Group type="102" alignment="0" attributes="0">
                                   <EmptySpace min="-2" pref="226" max="-2" attributes="0"/>
@@ -1675,7 +1738,7 @@
                                   <Component id="jScrollPane4" min="-2" pref="199" max="-2" attributes="0"/>
                                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                   <Component id="pagination2" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace pref="31" max="32767" attributes="0"/>
+                                  <EmptySpace pref="35" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>
@@ -1683,6 +1746,9 @@
                       <SubComponents>
                         <Component class="javax.swing.JLabel" name="jLabel10">
                           <Properties>
+                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                              <Font name="Segoe UI" size="12" style="1"/>
+                            </Property>
                             <Property name="text" type="java.lang.String" value="Id"/>
                           </Properties>
                         </Component>
@@ -1700,6 +1766,9 @@
                         </Component>
                         <Component class="javax.swing.JLabel" name="jLabel11">
                           <Properties>
+                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                              <Font name="Segoe UI" size="12" style="1"/>
+                            </Property>
                             <Property name="text" type="java.lang.String" value="M&#xe3;"/>
                           </Properties>
                         </Component>
@@ -1717,6 +1786,9 @@
                         </Component>
                         <Component class="javax.swing.JLabel" name="jLabel12">
                           <Properties>
+                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                              <Font name="Segoe UI" size="12" style="1"/>
+                            </Property>
                             <Property name="text" type="java.lang.String" value="T&#xea;n NCC"/>
                           </Properties>
                         </Component>
@@ -1734,6 +1806,9 @@
                         </Component>
                         <Component class="javax.swing.JLabel" name="jLabel13">
                           <Properties>
+                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                              <Font name="Segoe UI" size="12" style="1"/>
+                            </Property>
                             <Property name="text" type="java.lang.String" value="&#x110;&#x1ecb;a ch&#x1ec9;"/>
                           </Properties>
                         </Component>
@@ -1751,6 +1826,9 @@
                         </Component>
                         <Component class="javax.swing.JLabel" name="jLabel14">
                           <Properties>
+                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                              <Font name="Segoe UI" size="12" style="1"/>
+                            </Property>
                             <Property name="text" type="java.lang.String" value="&#x110;i&#x1ec7;n Tho&#x1ea1;i"/>
                           </Properties>
                         </Component>
@@ -1777,7 +1855,7 @@
                             <Property name="text" type="java.lang.String" value="T&#xec;m ki&#x1ebf;m"/>
                             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                               <Border info="org.netbeans.modules.form.compat2.border.MatteColorBorderInfo">
-                                <MatteColorBorder/>
+                                <MatteColorBorder bottom="2" left="2" right="2" top="2"/>
                               </Border>
                             </Property>
                           </Properties>
@@ -1832,7 +1910,7 @@
                             <Property name="text" type="java.lang.String" value="Add"/>
                             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                               <Border info="org.netbeans.modules.form.compat2.border.MatteColorBorderInfo">
-                                <MatteColorBorder/>
+                                <MatteColorBorder bottom="2" left="2" right="2" top="2"/>
                               </Border>
                             </Property>
                           </Properties>
@@ -1851,7 +1929,7 @@
                             <Property name="text" type="java.lang.String" value="Update"/>
                             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                               <Border info="org.netbeans.modules.form.compat2.border.MatteColorBorderInfo">
-                                <MatteColorBorder/>
+                                <MatteColorBorder bottom="2" left="2" right="2" top="2"/>
                               </Border>
                             </Property>
                           </Properties>
@@ -1870,7 +1948,7 @@
                             <Property name="text" type="java.lang.String" value="Delete"/>
                             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                               <Border info="org.netbeans.modules.form.compat2.border.MatteColorBorderInfo">
-                                <MatteColorBorder/>
+                                <MatteColorBorder bottom="2" left="2" right="2" top="2"/>
                               </Border>
                             </Property>
                             <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
