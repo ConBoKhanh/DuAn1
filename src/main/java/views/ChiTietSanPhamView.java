@@ -468,14 +468,18 @@ public class ChiTietSanPhamView extends javax.swing.JFrame {
     public static void loadcbc() {
 
         List<ViewModelSanPham> a = spSV.getListSP();
+        
+        cbcSP.removeAllItems();
 
         for (ViewModelSanPham sp : a) {
-
+            
             cbcSP.addItem(sp.getTen());
 
         }
 
         List<ViewModelDongGo> b = dgSV.getListDongGo();
+        
+        cbcDongGo.removeAllItems();
 
         for (ViewModelDongGo dg : b) {
 
@@ -483,6 +487,8 @@ public class ChiTietSanPhamView extends javax.swing.JFrame {
 
         }
         List<ViewModelLoaiSanPham> c = lSpSv.getListLoaiSP();
+        
+        cbcLoaiSP.removeAllItems();
 
         for (ViewModelLoaiSanPham l : c) {
 
@@ -491,6 +497,8 @@ public class ChiTietSanPhamView extends javax.swing.JFrame {
         }
 
         List<ViewModelNhaCungCap> d = nhaCungCapService.getAll();
+        
+        cbNhaCC.removeAllItems();
 
         for (ViewModelNhaCungCap ncc : d) {
 
@@ -499,6 +507,8 @@ public class ChiTietSanPhamView extends javax.swing.JFrame {
         }
 
         List<ViewModelDonViTinh> e = dvtrp.getListDVT();
+        
+        cbcDVT.removeAllItems();
 
         for (ViewModelDonViTinh dvt : e) {
 
@@ -507,6 +517,8 @@ public class ChiTietSanPhamView extends javax.swing.JFrame {
         }
 
         List<ViewModelNguonGoc> f = ngSv.getAll();
+        
+        cbcNguonGoc.removeAllItems();
 
         for (ViewModelNguonGoc ng : f) {
 
