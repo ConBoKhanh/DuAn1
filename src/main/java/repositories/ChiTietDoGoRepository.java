@@ -28,6 +28,7 @@ public class ChiTietDoGoRepository {
     Transaction transaction = session.getTransaction();
 
     public List<ChiTietDoGo> getListTu1Den3M() {
+        
         try {
             Session session = HibernatUtil.getFACTORY().openSession();
             Query q = session.createQuery("FROM ChiTietDoGo where GiaBan >= 1000000 AND GiaBan <= 3000000 AND TrangThai = 1");
@@ -40,6 +41,7 @@ public class ChiTietDoGoRepository {
     
     
     public List<ChiTietDoGo> getListTu3Den5M() {
+        
         try {
             Session session = HibernatUtil.getFACTORY().openSession();
             Query q = session.createQuery("FROM ChiTietDoGo where GiaBan >= 3000000 AND GiaBan <= 5000000 AND TrangThai = 1");
@@ -51,6 +53,7 @@ public class ChiTietDoGoRepository {
     }
     
     public List<ChiTietDoGo> getListTu5Den10M() {
+        
         try {
             Session session = HibernatUtil.getFACTORY().openSession();
             Query q = session.createQuery("FROM ChiTietDoGo where GiaBan >= 5000000 AND GiaBan <= 10000000 AND TrangThai = 1");
@@ -62,6 +65,7 @@ public class ChiTietDoGoRepository {
     }
 
     public List<ChiTietDoGo> getListNhoHon1Trieu() {
+        
         try {
             Session session = HibernatUtil.getFACTORY().openSession();
             Query q = session.createQuery("FROM ChiTietDoGo where GiaBan < 1000000 AND TrangThai = 1");
@@ -74,6 +78,7 @@ public class ChiTietDoGoRepository {
     
     
     public List<ChiTietDoGo> getListLonHon10Trieu() {
+        
         try {
             Session session = HibernatUtil.getFACTORY().openSession();
             Query q = session.createQuery("FROM ChiTietDoGo where GiaBan > 10000000 AND TrangThai = 1");
@@ -87,6 +92,7 @@ public class ChiTietDoGoRepository {
     
 
     public List<Object[]> phanTrangCTDG(int i, int b) {
+        
         try {
             Transaction transaction = session.getTransaction();
 
@@ -114,6 +120,7 @@ public class ChiTietDoGoRepository {
     }
 
     public int getListSLRow() {
+        
         int index = -1;
         try {
             Transaction transaction = session.getTransaction();
@@ -133,6 +140,7 @@ public class ChiTietDoGoRepository {
     }
 
     public List<ChiTietDoGo> list() {
+        
         try {
             Session session = HibernatUtil.getFACTORY().openSession();
             Query q = session.createQuery("from ChiTietDoGo where TrangThai = 1");
@@ -144,6 +152,7 @@ public class ChiTietDoGoRepository {
     }
 
     public List<ChiTietDoGo> listtk(String ten) {
+        
         try {
             Session session = HibernatUtil.getFACTORY().openSession();
             Query q = session.createQuery("from ChiTietDoGo where TrangThai = 1 and TenSP like :ten");
@@ -156,6 +165,7 @@ public class ChiTietDoGoRepository {
     }
 
     public boolean add(ChiTietDoGo dg) {
+        
         try {
             Session session = HibernatUtil.getFACTORY().openSession();
 
@@ -195,6 +205,7 @@ public class ChiTietDoGoRepository {
     }
 
     public boolean update(ChiTietDoGo dg) {
+        
         try {
             Session session = HibernatUtil.getFACTORY().openSession();
 
@@ -231,6 +242,7 @@ public class ChiTietDoGoRepository {
     }
 
     public boolean delete(String id) {
+        
         try {
             Session session = HibernatUtil.getFACTORY().openSession();
 
@@ -251,6 +263,7 @@ public class ChiTietDoGoRepository {
     }
 
     public boolean truSanPham(String id, int soLuong) {
+        
         try {
             Session session = HibernatUtil.getFACTORY().openSession();
             ChiTietDoGo ct = session.get(ChiTietDoGo.class, id);
@@ -267,6 +280,7 @@ public class ChiTietDoGoRepository {
     }
 
     public boolean congSanPham(String id, int soLuong) {
+        
         try {
             Session session = HibernatUtil.getFACTORY().openSession();
             ChiTietDoGo ct = session.get(ChiTietDoGo.class, id);
@@ -284,6 +298,7 @@ public class ChiTietDoGoRepository {
     }
 
     public boolean updateSLSanPham(String id, int soLuong) {
+        
         try {
             Session session = HibernatUtil.getFACTORY().openSession();
             ChiTietDoGo ct = session.get(ChiTietDoGo.class, id);

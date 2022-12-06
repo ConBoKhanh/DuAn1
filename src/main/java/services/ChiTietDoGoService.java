@@ -22,16 +22,24 @@ public class ChiTietDoGoService implements IManageChiTietDoGoService {
 
     @Override
     public List<ChiTietDoGoViewModel> list() {
+        
         try {
+            
             List<ChiTietDoGoViewModel> list = new ArrayList<>();
+            
             List<ChiTietDoGo> sps = a.list();
+            
             for (ChiTietDoGo sp : sps) {
-                list.add(new ChiTietDoGoViewModel(sp.getId(), sp.getTenSP(), sp.getIdLoaiSP().getTenDongSP(),
+                list.add(new ChiTietDoGoViewModel(
+                        sp.getId(),
+                        sp.getTenSP(),
+                        sp.getIdLoaiSP().getTenDongSP(),
                         sp.getIdSanPham().getTen(),
                         sp.getIdDongGo().getTenLoaiGo(),
                         sp.getIdNhaCungCap().getTenNCC(),
                         sp.getIdNguocGoc().getQuocGia(), sp.getIdDonViTinh().getDonViTinh(), sp.getMoTa(),
-                        sp.getSoLuong(), sp.getGiaNhap(), sp.getGiaBan()));
+                        sp.getSoLuong(), sp.getGiaNhap(), sp.getGiaBan()
+                ));
             }
             return list;
         } catch (Exception e) {
@@ -45,12 +53,18 @@ public class ChiTietDoGoService implements IManageChiTietDoGoService {
             List<ChiTietDoGoViewModel> list = new ArrayList<>();
             List<ChiTietDoGo> sps = a.listtk(Ten);
             for (ChiTietDoGo sp : sps) {
-                list.add(new ChiTietDoGoViewModel(sp.getId(), sp.getTenSP(), sp.getIdLoaiSP().getTenDongSP(),
+                list.add(new ChiTietDoGoViewModel(
+                        sp.getId(), sp.getTenSP(),
+                        sp.getIdLoaiSP().getTenDongSP(),
                         sp.getIdSanPham().getTen(),
                         sp.getIdDongGo().getTenLoaiGo(),
                         sp.getIdNhaCungCap().getTenNCC(),
-                        sp.getIdNguocGoc().getQuocGia(), sp.getIdDonViTinh().getDonViTinh(), sp.getMoTa(),
-                        sp.getSoLuong(), sp.getGiaNhap(), sp.getGiaBan()));
+                        sp.getIdNguocGoc().getQuocGia(),
+                        sp.getIdDonViTinh().getDonViTinh(),
+                        sp.getMoTa(),
+                        sp.getSoLuong(),
+                        sp.getGiaNhap(),
+                        sp.getGiaBan()));
             }
             return list;
         } catch (Exception e) {
@@ -60,6 +74,7 @@ public class ChiTietDoGoService implements IManageChiTietDoGoService {
 
     @Override
     public boolean add(ChiTietDoGo go) {
+        
         try {
             return a.add(go);
         } catch (Exception e) {
@@ -69,6 +84,7 @@ public class ChiTietDoGoService implements IManageChiTietDoGoService {
 
     @Override
     public boolean update(ChiTietDoGo go) {
+        
         try {
             return a.update(go);
         } catch (Exception e) {
@@ -78,6 +94,7 @@ public class ChiTietDoGoService implements IManageChiTietDoGoService {
 
     @Override
     public boolean delete(String id) {
+        
         try {
             return a.delete(id);
         } catch (Exception e) {
@@ -87,6 +104,7 @@ public class ChiTietDoGoService implements IManageChiTietDoGoService {
 
     @Override
     public boolean truSanPham(String id, int soLuong) {
+        
         try {
             return a.truSanPham(id, soLuong);
         } catch (Exception e) {
@@ -96,6 +114,7 @@ public class ChiTietDoGoService implements IManageChiTietDoGoService {
 
     @Override
     public boolean congSanPham(String id, int soLuong) {
+        
         try {
             return a.congSanPham(id, soLuong);
         } catch (Exception e) {
@@ -105,6 +124,7 @@ public class ChiTietDoGoService implements IManageChiTietDoGoService {
 
     @Override
     public boolean updateSLSanPham(String id, int soLuong) {
+        
         try {
             return a.updateSLSanPham(id, soLuong);
         } catch (Exception e) {
@@ -114,6 +134,7 @@ public class ChiTietDoGoService implements IManageChiTietDoGoService {
 
     @Override
     public List<ChiTietDoGoViewModel> phanTrangCTDG(int i, int b) {
+        
         List<Object[]> list = a.phanTrangCTDG(i, b);
 
         List<ChiTietDoGoViewModel> ct = new ArrayList<>();
@@ -164,6 +185,7 @@ public class ChiTietDoGoService implements IManageChiTietDoGoService {
 
     public static void main(String[] args) {
         ChiTietDoGoService a = new ChiTietDoGoService();
+        
         System.out.println(a.getListTu1Den3M().toString());
 //        List<ChiTietDoGoViewModel> list = a.phanTrangCTDG(0, 2);
 //        for (ChiTietDoGoViewModel objects : list) {
@@ -196,6 +218,7 @@ public class ChiTietDoGoService implements IManageChiTietDoGoService {
 //    }
     @Override
     public List<ChiTietDoGoViewModel> getListNhoHon1Trieu() {
+        
         try {
             List<ChiTietDoGoViewModel> list = new ArrayList<>();
             List<ChiTietDoGo> sps = a.getListNhoHon1Trieu();
@@ -246,6 +269,7 @@ public class ChiTietDoGoService implements IManageChiTietDoGoService {
 
     @Override
     public List<ChiTietDoGoViewModel> getListTu3Den5M() {
+        
         try {
             List<ChiTietDoGoViewModel> list = new ArrayList<>();
             List<ChiTietDoGo> sps = a.getListTu3Den5M();
@@ -271,7 +295,9 @@ public class ChiTietDoGoService implements IManageChiTietDoGoService {
 
     @Override
     public List<ChiTietDoGoViewModel> getListTu5Den10M() {
+        
         try {
+            
             List<ChiTietDoGoViewModel> list = new ArrayList<>();
             List<ChiTietDoGo> sps = a.getListTu5Den10M();
             for (ChiTietDoGo sp : sps) {
@@ -296,7 +322,9 @@ public class ChiTietDoGoService implements IManageChiTietDoGoService {
 
     @Override
     public List<ChiTietDoGoViewModel> getListLonHon10Trieu() {
+        
         try {
+            
             List<ChiTietDoGoViewModel> list = new ArrayList<>();
             List<ChiTietDoGo> sps = a.getListLonHon10Trieu();
             for (ChiTietDoGo sp : sps) {

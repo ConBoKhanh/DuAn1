@@ -164,8 +164,11 @@ public class ChiTietSanPhamView extends javax.swing.JFrame {
 
     }
 
+    
     public void loadTBTu1Den3M() {
+        
         model = (DefaultTableModel) tbl.getModel();
+        
         model.setRowCount(0);
 
         List<ChiTietDoGoViewModel> list = a.getListTu1Den3M();
@@ -189,7 +192,9 @@ public class ChiTietSanPhamView extends javax.swing.JFrame {
     }
     
     public void loadTBTu3Den5M() {
+        
         model = (DefaultTableModel) tbl.getModel();
+        
         model.setRowCount(0);
 
         List<ChiTietDoGoViewModel> list = a.getListTu3Den5M();
@@ -237,7 +242,9 @@ public class ChiTietSanPhamView extends javax.swing.JFrame {
     }
     
     public void loadTBLonHon10M() {
+        
         model = (DefaultTableModel) tbl.getModel();
+        
         model.setRowCount(0);
 
         List<ChiTietDoGoViewModel> list = a.getListLonHon10Trieu();
@@ -261,7 +268,9 @@ public class ChiTietSanPhamView extends javax.swing.JFrame {
     }
 
     public void loadTBNhoHon1Trieu() {
+        
         model = (DefaultTableModel) tbl.getModel();
+        
         model.setRowCount(0);
 
         List<ChiTietDoGoViewModel> list = a.getListNhoHon1Trieu();
@@ -285,6 +294,7 @@ public class ChiTietSanPhamView extends javax.swing.JFrame {
     }
 
     public static void phanTrang(int page) {
+        
         int limit = 3;
         int count = 0;
 
@@ -322,6 +332,7 @@ public class ChiTietSanPhamView extends javax.swing.JFrame {
     }
 
     public void searchByTen(String ten, int page1) {
+        
         try {
             int limit = 3;
             int count = 0;
@@ -1538,6 +1549,7 @@ public class ChiTietSanPhamView extends javax.swing.JFrame {
         //This data needs to be written (Object[]) load vào để chuẩn bị loat lên các dòng
         int i = 1;
         Map<String, Object[]> data1 = new TreeMap<String, Object[]>();
+        
         for (ChiTietDoGoViewModel a : list) {
             data1.put(String.valueOf(i++),
                     new Object[]{a.getId(),
@@ -1614,11 +1626,17 @@ public class ChiTietSanPhamView extends javax.swing.JFrame {
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
         // TODO add your handling code here:
         txtid.setText("id");
+        
         txtTen.setText("");
+        
         txtGiaNhap.setText("");
+        
         txtGiaBan.setText("");
+        
         taMoTa.setText("");
+        
         txtSoLuong.setText("0");
+        
     }//GEN-LAST:event_jButton8ActionPerformed
 
     private void cbcSPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbcSPActionPerformed
@@ -1633,22 +1651,39 @@ public class ChiTietSanPhamView extends javax.swing.JFrame {
     private void CBBLocGiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CBBLocGiaActionPerformed
         // TODO add your handling code here:
         if (CBBLocGia.getSelectedItem().equals("All")) {
+            
             phanTrang(page1);
+            
         } else if (CBBLocGia.getSelectedItem().equals("< 1m")) {
+            
             loadTBNhoHon1Trieu();
+            
 //            System.out.println("OKE");
+
         } else if (CBBLocGia.getSelectedItem().equals("Từ 1 - 3m")) {
+            
             loadTBTu1Den3M();
+            
 //            System.out.println(" < 1 triệu");
+
         } else if (CBBLocGia.getSelectedItem().equals("Từ 3 - 5m")) {
+            
             loadTBTu3Den5M();
-            System.out.println("Từ 3 - 5m");
+            
+//            System.out.println("Từ 3 - 5m");
+            
         } else if (CBBLocGia.getSelectedItem().equals("Từ 5 - 10m")) {
+            
             loadTBTu5Den10M();
-            System.out.println("Từ 5 - 10m");
+            
+//            System.out.println("Từ 5 - 10m");
+            
         } else {
+            
             loadTBLonHon10M();
-            System.out.println("> 10m");
+            
+//            System.out.println("> 10m");
+            
         }
         
         
