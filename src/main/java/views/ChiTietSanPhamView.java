@@ -164,11 +164,83 @@ public class ChiTietSanPhamView extends javax.swing.JFrame {
 
     }
 
-    public void loadTBLonHon1Trieu() {
+    public void loadTBTu1Den3M() {
         model = (DefaultTableModel) tbl.getModel();
         model.setRowCount(0);
 
-        List<ChiTietDoGoViewModel> list = a.getListLonHon1Trieu();
+        List<ChiTietDoGoViewModel> list = a.getListTu1Den3M();
+        for (ChiTietDoGoViewModel n : list) {
+            model.addRow(new Object[]{
+                model.getRowCount() + 1,
+                n.getId(),
+                n.getTensp(),
+                n.getSp(),
+                n.getLoad(),
+                n.getDonggo(),
+                n.getNcc(),
+                n.getNguongoc(),
+                n.getDonvi(),
+                n.getMota(),
+                n.getSoluong(),
+                String.valueOf(n.getGiaNhap().intValue()),
+                String.valueOf(n.getGiaBan().intValue())
+            });
+        }
+    }
+    
+    public void loadTBTu3Den5M() {
+        model = (DefaultTableModel) tbl.getModel();
+        model.setRowCount(0);
+
+        List<ChiTietDoGoViewModel> list = a.getListTu3Den5M();
+        for (ChiTietDoGoViewModel n : list) {
+            model.addRow(new Object[]{
+                model.getRowCount() + 1,
+                n.getId(),
+                n.getTensp(),
+                n.getSp(),
+                n.getLoad(),
+                n.getDonggo(),
+                n.getNcc(),
+                n.getNguongoc(),
+                n.getDonvi(),
+                n.getMota(),
+                n.getSoluong(),
+                String.valueOf(n.getGiaNhap().intValue()),
+                String.valueOf(n.getGiaBan().intValue())
+            });
+        }
+    }
+    
+    public void loadTBTu5Den10M() {
+        model = (DefaultTableModel) tbl.getModel();
+        model.setRowCount(0);
+
+        List<ChiTietDoGoViewModel> list = a.getListTu5Den10M();
+        for (ChiTietDoGoViewModel n : list) {
+            model.addRow(new Object[]{
+                model.getRowCount() + 1,
+                n.getId(),
+                n.getTensp(),
+                n.getSp(),
+                n.getLoad(),
+                n.getDonggo(),
+                n.getNcc(),
+                n.getNguongoc(),
+                n.getDonvi(),
+                n.getMota(),
+                n.getSoluong(),
+                String.valueOf(n.getGiaNhap().intValue()),
+                String.valueOf(n.getGiaBan().intValue())
+            });
+        }
+    }
+    
+    public void loadTBLonHon10M() {
+        model = (DefaultTableModel) tbl.getModel();
+        model.setRowCount(0);
+
+        List<ChiTietDoGoViewModel> list = a.getListLonHon10Trieu();
         for (ChiTietDoGoViewModel n : list) {
             model.addRow(new Object[]{
                 model.getRowCount() + 1,
@@ -639,7 +711,7 @@ public class ChiTietSanPhamView extends javax.swing.JFrame {
 
         CBBLocGia.setBackground(new java.awt.Color(255, 204, 255));
         CBBLocGia.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        CBBLocGia.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "All", "Lớn Hơn 1 Triệu", "Nhỏ Hơn 1 Triệu" }));
+        CBBLocGia.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "All", "< 1m", "Từ 1 - 3m", "Từ 3 - 5m", "Từ 5 - 10m", "> 10m" }));
         CBBLocGia.setBorder(javax.swing.BorderFactory.createMatteBorder(2, 2, 2, 2, new java.awt.Color(0, 0, 0)));
         CBBLocGia.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -956,8 +1028,8 @@ public class ChiTietSanPhamView extends javax.swing.JFrame {
                                 .addGap(29, 29, 29)
                                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(187, 187, 187)
-                                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(177, 177, 177)
+                                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 541, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(73, 73, 73)
                                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(12, 12, 12)
@@ -1562,13 +1634,30 @@ public class ChiTietSanPhamView extends javax.swing.JFrame {
         // TODO add your handling code here:
         if (CBBLocGia.getSelectedItem().equals("All")) {
             phanTrang(page1);
-        } else if (CBBLocGia.getSelectedItem().equals("Lớn Hơn 1 Triệu")) {
-            loadTBLonHon1Trieu();
-            System.out.println("OKE");
-        } else if (CBBLocGia.getSelectedItem().equals("Nhỏ Hơn 1 Triệu")) {
+        } else if (CBBLocGia.getSelectedItem().equals("< 1m")) {
             loadTBNhoHon1Trieu();
-            System.out.println(" < 1 triệu");
+//            System.out.println("OKE");
+        } else if (CBBLocGia.getSelectedItem().equals("Từ 1 - 3m")) {
+            loadTBTu1Den3M();
+//            System.out.println(" < 1 triệu");
+        } else if (CBBLocGia.getSelectedItem().equals("Từ 3 - 5m")) {
+            loadTBTu3Den5M();
+            System.out.println("Từ 3 - 5m");
+        } else if (CBBLocGia.getSelectedItem().equals("Từ 5 - 10m")) {
+            loadTBTu5Den10M();
+            System.out.println("Từ 5 - 10m");
+        } else {
+            loadTBLonHon10M();
+            System.out.println("> 10m");
         }
+        
+        
+//             All
+//            < 1m
+//            Từ 1 - 3m
+//            Từ 3 - 5m
+//            Từ 5 - 10m
+//            > 10m
     }//GEN-LAST:event_CBBLocGiaActionPerformed
 
     private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton12ActionPerformed

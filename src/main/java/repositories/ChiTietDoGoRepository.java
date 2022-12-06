@@ -27,10 +27,33 @@ public class ChiTietDoGoRepository {
     Session session = HibernatUtil.getFACTORY().openSession();
     Transaction transaction = session.getTransaction();
 
-    public List<ChiTietDoGo> getListLonHon1Trieu() {
+    public List<ChiTietDoGo> getListTu1Den3M() {
         try {
             Session session = HibernatUtil.getFACTORY().openSession();
-            Query q = session.createQuery("FROM ChiTietDoGo where GiaBan > 1000000 AND TrangThai = 1");
+            Query q = session.createQuery("FROM ChiTietDoGo where GiaBan >= 1000000 AND GiaBan <= 3000000 AND TrangThai = 1");
+            List<ChiTietDoGo> list = q.getResultList();
+            return list;
+        } catch (Exception e) {
+            return null;
+        }
+    }
+    
+    
+    public List<ChiTietDoGo> getListTu3Den5M() {
+        try {
+            Session session = HibernatUtil.getFACTORY().openSession();
+            Query q = session.createQuery("FROM ChiTietDoGo where GiaBan >= 3000000 AND GiaBan <= 5000000 AND TrangThai = 1");
+            List<ChiTietDoGo> list = q.getResultList();
+            return list;
+        } catch (Exception e) {
+            return null;
+        }
+    }
+    
+    public List<ChiTietDoGo> getListTu5Den10M() {
+        try {
+            Session session = HibernatUtil.getFACTORY().openSession();
+            Query q = session.createQuery("FROM ChiTietDoGo where GiaBan >= 5000000 AND GiaBan <= 10000000 AND TrangThai = 1");
             List<ChiTietDoGo> list = q.getResultList();
             return list;
         } catch (Exception e) {
@@ -48,6 +71,20 @@ public class ChiTietDoGoRepository {
             return null;
         }
     }
+    
+    
+    public List<ChiTietDoGo> getListLonHon10Trieu() {
+        try {
+            Session session = HibernatUtil.getFACTORY().openSession();
+            Query q = session.createQuery("FROM ChiTietDoGo where GiaBan > 10000000 AND TrangThai = 1");
+            List<ChiTietDoGo> list = q.getResultList();
+            return list;
+        } catch (Exception e) {
+            return null;
+        }
+    }
+    
+    
 
     public List<Object[]> phanTrangCTDG(int i, int b) {
         try {

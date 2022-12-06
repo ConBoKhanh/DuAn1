@@ -52,9 +52,9 @@
                                   <Component id="jPanel2" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <Group type="102" alignment="0" attributes="0">
-                                  <EmptySpace min="187" pref="187" max="-2" attributes="0"/>
-                                  <Component id="jPanel3" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace min="73" pref="73" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="177" max="-2" attributes="0"/>
+                                  <Component id="jPanel3" min="-2" pref="541" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="73" max="-2" attributes="0"/>
                                   <Component id="jButton1" min="-2" pref="150" max="-2" attributes="0"/>
                               </Group>
                           </Group>
@@ -525,10 +525,13 @@
                   <Font name="Segoe UI" size="12" style="1"/>
                 </Property>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                  <StringArray count="3">
+                  <StringArray count="6">
                     <StringItem index="0" value="All"/>
-                    <StringItem index="1" value="L&#x1edb;n H&#x1a1;n 1 Tri&#x1ec7;u"/>
-                    <StringItem index="2" value="Nh&#x1ecf; H&#x1a1;n 1 Tri&#x1ec7;u"/>
+                    <StringItem index="1" value="&lt; 1m"/>
+                    <StringItem index="2" value="T&#x1b0;&#x300; 1 - 3m"/>
+                    <StringItem index="3" value="T&#x1b0;&#x300; 3 - 5m"/>
+                    <StringItem index="4" value="T&#x1b0;&#x300; 5 - 10m"/>
+                    <StringItem index="5" value="&gt; 10m"/>
                   </StringArray>
                 </Property>
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">

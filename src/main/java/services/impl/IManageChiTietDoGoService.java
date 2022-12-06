@@ -13,13 +13,19 @@ import viewModel.ChiTietDoGoViewModel;
  * @author Admin
  */
 public interface IManageChiTietDoGoService {
-    
-    List<ChiTietDoGoViewModel> getListLonHon1Trieu();
-    
+
     List<ChiTietDoGoViewModel> getListNhoHon1Trieu();
+
+    List<ChiTietDoGoViewModel> getListTu1Den3M();
     
+    List<ChiTietDoGoViewModel> getListTu3Den5M();
+    
+    List<ChiTietDoGoViewModel> getListTu5Den10M();
+    
+    List<ChiTietDoGoViewModel> getListLonHon10Trieu();
+
     List<ChiTietDoGoViewModel> phanTrangCTDG(int i, int b);
-    
+
     int row();
 
     List<ChiTietDoGoViewModel> list();
