@@ -140,7 +140,7 @@
                                           </Group>
                                       </Group>
                                       <Group type="102" alignment="0" attributes="0">
-                                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                          <Group type="103" groupAlignment="0" attributes="0">
                                               <Group type="102" alignment="0" attributes="0">
                                                   <Group type="103" groupAlignment="0" attributes="0">
                                                       <Component id="jLabel8" min="-2" pref="70" max="-2" attributes="0"/>
@@ -170,14 +170,14 @@
                                                   <Component id="jLabel15" min="-2" pref="70" max="-2" attributes="0"/>
                                                   <EmptySpace min="140" pref="140" max="-2" attributes="0"/>
                                                   <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-                                                  <EmptySpace max="32767" attributes="0"/>
+                                                  <EmptySpace min="-2" max="-2" attributes="0"/>
                                                   <Component id="icon2" min="-2" pref="43" max="-2" attributes="0"/>
                                                   <EmptySpace max="-2" attributes="0"/>
                                                   <Component id="icon1" min="-2" pref="43" max="-2" attributes="0"/>
                                               </Group>
                                               <Group type="102" alignment="0" attributes="0">
                                                   <Component id="txtemailNhanVien" min="-2" pref="140" max="-2" attributes="0"/>
-                                                  <EmptySpace min="-2" pref="57" max="-2" attributes="0"/>
+                                                  <EmptySpace min="-2" pref="45" max="-2" attributes="0"/>
                                                   <Component id="txtmatKhau" max="32767" attributes="0"/>
                                               </Group>
                                               <Component id="jLabel20" alignment="1" min="-2" pref="43" max="-2" attributes="0"/>
@@ -341,10 +341,7 @@
                                           <EmptySpace pref="19" max="32767" attributes="0"/>
                                       </Group>
                                   </Group>
-                                  <Group type="103" groupAlignment="3" attributes="0">
-                                      <Component id="txtemailNhanVien" alignment="3" min="-2" pref="29" max="-2" attributes="0"/>
-                                      <Component id="txtmatKhau" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  </Group>
+                                  <Component id="txtemailNhanVien" min="-2" pref="29" max="-2" attributes="0"/>
                                   <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
                               </Group>
                               <Group type="102" alignment="0" attributes="0">
@@ -359,6 +356,7 @@
                                           <Group type="103" groupAlignment="3" attributes="0">
                                               <Component id="btnXoa" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
                                               <Component id="jButton1" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                                              <Component id="txtmatKhau" alignment="3" min="-2" max="-2" attributes="0"/>
                                           </Group>
                                       </Group>
                                   </Group>
@@ -807,6 +805,16 @@
                   </Events>
                 </Component>
                 <Component class="javax.swing.JPasswordField" name="txtmatKhau">
+                  <Properties>
+                    <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="cc" green="cc" red="ff" type="rgb"/>
+                    </Property>
+                    <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                      <Border info="org.netbeans.modules.form.compat2.border.MatteColorBorderInfo">
+                        <MatteColorBorder bottom="3" left="0" right="0" top="0"/>
+                      </Border>
+                    </Property>
+                  </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabel19">
                   <Properties>
