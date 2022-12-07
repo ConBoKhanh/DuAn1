@@ -331,6 +331,25 @@ public class NhanVienRepository1 {
             return null;
         }
     }
+    
+    
+       public List<NhanVien> listtkSDT(String sdt) {
+
+        try {
+            Session session = HibernatUtil.getFACTORY().openSession();
+            Query q = session.createQuery("from NhanVien where TrangThai = 2 and Sdt like :ten");
+            q.setParameter("ten", "%" + sdt + "%");
+            List<NhanVien> list = q.getResultList();
+            return list;
+
+        } catch (Exception e) {
+            return null;
+        }
+    }
+    
+    
+    
+    
 
     public List<NhanVien> listtkChucVu(String idCV) {
 

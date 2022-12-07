@@ -31,11 +31,13 @@ public interface IManageNhanVienService1 {
 
     List<ViewModelNhanVien1> listtk(String Ten);
 
+    List<ViewModelNhanVien1> listtkSDT(String sdt);
+
     List<ViewModelNhanVien1> listtkChucVu(String idCV);
 
     List<ViewModelNhanVien1> listtkCuaHang(String idCH);
-    
-      List<ViewModelNhanVien1> getAll(int a, int b);
+
+    List<ViewModelNhanVien1> getAll(int a, int b);
 
     int getRow(int b, int c);
 

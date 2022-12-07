@@ -319,6 +319,40 @@ public class NhanVienService1 implements IManageNhanVienService1 {
             return 0;
         }
     }
+
+    @Override
+    public List<ViewModelNhanVien1> listtkSDT(String sdt) {
+        
+         try {
+            List<ViewModelNhanVien1> list = new ArrayList<>();
+            List<NhanVien> sps = nhanVien1.listtkSDT(sdt);
+            for (NhanVien sp : sps) {
+                list.add(new ViewModelNhanVien1(sp.getId(),
+                        sp.getMa(),
+                        
+                        sp.getHoTen(),
+                        
+                        sp.getSdt(),
+                        
+                        sp.getDiaChi(),
+                        
+                        sp.getNgaySinh() + "",
+                        
+                        sp.getIdCuaHang().getTenCuaHang(),
+                        
+                        sp.getIdChucVu().getTenChucVu(),
+                        
+                        sp.getMatKhau(),
+                        
+                        sp.getEmail(),
+                        
+                        sp.getTrangThai()));
+            }
+            return list;
+        } catch (Exception e) {
+            return null;
+        }
+    }
     
 
  
