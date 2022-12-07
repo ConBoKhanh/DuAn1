@@ -24,5 +24,9 @@ public interface IManageHoaDonService {
 
     boolean delete(String id);
     
+    int soLuong();
+    
      List<ViewModelHoadon> getListHD();
+     
+     List<ViewModelHoadon> timKiemMa(String ma);
 }

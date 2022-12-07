@@ -17,7 +17,7 @@ import viewModel.ViewModelHoadon;
  */
 public class HoadonService implements IManageHoaDonService {
 
-    private HoadonRepository hdrp = new HoadonRepository();
+     HoadonRepository hdrp = new HoadonRepository();
 
     @Override
     public List<ViewModelHoadon> getListHoaDon(int i, int b) {
@@ -164,6 +164,64 @@ public class HoadonService implements IManageHoaDonService {
                 list.add(x);
             }
             return list;
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+    @Override
+    public int soLuong() {
+        try {
+            return hdrp.getSoLuongHd();
+        } catch (Exception e) {
+            return -1;
+        }
+    }
+
+    public static void main(String[] args) {
+        HoadonService i = new HoadonService();
+        System.out.println(i.soLuong());
+    }
+
+    @Override
+    public List<ViewModelHoadon> timKiemMa(String ma) {
+          List<HoaDon> lhd = hdrp.listtk(ma);
+        try {
+            List<ViewModelHoadon> hoadon = new ArrayList<>();
+            for (HoaDon x : lhd) {
+                ViewModelHoadon l = new ViewModelHoadon();
+                l.setId(x.getId());
+                l.setMa(x.getMa());
+                l.setNgayTao(x.getNgayTao() + "");
+                if (x.getNgayThanhToan() == null) {
+                    l.setNgayThanhToan("Chưa Thanh Toán");
+                } else {
+                    l.setNgayThanhToan(x.getNgayThanhToan() + "");
+                }
+
+                if (x.getIdKhuyenMai() == null) {
+                    l.setPhamtramKM("Không chọn");
+                } else {
+                    l.setPhamtramKM(x.getIdKhuyenMai().getPhanTramKM() + "");
+                }
+                if (x.getIdKhachHang() == null) {
+                    l.setTenKH("Không chọn");
+                } else {
+                    l.setTenKH(x.getIdKhachHang().getTenKhachHang());
+                }
+
+                l.setTenNV(x.getIdNhanVien().getHoTen());
+                if (x.getTrangThai() == 1) {
+                    l.setTrangThaiHoaDon("Chưa Thanh Toán");
+                } else if (x.getTrangThai() == 2) {
+                    l.setTrangThaiHoaDon("Đã Thanh Toán");
+                } else {
+                    l.setTrangThaiHoaDon("Hóa Đơn Bảo Hành");
+                }
+
+                hoadon.add(l);
+            }
+            return hoadon;
         } catch (Exception e) {
             return null;
         }

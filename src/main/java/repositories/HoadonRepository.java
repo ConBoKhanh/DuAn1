@@ -148,18 +148,53 @@ public class HoadonRepository {
             return null;
         }
     }
-    
-    
-    
-     public List<HoaDon> getListHD() {
-        
-        
+
+    public List<HoaDon> getListHD() {
+
         try {
             Session session = HibernatUtil.getFACTORY().openSession();
             Query q = session.createQuery("FROM HoaDon where TrangThai >= 1 order by Convert(int,Ma) desc");
             List<HoaDon> list = q.getResultList();
             return list;
-            
+
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+    public int getSoLuongHd() {
+
+//        try {
+        int a = 0;
+
+        Session session = HibernatUtil.getFACTORY().openSession();
+
+        Transaction transaction = session.getTransaction();
+
+        Query q = session.createNativeQuery("select COUNT(A.Ma),A.Ma FROM HoaDon A where A.TrangThai >= 1 Group by A.Ma");
+
+        List<Object[]> list = q.getResultList();
+
+        a = list.size();
+
+        return a;
+
+//        } catch (Exception e) {
+//
+//            return 0;
+//
+//        }
+    }
+
+    public List<HoaDon> listtk(String ma) {
+
+        try {
+            Session session = HibernatUtil.getFACTORY().openSession();
+            Query q = session.createQuery("from HoaDon where TrangThai >= 1 and Ma like :ma");
+            q.setParameter("ma", "%" + ma + "%");
+            List<HoaDon> list = q.getResultList();
+            return list;
+
         } catch (Exception e) {
             return null;
         }
@@ -174,14 +209,7 @@ public class HoadonRepository {
 //        for (HoaDon hoaDon : list) {
 //            System.out.println(hoaDon.toString());
 //        }
-     //   List<Object[]> list = hd.getList(2, 5);
-        
-         for (Object[] arg : hd.getList(0, 5)) {
-             System.out.println(arg.toString());
-        }
-
-        System.out.println(hd.getListHD());
-        
-
+        //   List<Object[]> list = hd.getList(2, 5);
+        System.out.println(hd.getListSL());
     }
 }
