@@ -37,7 +37,7 @@ public class CuaHangService implements IManageCuaHangService {
                 
                 v.setDiaChi(x.getDiaChi());
                 
-                v.setTrangThai(String.valueOf(x.getTrangThai()));
+                v.setTrangThai(x.getTrangThai());
                 
                 sanPhams.add(v);
             }
@@ -68,7 +68,7 @@ public class CuaHangService implements IManageCuaHangService {
                 
                 v.setDiaChi(x.getDiaChi());
                 
-                v.setTrangThai(String.valueOf(x.getTrangThai()));
+                v.setTrangThai(x.getTrangThai());
                 
                 sanPhams.add(v);
             }
@@ -83,8 +83,11 @@ public class CuaHangService implements IManageCuaHangService {
     public boolean add(CuaHang c) {
         
         try {
+            
             return ch.add(c);
+            
         } catch (Exception e) {
+            
             return false;
         }
     }
@@ -127,6 +130,8 @@ public class CuaHangService implements IManageCuaHangService {
             x.setTenCuaHang(a[2].toString());
             
             x.setDiaChi(a[3].toString());
+            
+            x.setTrangThai(1);
           
             ncc.add(x);
 
@@ -141,6 +146,47 @@ public class CuaHangService implements IManageCuaHangService {
             return ch.getListSLRow();
         } catch (Exception e) {
             return 0;
+        }
+    }
+
+    @Override
+    public List<ViewModelCuaHang> cuaHangNgungHoatDong() {
+        
+          List<CuaHang> sp = ch.cuaHangNgungHoatDong();
+        try {
+            List<ViewModelCuaHang> sanPhams = new ArrayList<>();
+            for (CuaHang x : sp) {
+                
+                ViewModelCuaHang v = new ViewModelCuaHang();
+                
+                v.setId(x.getId());
+                
+                v.setMa(x.getMa());
+                
+                v.setTenCuaHang(x.getTenCuaHang());
+                
+                v.setDiaChi(x.getDiaChi());
+                
+                v.setTrangThai(x.getTrangThai());
+                
+                sanPhams.add(v);
+            }
+            return sanPhams;
+
+        } catch (Exception e) {
+            return null;
+        }
+              
+    }
+
+    @Override
+    public boolean troLai(String id) {
+        
+          try {
+            ch.troLai(id);
+            return true;
+        } catch (Exception e) {
+            return false;
         }
     }
 

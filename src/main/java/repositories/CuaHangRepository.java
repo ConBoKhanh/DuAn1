@@ -25,12 +25,14 @@ public class CuaHangRepository {
         
         
         try {
+            
+            
             Transaction transaction = session.getTransaction();
 
             Session session = HibernatUtil.getFACTORY().openSession();
             org.hibernate.query.Query q = session.createNativeQuery(""
                     + "SELECT * FROM CuaHang WHERE TrangThai = 1 \n"
-                    + "  ORDER BY Ma asc \n"
+                    + "  ORDER BY Ma desc \n"
                     + "  OFFSET " + i + " ROWS \n"
                     + "  FETCH NEXT " + b + " ROWS ONLY");
 
@@ -49,13 +51,15 @@ public class CuaHangRepository {
         
         int index = -1;
         try {
+            
+            
             Transaction transaction = session.getTransaction();
 
             Session session = HibernatUtil.getFACTORY().openSession();
             org.hibernate.query.Query q = session.createNativeQuery(""
                     + "SELECT * FROM CuaHang"
                     + "  WHERE TrangThai = 1\n"
-                    + "  ORDER BY Ma asc ");
+                    + "  ORDER BY Ma desc ");
 
             List<Object[]> list = q.getResultList();
             index = list.size();
@@ -82,6 +86,29 @@ public class CuaHangRepository {
             return null;
         }
     }
+    
+    
+    
+     public List<CuaHang> cuaHangNgungHoatDong() {
+        
+        
+        try {
+            
+            
+            Session se = HibernatUtil.getFACTORY().openSession();
+            Query q = se.createQuery("FROM CuaHang WHERE TrangThai = 2");
+            List<CuaHang> list = q.getResultList();
+            return list;
+            
+            
+        } catch (Exception e) {
+            return null;
+        }
+    }
+    
+    
+    
+    
 
     public List<CuaHang> getListSPByName(String ten) {
         
@@ -103,9 +130,13 @@ public class CuaHangRepository {
         
         
         Session session = HibernatUtil.getFACTORY().openSession();
+        
         String soMaLonNhat = null;
+        
         Query q = session.createQuery(" select A.Ma From CuaHang A Where TrangThai = 1 ");
+        
         List<String> i = q.getResultList(); //Lay list String 
+        
         if (i.isEmpty()) {
             return 0;
         } else {
@@ -135,9 +166,13 @@ public class CuaHangRepository {
             Session session = HibernatUtil.getFACTORY().openSession();
 
             CuaHang sp = new CuaHang();
+            
             sp.setMa(getMa);
+            
             sp.setTenCuaHang(c.getTenCuaHang());
+            
             sp.setDiaChi(c.getDiaChi());
+            
             sp.setTrangThai(1);
 
             session.getTransaction().begin();
@@ -157,10 +192,14 @@ public class CuaHangRepository {
         String getMa = String.valueOf(getMaxMa() + 1);
         try {
             Session session = HibernatUtil.getFACTORY().openSession();
+            
             CuaHang sp = session.get(CuaHang.class, c.getId());
+            
             sp.setTenCuaHang(c.getTenCuaHang());
+            
             sp.setDiaChi(c.getDiaChi());
-            sp.setTrangThai(1);
+            
+            sp.setTrangThai(c.getTrangThai());
 
             session.getTransaction().begin();
             session.save(sp);
@@ -178,7 +217,9 @@ public class CuaHangRepository {
         
         try {
             Session se = HibernatUtil.getFACTORY().openSession();
+            
             CuaHang sp = se.get(CuaHang.class, c.getId());
+            
             sp.setTrangThai(0);
 
             se.getTransaction().begin();
@@ -187,6 +228,31 @@ public class CuaHangRepository {
             se.close();
             return true;
 
+        } catch (Exception e) {
+            return false;
+        }
+    }
+    
+    
+    public boolean troLai(String id) {
+        
+        
+        String getMa = String.valueOf(getMaxMa() + 1);
+        try {
+            Session session = HibernatUtil.getFACTORY().openSession();
+            
+            CuaHang sp = session.get(CuaHang.class,id);
+            
+            sp.setMa(getMa);
+          
+            sp.setTrangThai(1);
+
+            session.getTransaction().begin();
+            session.save(sp);
+            session.getTransaction().commit();
+            session.close();
+            return true;
+            
         } catch (Exception e) {
             return false;
         }

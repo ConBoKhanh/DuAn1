@@ -15,6 +15,8 @@ import viewModel.ViewModelCuaHang;
 public interface IManageCuaHangService {
 
     List<ViewModelCuaHang> getAll();
+    
+    List<ViewModelCuaHang> cuaHangNgungHoatDong();
 
     List<ViewModelCuaHang> getListSPByName(String ten);
 
@@ -27,4 +29,6 @@ public interface IManageCuaHangService {
     List<ViewModelCuaHang> getListSP(int i, int b);
 
     int row();
+    
+    boolean troLai(String id);
 }
