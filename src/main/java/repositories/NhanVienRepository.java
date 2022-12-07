@@ -246,7 +246,85 @@ public class NhanVienRepository {
             return false;
         }
     }
+    
+    
+    
+//      public boolean update(NhanVien nv) {
+//        
+//        
+//        try {
+//            Session session = HibernatUtil.getFACTORY().openSession();
+//
+//            NhanVien v = session.get(NhanVien.class, nv.getId());
+//
+//            CuaHang a = session.get(CuaHang.class, nv.getIdCuaHang().getId());
+//            ChucVu b = session.get(ChucVu.class, nv.getIdChucVu().getId());
+//
+//            v.setIdCuaHang(a);
+//            
+//            v.setIdChucVu(b);
+//            
+//            v.setHoTen(nv.getHoTen());
+//            
+//            v.setSdt(nv.getSdt());
+//            
+//            v.setDiaChi(nv.getDiaChi());
+//            
+//            v.setNgaySinh(nv.getNgaySinh());
+//            
+//            v.setMatKhau(nv.getMatKhau());
+//            
+//            v.setEmail(nv.getEmail());
+//            
+//            v.setTrangThai(1);
+//
+//            session.getTransaction().begin();
+//            session.save(v);
+//            session.getTransaction().commit();
+//            session.close();
+//
+//            return true;
+//            
+//        } catch (Exception e) {
+//            return false;
+//        }
+//
+//    }
+//    
+//    
+//    
+//    
+//    
+//    
+    
+    
+    
+//      public List<Object[]> getAll(int b, int c) {
+//        
+//
+//        try {
+//            Session session = HibernatUtil.getFACTORY().openSession();
+//            Query q = session.createNativeQuery("Select A.Id, A.Ma, A.HoTen, A.Sdt, A.DiaChi, A.NgaySinh , A.Email,"
+//                    + " A.MatKhau,C.TenChucVu, B.TenCuaHang  from NhanVien A  left JOIN CuaHang B "
+//                    + "on A.IdCuaHang = B.Id "
+//                    + " left join ChucVu C On A.IdChucVu = C.Id where A.TrangThai >= 1 "
+//                    + "order by Convert(int,A.Ma) asc "
+//                    + "OFFSET " + b + " ROWS "
+//                    + "FETCH NEXT " + c + " ROWS ONLY");
+//
+//            List<Object[]> list = q.getResultList();
+//            return list;
+//            
+//        } catch (HibernateException hibernateException) {
+//            return null;
+//        }
+//
+//    }
+//    
+    
+    
 
+    
 //    public static void main(String[] args) {
 //        NhanVienRepository nhanVienRepository = new NhanVienRepository();
 //        NhanVien nv = new NhanVien();

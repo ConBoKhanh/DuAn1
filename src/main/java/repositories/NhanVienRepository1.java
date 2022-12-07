@@ -86,7 +86,57 @@ public class NhanVienRepository1 {
         }
     }
 
-    public boolean add(NhanVien nv) {
+//    public boolean add(NhanVien nv) {
+//
+//        String ma = String.valueOf(getMaMax() + 1);
+//
+//        try {
+//            Session session = HibernatUtil.getFACTORY().openSession();
+//
+//            NhanVien v = new NhanVien();
+//
+//            CuaHang a = session.get(CuaHang.class, nv.getIdCuaHang().getId());
+//            ChucVu b = session.get(ChucVu.class, nv.getIdChucVu().getId());
+//
+//            v.setMa(ma);
+//
+//            v.setIdCuaHang(a);
+//
+//            v.setIdChucVu(b);
+//
+//            v.setHoTen(nv.getHoTen());
+//
+//            v.setSdt(nv.getSdt());
+//
+//            v.setDiaChi(nv.getDiaChi());
+//
+//            v.setNgaySinh(nv.getNgaySinh());
+//
+//            v.setMatKhau(nv.getMatKhau());
+//
+//            v.setEmail(nv.getEmail());
+//
+//            v.setTrangThai(1);
+//
+//            session.getTransaction().begin();
+//
+//            session.save(v);
+//
+//            session.getTransaction().commit();
+//
+//            session.close();
+//
+//            return true;
+//        } catch (Exception e) {
+//            return false;
+//        }
+//
+//    }
+//    
+    
+    
+    
+       public boolean add(NhanVien nv) {
 
         String ma = String.valueOf(getMaMax() + 1);
 
@@ -132,8 +182,57 @@ public class NhanVienRepository1 {
         }
 
     }
+    
+    
+    
+    
 
-    public boolean update(NhanVien nv) {
+//    public boolean update(NhanVien nv) {
+//
+//        try {
+//            Session session = HibernatUtil.getFACTORY().openSession();
+//
+//            NhanVien v = session.get(NhanVien.class, nv.getId());
+//
+//            CuaHang a = session.get(CuaHang.class, nv.getIdCuaHang().getId());
+//            ChucVu b = session.get(ChucVu.class, nv.getIdChucVu().getId());
+//
+//            v.setIdCuaHang(a);
+//
+//            v.setIdChucVu(b);
+//
+//            v.setHoTen(nv.getHoTen());
+//
+//            v.setSdt(nv.getSdt());
+//
+//            v.setDiaChi(nv.getDiaChi());
+//
+//            v.setNgaySinh(nv.getNgaySinh());
+//
+//            v.setMatKhau(nv.getMatKhau());
+//
+//            v.setEmail(nv.getEmail());
+//
+//            v.setTrangThai(nv.getTrangThai());
+//
+//            session.getTransaction().begin();
+//            session.save(v);
+//            session.getTransaction().commit();
+//            session.close();
+//
+//            return true;
+//
+//        } catch (Exception e) {
+//            return false;
+//        }
+//
+//    }
+//    
+    
+    
+    
+    
+       public boolean update(NhanVien nv) {
 
         try {
             Session session = HibernatUtil.getFACTORY().openSession();
@@ -173,6 +272,10 @@ public class NhanVienRepository1 {
         }
 
     }
+    
+    
+    
+    
 
     public boolean delete(String id) {
 

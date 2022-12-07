@@ -297,6 +297,74 @@ public class NhanVienFView extends javax.swing.JFrame {
         } catch (Exception e) {
         }
     }
+    
+    
+    
+//      public void loadTableDangLam(int page) {
+//        try {
+//            int limit = 5;
+//            int count = 0;
+//            List<ViewModelNhanVien1> nv = nhanVienService1.getAll((page - 1) * limit, limit);
+//            if (nv == null) {
+//
+//                System.out.println("1");
+//                return;
+//            }
+//            count = nhanVienService1.getRow((page - 1) * limit, limit);
+//
+//            model = (DefaultTableModel) TBBANG.getModel();
+//
+//            model.setColumnCount(0);
+//
+//            model.addColumn("Id");
+//
+//            model.addColumn("Mã");
+//
+//            model.addColumn("Họ tên");
+//
+//            model.addColumn("SĐT");
+//
+//            model.addColumn("Địa chỉ");
+//
+//            model.addColumn("Ngày sinh");
+//
+//            model.addColumn("Cửa hàng");
+//
+//            model.addColumn("Chức vụ");
+//
+//            model.addColumn("Mật khẩu");
+//
+//            model.addColumn("Email");
+//
+//            model.addColumn("Trạng thái");
+//
+//            model.setRowCount(0);
+//
+//            for (ViewModelNhanVien1 viewModelNhanVien : nv) {
+//                model.addRow(new Object[]{
+//                    viewModelNhanVien.getId(), viewModelNhanVien.getMa(), viewModelNhanVien.getHoTen(),
+//                    viewModelNhanVien.getSdt(), viewModelNhanVien.getDiaChi(), viewModelNhanVien.getNgaySinh(),
+//                    viewModelNhanVien.getIdCH(), viewModelNhanVien.getIdCV(), viewModelNhanVien.getMatKhau(), viewModelNhanVien.getEmail(),
+//                    viewModelNhanVien.getTrangThai() == 1 ? "Đang làm" : "Nghỉ làm"
+//                });
+//
+//            }
+//            int totalPage = (int) Math.ceil(count / limit);
+//            if (count / limit == 0) {
+//                pagination1.setPagegination(page, totalPage);
+//            } else {
+//
+//                pagination1.setPagegination(page, totalPage + 1);
+//
+//            }
+//        } catch (Exception e) {
+//        }
+//    }
+//    
+//    
+    
+    
+    
 
     public void loadTableNghiLam() {
         model = (DefaultTableModel) tbbangnghiviec.getModel();
@@ -2484,9 +2552,14 @@ public class NhanVienFView extends javax.swing.JFrame {
             boolean b = cuaHangService.update(ch);
 
             if (b == true) {
+                
+                
                 Icon icon = new javax.swing.ImageIcon(getClass().getResource("/img/themmoiicon.png"));
+                
                 JOptionPane.showMessageDialog(this, "Sửa sp thành công", "Sản Phẩm", JOptionPane.INFORMATION_MESSAGE, icon);
+                
                 loadTbCuaHangPhanTrang(1);
+                
                 loadTBCuaHangNgungHoatDong();
 
             } else {
