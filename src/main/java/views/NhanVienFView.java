@@ -142,25 +142,25 @@ public class NhanVienFView extends javax.swing.JFrame {
         model.setColumnCount(0);
 
         model.addColumn("Id");
-        
+
         model.addColumn("Mã");
-        
+
         model.addColumn("Họ tên");
-        
+
         model.addColumn("SĐT");
-        
+
         model.addColumn("Địa chỉ");
-        
+
         model.addColumn("Ngày sinh");
-        
+
         model.addColumn("Cửa hàng");
-        
+
         model.addColumn("Chức vụ");
-        
+
         model.addColumn("Mật khẩu");
-        
+
         model.addColumn("Email");
-        
+
         model.addColumn("Trạng thái");
 
         model.setRowCount(0);
@@ -408,9 +408,8 @@ public class NhanVienFView extends javax.swing.JFrame {
         }
 
     }
-    
-    
-      public void loadTableAll() {
+
+    public void loadTableAll() {
         model = (DefaultTableModel) TBBANG.getModel();
         List<ViewModelNhanVien1> nv1 = nhanVienService1.getListNVDangLam();
         model.setColumnCount(0);
@@ -446,7 +445,6 @@ public class NhanVienFView extends javax.swing.JFrame {
         }
 
     }
-    
 
     public void loadTbCuaHangPhanTrang(int page) {
         int limit = 3;
@@ -600,12 +598,9 @@ public class NhanVienFView extends javax.swing.JFrame {
 
         }
     }
-    
-    
 
     public String getCHCBB() {
-        
-        
+
         String id = null;
         List<ViewModelCuaHang> a = cuaHangService.getAll();
 
@@ -777,31 +772,22 @@ public class NhanVienFView extends javax.swing.JFrame {
             result = sdt.parse(ns);
 
             ngaySinh.setDate(result);
-            
 
             TXTID.setText(TBBANG.getValueAt(index, 0).toString());
-            
 
             TXTMA.setText(TBBANG.getValueAt(index, 1).toString());
-            
 
             TXTHOTEN.setText(TBBANG.getValueAt(index, 2).toString());
-            
 
             TXTSDT.setText(TBBANG.getValueAt(index, 3).toString());
-            
 
             TXTDIACHI.setText(TBBANG.getValueAt(index, 4).toString());
-            
 
             CBCCUAHANG.setSelectedItem(TBBANG.getValueAt(index, 6).toString());
-            
 
             CBCCHUCVU.setSelectedItem(TBBANG.getValueAt(index, 7).toString());
-            
 
             txtmatKhau.setText(TBBANG.getValueAt(index, 8).toString());
-            
 
             txtemailNhanVien.setText(TBBANG.getValueAt(index, 9).toString().trim());
 
@@ -837,19 +823,14 @@ public class NhanVienFView extends javax.swing.JFrame {
     public void loadTBCuaHang() {
 
         model = (DefaultTableModel) tbbang.getModel();
-        
 
         model.setColumnCount(0);
-        
 
         model.addColumn("ID");
-        
 
         model.addColumn("Mã");
-        
 
         model.addColumn("Tên");
-        
 
         model.addColumn("Địa chỉ");
 
@@ -868,19 +849,14 @@ public class NhanVienFView extends javax.swing.JFrame {
     public void loadTBCuaHang(String ten) {
 
         model = (DefaultTableModel) tbbang.getModel();
-        
 
         model.setColumnCount(0);
-        
 
         model.addColumn("ID");
-        
 
         model.addColumn("Mã");
-        
 
         model.addColumn("Tên");
-        
 
         model.addColumn("Địa chỉ");
 
@@ -2818,8 +2794,8 @@ public class NhanVienFView extends javax.swing.JFrame {
                 loadTbCuaHangPhanTrang(1);
 
                 loadTBCuaHangNgungHoatDong();
-                loadTableDangLam(1);
                 loadCBB();
+                loadTableDangLam(1);
 
             } else {
                 Icon icon = new javax.swing.ImageIcon(getClass().getResource("/img/deleteicon.png"));
