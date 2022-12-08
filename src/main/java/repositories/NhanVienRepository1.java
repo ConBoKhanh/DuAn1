@@ -386,7 +386,7 @@ public class NhanVienRepository1 {
         try {
             Session session = HibernatUtil.getFACTORY().openSession();
             Query q = session.createNativeQuery("Select A.Id, A.Ma, A.HoTen, A.Sdt, A.DiaChi, A.NgaySinh , A.Email,"
-                    + " A.MatKhau,C.TenChucVu, B.TenCuaHang  from NhanVien A  left JOIN CuaHang B "
+                    + " A.MatKhau,C.TenChucVu, B.TenCuaHang,B.TrangThai  from NhanVien A  left JOIN CuaHang B "
                     + "on A.IdCuaHang = B.Id "
                     + " left join ChucVu C On A.IdChucVu = C.Id where A.TrangThai = 1 "
                     + "order by Convert(int,A.Ma) desc "
@@ -427,10 +427,13 @@ public class NhanVienRepository1 {
 
     public static void main(String[] args) {
         NhanVienRepository1 nv = new NhanVienRepository1();
-        for (NhanVien arg : nv.listtkCuaHang("19CA6E50-4FC2-4281-9584-632113A929F8")) {
-            System.out.println(arg.toString());
-
+       
+        for (Object[] arg : nv.getAll(0, 5)) {
+            System.out.println(arg[10].toString());
+            
         }
+
+        
     }
 
 }

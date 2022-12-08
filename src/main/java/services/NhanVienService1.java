@@ -25,31 +25,31 @@ public class NhanVienService1 implements IManageNhanVienService1 {
         try {
             List<ViewModelNhanVien1> viewNhanVien = new ArrayList<>();
             for (NhanVien viewModelNhanVien1 : nv) {
-                
+
                 ViewModelNhanVien1 v = new ViewModelNhanVien1();
-                
+
                 v.setId(viewModelNhanVien1.getId());
-                
+
                 v.setMa(viewModelNhanVien1.getMa());
-                
+
                 v.setHoTen(viewModelNhanVien1.getHoTen());
-                
+
                 v.setSdt(viewModelNhanVien1.getSdt());
-                
+
                 v.setDiaChi(viewModelNhanVien1.getDiaChi());
-                
+
                 v.setNgaySinh(viewModelNhanVien1.getNgaySinh() + "");
-                
+
                 v.setIdCH(viewModelNhanVien1.getIdCuaHang().getTenCuaHang());
-                
+
                 v.setIdCV(viewModelNhanVien1.getIdChucVu().getTenChucVu());
-                
+
                 v.setMatKhau(viewModelNhanVien1.getMatKhau());
-                
+
                 v.setEmail(viewModelNhanVien1.getEmail());
-                
+
                 v.setTrangThai(viewModelNhanVien1.getTrangThai());
-                
+
                 viewNhanVien.add(v);
 
             }
@@ -65,29 +65,29 @@ public class NhanVienService1 implements IManageNhanVienService1 {
         try {
             List<ViewModelNhanVien1> viewNV = new ArrayList<>();
             for (NhanVien viewModelNhanVien1 : nv) {
-                
+
                 ViewModelNhanVien1 v = new ViewModelNhanVien1();
-                
+
                 v.setId(viewModelNhanVien1.getId());
-                
+
                 v.setMa(viewModelNhanVien1.getMa());
-                
+
                 v.setHoTen(viewModelNhanVien1.getHoTen());
-                
+
                 v.setSdt(viewModelNhanVien1.getSdt());
-                
+
                 v.setDiaChi(viewModelNhanVien1.getDiaChi());
-                
+
                 v.setNgaySinh(viewModelNhanVien1.getNgaySinh() + "");
-                
+
                 v.setIdCH(viewModelNhanVien1.getIdCuaHang().getTenCuaHang());
-                
+
                 v.setIdCV(viewModelNhanVien1.getIdChucVu().getTenChucVu());
-                
+
                 v.setMatKhau(viewModelNhanVien1.getMatKhau());
-                
+
                 v.setEmail(viewModelNhanVien1.getEmail());
-                
+
                 v.setTrangThai(viewModelNhanVien1.getTrangThai());
                 viewNV.add(v);
             }
@@ -104,31 +104,31 @@ public class NhanVienService1 implements IManageNhanVienService1 {
         try {
             List<ViewModelNhanVien1> viewNV = new ArrayList<>();
             for (NhanVien viewModelNhanVien1 : nv) {
-                
+
                 ViewModelNhanVien1 v = new ViewModelNhanVien1();
-                
+
                 v.setId(viewModelNhanVien1.getId());
-                
+
                 v.setMa(viewModelNhanVien1.getMa());
-                
+
                 v.setHoTen(viewModelNhanVien1.getHoTen());
-                
+
                 v.setSdt(viewModelNhanVien1.getSdt());
-                
+
                 v.setDiaChi(viewModelNhanVien1.getDiaChi());
-                
+
                 v.setNgaySinh(viewModelNhanVien1.getNgaySinh() + "");
-                
+
                 v.setIdCH(viewModelNhanVien1.getIdCuaHang().getTenCuaHang());
-                
+
                 v.setIdCV(viewModelNhanVien1.getIdChucVu().getTenChucVu());
-                
+
                 v.setMatKhau(viewModelNhanVien1.getMatKhau());
-                
+
                 v.setEmail(viewModelNhanVien1.getEmail());
-                
+
                 v.setTrangThai(viewModelNhanVien1.getTrangThai());
-                
+
                 viewNV.add(v);
             }
             return viewNV;
@@ -174,6 +174,7 @@ public class NhanVienService1 implements IManageNhanVienService1 {
             List<NhanVien> sps = nhanVien1.listtk(Ten);
             for (NhanVien sp : sps) {
                 list.add(new ViewModelNhanVien1(sp.getId(),
+                        
                         sp.getMa(),
                         
                         sp.getHoTen(),
@@ -212,7 +213,7 @@ public class NhanVienService1 implements IManageNhanVienService1 {
 
     @Override
     public List<ViewModelNhanVien1> listtkChucVu(String idCV) {
-          try {
+        try {
             List<ViewModelNhanVien1> list = new ArrayList<>();
             List<NhanVien> sps = nhanVien1.listtkChucVu(idCV);
             for (NhanVien sp : sps) {
@@ -246,7 +247,7 @@ public class NhanVienService1 implements IManageNhanVienService1 {
 
     @Override
     public List<ViewModelNhanVien1> listtkCuaHang(String idCH) {
-           try {
+        try {
             List<ViewModelNhanVien1> list = new ArrayList<>();
             List<NhanVien> sps = nhanVien1.listtkCuaHang(idCH);
             for (NhanVien sp : sps) {
@@ -280,40 +281,45 @@ public class NhanVienService1 implements IManageNhanVienService1 {
 
     @Override
     public List<ViewModelNhanVien1> getAll(int a, int b) {
-           List<ViewModelNhanVien1> list = new ArrayList<>();
-            List<Object[]> sps = nhanVien1.getAll(a, b);
-             for (Object[] sp : sps) {
-                 ViewModelNhanVien1 v = new ViewModelNhanVien1();
-                 v.setId(sp[0].toString());
-                 
-                 v.setMa(sp[1].toString());
-                 
-                 v.setHoTen(sp[2].toString());
-                 
-                 v.setSdt(sp[3].toString());
-                 
-                 v.setDiaChi(sp[4].toString());
-                 
-                 v.setNgaySinh(sp[5].toString());
-                 
-                 v.setEmail(sp[6].toString());
-                 
-                 v.setMatKhau(sp[7].toString());
-                 
-                 v.setIdCV(sp[8].toString());
-                 
-                 v.setIdCH(sp[9].toString());
-                 
-                 v.setTrangThai(1);
-                 
-                 list.add(v);
-             }
-            return list;
+        List<ViewModelNhanVien1> list = new ArrayList<>();
+        List<Object[]> sps = nhanVien1.getAll(a, b);
+        for (Object[] sp : sps) {
+            ViewModelNhanVien1 v = new ViewModelNhanVien1();
+            v.setId(sp[0].toString());
+
+            v.setMa(sp[1].toString());
+
+            v.setHoTen(sp[2].toString());
+
+            v.setSdt(sp[3].toString());
+
+            v.setDiaChi(sp[4].toString());
+
+            v.setNgaySinh(sp[5].toString());
+
+            v.setEmail(sp[6].toString());
+
+            v.setMatKhau(sp[7].toString());
+
+            v.setIdCV(sp[8].toString());
+
+            if (sp[10].toString().equals("2")) {
+                v.setIdCH("Dừng hoạt động");
+
+            } else {
+                v.setIdCH(sp[9].toString());
+            }
+
+            v.setTrangThai(1);
+
+            list.add(v);
+        }
+        return list;
     }
 
     @Override
     public int getRow(int b, int c) {
-          try {
+        try {
             return nhanVien1.getRow(b, c);
         } catch (Exception e) {
             return 0;
@@ -322,12 +328,13 @@ public class NhanVienService1 implements IManageNhanVienService1 {
 
     @Override
     public List<ViewModelNhanVien1> listtkSDT(String sdt) {
-        
-         try {
+
+        try {
             List<ViewModelNhanVien1> list = new ArrayList<>();
             List<NhanVien> sps = nhanVien1.listtkSDT(sdt);
             for (NhanVien sp : sps) {
                 list.add(new ViewModelNhanVien1(sp.getId(),
+                        
                         sp.getMa(),
                         
                         sp.getHoTen(),
@@ -353,8 +360,5 @@ public class NhanVienService1 implements IManageNhanVienService1 {
             return null;
         }
     }
-    
-
- 
 
 }

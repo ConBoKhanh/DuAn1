@@ -77,7 +77,7 @@ public class CuaHangRepository {
         
         try {
             Session se = HibernatUtil.getFACTORY().openSession();
-            Query q = se.createQuery("FROM CuaHang WHERE TrangThai = 1");
+            Query q = se.createQuery("FROM CuaHang WHERE TrangThai = 1 ");
             List<CuaHang> list = q.getResultList();
             return list;
             
