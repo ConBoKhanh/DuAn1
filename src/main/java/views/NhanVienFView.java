@@ -408,6 +408,45 @@ public class NhanVienFView extends javax.swing.JFrame {
         }
 
     }
+    
+    
+      public void loadTableAll() {
+        model = (DefaultTableModel) TBBANG.getModel();
+        List<ViewModelNhanVien1> nv1 = nhanVienService1.getListNVDangLam();
+        model.setColumnCount(0);
+
+        model.addColumn("Id");
+        model.addColumn("Mã");
+        model.addColumn("Họ tên");
+        model.addColumn("SĐT");
+        model.addColumn("Địa chỉ");
+        model.addColumn("Ngày sinh");
+        model.addColumn("Cửa hàng");
+        model.addColumn("Chức vụ");
+        model.addColumn("Mật khẩu");
+        model.addColumn("Email");
+        model.addColumn("Trạng thái");
+
+        model.setRowCount(0);
+        for (ViewModelNhanVien1 viewModelNhanVien1 : nv1) {
+            model.addRow(new Object[]{
+                viewModelNhanVien1.getId(),
+                viewModelNhanVien1.getMa(),
+                viewModelNhanVien1.getHoTen(),
+                viewModelNhanVien1.getSdt(),
+                viewModelNhanVien1.getDiaChi(),
+                viewModelNhanVien1.getNgaySinh(),
+                viewModelNhanVien1.getIdCH(),
+                viewModelNhanVien1.getIdCV(),
+                viewModelNhanVien1.getMatKhau(),
+                viewModelNhanVien1.getEmail(),
+                viewModelNhanVien1.getTrangThai() == 1 ? "Đang làm" : "Nghỉ làm"
+            });
+
+        }
+
+    }
+    
 
     public void loadTbCuaHangPhanTrang(int page) {
         int limit = 3;
@@ -3215,7 +3254,7 @@ public class NhanVienFView extends javax.swing.JFrame {
         //        }
 
         if (cbbtimKiem.getSelectedItem().equals("All")) {
-            loadTableDangLam(1);
+            loadTableAll();
         } else if (cbbtimKiem.getSelectedItem().equals("Quan Ly")) {
             loadTableTKDangLamCV(getCBBCVTK());
 
@@ -3229,7 +3268,7 @@ public class NhanVienFView extends javax.swing.JFrame {
 
         try {
             if (cbbtimKiemCuaHang.getSelectedItem().equals("All")) {
-                loadTableDangLam(1);
+                loadTableAll();
                 return;
             }
             List<ViewModelCuaHang> v = cuaHangService.getAll();
