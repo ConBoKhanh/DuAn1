@@ -741,7 +741,7 @@ public class DoanhThuView extends javax.swing.JFrame {
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(359, 359, 359)
                         .addComponent(pagination1, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(35, Short.MAX_VALUE))
+                .addContainerGap(36, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -773,7 +773,7 @@ public class DoanhThuView extends javax.swing.JFrame {
         jPanel6.setBorder(new javax.swing.border.MatteBorder(null));
 
         jButton7.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jButton7.setText("BD tròn cho Tháng");
+        jButton7.setText("BD  cho Tháng");
         jButton7.setBorder(new javax.swing.border.MatteBorder(null));
         jButton7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -804,7 +804,7 @@ public class DoanhThuView extends javax.swing.JFrame {
         a.setLayout(new javax.swing.BoxLayout(a, javax.swing.BoxLayout.LINE_AXIS));
 
         jButton10.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jButton10.setText("BD  cột cho Năm");
+        jButton10.setText("BD   cho Năm");
         jButton10.setBorder(new javax.swing.border.MatteBorder(null));
         jButton10.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -819,26 +819,21 @@ public class DoanhThuView extends javax.swing.JFrame {
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel6Layout.createSequentialGroup()
-                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton10, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 7, Short.MAX_VALUE)
                 .addComponent(a, javax.swing.GroupLayout.PREFERRED_SIZE, 857, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel6Layout.createSequentialGroup()
-                .addGap(84, 84, 84)
+                .addGap(85, 85, 85)
                 .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(33, 33, 33)
+                .addGap(27, 27, 27)
                 .addComponent(jButton10, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(194, 194, 194)
+                .addGap(199, 199, 199)
                 .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(36, 36, 36)
                 .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1204,7 +1199,7 @@ public class DoanhThuView extends javax.swing.JFrame {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(71, 71, 71)
                         .addComponent(jPanel19, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(13, Short.MAX_VALUE))
+                .addContainerGap(14, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1398,9 +1393,9 @@ public class DoanhThuView extends javax.swing.JFrame {
             
             session.beginTransaction();
             
-            Query q = session.createNativeQuery("select SUM(A.DonGia) AS'TONG TIEN',COUNT(C.ID)'SO HOA DON',MONTH(C.NgayThanhToan) AS'THANG',COUNT(A.SoLuong) AS 'SL' from HoaDonChiTiet A  ,HoaDon C \n"
-                    + "WHERE  A.IdHoaDon = C.Id AND C.TRANGTHAI =2\n"
-                    + "GROUP BY  MONTH(C.NgayThanhToan)");
+            Query q = session.createNativeQuery("select SUM(C.ThanhTien) AS'TONG TIEN',COUNT(C.ID)'SO HOA DON',MONTH(C.NgayThanhToan) AS'THANG',COUNT(A.SoLuong) AS 'SL' from HoaDonChiTiet A  ,HoaDon C \n" +
+"                    WHERE  A.IdHoaDon = C.Id AND C.TRANGTHAI =2\n" +
+"                    GROUP BY  MONTH(C.NgayThanhToan)");
             
             List<Object[]> THANG = q.getResultList();
             
@@ -1454,7 +1449,7 @@ public class DoanhThuView extends javax.swing.JFrame {
             
             session.beginTransaction();
             
-            Query q = session.createNativeQuery("select SUM(A.DonGia) AS'TONG TIEN',COUNT(C.ID)'SO HOA DON',YEAR(C.NgayThanhToan) AS'THANG',COUNT(A.SoLuong) AS 'SL' from HoaDonChiTiet A  ,HoaDon C \n"
+            Query q = session.createNativeQuery("select SUM(C.ThanhTien) AS'TONG TIEN',COUNT(C.ID)'SO HOA DON',YEAR(C.NgayThanhToan) AS'NAM',COUNT(A.SoLuong) AS 'SL' from HoaDonChiTiet A  ,HoaDon C \n"
                     + "WHERE  A.IdHoaDon = C.Id AND C.TRANGTHAI =2\n"
                     + "GROUP BY  YEAR(C.NgayThanhToan)");
             
@@ -1544,7 +1539,7 @@ public class DoanhThuView extends javax.swing.JFrame {
                     PlotOrientation.VERTICAL, true,
                     true, false);
 
-            ChartPanel chartPanel = new ChartPanel(barChart);// add cái biểu dồ vào jfanel
+            ChartPanel chartPanel = new ChartPanel(chart);// add cái biểu dồ vào jfanel
 
             a.removeAll();
             
