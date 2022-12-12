@@ -126,7 +126,7 @@ public class DoanhThuRepository {
 
     public List<Object[]> getListtop3() {
 
-        try {
+//        try {
             
             Session session = HibernatUtil.getFACTORY().openSession();
             
@@ -134,7 +134,7 @@ public class DoanhThuRepository {
             
             Query q = session.createQuery("select B.Id,B.TenSP,B.SoLuong ,Sum(A.SoLuong),SUM(A.DonGia)"
                     + " from HoaDonChiTiet A , ChiTietDoGo B , HoaDon C\n"
-                    + "where A.IdChiTietDoGo = B.Id and A.IdHoaDon = C.Id\n"
+                    + "where A.IdChiTietDoGo = B.Id and A.IdHoaDon = C.Id And C.TrangThai =2\n"
                     + "group by B.TenSP,B.Id,B.SoLuong \n"
                     + "order by Sum(A.SoLuong)  desc");
             
@@ -142,11 +142,11 @@ public class DoanhThuRepository {
             
             return list;
             
-        } catch (Exception e) {
-            
-            return null;
-            
-        }
+//        } catch (Exception e) {
+//            
+//            return null;
+//            
+//        }
         
     }
 
@@ -303,7 +303,7 @@ public class DoanhThuRepository {
         Transaction transaction = session.getTransaction();
         Query q = session.createQuery("select C.Id,C.Ma,C.NgayThanhToan,A.DonGia "
                 + "from HoaDonChiTiet A , ChiTietDoGo B , HoaDon C\n"
-                + "where A.IdChiTietDoGo = B.Id and A.IdHoaDon = C.Id\n"
+                + "where A.IdChiTietDoGo = B.Id and A.IdHoaDon = C.Id And C.TrangThai =2 \n"
                 + "group by C.Id,C.Ma,C.NgayThanhToan,A.DonGia "
                 + "order by C.NgayThanhToan asc");
         List<Object[]> list = q.getResultList();
@@ -325,7 +325,7 @@ public class DoanhThuRepository {
             
             Query q = session.createQuery("select sum(ThanhTien),sum(ThanhTien)"
                     + " from HoaDon \n"
-                    + "where year(getdate()) =year(NgayThanhToan) ");
+                    + "where year(getdate()) =year(NgayThanhToan) And TrangThai =2 ");
             
             List<Object[]> list = q.getResultList();
             
@@ -591,7 +591,8 @@ public class DoanhThuRepository {
             Session session = HibernatUtil.getFACTORY().openSession();
             
             Query q = session.createNativeQuery(" select B.Id,B.TenSP,B.SoLuong ,Sum(A.SoLuong),SUM(A.DonGia) as '2'\n"
-                    + "from HoaDonChiTiet A Join ChiTietDoGo B on A.IdChiTietDoGo = B.Id\n"
+                    + "from HoaDonChiTiet A Join ChiTietDoGo B on A.IdChiTietDoGo = B.Id Join HoaDon C on C.Id =A.IdHoaDon\n"
+                    + "WHERE C.TrangThai = 2 \n"
                     + "group by B.TenSP,B.Id,B.SoLuong \n"
                     + "order by Sum(A.DonGia)  desc"
                     + " OFFSET " + i + " ROWS "
@@ -621,6 +622,7 @@ public class DoanhThuRepository {
             
             Query q = session.createNativeQuery("select B.Id,B.TenSP,B.SoLuong ,Sum(A.SoLuong),SUM(A.DonGia) as '2'\n"
                     + "from HoaDonChiTiet A Join ChiTietDoGo B on A.IdChiTietDoGo = B.Id\n"
+                       
                     + "group by B.TenSP,B.Id,B.SoLuong \n"
                    );
 
@@ -647,7 +649,8 @@ public class DoanhThuRepository {
             Session session = HibernatUtil.getFACTORY().openSession();
             
             Query q = session.createNativeQuery(" select B.Id,B.TenSP,B.SoLuong ,Sum(A.SoLuong),SUM(A.DonGia) as '2'\n"
-                    + "from HoaDonChiTiet A Join ChiTietDoGo B on A.IdChiTietDoGo = B.Id\n"
+                    + "from HoaDonChiTiet A Join ChiTietDoGo B on A.IdChiTietDoGo = B.Id Join HoaDon C on C.Id =A.IdHoaDon \n"
+                    + "WHERE C.TrangThai = 2 \n"
                     + "group by B.TenSP,B.Id,B.SoLuong \n"
                     + "order by Sum(A.DonGia)  asc"
                     + " OFFSET " + i + " ROWS "
@@ -706,8 +709,8 @@ public class DoanhThuRepository {
 //            System.out.println(hoaDon[1].toString());
 //        }
 
-        for (Object[] a : hd.getListDoanhthu()) {
-            System.out.println(a[0].toString() + a[1].toString() + a[2].toString() + a[3].toString());
+        for (Object[] a : hd.getListtop3()) {
+            System.out.println(a[0].toString());
         }
 
         //System.out.println(i.getDoanhtHUTHEOnGAY());

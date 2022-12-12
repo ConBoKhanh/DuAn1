@@ -1348,6 +1348,16 @@ public class DoanhThuView extends javax.swing.JFrame {
                 dataset2.setValue(Integer.parseInt(a[1].toString()), a[0].toString(), "");
            
             }
+//               dataset.setValue("soluong",100);
+//               dataset.setValue("taikhoan",90);
+//               dataset.setValue("doanhthu",80);
+//               dataset.setValue("thanhtien",70);
+//               
+//               dataset2.setValue(120, "baihoc", "cannang");
+//               dataset2.setValue(120, "taikhoan", "cannang");
+//               dataset2.setValue(120, "soluong", "cannang");
+//               dataset2.setValue(120, "thanhtien", "cannang");
+               
         } catch (HibernateException hibernateException) {
             
         }
