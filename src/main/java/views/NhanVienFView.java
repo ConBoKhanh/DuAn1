@@ -17,6 +17,8 @@ import java.sql.Date;
 import java.text.ParseException;
 
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.Period;
 
 import java.util.ArrayList;
 
@@ -61,6 +63,8 @@ import viewModel.ViewModelCuaHang;
 
 import viewModel.ViewModelNhanVien;
 import viewModel.ViewModelNhanVien1;
+
+import javax.swing.JTextField;
 
 /**
  *
@@ -2400,10 +2404,26 @@ public class NhanVienFView extends javax.swing.JFrame {
 
         }
 
-//        if (!txtmatKhau.getText().matches("^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%]).{8,15}$")) {
-//            JOptionPane.showMessageDialog(this, "Mật khẩu phải chứa 1 ký tự số, 1 ký tự hoa và 1 ký tự đặc biệt");
-//            return;
-//        }
+        String tuoi = ((JTextField) ngaySinh.getDateEditor().getUiComponent()).getText();
+        String dob[] = tuoi.split("-");
+        int day = Integer.parseInt(dob[2]);
+        int month = Integer.parseInt(dob[1]);
+        int year = Integer.parseInt(dob[0]);
+
+        LocalDate tinhTuoi = LocalDate.of(year, month, day);
+        LocalDate nam = LocalDate.now();
+
+        int resulYear = Period.between(tinhTuoi, nam).getYears();
+
+        if (resulYear < 18) {
+            JOptionPane.showMessageDialog(this, "Tuổi nhân viên phải lớn hơn 18");
+            return;
+        }
+
+        if (!txtmatKhau.getText().matches("^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%]).{8,15}$")) {
+            JOptionPane.showMessageDialog(this, "Mật khẩu phải chứa 1 ký tự số, 1 ký tự hoa và 1 ký tự đặc biệt");
+            return;
+        }
         if (!txtemailNhanVien.getText().matches("^[\\w-_\\.+]*[\\w-_\\.]\\@([\\w]+\\.)+[\\w]+[\\w]$")) {
             JOptionPane.showMessageDialog(this, "Vui lòng nhập đúng định dang email");
             return;
@@ -3359,9 +3379,10 @@ public class NhanVienFView extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Trở lại thành công");
             loadTBCuaHangNgungHoatDong();
             loadTbCuaHangPhanTrang(1);
+
+            loadCBB();
             //  loadTable1NhanVien(1);
             loadTableDangLam(1);
-            loadCBB();
 
         } else {
             JOptionPane.showMessageDialog(this, "Trở lại thất bại");
