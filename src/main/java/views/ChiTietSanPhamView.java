@@ -702,8 +702,13 @@ public class ChiTietSanPhamView extends javax.swing.JFrame {
         jScrollPane1.setViewportView(tbl);
 
         txtTimKiem.setBackground(new java.awt.Color(255, 204, 255));
-        txtTimKiem.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        txtTimKiem.setText("Tìm kiếm sản phẩm");
         txtTimKiem.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 3, 0, new java.awt.Color(0, 0, 0)));
+        txtTimKiem.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txtTimKiemMouseClicked(evt);
+            }
+        });
         txtTimKiem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtTimKiemActionPerformed(evt);
@@ -767,7 +772,7 @@ public class ChiTietSanPhamView extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel17, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel17, javax.swing.GroupLayout.DEFAULT_SIZE, 34, Short.MAX_VALUE)
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(txtTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel16)
@@ -1757,6 +1762,11 @@ public class ChiTietSanPhamView extends javax.swing.JFrame {
 
         tn.setLocationRelativeTo(null);
     }//GEN-LAST:event_jButton13ActionPerformed
+
+    private void txtTimKiemMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtTimKiemMouseClicked
+        // TODO add your handling code here:
+        txtTimKiem.setText("");
+    }//GEN-LAST:event_txtTimKiemMouseClicked
 
     /**
      * @param args the command line arguments
