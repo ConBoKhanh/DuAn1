@@ -702,7 +702,6 @@ public class ChiTietSanPhamView extends javax.swing.JFrame {
         jScrollPane1.setViewportView(tbl);
 
         txtTimKiem.setBackground(new java.awt.Color(255, 204, 255));
-        txtTimKiem.setText("Tìm kiếm sản phẩm");
         txtTimKiem.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 3, 0, new java.awt.Color(0, 0, 0)));
         txtTimKiem.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -1765,7 +1764,7 @@ public class ChiTietSanPhamView extends javax.swing.JFrame {
 
     private void txtTimKiemMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtTimKiemMouseClicked
         // TODO add your handling code here:
-        txtTimKiem.setText("");
+//        txtTimKiem.setText("");
     }//GEN-LAST:event_txtTimKiemMouseClicked
 
     /**
